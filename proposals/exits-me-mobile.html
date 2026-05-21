@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exits.me — Mobile App Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy:        #060D1C;
+  --navy-soft:   #0C1828;
+  --card-bg:     #0E1E35;
+  --card-alt:    #0A1525;
+  --teal:        #00C896;
+  --teal-light:  rgba(0, 200, 150, 0.09);
+  --teal-border: rgba(0, 200, 150, 0.22);
+  --border:      rgba(255, 255, 255, 0.06);
+  --text-bright: #FFFFFF;
+  --text-main:   #C0D4E8;
+  --text-dim:    #6A8AAE;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── COVER ──────────────────────────────────── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 40px;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 50% at 50% 0%,   rgba(0,200,150,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 80%,  rgba(0,100,200,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 25% at 88% 75%,  rgba(0,200,150,0.05) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.cover-line {
+  width: 1px; height: 64px;
+  background: linear-gradient(to bottom, transparent, var(--teal), transparent);
+  margin: 0 auto 32px;
+  opacity: 0;
+  animation: fadeDown 0.9s ease 0.2s forwards;
+}
+
+.cover-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 18px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+.cover-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(54px, 8vw, 100px);
+  font-weight: 400; line-height: 0.95;
+  color: var(--text-bright); margin-bottom: 8px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+}
+
+.cover-title em { font-style: italic; color: var(--teal); }
+
+.cover-subtitle {
+  font-size: 13px; font-weight: 300; letter-spacing: 2.5px;
+  color: var(--text-dim); margin-bottom: 52px;
+  text-transform: uppercase;
+  opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+}
+
+.cover-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 52px;
+  opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+}
+
+.cover-divider span { display: block; width: 64px; height: 1px; background: var(--teal); opacity: 0.3; }
+.cover-diamond { width: 7px; height: 7px; background: var(--teal); transform: rotate(45deg); opacity: 0.75; }
+
+.cover-meta {
+  display: flex; gap: 52px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards;
+}
+
+.cover-meta-item { text-align: center; }
+
+.cover-meta-label {
+  font-size: 9px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 6px;
+}
+
+.cover-meta-value { font-size: 14px; font-weight: 400; color: var(--text-main); }
+
+.cover-badge {
+  position: absolute; bottom: 32px; right: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 1.3s forwards;
+}
+
+.cover-badge-inner {
+  font-size: 9px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--text-dim);
+  border: 1px solid var(--teal-border); padding: 7px 16px;
+}
+
+/* ─── SECTIONS ───────────────────────────────── */
+.section {
+  max-width: 940px; margin: 0 auto;
+  padding: 80px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section:last-of-type { border-bottom: none; }
+
+.section-number {
+  font-size: 9px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 400; color: var(--text-bright);
+  line-height: 1.1; margin-bottom: 22px;
+}
+
+.section-title em { font-style: italic; color: var(--teal); }
+
+.section-body {
+  font-size: 14px; font-weight: 300; color: var(--text-dim);
+  max-width: 620px; line-height: 1.9; margin-bottom: 40px;
+}
+
+/* ─── TAG ────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  background: var(--teal-light); border: 1px solid var(--teal-border);
+  color: var(--teal); font-size: 9px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; padding: 4px 12px;
+  margin-right: 6px; margin-bottom: 6px;
+}
+
+/* ─── FEATURE GRID ───────────────────────────── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 44px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  padding: 30px 26px;
+  position: relative; overflow: hidden;
+  transition: background 0.25s;
+}
+
+.feature-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 2px; height: 0;
+  background: var(--teal);
+  transition: height 0.35s ease;
+}
+
+.feature-card:hover { background: #122035; }
+.feature-card:hover::after { height: 100%; }
+
+.feature-icon { font-size: 20px; margin-bottom: 12px; }
+.feature-title { font-size: 14px; font-weight: 500; color: var(--text-bright); margin-bottom: 7px; }
+.feature-desc { font-size: 12.5px; font-weight: 300; color: var(--text-dim); line-height: 1.75; }
+
+/* ─── SCOPE LIST ─────────────────────────────── */
+.scope-list { list-style: none; margin-top: 40px; }
+
+.scope-list li {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+}
+
+.scope-list li:last-child { border-bottom: none; }
+
+.scope-dot {
+  width: 6px; height: 6px; min-width: 6px;
+  background: var(--teal); transform: rotate(45deg);
+  margin-top: 8px; opacity: 0.75;
+}
+
+.scope-text { font-size: 13.5px; font-weight: 300; color: var(--text-dim); }
+.scope-text strong { color: var(--text-bright); font-weight: 500; }
+
+/* ─── PRICING ────────────────────────────────── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px; margin-top: 44px;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 30px 26px;
+  position: relative; transition: border-color 0.3s;
+}
+
+.pricing-card:hover { border-color: var(--teal-border); }
+.pricing-card.featured { border-color: var(--teal-border); background: #0A1E18; }
+
+.pricing-card.featured::before {
+  content: 'RECOMMENDED';
+  position: absolute; top: -1px; right: 18px;
+  background: var(--teal); color: #000;
+  font-size: 8px; font-weight: 700; letter-spacing: 2px; padding: 4px 10px;
+}
+
+.pricing-type { font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+.pricing-name { font-size: 15px; font-weight: 500; color: var(--text-bright); margin-bottom: 16px; line-height: 1.3; }
+
+.pricing-amount {
+  font-family: 'DM Serif Display', serif;
+  font-size: 44px; font-weight: 400;
+  color: var(--teal); line-height: 1; margin-bottom: 4px;
+}
+
+.pricing-period { font-size: 11px; font-weight: 300; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 20px; }
+.pricing-divider { height: 1px; background: var(--border); margin-bottom: 16px; }
+
+.pricing-items { list-style: none; }
+
+.pricing-items li {
+  font-size: 12.5px; font-weight: 300; color: var(--text-dim);
+  padding: 5px 0 5px 16px; position: relative;
+}
+
+.pricing-items li::before {
+  content: '◆'; font-size: 5px; color: var(--teal);
+  position: absolute; left: 0; top: 9px;
+}
+
+/* ─── ONE-TIME TABLE ─────────────────────────── */
+.one-time-table { width: 100%; border-collapse: collapse; margin-top: 44px; }
+
+.one-time-table th {
+  font-size: 9px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--teal);
+  text-align: left; padding: 14px 18px;
+  border-bottom: 1px solid var(--teal-border);
+}
+
+.one-time-table td {
+  padding: 16px 18px; font-size: 13px; font-weight: 300;
+  color: var(--text-dim); border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.one-time-table tr:last-child td { border-bottom: none; }
+.one-time-table td:first-child { font-size: 14px; font-weight: 500; color: var(--text-bright); width: 36%; }
+
+.one-time-table td.price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 21px; font-weight: 400; color: var(--teal);
+  white-space: nowrap; text-align: right;
+}
+
+.total-row td {
+  background: rgba(0,200,150,0.06) !important;
+  border-top: 1px solid var(--teal-border) !important;
+  border-bottom: none !important;
+  padding-top: 22px !important; padding-bottom: 22px !important;
+}
+
+.total-row td:first-child {
+  font-size: 10px !important; font-weight: 600 !important;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--teal) !important;
+}
+
+.total-row td.price { font-size: 34px !important; }
+
+/* ─── SUMMARY BOX ────────────────────────────── */
+.summary-box {
+  background: #050E1A; border: 1px solid var(--teal-border);
+  padding: 44px 40px; margin-top: 44px; position: relative;
+}
+
+.summary-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--teal), transparent);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 32px; margin-top: 28px;
+}
+
+.summary-item { text-align: center; }
+
+.summary-label {
+  font-size: 9px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--teal); opacity: 0.8; margin-bottom: 8px;
+}
+
+.summary-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 38px; font-weight: 400; color: var(--text-bright);
+}
+
+.summary-note { font-size: 11px; font-weight: 300; color: var(--text-dim); margin-top: 4px; }
+
+/* ─── TIMELINE ───────────────────────────────── */
+.timeline { margin-top: 44px; position: relative; }
+
+.timeline::before {
+  content: '';
+  position: absolute; left: 16px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--teal), transparent);
+  opacity: 0.2;
+}
+
+.timeline-item {
+  display: flex; gap: 32px; margin-bottom: 32px;
+  padding-left: 52px; position: relative;
+}
+
+.timeline-dot {
+  position: absolute; left: 9px; top: 4px;
+  width: 14px; height: 14px;
+  border: 1px solid var(--teal);
+  background: var(--navy); transform: rotate(45deg); opacity: 0.7;
+}
+
+.timeline-phase {
+  font-size: 9px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--teal);
+  min-width: 96px; padding-top: 3px; opacity: 0.8;
+}
+
+.timeline-title { font-size: 15px; font-weight: 500; color: var(--text-bright); margin-bottom: 6px; }
+.timeline-desc { font-size: 13px; font-weight: 300; color: var(--text-dim); line-height: 1.75; }
+
+/* ─── WHY SECTION ────────────────────────────── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 44px;
+}
+
+.stat-card {
+  background: var(--card-alt);
+  padding: 32px 28px; text-align: center;
+}
+
+.stat-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 44px; font-weight: 400; color: var(--teal);
+  line-height: 1; margin-bottom: 8px;
+}
+
+.stat-label { font-size: 11px; font-weight: 300; color: var(--text-dim); letter-spacing: 0.5px; }
+
+/* ─── MONTHLY TOTAL BAR ──────────────────────── */
+.total-bar {
+  background: rgba(0,200,150,0.05); border: 1px solid var(--teal-border);
+  padding: 20px 28px; margin-top: 16px;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 12px;
+}
+
+.total-bar .label {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--text-dim);
+}
+
+.total-bar .amount {
+  font-family: 'DM Serif Display', serif;
+  font-size: 38px; font-weight: 400; color: var(--teal);
+}
+
+.total-bar .amount span {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; color: var(--text-dim); font-weight: 300;
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+.proposal-footer {
+  background: var(--navy-soft);
+  border-top: 1px solid var(--border);
+  padding: 56px 40px; text-align: center;
+}
+
+.footer-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px; color: var(--teal);
+  margin-bottom: 6px; letter-spacing: 3px;
+}
+
+.footer-tagline {
+  font-size: 10px; font-weight: 300; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--text-dim); margin-bottom: 28px;
+}
+
+.footer-contact {
+  display: flex; gap: 36px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 28px;
+}
+
+.footer-contact a {
+  font-size: 13px; font-weight: 300; color: var(--text-dim);
+  text-decoration: none; transition: color 0.2s;
+}
+
+.footer-contact a:hover { color: var(--teal); }
+
+.footer-legal {
+  font-size: 11px; font-weight: 300; color: var(--text-dim);
+  opacity: 0.45; line-height: 1.9;
+}
+
+/* ─── ANIMATIONS ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-line"></div>
+  <div class="cover-eyebrow">Mobile App Proposal — NixAI Labs</div>
+  <h1 class="cover-title"><em>Exits.me</em><br>Mobile</h1>
+  <p class="cover-subtitle">Native iOS &amp; Android App for M&amp;A Deal Flow</p>
+  <div class="cover-divider">
+    <span></span><div class="cover-diamond"></div><span></span>
+  </div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Prepared by</div>
+      <div class="cover-meta-value">NixAI Labs</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Date</div>
+      <div class="cover-meta-value">May 2026</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Version</div>
+      <div class="cover-meta-value">1.0</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Valid For</div>
+      <div class="cover-meta-value">30 Days</div>
+    </div>
+  </div>
+  <div class="cover-badge"><div class="cover-badge-inner">Confidential</div></div>
+</section>
+
+<!-- 01 OPPORTUNITY -->
+<section class="section">
+  <div class="section-number">01 — The Opportunity</div>
+  <h2 class="section-title">M&amp;A Is <em>Mobile-First</em> Now</h2>
+  <p class="section-body">Exits.me has built a compelling web platform for buying and selling businesses. But deals don't happen only at desks — buyers browse listings on the go, sellers check offer activity in real time, and conversations happen around the clock. A dedicated mobile app extends Exits.me's reach to where deals actually live.</p>
+
+  <div>
+    <span class="tag">React Native</span>
+    <span class="tag">iOS &amp; Android</span>
+    <span class="tag">Real-Time Messaging</span>
+    <span class="tag">Push Alerts</span>
+    <span class="tag">AI Matching</span>
+    <span class="tag">Secure Documents</span>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-number">72%</div>
+      <div class="stat-label">of B2B buyers use mobile<br>during the purchase process</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3×</div>
+      <div class="stat-label">higher engagement on native<br>apps vs. mobile web</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">60%</div>
+      <div class="stat-label">of acquire.com traffic<br>already comes from mobile</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0</div>
+      <div class="stat-label">dedicated M&amp;A marketplace<br>apps currently on the App Store</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 FEATURES -->
+<section class="section">
+  <div class="section-number">02 — Core Features</div>
+  <h2 class="section-title">Built for <em>Buyers &amp; Sellers</em></h2>
+  <p class="section-body">Every feature is designed around the actual workflow of an M&amp;A transaction — from initial discovery through due diligence to signed deal.</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-title">Deal Browser</div>
+      <div class="feature-desc">Filter listings by industry, revenue, asking price, and profitability. Swipe, save, and share in a fluid native interface.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <div class="feature-title">Smart Alerts</div>
+      <div class="feature-desc">Push notifications for new listings that match saved criteria, inbound offers, and message activity — so users never miss a deal.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">In-App Messaging</div>
+      <div class="feature-desc">Real-time encrypted chat between buyers and sellers, with read receipts, file attachments, and message history synced with the web platform.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Seller Dashboard</div>
+      <div class="feature-desc">Live analytics on listing views, buyer interest signals, and offer pipeline — all in a clean mobile dashboard built for quick check-ins.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗂️</div>
+      <div class="feature-title">Document Vault</div>
+      <div class="feature-desc">Secure NDA signing, financial document viewing, and due diligence file sharing — protected behind biometric authentication.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">AI Match Score</div>
+      <div class="feature-desc">AI-powered compatibility scoring surfaces the most relevant listings for each buyer based on their history, saved searches, and deal preferences.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">❤️</div>
+      <div class="feature-title">Watchlist</div>
+      <div class="feature-desc">Save and track listings over time. Get notified on price changes, new financials, or when a seller marks their business as under offer.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-title">Secure Auth</div>
+      <div class="feature-desc">Face ID / Touch ID login, two-factor authentication, and session management — meeting the security bar that M&amp;A participants expect.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SCOPE -->
+<section class="section">
+  <div class="section-number">03 — Scope of Work</div>
+  <h2 class="section-title">What We <em>Deliver</em></h2>
+  <p class="section-body">A single cross-platform React Native codebase ships to both the Apple App Store and Google Play — one build cycle, two platforms, consistent experience.</p>
+
+  <ul class="scope-list">
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Discovery &amp; Architecture</strong> — Deep-dive into Exits.me's existing API, define app architecture, authentication flow, and data sync strategy with the web platform.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>UX/UI Design</strong> — Full mobile design system: wireframes, interactive prototype, final high-fidelity screens for iOS and Android, design handoff to development.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>React Native Development</strong> — Core app build: authentication, listing browser, filters &amp; search, watchlist, seller dashboard, and user profiles.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Real-Time Messaging</strong> — WebSocket-based chat system synced with the web platform, with push notification triggers, read receipts, and file attachment support.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Push Notification System</strong> — Firebase Cloud Messaging integration for deal alerts, new messages, offer updates, and listing changes — configurable per user.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Document Vault &amp; e-Signing</strong> — Secure file viewer for PDFs and financials, NDA signing flow with DocuSign or native signature capture, biometric-gated access.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>AI Match Score Engine</strong> — Buyer preference model that surfaces personalized listing rankings using historical interactions and explicit criteria.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Backend API Integration</strong> — Connect app to Exits.me's existing API; where gaps exist, define and build supplementary endpoints for mobile-specific data needs.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>QA &amp; Security Audit</strong> — Full device matrix testing (iPhone, iPad, Android phones/tablets), penetration testing on auth and document flows, performance profiling.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>App Store &amp; Play Store Submission</strong> — App metadata, screenshots, ASO copywriting, review submission management, and compliance with Apple and Google policies.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Launch &amp; Handover</strong> — Go-live monitoring, team training, developer documentation, and a 30-day hypercare window post-launch.</div></li>
+  </ul>
+</section>
+
+<!-- 04 INVESTMENT -->
+<section class="section">
+  <div class="section-number">04 — Investment</div>
+  <h2 class="section-title">Transparent <em>Pricing</em></h2>
+  <p class="section-body">A one-time build fee covers design through launch. A monthly retainer keeps the app current as iOS and Android release new OS versions, and as Exits.me's platform evolves.</p>
+
+  <div style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--teal);opacity:0.75;margin-bottom:8px;">Monthly Recurring</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card featured">
+      <div class="pricing-type">Monthly</div>
+      <div class="pricing-name">App Maintenance &amp; OS Updates</div>
+      <div class="pricing-amount">$900</div>
+      <div class="pricing-period">/ month</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-items">
+        <li>iOS &amp; Android OS update compatibility</li>
+        <li>Bug fixes &amp; performance patches</li>
+        <li>App Store &amp; Play Store policy compliance</li>
+        <li>API sync as web platform evolves</li>
+        <li>Priority response within 24 hrs</li>
+      </ul>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-type">Add-On</div>
+      <div class="pricing-name">Feature Development Retainer</div>
+      <div class="pricing-amount">$2,400</div>
+      <div class="pricing-period">/ month — optional</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-items">
+        <li>Up to 20 hrs/month new feature work</li>
+        <li>A/B testing &amp; conversion experiments</li>
+        <li>Analytics &amp; funnel reporting</li>
+        <li>Ongoing UX iterations</li>
+        <li>Dedicated developer assigned</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="total-bar">
+    <div class="label">Base Monthly Retainer</div>
+    <div class="amount">$900 <span>/ month</span></div>
+  </div>
+</section>
+
+<!-- 05 ONE-TIME -->
+<section class="section">
+  <div class="section-number">05 — One-Time Build Fee</div>
+  <h2 class="section-title">Design Through <em>Launch</em></h2>
+  <p class="section-body">Paid in two milestones: 50% at kickoff, 50% at App Store approval. Full ownership of code and assets transferred to Exits.me at completion.</p>
+
+  <table class="one-time-table">
+    <thead>
+      <tr>
+        <th>Deliverable</th>
+        <th>Description</th>
+        <th style="text-align:right;">Fee (USD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Discovery &amp; Architecture</td>
+        <td>API audit, tech stack decisions, app architecture plan</td>
+        <td class="price">$3,500</td>
+      </tr>
+      <tr>
+        <td>UX/UI Design</td>
+        <td>Wireframes, prototype, full design system &amp; screen library</td>
+        <td class="price">$9,000</td>
+      </tr>
+      <tr>
+        <td>Core App Development</td>
+        <td>Auth, listing browser, search/filter, watchlist, profiles, dashboards</td>
+        <td class="price">$22,000</td>
+      </tr>
+      <tr>
+        <td>Real-Time Messaging</td>
+        <td>WebSocket chat, push notifications, file attachments</td>
+        <td class="price">$6,000</td>
+      </tr>
+      <tr>
+        <td>Document Vault &amp; e-Sign</td>
+        <td>Secure viewer, NDA flow, biometric auth, DocuSign integration</td>
+        <td class="price">$5,500</td>
+      </tr>
+      <tr>
+        <td>AI Match Score</td>
+        <td>Buyer preference model, personalized listing ranking engine</td>
+        <td class="price">$5,000</td>
+      </tr>
+      <tr>
+        <td>QA &amp; Security Audit</td>
+        <td>Device matrix testing, penetration test, performance profiling</td>
+        <td class="price">$5,500</td>
+      </tr>
+      <tr>
+        <td>App Store Submission &amp; ASO</td>
+        <td>Metadata, screenshots, review management, compliance sign-off</td>
+        <td class="price">$1,500</td>
+      </tr>
+      <tr>
+        <td>Launch &amp; Hypercare</td>
+        <td>Go-live support, team training, docs, 30-day post-launch window</td>
+        <td class="price">$2,000</td>
+      </tr>
+      <tr class="total-row">
+        <td>Total One-Time Investment</td>
+        <td></td>
+        <td class="price">$60,000</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:11px;font-weight:300;color:var(--text-dim);margin-top:12px;padding-left:4px;">* 50% deposit ($30,000) required to begin. Balance due upon App Store &amp; Play Store approval.</div>
+</section>
+
+<!-- 06 SUMMARY -->
+<section class="section">
+  <div class="section-number">06 — Summary</div>
+  <h2 class="section-title">The Full <em>Picture</em></h2>
+
+  <div class="summary-box">
+    <div style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--teal);opacity:0.75;">Complete Investment Overview</div>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <div class="summary-label">One-Time Build</div>
+        <div class="summary-value">$60k</div>
+        <div class="summary-note">50% deposit to begin</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Monthly Retainer</div>
+        <div class="summary-value">$900</div>
+        <div class="summary-note">From month 1 onwards</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Year 1 Total</div>
+        <div class="summary-value">$70.8k</div>
+        <div class="summary-note">Build + 12 months retainer</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Platforms</div>
+        <div class="summary-value">2</div>
+        <div class="summary-note">iOS &amp; Android, one codebase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 TIMELINE -->
+<section class="section">
+  <div class="section-number">07 — Timeline</div>
+  <h2 class="section-title">Live in <em>16 Weeks</em></h2>
+  <p class="section-body">A phased delivery schedule with a client review gate at Week 8 — ensuring the design and core experience are signed off before the advanced feature build begins.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-phase">Weeks 1–2</div>
+      <div>
+        <div class="timeline-title">Discovery &amp; Architecture</div>
+        <div class="timeline-desc">Kickoff, API audit, tech stack decisions, app architecture plan, development environment setup, and design brief alignment.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-phase">Weeks 3–5</div>
+      <div>
+        <div class="timeline-title">UX/UI Design</div>
+        <div class="timeline-desc">Wireframes for all screens, interactive Figma prototype, design system, and final high-fidelity iOS &amp; Android screen library.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-phase">Week 6</div>
+      <div>
+        <div class="timeline-title">Design Review — Client Sign-Off</div>
+        <div class="timeline-desc">Full walkthrough with the Exits.me team. Feedback collected and design finalized before development begins. No code starts without sign-off.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-phase">Weeks 7–10</div>
+      <div>
+        <div class="timeline-title">Core App Development</div>
+        <div class="timeline-desc">Authentication, listing browser, search &amp; filters, watchlist, seller dashboard, user profiles, and API integration with Exits.me's platform.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-phase">Weeks 11–13</div>
+      <div>
+        <div class="timeline-title">Advanced Features</div>
+        <div class="timeline-desc">Real-time messaging, push notification system, Document Vault with biometric auth, e-sign flow, and AI Match Score engine.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-phase">Weeks 14–15</div>
+      <div>
+        <div class="timeline-title">QA, Security &amp; Hardening</div>
+        <div class="timeline-desc">Full device matrix QA, security audit on auth and document flows, performance profiling, crash testing, and final bug resolution.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-phase">Week 16</div>
+      <div>
+        <div class="timeline-title">Launch &amp; Handover</div>
+        <div class="timeline-desc">App Store and Play Store submission, go-live monitoring, team training session, full documentation handover, and 30-day hypercare begins.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="proposal-footer">
+  <div class="footer-logo">NixAI</div>
+  <div class="footer-tagline">AI &amp; Product Agency — nixailabs.com</div>
+  <div class="footer-contact">
+    <a href="https://nixailabs.com">nixailabs.com</a>
+    <a href="mailto:ayousef@nixailabs.com">ayousef@nixailabs.com</a>
+  </div>
+  <div class="footer-legal">
+    This proposal is confidential and prepared exclusively for Exits.me.<br>
+    Prices are valid for 30 days from date of issue. All amounts in USD.<br>
+    © 2026 NixAI Labs. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
