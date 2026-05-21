@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AM Jewelry – Digital Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A020;
+    --gold-light: #F0D060;
+    --gold-bg: rgba(201,160,32,0.08);
+    --black: #0D0D0D;
+    --black-soft: #141414;
+    --charcoal: #1E1E1E;
+    --card-bg: #191919;
+    --border: rgba(255,255,255,0.07);
+    --border-gold: rgba(201,160,32,0.25);
+    --text-bright: #FFFFFF;
+    --text-main: #D6D6D6;
+    --text-dim: #888888;
+    --white: #FFFFFF;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text-main);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 40px;
+    background: var(--black);
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(201,160,32,0.13) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 30% at 80% 90%, rgba(201,160,32,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cover-ornament {
+    width: 1px; height: 72px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 36px;
+    opacity: 0;
+    animation: fadeDown 0.9s ease 0.2s forwards;
+  }
+
+  .cover-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 5px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 9vw, 110px); font-weight: 300;
+    line-height: 0.95; color: var(--white); margin-bottom: 6px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .cover-title em { font-style: italic; color: var(--gold); }
+
+  .cover-subtitle {
+    font-size: 14px; font-weight: 300; letter-spacing: 2px;
+    color: var(--text-dim); margin-bottom: 52px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .cover-divider {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 52px;
+    opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .cover-divider span { display: block; width: 72px; height: 1px; background: var(--gold); opacity: 0.35; }
+  .diamond-icon { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); opacity: 0.8; }
+
+  .cover-meta {
+    display: flex; gap: 56px; justify-content: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+
+  .cover-meta-item { text-align: center; }
+
+  .cover-meta-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+  }
+
+  .cover-meta-value { font-size: 15px; font-weight: 400; color: var(--text-main); }
+
+  .cover-badge {
+    position: absolute; bottom: 36px; right: 36px;
+    opacity: 0; animation: fadeUp 0.8s ease 1.3s forwards;
+  }
+
+  .cover-badge-inner {
+    font-size: 10px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text-dim);
+    border: 1px solid var(--border-gold); padding: 8px 18px;
+  }
+
+  .section {
+    max-width: 920px; margin: 0 auto; padding: 80px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-number {
+    font-size: 10px; font-weight: 500; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 56px); font-weight: 300;
+    color: var(--white); line-height: 1.1; margin-bottom: 24px;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .section-body {
+    font-size: 14px; font-weight: 300; color: var(--text-dim);
+    max-width: 640px; line-height: 1.9; margin-bottom: 40px;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 44px;
+  }
+
+  .service-card {
+    background: var(--card-bg); padding: 32px 28px;
+    transition: background 0.25s ease; position: relative; overflow: hidden;
+  }
+
+  .service-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 2px; height: 0; background: var(--gold); transition: height 0.35s ease;
+  }
+
+  .service-card:hover { background: #1f1f1f; }
+  .service-card:hover::after { height: 100%; }
+
+  .service-icon { font-size: 22px; margin-bottom: 14px; }
+  .service-title { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+  .service-desc { font-size: 13px; font-weight: 300; color: var(--text-dim); line-height: 1.75; }
+
+  .scope-list { list-style: none; margin-top: 40px; }
+
+  .scope-list li {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px 0; border-bottom: 1px solid var(--border);
+  }
+
+  .scope-list li:last-child { border-bottom: none; }
+
+  .scope-dot {
+    width: 6px; height: 6px; min-width: 6px; background: var(--gold);
+    transform: rotate(45deg); margin-top: 8px; opacity: 0.8;
+  }
+
+  .scope-text { font-size: 13.5px; font-weight: 300; color: var(--text-dim); }
+  .scope-text strong { color: var(--text-bright); font-weight: 500; }
+
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px; margin-top: 44px;
+  }
+
+  .pricing-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    padding: 32px 26px; position: relative; transition: border-color 0.3s ease;
+  }
+
+  .pricing-card:hover { border-color: var(--border-gold); }
+
+  .pricing-card.featured { border-color: var(--border-gold); background: #181408; }
+
+  .pricing-card.featured::before {
+    content: 'CORE'; position: absolute; top: -1px; right: 20px;
+    background: var(--gold); color: #000; font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; padding: 4px 10px;
+  }
+
+  .pricing-type { font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .pricing-name { font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 18px; line-height: 1.35; }
+
+  .pricing-amount {
+    font-family: 'Cormorant Garamond', serif; font-size: 46px;
+    font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 4px;
+  }
+
+  .pricing-period { font-size: 11px; font-weight: 300; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 22px; }
+  .pricing-divider { height: 1px; background: var(--border); margin-bottom: 18px; }
+
+  .pricing-items { list-style: none; }
+
+  .pricing-items li {
+    font-size: 12.5px; font-weight: 300; color: var(--text-dim);
+    padding: 5px 0 5px 16px; position: relative;
+  }
+
+  .pricing-items li::before {
+    content: '◆'; font-size: 5px; color: var(--gold);
+    position: absolute; left: 0; top: 9px;
+  }
+
+  .per-image-box {
+    margin-top: 18px; background: var(--card-bg); border: 1px solid var(--border-gold);
+    padding: 24px 28px; display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+
+  .per-image-box .label { font-size: 13px; font-weight: 400; color: var(--text-main); }
+  .per-image-box .label span { display: block; font-size: 11px; font-weight: 300; color: var(--text-dim); margin-top: 2px; }
+
+  .per-image-price {
+    font-family: 'Cormorant Garamond', serif; font-size: 42px;
+    color: var(--gold); font-weight: 300; line-height: 1;
+  }
+
+  .per-image-unit { font-size: 12px; color: var(--text-dim); margin-top: 2px; text-align: right; }
+
+  .one-time-table { width: 100%; border-collapse: collapse; margin-top: 44px; }
+
+  .one-time-table th {
+    font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); text-align: left; padding: 14px 18px;
+    border-bottom: 1px solid var(--border-gold);
+  }
+
+  .one-time-table td {
+    padding: 16px 18px; font-size: 13px; font-weight: 300; color: var(--text-dim);
+    border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+
+  .one-time-table tr:last-child td { border-bottom: none; }
+
+  .one-time-table td:first-child { font-size: 14px; font-weight: 500; color: var(--white); width: 38%; }
+
+  .one-time-table td.price {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px;
+    font-weight: 400; color: var(--gold); white-space: nowrap; text-align: right;
+  }
+
+  .total-row td {
+    background: rgba(201,160,32,0.06) !important;
+    border-top: 1px solid var(--border-gold) !important;
+    border-bottom: none !important;
+    padding-top: 22px !important; padding-bottom: 22px !important;
+  }
+
+  .total-row td:first-child {
+    font-size: 11px !important; font-weight: 600 !important;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold) !important;
+  }
+
+  .total-row td.price { font-size: 36px !important; }
+
+  .summary-box {
+    background: #0f0c02; border: 1px solid var(--border-gold);
+    padding: 44px 40px; margin-top: 44px; position: relative;
+  }
+
+  .summary-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px; margin-top: 28px;
+  }
+
+  .summary-item { text-align: center; }
+
+  .summary-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 8px;
+  }
+
+  .summary-value {
+    font-family: 'Cormorant Garamond', serif; font-size: 40px;
+    font-weight: 300; color: var(--white);
+  }
+
+  .summary-note { font-size: 11px; font-weight: 300; color: var(--text-dim); margin-top: 4px; }
+
+  .timeline { margin-top: 44px; position: relative; }
+
+  .timeline::before {
+    content: ''; position: absolute; left: 16px; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); opacity: 0.25;
+  }
+
+  .timeline-item {
+    display: flex; gap: 32px; margin-bottom: 32px;
+    padding-left: 52px; position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute; left: 9px; top: 4px;
+    width: 14px; height: 14px; border: 1px solid var(--gold);
+    background: var(--black); transform: rotate(45deg); opacity: 0.75;
+  }
+
+  .timeline-week {
+    font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); min-width: 90px; padding-top: 3px; opacity: 0.8;
+  }
+
+  .timeline-title { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+  .timeline-desc { font-size: 13px; font-weight: 300; color: var(--text-dim); line-height: 1.75; }
+
+  .monthly-total-bar {
+    background: rgba(201,160,32,0.05); border: 1px solid var(--border-gold);
+    padding: 20px 28px; margin-top: 16px; display: flex;
+    justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+
+  .monthly-total-bar .label {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text-dim);
+  }
+
+  .monthly-total-bar .amount {
+    font-family: 'Cormorant Garamond', serif; font-size: 40px;
+    font-weight: 300; color: var(--gold);
+  }
+
+  .monthly-total-bar .amount span {
+    font-family: 'Roboto', sans-serif; font-size: 13px;
+    color: var(--text-dim); font-weight: 300;
+  }
+
+  .tag {
+    display: inline-block; background: var(--gold-bg); border: 1px solid var(--border-gold);
+    color: var(--gold); font-size: 10px; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; padding: 4px 12px; margin-right: 6px; margin-bottom: 6px;
+  }
+
+  .proposal-footer {
+    background: var(--black-soft); border-top: 1px solid var(--border);
+    padding: 56px 40px; text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 30px;
+    color: var(--gold); margin-bottom: 6px; letter-spacing: 3px;
+  }
+
+  .footer-tagline {
+    font-size: 11px; font-weight: 300; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 28px;
+  }
+
+  .footer-contact {
+    display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px;
+  }
+
+  .footer-contact a {
+    font-size: 13px; font-weight: 300; color: var(--text-dim);
+    text-decoration: none; transition: color 0.2s;
+  }
+
+  .footer-contact a:hover { color: var(--gold); }
+
+  .footer-legal {
+    font-size: 11px; font-weight: 300; color: var(--text-dim); opacity: 0.45; line-height: 1.9;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-ornament"></div>
+  <div class="cover-eyebrow">Digital Proposal — NixAI</div>
+  <h1 class="cover-title"><em>AM</em> Jewelry</h1>
+  <p class="cover-subtitle">Shopify Experience &amp; AI Virtual Try-On Plugin</p>
+  <div class="cover-divider">
+    <span></span><div class="diamond-icon"></div><span></span>
+  </div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Prepared by</div>
+      <div class="cover-meta-value">NixAI</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Date</div>
+      <div class="cover-meta-value">May 2025</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Version</div>
+      <div class="cover-meta-value">1.0</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Valid For</div>
+      <div class="cover-meta-value">30 Days</div>
+    </div>
+  </div>
+  <div class="cover-badge"><div class="cover-badge-inner">Confidential</div></div>
+</section>
+
+<!-- 01 OVERVIEW -->
+<section class="section">
+  <div class="section-number">01 — Overview</div>
+  <h2 class="section-title">A Complete <em>Digital</em> Presence</h2>
+  <p class="section-body">This proposal outlines the end-to-end digital infrastructure to launch AM Jewelry online — from domain registration and Shopify store setup to a custom AI-powered Virtual Try-On plugin that lets customers see themselves wearing pieces before purchasing.</p>
+  <div>
+    <span class="tag">Shopify Commerce</span>
+    <span class="tag">Domain & Hosting</span>
+    <span class="tag">AI Try-On Plugin</span>
+    <span class="tag">Custom Dev</span>
+    <span class="tag">Ongoing Support</span>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <div class="service-title">Domain & Setup</div>
+      <div class="service-desc">Domain registration, DNS, SSL certificate, and Shopify store initialization tailored for jewelry retail.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛍️</div>
+      <div class="service-title">Shopify Store</div>
+      <div class="service-desc">Premium theme, product catalog, payment gateway integration, and checkout flow optimized for conversion.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <div class="service-title">AI Try-On Plugin</div>
+      <div class="service-desc">Custom plugin using AI image generation so customers can upload a photo and see themselves wearing the jewelry.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <div class="service-title">Monthly Support</div>
+      <div class="service-desc">Ongoing developer availability for updates, bug fixes, performance monitoring, and new feature additions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 SCOPE -->
+<section class="section">
+  <div class="section-number">02 — Scope of Work</div>
+  <h2 class="section-title">What We <em>Deliver</em></h2>
+  <p class="section-body">Every component is handled end-to-end by the NixAI team — one accountable partner from kickoff to launch and beyond.</p>
+  <ul class="scope-list">
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Domain Acquisition</strong> — Register the ideal .com domain for AM Jewelry, configure DNS records, and activate SSL/HTTPS security.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Shopify Store Setup</strong> — Initialize Shopify, install a luxury theme, configure collections, product pages, size guides, and navigation.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Design Customization</strong> — Brand-aligned colors, typography, logo placement, hero sections, and homepage layout to reflect AM Jewelry's aesthetic.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Payment & Checkout</strong> — Stripe, PayPal, and/or local payment provider integration with a streamlined order confirmation flow.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>SEO & Analytics</strong> — On-page SEO foundation, Google Analytics 4, Meta Pixel integration, and sitemap submission.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>AI Try-On Plugin — Development</strong> — Custom Shopify embedded app: customer uploads a photo, AI generates a realistic image of them wearing the selected jewelry.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>AI Try-On Plugin — Integration</strong> — "Try It On" button embedded on product pages, mobile-responsive interface, download and share functionality.</div></li>
+    <li><div class="scope-dot"></div><div class="scope-text"><strong>Monthly Maintenance & Support</strong> — Product updates, content changes, performance monitoring, security patches, and priority support channel (up to 10 hrs/month).</div></li>
+  </ul>
+</section>
+
+<!-- 03 PRICING -->
+<section class="section">
+  <div class="section-number">03 — Investment</div>
+  <h2 class="section-title">Transparent <em>Pricing</em></h2>
+  <p class="section-body">Structured in two parts: a one-time setup and development fee, and a recurring monthly retainer covering hosting, support, and developer time.</p>
+
+  <div style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:6px;">Monthly Recurring</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card featured">
+      <div class="pricing-type">Monthly</div>
+      <div class="pricing-name">Shopify Plan & Hosting</div>
+      <div class="pricing-amount">$79</div>
+      <div class="pricing-period">/ month — billed to client</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-items">
+        <li>Shopify Basic subscription</li>
+        <li>Unlimited products & bandwidth</li>
+        <li>Shopify Payments enabled</li>
+        <li>SSL certificate included</li>
+        <li>99.99% uptime guarantee</li>
+      </ul>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-type">Monthly</div>
+      <div class="pricing-name">Developer Retainer & Support</div>
+      <div class="pricing-amount">$400</div>
+      <div class="pricing-period">/ month</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-items">
+        <li>Up to 10 hrs developer time</li>
+        <li>Content & product updates</li>
+        <li>Bug fixes & performance tuning</li>
+        <li>Plugin maintenance & updates</li>
+        <li>Priority response within 24 hrs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:8px;">AI Try-On — Per Use</div>
+  <div class="per-image-box">
+    <div class="label">
+      Virtual Try-On — Per Image Generated
+      <span>Customer uploads photo → AI renders jewelry on their image. Billed per render.</span>
+    </div>
+    <div>
+      <div class="per-image-price">$0.75</div>
+      <div class="per-image-unit">per image</div>
+    </div>
+  </div>
+
+  <div class="monthly-total-bar" style="margin-top:24px;">
+    <div class="label">Monthly Retainer Total</div>
+    <div class="amount">$479 <span>/ month</span></div>
+  </div>
+  <div style="font-size:11px;font-weight:300;color:var(--text-dim);margin-top:8px;padding-left:4px;">* Shopify plan ($79) can be billed directly to client's card. Net monthly to Anspire: $400. Try-On renders billed separately at $0.75/image.</div>
+</section>
+
+<!-- 04 ONE-TIME -->
+<section class="section">
+  <div class="section-number">04 — One-Time Fees</div>
+  <h2 class="section-title">Setup & <em>Development</em></h2>
+  <p class="section-body">Paid once at project kickoff. Covers the full buildout — domain, store, design, plugin development, and launch.</p>
+
+  <table class="one-time-table">
+    <thead>
+      <tr>
+        <th>Deliverable</th>
+        <th>Description</th>
+        <th style="text-align:right;">Fee (USD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Domain Registration</td>
+        <td>1-year .com domain, DNS setup, SSL activation</td>
+        <td class="price">$20</td>
+      </tr>
+      <tr>
+        <td>Shopify Installation & Configuration</td>
+        <td>Store setup, theme install, collections, pages, navigation</td>
+        <td class="price">$800</td>
+      </tr>
+      <tr>
+        <td>Design Customization</td>
+        <td>Brand-aligned UI — homepage, product pages, banners</td>
+        <td class="price">$700</td>
+      </tr>
+      <tr>
+        <td>Payment & Integrations Setup</td>
+        <td>Payment gateways, Analytics, Meta Pixel, email capture</td>
+        <td class="price">$300</td>
+      </tr>
+      <tr>
+        <td>AI Try-On Plugin Development</td>
+        <td>Custom Shopify app — photo upload, AI generation, display, share</td>
+        <td class="price">$2,500</td>
+      </tr>
+      <tr>
+        <td>Plugin Integration & QA</td>
+        <td>Product page embedding, mobile testing, cross-browser QA</td>
+        <td class="price">$500</td>
+      </tr>
+      <tr>
+        <td>Launch & Handover</td>
+        <td>Go-live support, training session, documentation</td>
+        <td class="price">$180</td>
+      </tr>
+      <tr class="total-row">
+        <td>Total One-Time Investment</td>
+        <td></td>
+        <td class="price">$7,500</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:11px;font-weight:300;color:var(--text-dim);margin-top:12px;padding-left:4px;">* A 50% deposit ($3,750) is required to begin. Balance due upon store launch.</div>
+</section>
+
+<!-- 05 SUMMARY -->
+<section class="section">
+  <div class="section-number">05 — Summary</div>
+  <h2 class="section-title">The Full <em>Picture</em></h2>
+  <div class="summary-box">
+    <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0.75;">Complete Investment Overview</div>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <div class="summary-label">One-Time Setup</div>
+        <div class="summary-value">$7,500</div>
+        <div class="summary-note">50% deposit to begin</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Monthly Retainer</div>
+        <div class="summary-value">$479</div>
+        <div class="summary-note">From month 1 onwards</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Try-On Renders</div>
+        <div class="summary-value">$0.75</div>
+        <div class="summary-note">Per AI image generated</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Year 1 Total</div>
+        <div class="summary-value">$13,248</div>
+        <div class="summary-note">Setup + 12 months retainer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 TIMELINE -->
+<section class="section">
+  <div class="section-number">06 — Timeline</div>
+  <h2 class="section-title">Live in <em>8 Weeks</em></h2>
+  <p class="section-body">A thorough, quality-first delivery schedule ensuring every detail — from store design to AI plugin stability — is properly built and tested before launch.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 1–2</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Discovery & Foundation</div>
+        <div class="timeline-desc">Kickoff meeting, brand brief review, domain registration, Shopify store initialization, theme shortlisting, and full development environment setup.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 3–4</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Store Design & Build</div>
+        <div class="timeline-desc">Theme customization, homepage and product page design, payment gateway integration, SEO foundation, Analytics and Meta Pixel setup.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 5</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Client Review — Round 1</div>
+        <div class="timeline-desc">Store walkthrough with AM Jewelry team. Feedback collected and revisions applied to design and content before proceeding to plugin development.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 6–7</div>
+      <div class="timeline-content">
+        <div class="timeline-title">AI Try-On Plugin Development</div>
+        <div class="timeline-desc">Custom plugin build — photo upload flow, AI API integration, result rendering, download and share functionality, and product page embedding.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 8</div>
+      <div class="timeline-content">
+        <div class="timeline-title">QA, Final Review & Launch</div>
+        <div class="timeline-desc">Full QA across devices and browsers, plugin stress testing, final client sign-off, go-live, training session, and handover documentation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="proposal-footer">
+  <div class="footer-logo">NixAI</div>
+  <div class="footer-tagline">AI Agency — nixailabs.com</div>
+  <div class="footer-contact">
+    <a href="https://nixailabs.com">nixailabs.com</a>
+    <a href="mailto:ayousef@nixailabs.com">ayousef@nixailabs.com</a>
+  </div>
+  <div class="footer-legal">
+    This proposal is confidential and prepared exclusively for AM Jewelry.<br>
+    Prices are valid for 30 days from date of issue. All amounts in USD.<br>
+    © 2025 NixAI. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
