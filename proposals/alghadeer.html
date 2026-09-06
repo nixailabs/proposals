@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Al Ghadeer — One Digital Estate | Proposal by NixAI</title>
-  <meta name="description" content="A digital-transformation proposal for Al Ghadeer Real Estate Investments: website, CMS, mobile app, CRM and marketing automation, benchmarked against DAMAC, Emaar and Binghatti and priced feature by feature from $50,000 to over $1,000,000." />
+  <meta name="description" content="A digital-transformation proposal for Al Ghadeer Real Estate Investments: a mandatory website and CMS, with the mobile app, CRM and marketing automation optional — benchmarked against DAMAC, Emaar and Binghatti and priced feature by feature from a $50,000 entry programme to over $1,000,000." />
   <meta property="og:title" content="Al Ghadeer — One Digital Estate" />
-  <meta property="og:description" content="Set the depth of every feature and watch the programme move between $50,000 and $1,000,000+. Prepared by NixAI." />
+  <meta property="og:description" content="Set the depth of every feature — or load the build required to match DAMAC, Emaar or Binghatti — and watch the programme move between $50,000 and $1,000,000+. Prepared by NixAI." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/assets/alghadeer/hero-masterplan.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -207,11 +207,22 @@
     .score b { font-family: var(--serif); font-size: 40px; font-weight: 500; color: var(--cream); line-height: 1; }
     .score small { display: block; font-size: 12px; color: rgba(249,244,236,0.6); margin-top: 6px; }
     .score.you { background: rgba(227,172,88,0.1); }
+    .score.is-preset { cursor: pointer; transition: border-color 220ms ease, background 220ms ease; }
+    .score.is-preset:hover, .score.is-preset.is-on { border-color: var(--gold); background: rgba(227,172,88,0.09); }
+    .score.is-preset:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+    .score-cta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 15px; border-top: 1px solid var(--line-gold-dark); padding-top: 11px; font-style: normal; }
+    .score-cta .amt { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--gold); line-height: 1; }
+    .score-cta .go { font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--gold-soft); white-space: nowrap; }
+    .score.is-preset:hover .score-cta .go, .score.is-preset.is-on .score-cta .go { color: var(--cream); }
 
     /* Pillars -------------------------------------------------------------- */
     .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
     .pillar { background: var(--paper); border: 1px solid var(--line-gold); padding: 26px 22px 22px; min-height: 380px; display: flex; flex-direction: column; }
-    .pillar .tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 16px; font-weight: 700; }
+    .pillar .tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .flag { font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; border: 1px solid var(--line-gold); padding: 3px 6px; white-space: nowrap; }
+    .flag.is-core { color: var(--gold-deep); border-color: var(--gold-deep); background: rgba(227,172,88,0.12); }
+    .flag.is-opt { color: var(--faint); }
+    .pillar.is-opt { background: transparent; }
     .pillar h3 { font-family: var(--serif); font-size: 30px; font-weight: 500; color: var(--ink); margin-bottom: 10px; line-height: 1.05; }
     .pillar p { flex: 1; font-size: 13.5px; }
     .pillar .bench { margin-top: 14px; font-size: 12px; color: var(--ink); border-top: 1px solid var(--line-gold); padding-top: 12px; }
@@ -234,6 +245,9 @@
     .rail-step b { display: block; font-family: var(--serif); font-style: italic; color: var(--gold-deep); font-size: 17px; margin-bottom: 4px; }
     .rail-step span { font-size: 11px; letter-spacing: 0.04em; color: var(--muted); }
     .rail-step em { display: block; font-style: normal; font-size: 11px; color: var(--ink); font-weight: 600; margin-top: 3px; }
+    .rail-step i { display: block; font-style: normal; font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; margin-top: 5px; color: var(--faint); }
+    .rail-step.is-opt { border-style: dashed; }
+    .rail-step.is-opt.is-hot { border-style: solid; }
 
     .scale { margin: 0 0 22px; }
     .scale-track { position: relative; height: 3px; background: var(--sand); margin: 34px 0 12px; }
@@ -250,6 +264,8 @@
     .stage-head b { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--gold-deep); }
     .stage-head h3 { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
     .stage-head em { font-style: normal; font-size: 12px; color: var(--faint); margin-left: auto; }
+    .stage-head .flag { margin-left: auto; }
+    .stage-head em + .flag { margin-left: 0; }
     .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .line { border: 1px solid var(--line); padding: 14px 15px 13px; background: rgba(255,255,255,0.55); transition: border-color 200ms ease, background 200ms ease; }
     .line.is-on { border-color: var(--line-gold); background: rgba(227,172,88,0.09); }
@@ -273,9 +289,12 @@
     .tier-btn.is-on em { color: var(--gold-soft); }
     .line-desc { font-size: 12px; line-height: 1.55; color: var(--muted); margin: 0; }
     .line-note { display: block; margin-top: 7px; font-size: 10.5px; letter-spacing: 0.04em; color: var(--gold-deep); font-weight: 600; }
-    .picker-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 4px 0 22px; }
+    .picker-actions { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 4px 0 10px; }
+    .picker-actions:last-of-type { margin-bottom: 22px; }
     .picker-actions button { background: none; border: 0; color: var(--gold-deep); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; padding: 0; border-bottom: 1px solid var(--line-gold); }
     .picker-actions button:hover { color: var(--ink); border-color: var(--gold-deep); }
+    .picker-actions button b { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 13.5px; letter-spacing: 0; text-transform: none; }
+    .pa-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--faint); min-width: 132px; }
 
     .bill { position: sticky; top: 92px; border: 1px solid var(--gold-deep); background: var(--navy); color: var(--cream); padding: 22px 22px 18px; }
     .bill span.k { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 700; }
@@ -553,7 +572,7 @@
         <span class="h1-line"><span class="gold">One digital</span></span>
         <span class="h1-line"><span class="gold">estate.</span></span>
       </h1>
-      <p class="cover-sub">Al Ghadeer has 17,362 units, a $2.84 billion portfolio, a million YouTube subscribers and a booth in London. What it does not have is the machine that turns that audience into reservations. This proposal is that machine — website, CMS, mobile app, CRM and marketing automation — priced feature by feature, so $50,000 and $1,000,000 become decisions instead of guesses.</p>
+      <p class="cover-sub">Al Ghadeer has 17,362 units, a $2.84 billion portfolio, a million YouTube subscribers and a booth in London. What it does not have is the machine that turns that audience into reservations. This proposal is that machine — a mandatory website and CMS, with the mobile app, CRM and marketing automation there to take or leave — priced feature by feature, so a $50,000 entry programme and a $1,000,000 flagship become decisions instead of guesses. You can also load the build required to match DAMAC, Emaar or Binghatti and read the price that comes with it.</p>
       <div class="cover-foot">
         <div class="cover-logos">
           <span class="word-mark">Al Ghadeer</span>
@@ -571,7 +590,7 @@
 
   <div class="quote-bar shell">
     <div class="quote-cell"><span>Client</span><b>Al Ghadeer Real Estate Investments — Al-Ridha Investment Group</b></div>
-    <div class="quote-cell"><span>Programme</span><b>Website · CMS · Mobile app · CRM · Marketing automation</b></div>
+    <div class="quote-cell"><span>Programme</span><b>Website &amp; CMS — mandatory · Mobile app, CRM &amp; marketing automation — optional</b></div>
     <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
     <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
   </div>
@@ -681,6 +700,7 @@
       <div class="bench-score" id="bench-score"></div>
 
       <p style="margin-top:28px;max-width:820px">Read the last column honestly: on the twenty-four capabilities that define the developers you want to resemble, Al Ghadeer today has <strong>none in full</strong> and eight in part. That is not a criticism of the brand. It is the size of the opportunity, and the reason this programme is scoped in five pillars rather than a redesign.</p>
+      <p style="margin-top:14px;max-width:820px;color:var(--gold-soft)">The three competitor cards above are live. <strong style="color:var(--cream)">Press one</strong> and the configurator in section 04 sets every line to the depth that column actually requires — the price you see on the card is the consequence of matching that company's feature set, derived row by row from this matrix.</p>
     </div>
   </section>
 
@@ -692,41 +712,41 @@
           <div class="section-kicker">03 &nbsp;/&nbsp; Solution</div>
           <h2>Five pillars. <em>One estate.</em></h2>
         </div>
-        <p class="lead">Everything below shares one identity, one inventory and one customer record. A unit reserved in the app disappears from the website in the same second, appears in the sales pipeline with its buyer, and triggers the follow-up journey — without a phone call.</p>
+        <p class="lead">Everything below shares one identity, one inventory and one customer record. A unit reserved in the app disappears from the website in the same second, appears in the sales pipeline with its buyer, and triggers the follow-up journey — without a phone call. <strong>The first two pillars are mandatory: no version of this programme ships without one bilingual website and one source of truth behind it. The last three are optional</strong> — recommended, benchmarked, and priced on their own, so you can commission them now, later, or not at all.</p>
       </div>
       <div class="pillars">
         <article class="pillar">
-          <div class="tag">01 &nbsp;/&nbsp; Website</div>
+          <div class="tag">01 &nbsp;/&nbsp; Website <span class="flag is-core">Mandatory</span></div>
           <h3>One bilingual site</h3>
           <p>alghadeer.com becomes the single home in Arabic and English, server-rendered for search, with project pages that show unit types, prices, plans, phases and live availability — and a way to act on every screen.</p>
           <div class="bench"><b>Benchmark</b>DAMAC unit search · Emaar 360° tours · Binghatti film-led project pages</div>
           <div class="stack"><span class="chip">Next.js</span><span class="chip">RTL</span><span class="chip">SEO</span></div>
         </article>
         <article class="pillar">
-          <div class="tag">02 &nbsp;/&nbsp; CMS</div>
+          <div class="tag">02 &nbsp;/&nbsp; CMS <span class="flag is-core">Mandatory</span></div>
           <h3>Content and inventory</h3>
           <p>A headless CMS your marketing team edits in Arabic and English at once — projects, phases, units, prices, news, careers, offers — so the two-truths problem cannot happen again.</p>
           <div class="bench"><b>Benchmark</b>Emaar's single source for 40+ communities · DAMAC offers hub</div>
           <div class="stack"><span class="chip">Payload CMS</span><span class="chip">Bilingual</span><span class="chip">Roles</span></div>
         </article>
-        <article class="pillar">
-          <div class="tag">03 &nbsp;/&nbsp; Mobile app</div>
+        <article class="pillar is-opt">
+          <div class="tag">03 &nbsp;/&nbsp; Mobile app <span class="flag is-opt">Optional</span></div>
           <h3>Buyer, then owner</h3>
-          <p>iOS and Android from one React Native codebase. Discover and enquire before purchase; after purchase, pay instalments, follow construction, take handover and raise service requests.</p>
+          <p>iOS and Android from one React Native codebase. Discover and enquire before purchase; after purchase, pay instalments, follow construction, take handover and raise service requests. <em>Optional, and it starts at $25,000 — the honest floor for an app that is an app rather than a wrapped website.</em></p>
           <div class="bench"><b>Benchmark</b>Emaar One · DAMAC Living · Binghatti Sphere</div>
           <div class="stack"><span class="chip">React Native</span><span class="chip">iOS</span><span class="chip">Android</span></div>
         </article>
-        <article class="pillar">
-          <div class="tag">04 &nbsp;/&nbsp; CRM</div>
+        <article class="pillar is-opt">
+          <div class="tag">04 &nbsp;/&nbsp; CRM <span class="flag is-opt">Optional</span></div>
           <h3>Every lead, one record</h3>
-          <p>WhatsApp, calls, YouTube, Meta forms, the website and the London booth land in one pipeline with units attached. Sales sees who is hot; management sees what is selling and why.</p>
+          <p>WhatsApp, calls, YouTube, Meta forms, the website and the London booth land in one pipeline with units attached. Sales sees who is hot; management sees what is selling and why. <em>Optional — but this is the one we would add first, and the $50,000 entry programme includes it.</em></p>
           <div class="bench"><b>Benchmark</b>Emaar on Salesforce · DAMAC agents portal · broker EOI flows</div>
           <div class="stack"><span class="chip">NixAI CRM</span><span class="chip">WhatsApp API</span><span class="chip">Pipeline</span></div>
         </article>
-        <article class="pillar">
-          <div class="tag">05 &nbsp;/&nbsp; Marketing automation</div>
+        <article class="pillar is-opt">
+          <div class="tag">05 &nbsp;/&nbsp; Marketing automation <span class="flag is-opt">Optional</span></div>
           <h3>Follow-up that never sleeps</h3>
-          <p>Journeys in Arabic and English by phase, budget and city. A lead from a YouTube video receives the brochure, a site-visit invitation and a price update without anyone remembering to send them.</p>
+          <p>Journeys in Arabic and English by phase, budget and city. A lead from a YouTube video receives the brochure, a site-visit invitation and a price update without anyone remembering to send them. <em>Optional, and it earns most when the CRM is already in place.</em></p>
           <div class="bench"><b>Benchmark</b>DAMAC retargeting · Emaar launch drips · Binghatti register-interest everywhere</div>
           <div class="stack"><span class="chip">Journeys</span><span class="chip">Scoring</span><span class="chip">Attribution</span></div>
         </article>
@@ -742,7 +762,7 @@
           <div class="section-kicker">04 &nbsp;/&nbsp; Build the programme</div>
           <h2>$50k and $1M are <em>not packages.</em></h2>
         </div>
-        <p class="lead">They are where the bill lands. Every capability below is priced on its own at the depth you choose. <strong>Mandatory</strong> lines exist in every version of the programme — but each has three depths, and that is most of the distance between the two numbers. Optional lines are added only where the benchmark justifies them.</p>
+        <p class="lead">They are where the bill lands. Every capability below is priced on its own at the depth you choose. Nine <strong>mandatory</strong> lines exist in every version of the programme — the website, the CMS and the platform, security and QA beneath them — and each has three depths, which is most of the distance between the two numbers. Everything else, including the whole mobile app, CRM and marketing-automation pillars, is <strong>optional</strong>: switch a pillar off and it leaves the bill, the roadmap and the quotation entirely. Or press DAMAC, Emaar or Binghatti below and read the price of matching them line for line.</p>
       </div>
 
       <div class="scale">
@@ -756,17 +776,25 @@
       <div class="picker">
         <div class="picker-main">
           <div class="must">
-            <div class="must-label">Thirteen mandatory capabilities — in every number</div>
+            <div class="must-label">Nine mandatory capabilities — in every number</div>
             <div class="must-chips" id="must-chips"></div>
-            <p>All thirteen at <strong>Essential</strong> is <strong>$50,000</strong> — the floor, and the reason a connected estate cannot cost less. All thirteen at <strong>Flagship</strong> is <strong>$743,000</strong>, before a single optional line. Everything between those sums is a depth decision, capability by capability.</p>
+            <p>All nine at <strong>Essential</strong> is <strong>$30,500</strong> — the honest floor, and the reason a bilingual site with one source of truth behind it cannot cost less. All nine at <strong>Flagship</strong> is <strong>$408,000</strong>, before a single optional line. Everything between those sums is a depth decision, capability by capability.</p>
+            <p>The programme we recommend starting from is the <strong>$50,000 entry programme</strong>: those nine lines plus the CRM core, so no enquiry is lost while the rest is decided. The mobile app, CRM and marketing-automation pillars are optional and additive — take them now, take them next year, or leave them.</p>
           </div>
 
           <div class="rail" id="journey-rail" aria-label="Programme pillars"></div>
 
           <div class="picker-actions">
-            <button type="button" data-preset="floor">Load the $50,000 foundation</button>
-            <button type="button" data-preset="middle">Load the $300,000 growth build</button>
-            <button type="button" data-preset="ceiling">Load the $1M flagship</button>
+            <span class="pa-label">Programme builds</span>
+            <button type="button" data-preset="floor">Entry programme <b data-preset-price="floor">—</b></button>
+            <button type="button" data-preset="middle">Growth build <b data-preset-price="middle">—</b></button>
+            <button type="button" data-preset="ceiling">Flagship build <b data-preset-price="ceiling">—</b></button>
+          </div>
+          <div class="picker-actions">
+            <span class="pa-label">Match a competitor</span>
+            <button type="button" data-preset="damac">Build like DAMAC <b data-preset-price="damac">—</b></button>
+            <button type="button" data-preset="emaar">Build like Emaar <b data-preset-price="emaar">—</b></button>
+            <button type="button" data-preset="binghatti">Build like Binghatti <b data-preset-price="binghatti">—</b></button>
           </div>
 
           <div id="stages"></div>
@@ -774,10 +802,10 @@
 
         <aside class="bill" id="bill" aria-live="polite">
           <span class="k">Configured programme</span>
-          <div class="pkg-name" id="bill-name">Foundation programme</div>
+          <div class="pkg-name" id="bill-name">Entry programme</div>
           <div class="price" id="bill-price">$50,000</div>
           <div class="weeks" id="bill-weeks">Delivery 4–5 months</div>
-          <p class="bill-note" id="bill-why">Every mandatory capability at Essential depth.</p>
+          <p class="bill-note" id="bill-why">The nine mandatory capabilities at Essential depth, plus the CRM core.</p>
           <ul id="bill-lines"></ul>
           <button class="to-pdf" type="button" data-pdf>
             <svg viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>
@@ -955,7 +983,7 @@
     <div class="shell">
       <div class="section-kicker">07 &nbsp;/&nbsp; Roadmap</div>
       <h2 id="timeline-title">4 to 5 months. Four waves.</h2>
-      <p class="lead" style="margin-bottom:36px" id="timeline-lead">The programme ships in waves so Al Ghadeer is never waiting for everything to be ready. The website and CRM go live first; the app, payments and automation follow on the same platform. The months below follow the depths you selected in section 04.</p>
+      <p class="lead" style="margin-bottom:36px" id="timeline-lead">The programme ships in waves so Al Ghadeer is never waiting for everything to be ready. The mandatory website and CMS go live first; whichever of the app, CRM and marketing-automation pillars you selected follow on the same platform. Both the months and the contents of each wave below follow the depths you selected in section 04 — switch a pillar off and it disappears from the roadmap too.</p>
       <div class="phases">
         <article class="phase">
           <div class="wk" id="ph-1-w">Months 1 — 2</div>
@@ -989,7 +1017,7 @@
         <article class="phase">
           <div class="wk" id="ph-4-w">Months 4 — 5</div>
           <h3>Optimise</h3>
-          <ul>
+          <ul id="ph-4-list">
             <li>QA across devices, UAT with the sales floor</li>
             <li>Training in Arabic for editors, agents and marketers</li>
             <li>App Store and Play release — allow two weeks</li>
@@ -1025,8 +1053,8 @@
         <div class="invest-top">
           <div>
             <div class="invest-label">Configured programme</div>
-            <h3 id="inv-name" style="font-family:var(--serif);font-size:34px;font-weight:500;margin:8px 0 10px">Foundation programme</h3>
-            <p id="inv-copy">Every mandatory capability at Essential depth, no optional lines.</p>
+            <h3 id="inv-name" style="font-family:var(--serif);font-size:34px;font-weight:500;margin:8px 0 10px">Entry programme</h3>
+            <p id="inv-copy">The nine mandatory capabilities at Essential depth, plus the CRM core.</p>
           </div>
           <div class="invest-total">
             <span>Total investment</span>
@@ -1044,10 +1072,10 @@
       </div>
 
       <div class="pay-grid">
-        <div class="pay"><span>To commence — 30%</span><b id="pay-1">$15,000</b></div>
-        <div class="pay"><span>Website + CRM live — 25%</span><b id="pay-2">$12,500</b></div>
-        <div class="pay"><span>App in stores — 25%</span><b id="pay-3">$12,500</b></div>
-        <div class="pay"><span>Programme acceptance — 20%</span><b id="pay-4">$10,000</b></div>
+        <div class="pay"><span id="pay-1-l">To commence — 30%</span><b id="pay-1">$15,000</b></div>
+        <div class="pay"><span id="pay-2-l">Website + CRM live — 25%</span><b id="pay-2">$12,500</b></div>
+        <div class="pay"><span id="pay-3-l">App in stores — 25%</span><b id="pay-3">$12,500</b></div>
+        <div class="pay"><span id="pay-4-l">Programme acceptance — 20%</span><b id="pay-4">$10,000</b></div>
       </div>
 
       <div class="units-note">
@@ -1058,36 +1086,83 @@
       <p style="margin:34px 0 0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-deep)">Worked examples — click one to load it above</p>
       <div class="compare" id="compare">
         <article data-preset="floor">
-          <div class="tag">The foundation</div>
-          <h3>Thirteen mandatory lines, all Essential</h3>
-          <div class="amt">$50,000</div>
+          <div class="tag">The entry programme</div>
+          <h3>The mandatory nine, plus the CRM core</h3>
+          <div class="amt" data-preset-price="floor">—</div>
           <ul>
-            <li>One bilingual website replacing both domains</li>
-            <li>CMS, companion app, CRM core, first journeys</li>
-            <li>Edge cases handled by your team, not the product</li>
+            <li>One bilingual website replacing both domains, with the unit explorer and lead capture</li>
+            <li>CMS holding one source of truth, and the CRM core so no enquiry is lost</li>
+            <li>No app and no automation yet — both stay open, and neither is bundled in</li>
+            <li>Mandatory-only, without the CRM, is <strong>$30,500</strong></li>
             <li>4–5 months</li>
           </ul>
         </article>
         <article data-preset="middle">
           <div class="tag">The growth build</div>
           <h3>Professional everywhere, plus inventory and media</h3>
-          <div class="amt">$301,000</div>
+          <div class="amt" data-preset-price="middle">—</div>
           <ul>
             <li>Unit finder with live availability and payment plans</li>
             <li>Owner app with payments, handover and construction updates</li>
             <li>CRM with roles, scoring, WhatsApp inbox and automation journeys</li>
+            <li>All three optional pillars switched on at Professional depth</li>
             <li>8–11 months</li>
           </ul>
         </article>
         <article data-preset="ceiling">
           <div class="tag">The flagship</div>
           <h3>Flagship everywhere, plus the benchmark extras</h3>
-          <div class="amt">$1,004,000</div>
+          <div class="amt" data-preset-price="ceiling">—</div>
           <ul>
             <li>Interactive 3D masterplan, 360° tours, film-led pages</li>
             <li>Owner app, broker platform, Iraqi and international payments</li>
             <li>AI concierge, attribution stack, data migration</li>
+            <li>Every pillar at its deepest, chosen by us rather than by a competitor</li>
             <li>14–18 months</li>
+          </ul>
+        </article>
+      </div>
+
+      <p style="margin:40px 0 0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-deep)">Build like a competitor — click one to load it above</p>
+      <p class="lead" style="margin-top:10px">These three are not packages either. Each one is the twenty-four-capability matrix in section 02 read line by line: for every capability that company scores <em>full</em> on, the corresponding line is set to the shallowest depth that actually delivers it. The price is the arithmetic of matching them — nothing more, nothing rounded.</p>
+      <div class="compare" id="compare-bench">
+        <article data-preset="damac">
+          <div class="tag">Build like DAMAC</div>
+          <h3>Front of the funnel, at full width</h3>
+          <div class="amt" data-preset-price="damac">—</div>
+          <ul>
+            <li>Interactive masterplan with unit-level availability, filters, instalment calculators</li>
+            <li>Seven-language, multi-currency estate with a 360° tour library and an offers and launches hub</li>
+            <li>DAMAC Living-class owner app: payments, handover, amenity booking, permits, home services</li>
+            <li>DAMAC 360-class broker programme: EOI, unit booking, commission tiers, roadshows, partner API</li>
+            <li>Flagship CRM behind everything, with lifecycle automation and full multi-touch attribution</li>
+            <li>No wishlist — DAMAC does not ship one, so we do not charge for one</li>
+          </ul>
+        </article>
+        <article data-preset="emaar">
+          <div class="tag">Build like Emaar</div>
+          <h3>The owner and post-sales side, at full depth</h3>
+          <div class="amt" data-preset-price="emaar">—</div>
+          <ul>
+            <li>Emaar One-class owner app with finance-grade payments, digital handover and voice service requests</li>
+            <li>Community operations behind it: amenity booking, access cards, permits, home services, service charges</li>
+            <li>Commercial inventory engine with phase-launch priority queues and live availability</li>
+            <li>Sales operations from quotation to key: reservations, contracts, e-signature, transfers, snagging</li>
+            <li>Salesforce-class CRM, and every existing owner record migrated so the app works on day one</li>
+            <li>Lighter on the map and the currency switcher, because Emaar is — so the explorer stops at Professional</li>
+          </ul>
+        </article>
+        <article data-preset="binghatti">
+          <div class="tag">Build like Binghatti</div>
+          <h3>Film-led, booking-led, brand-first</h3>
+          <div class="amt" data-preset-price="binghatti">—</div>
+          <ul>
+            <li>Interactive 3D masterplan, 360° walk-throughs and fly-throughs, with a sales-centre touch mode</li>
+            <li>Flagship website: bespoke motion and film sequences, press and awards centre, investor hub</li>
+            <li>Register interest on every screen, and book-a-meeting with real Zoom and Teams time slots</li>
+            <li>Binghatti Sphere-class investor app: portfolio, payment tracking, documents — mid-ladder, not owner-community</li>
+            <li>A twelve-month editorial and social programme, which is how the brand is actually built</li>
+            <li>The cheapest of the three, because owner operations, the broker app and unit search are genuinely lighter</li>
           </ul>
         </article>
       </div>
@@ -1179,7 +1254,7 @@
 
   <div class="bill-dock" id="bill-dock" aria-hidden="true">
     <div>
-      <span id="dock-name">Foundation programme</span>
+      <span id="dock-name">Entry programme</span>
       <b id="dock-price">$50,000</b>
     </div>
     <button class="dock-pdf" type="button" data-pdf>
@@ -1230,6 +1305,8 @@
       { g: "operate", f: "Press, awards, podcast and blog", s: "authority content that ranks", v: [2, 2, 2, 1] }
     ];
     const BENCH_COLS = ["DAMAC", "Emaar", "Binghatti", "Al Ghadeer today"];
+    /* Column → configurator preset. The fourth column is Al Ghadeer today and is not loadable. */
+    const BENCH_PRESET_KEYS = ["damac", "emaar", "binghatti", null];
 
     function renderBench(filter) {
       const dot = (v) => `<i class="dot ${v === 2 ? "full" : v === 1 ? "half" : "none"}" aria-label="${v === 2 ? "full" : v === 1 ? "partial" : "absent"}"></i>`;
@@ -1253,7 +1330,11 @@
       const score = BENCH_COLS.map((c, i) => {
         const full = BENCH.filter((b) => b.v[i] === 2).length;
         const part = BENCH.filter((b) => b.v[i] === 1).length;
-        return `<div class="score ${i === 3 ? "you" : ""}"><span>${c}</span><b>${full}<span style="display:inline;font-size:18px;color:rgba(249,244,236,0.5);letter-spacing:0;text-transform:none;font-weight:400;margin:0 0 0 4px">/ 24</span></b><small>${full} in full · ${part} partial · ${24 - full - part} absent</small></div>`;
+        const key = BENCH_PRESET_KEYS[i];
+        const cls = "score" + (i === 3 ? " you" : "") + (key ? " is-preset" : "");
+        const attrs = key ? ` data-preset="${key}" role="button" tabindex="0" aria-label="Load the build required to match ${c}"` : "";
+        const cta = key ? `<em class="score-cta"><span class="amt" data-bench-price="${key}">—</span><span class="go">Match this build &rarr;</span></em>` : "";
+        return `<div class="${cls}"${attrs}><span>${c}</span><b>${full}<span style="display:inline;font-size:18px;color:rgba(249,244,236,0.5);letter-spacing:0;text-transform:none;font-weight:400;margin:0 0 0 4px">/ 24</span></b><small>${full} in full · ${part} partial · ${24 - full - part} absent</small>${cta}</div>`;
       }).join("");
       document.getElementById("bench-score").innerHTML = score;
       renderBench("all");
@@ -1264,9 +1345,9 @@
       { id: "found", n: "00", label: "Foundations", note: "Under every pillar" },
       { id: "web", n: "01", label: "Website" },
       { id: "cms", n: "02", label: "CMS" },
-      { id: "app", n: "03", label: "Mobile app" },
-      { id: "crm", n: "04", label: "CRM" },
-      { id: "mkt", n: "05", label: "Marketing automation" }
+      { id: "app", n: "03", label: "Mobile app", opt: true },
+      { id: "crm", n: "04", label: "CRM", opt: true },
+      { id: "mkt", n: "05", label: "Marketing automation", opt: true }
     ];
 
     const FEATURES = [
@@ -1381,17 +1462,17 @@
 
       /* Mobile app ------------------------------------------------------- */
       {
-        id: "app", stage: "app", core: true, name: "Customer mobile app — React Native, iOS + Android",
+        id: "app", stage: "app", core: false, name: "Customer mobile app — React Native, iOS + Android",
         levels: [
-          { n: "Essential", p: 8000, d: "A companion app for buyers on standard components: projects, unit types, gallery, news, enquiry and WhatsApp, push notifications for launches. Around ten screens." },
-          { n: "Professional", p: 55000, d: "An owner app in the class of Emaar One: secure login, my units, instalment schedule and payments, construction updates with photos, digital handover with document upload, service requests with status, and notifications — in Arabic and English." },
+          { n: "Essential", p: 25000, d: "A genuine cross-platform buyer app from one React Native codebase — around a dozen working screens: account creation and login, projects and unit types with prices and phase status, galleries and floor plans, saved favourites, enquiry and WhatsApp handoff to the right sales centre, news and launches, and push notifications for phase releases. Arabic and English with right-to-left layout, wired to the same API as the website, QA'd on real iOS and Android devices, and submitted to both stores by us.", note: "This is the floor for a real app. Anything cheaper is a wrapped website, and we will not quote one." },
+          { n: "Professional", p: 55000, d: "Everything in Essential, plus the owner side in the class of Emaar One and DAMAC Living: secure owner login, my units, instalment schedule and in-app payments, construction updates with site photos, digital handover with document upload, and service requests with status tracking." },
           { n: "Flagship", p: 140000, d: "Everything in Professional, plus amenity booking, move-in permits and access cards, home services marketplace, community feed and events, owner priority booking at launches, referral rewards, biometric login, offline mode, and full analytics instrumentation." }
         ]
       },
       {
         id: "payments", stage: "app", core: false, name: "Online payments &amp; instalments",
         levels: [
-          { n: "One rail", p: 8000, d: "One Iraqi gateway — Qi Card or ZainCash — for deposits and instalments in the app and on the website, with receipts and a ledger the CRM can see." },
+          { n: "One rail", p: 12000, d: "One Iraqi gateway — Qi Card or ZainCash — integrated for deposits and instalments in the app and on the website, with hosted checkout, webhook reconciliation, receipts, refunds and a ledger the CRM can see." },
           { n: "Iraq set", p: 20000, d: "Qi Card, ZainCash, FIB and AsiaHawala with failover, plus international cards for the diaspora, automatic reminders before due dates, and reconciliation against the payment schedule." },
           { n: "Finance grade", p: 45000, d: "Everything in Iraq set, plus Apple Pay and Google Pay, bank-transfer matching, instalment rescheduling with approvals, late-fee rules, statements and tax documents, and export to your accounting system." }
         ]
@@ -1407,24 +1488,24 @@
       {
         id: "fieldapp", stage: "app", core: false, name: "Sales-team field app",
         levels: [
-          { n: "Visits", p: 12000, d: "Agents check in site visits, see the buyer's history, show available units on a tablet, and log outcomes — offline-tolerant for sales centres with weak connectivity." },
+          { n: "Visits", p: 18000, d: "A second React Native build for agents: check in site visits, see the buyer's history, show available units on a tablet, and log outcomes — with an offline store and conflict-safe sync for sales centres with weak connectivity." },
           { n: "Close on site", p: 30000, d: "Everything in Visits, plus unit reservation with deposit capture, quotation generation, e-signature on reservation forms, and KYC document capture." }
         ]
       },
 
       /* CRM -------------------------------------------------------------- */
       {
-        id: "crm", stage: "crm", core: true, name: "CRM core — NixAI CRM for developers",
+        id: "crm", stage: "crm", core: false, name: "CRM core — NixAI CRM for developers",
         levels: [
-          { n: "Essential", p: 5500, d: "Leads, contacts, one pipeline, tasks and notes, units attached to deals, assignment by city, and a dashboard — in Arabic and English. One admin role plus agents." },
+          { n: "Essential", p: 19500, d: "A working sales system, not a spreadsheet with a login: leads, contacts, one pipeline with stages you define, tasks, notes and reminders, units attached to deals, assignment by city, deduplication on phone number, an activity log and a management dashboard — in Arabic and English with right-to-left layout, one admin role plus agents, and every website, WhatsApp and Meta enquiry arriving with its source." },
           { n: "Professional", p: 35000, d: "Everything in Essential, plus role hierarchy for sales centres, managers and finance, lead scoring, round-robin and rule-based routing, duplicate detection, activity timelines, SLA timers on first response, calendar and email sync, and manager dashboards per project." },
           { n: "Flagship", p: 90000, d: "Everything in Professional, plus territory and team management across Baghdad, Najaf and Karbala, forecasting, quota and commission tracking for internal agents, a rules engine for approvals, full audit trail, and a mobile CRM for agents." }
         ]
       },
       {
-        id: "omni", stage: "crm", core: true, name: "Omnichannel inbox",
+        id: "omni", stage: "crm", core: false, name: "Omnichannel inbox",
         levels: [
-          { n: "Essential", p: 3000, d: "WhatsApp Business API, website forms and Meta lead forms flow into the CRM as conversations with the lead record, with templates for first reply." },
+          { n: "Essential", p: 7500, d: "WhatsApp Business API onboarding — business verification, number migration and approved message templates — plus website forms and Meta lead forms, all flowing into the CRM as conversations attached to the lead record, with templates for first reply in Arabic and English." },
           { n: "Professional", p: 18000, d: "Everything in Essential, plus Instagram and Facebook DMs, TikTok and YouTube lead forms, email, a shared team inbox with assignment and notes, canned replies in Arabic and English, and conversation analytics." },
           { n: "Flagship", p: 45000, d: "Everything in Professional, plus AI-suggested replies, automatic language detection, sentiment and intent tagging, chat-to-visit booking inside WhatsApp, and quality scoring of agent conversations." }
         ]
@@ -1464,9 +1545,9 @@
 
       /* Marketing automation --------------------------------------------- */
       {
-        id: "automation", stage: "mkt", core: true, name: "Marketing automation engine",
+        id: "automation", stage: "mkt", core: false, name: "Marketing automation engine",
         levels: [
-          { n: "Essential", p: 3000, d: "Segments by city, project and budget, email and WhatsApp broadcasts with templates, and three automated journeys: new lead, brochure follow-up, and launch announcement." },
+          { n: "Essential", p: 9000, d: "Segments by city, project and budget, a bilingual template set, email and WhatsApp broadcasts with deliverability and opt-out handling, and three automated journeys built and tested end to end: new lead, brochure follow-up, and launch announcement." },
           { n: "Professional", p: 24000, d: "Everything in Essential, plus a visual journey builder, behavioural triggers from website and app events, lead scoring that hands hot leads to agents, SMS via Iraqi operators, preference centre, and journey analytics." },
           { n: "Flagship", p: 60000, d: "Everything in Professional, plus lifecycle programmes from first click to handover to referral, predictive send-time and channel, dynamic content by segment, owner and investor newsletters, and quarterly journey optimisation." }
         ]
@@ -1505,21 +1586,95 @@
     ];
 
     const CORE = FEATURES.filter((f) => f.core);
+    /* The bare mandatory sum: the nine mandatory lines at Essential depth. Nothing can cost less. */
+    const CORE_FLOOR = CORE.reduce((s, f) => s + f.levels[0].p, 0);
+
+    /* Programme builds. Any id left out falls back to Essential for mandatory lines and Off for optional ones. */
     const PRESETS = {
-      floor: { pick: { discovery: 0, platform: 0, infra: 0, qa: 0, web: 0, explorer: 0, leadcap: 0, seo: 0, cms: 0, app: 0, crm: 0, omni: 0, automation: 0 } },
+      floor: { pick: { discovery: 0, platform: 0, infra: 0, qa: 0, web: 0, explorer: 0, leadcap: 0, seo: 0, cms: 0, crm: 0 } },
       middle: { pick: { discovery: 1, platform: 1, infra: 1, qa: 1, web: 1, explorer: 1, leadcap: 1, seo: 1, cms: 1, app: 1, crm: 1, omni: 1, automation: 1, inventory: 0, media: 0 } },
-      ceiling: { pick: { discovery: 2, platform: 2, infra: 2, qa: 2, web: 2, explorer: 2, leadcap: 2, seo: 2, cms: 2, app: 2, crm: 2, omni: 2, automation: 2, inventory: 2, media: 2, payments: 2, broker: 1, tracking: 1, migration: 1, ai: 0 } }
+      ceiling: { pick: { discovery: 2, platform: 2, infra: 2, qa: 2, web: 2, explorer: 2, leadcap: 2, seo: 2, cms: 2, app: 2, crm: 2, omni: 2, automation: 2, inventory: 2, media: 2, payments: 2, broker: 1, tracking: 1, migration: 1, ai: 0 } },
+
+      /* ---- Benchmark builds -------------------------------------------------
+         Every depth below is read off the BENCH matrix above: the level chosen is the
+         shallowest one that actually contains the capabilities that competitor scores
+         2 (full) on, and stops short of levels that exist only in capabilities they
+         score 0 or 1 on. The derivation per line is in the notes beside each block. */
+
+      /* DAMAC — broad and deep at the front of the funnel. Interactive masterplan (row 2 = 2)
+         forces the explorer to Flagship; seven languages and six currencies (rows 3, 4 = 2)
+         force the diaspora language set; DAMAC 360 with EOI, unit booking, commission tiers,
+         fleet and training (rows 19, 20 = 2) forces the full broker programme; DAMAC Living
+         with amenity booking, move-in permits and home services (rows 17, 18 = 2) forces the
+         Flagship app and the community-operations back office. Book-a-meeting is only partial
+         (row 14 = 1) so lead capture stops at Professional, and there is no wishlist (row 16 = 0). */
+      damac: { pick: {
+        discovery: 2, platform: 2, infra: 2, qa: 2, migration: 1,
+        web: 2, explorer: 2, leadcap: 1, seo: 2, media: 1, langs: 1,
+        cms: 2, inventory: 1,
+        app: 2, payments: 1, broker: 2,
+        crm: 2, omni: 1, salesops: 1, telephony: 0, care: 2, bi: 1,
+        automation: 2, tracking: 2, content: 1
+      } },
+
+      /* Emaar — the strongest owner and post-sales side. Emaar One (rows 17, 18 = 2) forces the
+         Flagship app, finance-grade payments and community operations; digital handover, payment
+         schedules and transfers force sales operations to contract-to-key; live availability and
+         launch queues (row 10 = 2) force the commercial inventory engine; Salesforce behind
+         everything (row 21 = 2) forces the Flagship CRM. The map is only partial (row 2 = 1) and
+         the currency switcher partial (row 4 = 1), so the explorer stops at Professional and the
+         language set at the first level. MyEmaar carries live inventory and unit booking but not
+         DAMAC's tiered agent programme (row 20), so brokers get portal + app, not the programme. */
+      emaar: { pick: {
+        discovery: 2, platform: 2, infra: 2, qa: 2, migration: 2,
+        web: 1, explorer: 1, leadcap: 1, seo: 2, media: 1, langs: 0,
+        cms: 2, inventory: 2,
+        app: 2, payments: 2, broker: 1,
+        crm: 2, omni: 1, salesops: 2, telephony: 0, care: 2, bi: 1,
+        automation: 2, tracking: 1, content: 1
+      } },
+
+      /* Binghatti — film-led branded residences. 360° and 3D walk-throughs (row 5 = 2) plus
+         film-led storytelling (row 6 = 2) force immersive media to the 3D masterplan level, the
+         Flagship website for bespoke motion and the press and awards centre (row 24 = 2), and
+         Flagship discovery for a motion and film language. Book-a-meeting with real time slots is
+         the only full score of the three (row 14 = 2), so lead capture is deep at Professional.
+         Binghatti Sphere tracks a portfolio and payments but has no amenity booking or permits
+         (row 17 = 1, row 18 = 0), so the app sits mid-ladder, payments on one rail and community
+         operations are off. Unit search and the map are light (row 1 = 1, row 2 = 0, row 16 = 0),
+         so the explorer stops at Professional — which is where payment plans and gated brochure
+         downloads live (rows 8, 9 = 2). Partners is a portal, not an app (row 20 = 1). */
+      binghatti: { pick: {
+        discovery: 2, platform: 1, infra: 1, qa: 1, migration: 0,
+        web: 2, explorer: 1, leadcap: 1, seo: 1, media: 2, langs: 0,
+        cms: 2, inventory: 0,
+        app: 1, payments: 0, broker: 0,
+        crm: 1, omni: 1, salesops: 0, telephony: 0, bi: 0,
+        automation: 1, tracking: 1, content: 2
+      } }
     };
 
+    /* The price of a preset without touching the live selection. */
+    function presetTotal(key) {
+      const preset = PRESETS[key];
+      if (!preset) return 0;
+      return FEATURES.reduce((s, f) => {
+        const i = Object.prototype.hasOwnProperty.call(preset.pick, f.id) ? preset.pick[f.id] : (f.core ? 0 : -1);
+        return s + (i >= 0 ? f.levels[i].p : 0);
+      }, 0);
+    }
+
     const BANDS = [
-      { max: 90000, name: "Foundation programme", why: "Every mandatory capability at Essential depth. One bilingual website replaces two, a CMS holds one truth, a companion app reaches buyers, a CRM receives every lead and three journeys follow up. Edge cases still live with your team." },
-      { max: 200000, name: "Connected programme", why: "The estate starts doing the sales team's work: deeper website and CRM, a real inventory, and journeys that respond to what buyers do rather than to a calendar." },
-      { max: 450000, name: "Growth programme", why: "Unit finder with live availability, an owner app with payments and construction updates, a CRM with roles and scoring, and automation that runs a launch without a spreadsheet. This is where most developers of your size should land first." },
-      { max: 800000, name: "Enterprise programme", why: "Owners, brokers and buyers each have their own surface. Payments, handover and service run through the platform. DAMAC Living and MyEmaar-class capability, built for Iraq." },
-      { max: Infinity, name: "Flagship programme", why: "An Emaar-class digital estate: 3D masterplans, an AI concierge, a broker programme, finance-grade payments, attribution across every channel — and a platform Al-Ridha's other companies can join." }
+      { max: 46000, name: "Website programme", why: "The mandatory lines only: one bilingual website replacing both domains, the project and unit explorer, lead capture on every screen, technical SEO, and the CMS, platform, security and QA beneath them. Enquiries still land in an inbox rather than a pipeline." },
+      { max: 90000, name: "Entry programme", why: "The mandatory nine plus a first CRM, so every enquiry from the website, WhatsApp and Meta arrives in one pipeline with its source attached instead of in someone's phone. This is the recommended way in: as small as the programme can be while still being a system rather than a brochure." },
+      { max: 200000, name: "Connected programme", why: "Past the entry point: the mandatory lines move off Essential and the first optional capabilities come on, so the estate starts doing work the sales floor currently does by hand." },
+      { max: 450000, name: "Growth programme", why: "Professional depth across the lines you have selected — the website stops being a brochure and every surface you have chosen operates as one system. This is where most developers of your size should land first." },
+      { max: 800000, name: "Enterprise programme", why: "Flagship depth on the lines that carry the most weight, and the pillars you selected built out properly rather than sketched. DAMAC Living and MyEmaar-class capability, built for Iraq." },
+      { max: Infinity, name: "Flagship programme", why: "The deepest version of everything you have selected — an Emaar-class digital estate, and a platform Al-Ridha's other companies can join." }
     ];
 
     const WEEKS = [
+      { max: 46000, label: "3–4 months", end: 4 },
       { max: 90000, label: "4–5 months", end: 5 },
       { max: 200000, label: "6–8 months", end: 8 },
       { max: 450000, label: "8–11 months", end: 11 },
@@ -1528,7 +1683,7 @@
       { max: Infinity, label: "18–24 months", end: 24 }
     ];
 
-    const SCALE_MIN = 40000;
+    const SCALE_MIN = 28000;
     const SCALE_MAX = 1500000;
     const UNIT_VALUE = 163600;
     const money = (n) => "$" + n.toLocaleString("en-US");
@@ -1560,6 +1715,28 @@
       });
     }
     function fillList(el, items) { el.innerHTML = items.map((t) => `<li>${t}</li>`).join(""); }
+    function isOnId(id) { const f = FEATURES.find((x) => x.id === id); return !!(f && chosen(f)); }
+
+    /* Names which optional pillars are actually on, so no band description can contradict the selection. */
+    function pillarNote() {
+      const optional = STAGES.filter((s) => s.opt);
+      const live = (s) => FEATURES.some((f) => f.stage === s.id && chosen(f));
+      const on = optional.filter(live), off = optional.filter((s) => !live(s));
+      const list = (a) => a.map((s) => s.label).join(", ").replace(/, ([^,]*)$/, " and $1");
+      if (!off.length) return "All three optional pillars — " + list(on) + " — are switched on.";
+      if (!on.length) return "All three optional pillars (" + list(off) + ") are switched off: this is the mandatory website and CMS programme only.";
+      return "Optional pillars on: " + list(on) + ". Switched off: " + list(off) + ".";
+    }
+
+    /* Payment stages name the milestones that actually exist in the configured programme. */
+    function paySchedule() {
+      return [
+        { label: "To commence", pct: 0.3 },
+        { label: isOnId("crm") ? "Website + CRM live" : "Website + CMS live", pct: 0.25 },
+        { label: isOnId("app") ? "App in stores" : isOnId("crm") ? "CRM and inventory accepted" : "Content loaded and signed off", pct: 0.25 },
+        { label: "Programme acceptance", pct: 0.2 }
+      ];
+    }
 
     function renderLines() {
       document.querySelectorAll(".line").forEach((line) => {
@@ -1617,14 +1794,15 @@
       document.getElementById("scale-fill").style.width = pct + "%";
       document.getElementById("scale-needle").style.left = pct + "%";
 
-      document.querySelectorAll("#compare article").forEach((card) => card.classList.toggle("is-on", card.dataset.preset === preset));
+      document.querySelectorAll(".compare article").forEach((card) => card.classList.toggle("is-on", card.dataset.preset === preset));
       document.querySelectorAll(".picker-actions button").forEach((btn) => { btn.style.color = btn.dataset.preset === preset ? "var(--ink)" : ""; });
+      document.querySelectorAll(".score[data-preset]").forEach((el) => el.classList.toggle("is-on", el.dataset.preset === preset));
 
       document.querySelectorAll(".rail-step").forEach((el) => {
         const fs = FEATURES.filter((f) => f.stage === el.dataset.stage && chosen(f));
         const sum = fs.reduce((a, f) => a + chosen(f).p, 0);
         el.classList.toggle("is-hot", fs.length > 0);
-        el.querySelector("em").textContent = money(sum);
+        el.querySelector("em").textContent = fs.length ? money(sum) : "Not selected";
       });
 
       document.getElementById("must-chips").innerHTML = CORE.map((f) =>
@@ -1632,20 +1810,24 @@
       ).join("");
 
       const setText = (id, v) => { document.getElementById(id).textContent = v; };
-      setText("bill-name", band.name); setText("bill-price", money(t)); setText("bill-weeks", "Delivery " + weeks.label); setText("bill-why", band.why);
+      const why = band.why + " " + pillarNote();
+      setText("bill-name", band.name); setText("bill-price", money(t)); setText("bill-weeks", "Delivery " + weeks.label); setText("bill-why", why);
       setText("cover-price", money(t)); setText("cover-weeks", weeks.label); setText("nav-price", money(t));
       setText("dock-name", band.name); setText("dock-price", money(t));
 
       document.getElementById("bill-lines").innerHTML = [
         `<li><span>Mandatory — ${CORE.length} capabilities</span><b>${money(sums.coreSum)}</b></li>`,
         `<li><span>Optional — ${sums.optCount} selected</span><b>${money(sums.optSum)}</b></li>`,
-        `<li><span>Against the $50k floor</span><b>${t > 50000 ? "+" + money(t - 50000) : "at floor"}</b></li>`,
+        `<li><span>Above the mandatory floor (${money(CORE_FLOOR)})</span><b>${t > CORE_FLOOR ? "+" + money(t - CORE_FLOOR) : "at floor"}</b></li>`,
         `<li><span>In average units ($163.6k)</span><b>${(t / UNIT_VALUE).toFixed(1)}</b></li>`,
         `<li><span>Total</span><b>${money(t)}</b></li>`
       ].join("");
 
-      setText("inv-name", band.name); setText("inv-copy", band.why); setText("inv-price", money(t)); setText("inv-total", money(t));
-      setText("pay-1", money(Math.round(t * 0.3))); setText("pay-2", money(Math.round(t * 0.25))); setText("pay-3", money(Math.round(t * 0.25))); setText("pay-4", money(Math.round(t * 0.2)));
+      setText("inv-name", band.name); setText("inv-copy", why); setText("inv-price", money(t)); setText("inv-total", money(t));
+      paySchedule().forEach((s, i) => {
+        setText("pay-" + (i + 1), money(Math.round(t * s.pct)));
+        setText("pay-" + (i + 1) + "-l", s.label + " — " + Math.round(s.pct * 100) + "%");
+      });
 
       const units = t / UNIT_VALUE;
       setText("units-eq", units.toFixed(1));
@@ -1654,7 +1836,6 @@
       setText("units-payback", months <= 1 ? "in the first month" : "within " + months + " months");
 
       const m = weeks.end;
-      setText("timeline-title", weeks.label.replace("–", " to ").replace(" months", "") + " months. Four waves.");
       setText("ph-1-w", "Months 1 — " + Math.max(1, Math.round(m * 0.25)));
       setText("ph-2-w", "Months " + Math.max(1, Math.round(m * 0.2)) + " — " + Math.max(2, Math.round(m * 0.55)));
       setText("ph-3-w", "Months " + Math.max(2, Math.round(m * 0.45)) + " — " + Math.max(3, Math.round(m * 0.85)));
@@ -1662,12 +1843,35 @@
 
       updateDocLinks(t, band, weeks);
 
-      const lvlOf = (id) => chosen(FEATURES.find((f) => f.id === id)).n;
-      const launch = ["Website — " + lvlOf("web"), "Project & unit explorer — " + lvlOf("explorer"), "CMS — " + lvlOf("cms"), "CRM core — " + lvlOf("crm"), "Both old domains redirected to one"];
+      /* Roadmap waves list only what is actually selected — every optional pillar can be off. */
+      const shortName = (f) => plain(f.name).split(" — ")[0];
+      const item = (id) => {
+        const f = FEATURES.find((x) => x.id === id);
+        const lvl = f && chosen(f);
+        return lvl ? shortName(f) + " — " + lvl.n : null;
+      };
+      const isOn = (id) => !!item(id);
+
+      const launch = [item("web"), item("explorer"), item("cms"), item("leadcap"), item("crm"), "Both old domains redirected to one"].filter(Boolean);
       fillList(document.getElementById("ph-2-list"), launch);
-      const scale = ["Mobile app — " + lvlOf("app"), "Omnichannel inbox — " + lvlOf("omni"), "Marketing automation — " + lvlOf("automation")];
-      FEATURES.filter((f) => !f.core && chosen(f)).slice(0, 3).forEach((f) => scale.push(plain(f.name).split(" — ")[0] + " — " + chosen(f).n));
+
+      const waveThree = ["app", "omni", "automation"];
+      const scale = waveThree.map(item).filter(Boolean);
+      FEATURES.filter((f) => !f.core && chosen(f) && waveThree.indexOf(f.id) === -1)
+        .slice(0, Math.max(2, 5 - scale.length))
+        .forEach((f) => scale.push(shortName(f) + " — " + chosen(f).n));
+      const hasWaveThree = scale.length > 0;
+      if (!hasWaveThree) scale.push("Nothing scheduled — no app, CRM or marketing-automation pillar is selected, so this wave folds into launch hardening.");
       fillList(document.getElementById("ph-3-list"), scale);
+
+      setText("timeline-title", weeks.label.replace("–", " to ").replace(" months", "") +
+        " months. " + (hasWaveThree ? "Four waves." : "Three waves."));
+
+      const optimise = ["QA across devices, UAT with the sales floor", "Training in Arabic for editors" + (isOn("crm") ? ", agents and marketers" : " and marketers")];
+      if (isOn("app")) optimise.push("App Store and Play release — allow two weeks");
+      if (isOn("broker")) optimise.push("Broker onboarding and the first partner cohort");
+      optimise.push("Hypercare and first optimisation cycle");
+      fillList(document.getElementById("ph-4-list"), optimise);
     }
 
     const LOCK_SVG = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:var(--gold-deep);stroke-width:2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
@@ -1677,13 +1881,14 @@
       const plusBadge = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
 
       document.getElementById("scale-ticks").innerHTML = [
-        { v: 50000, l: "Foundation" },
+        { v: CORE_FLOOR, l: "Mandatory floor" },
+        { v: 50000, l: "Entry" },
         { v: 300000, l: "Growth" },
         { v: 1000000, l: "Flagship" }
       ].map((t) => `<div class="scale-tick" style="left:${scalePct(t.v)}%"><b>${money(t.v)}</b><span>${t.l}</span></div>`).join("");
 
       document.getElementById("journey-rail").innerHTML = STAGES.map((s) =>
-        `<a class="rail-step is-hot" data-stage="${s.id}" href="#stage-${s.id}"><b>${s.n}</b><span>${s.label}</span><em>$0</em></a>`
+        `<a class="rail-step${s.opt ? " is-opt" : ""}" data-stage="${s.id}" href="#stage-${s.id}"><b>${s.n}</b><span>${s.label}</span><em>$0</em><i>${s.opt ? "Optional pillar" : "Mandatory"}</i></a>`
       ).join("");
 
       document.getElementById("stages").innerHTML = STAGES.map((s) => {
@@ -1708,7 +1913,7 @@
         }).join("");
         return `
           <div class="stage" id="stage-${s.id}">
-            <div class="stage-head"><b>${s.n}</b><h3>${s.label}</h3>${s.note ? `<em>${s.note}</em>` : ""}</div>
+            <div class="stage-head"><b>${s.n}</b><h3>${s.label}</h3>${s.note ? `<em>${s.note}</em>` : ""}<span class="flag ${s.opt ? "is-opt" : "is-core"}">${s.opt ? "Optional pillar — take it or leave it" : "Mandatory pillar"}</span></div>
             <div class="lines">${rows}</div>
           </div>`;
       }).join("");
@@ -1726,9 +1931,24 @@
         scrollToId("stage-" + step.dataset.stage);
       });
       document.querySelectorAll(".picker-actions button").forEach((btn) => btn.addEventListener("click", () => applyPreset(btn.dataset.preset)));
-      document.querySelectorAll("#compare article").forEach((card) => {
+      document.querySelectorAll(".compare article").forEach((card) => {
         card.addEventListener("click", () => { applyPreset(card.dataset.preset); scrollToId("journey"); });
       });
+
+      /* Every price that names a preset is printed from the preset itself, so it can never drift. */
+      document.querySelectorAll("[data-preset-price], [data-bench-price]").forEach((el) => {
+        el.textContent = money(presetTotal(el.dataset.presetPrice || el.dataset.benchPrice));
+      });
+
+      /* The three competitor scorecards in section 02 load their build and jump to the configurator. */
+      document.querySelectorAll(".score[data-preset]").forEach((el) => {
+        const load = () => { applyPreset(el.dataset.preset); scrollToId("journey"); };
+        el.addEventListener("click", load);
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); load(); }
+        });
+      });
+
       render();
     }
 
@@ -1772,11 +1992,11 @@
       const core = FEATURES.filter((f) => f.core && chosen(f));
       const opt = FEATURES.filter((f) => !f.core && chosen(f));
       return {
-        total: t, band: bandFor(t), weeks: weeksFor(t), groups,
+        total: t, band: bandFor(t), why: bandFor(t).why + " " + pillarNote(), weeks: weeksFor(t), groups,
         off: FEATURES.filter((f) => !chosen(f)).map((f) => ({ name: plain(f.name), depth: f.levels[0].n, from: f.levels[0].p })),
         coreSum: core.reduce((a, f) => a + chosen(f).p, 0), coreCount: core.length,
         optSum: opt.reduce((a, f) => a + chosen(f).p, 0), optCount: opt.length,
-        units: t / UNIT_VALUE, code: encodeConfig()
+        units: t / UNIT_VALUE, code: encodeConfig(), pay: paySchedule()
       };
     }
 
@@ -1844,7 +2064,7 @@
       const cellW = CW / 4;
       const meta = [
         ["Client", DOC_CLIENT],
-        ["Programme", "Website · CMS · Mobile app · CRM · Marketing automation"],
+        ["Programme", q.groups.map((g) => g.label).join(" · ")],
         ["Delivery", String(q.weeks.label).replace(/\s*–\s*/g, "-")],
         ["Validity", "30 days from " + DOC_DATE]
       ].map((m, i) => {
@@ -1867,7 +2087,7 @@
       /* ---- What you configured ----------------------------------------- */
       kick("What you configured", ML, y, GOLDD, 7); y += 6.5;
       font("helvetica", "normal", 8.6, MUTED);
-      wrap(q.band.why, CW).forEach((l) => { doc.text(l, ML, y); y += 4.1; });
+      wrap(q.why, CW).forEach((l) => { doc.text(l, ML, y); y += 4.1; });
       y += 3;
       font("helvetica", "bold", 8.2, INK);
       doc.text(q.coreCount + " mandatory capabilities · " + q.optCount + " optional selected · " + q.off.length + " available and not selected", ML, y);
@@ -1875,12 +2095,12 @@
 
       /* ---- Payment schedule -------------------------------------------- */
       kick("Payment schedule", ML, y, GOLDD, 7); y += 5.5;
-      [["To commence", 0.3], ["Website + CRM live", 0.25], ["App in stores", 0.25], ["Programme acceptance", 0.2]].forEach((p, i) => {
+      q.pay.forEach((p, i) => {
         const x = ML + i * cellW;
         box(x, y, cellW - 2.5, 17.5, GOLDD, 0.2);
-        kick(Math.round(p[1] * 100) + " %", x + 3.5, y + 5.6, GOLDD, 6.4);
-        font("helvetica", "normal", 7, MUTED); doc.text(p[0], x + 3.5, y + 9.8);
-        font("times", "normal", 12.5, INK); doc.text(cash(Math.round(q.total * p[1])), x + 3.5, y + 15.4);
+        kick(Math.round(p.pct * 100) + " %", x + 3.5, y + 5.6, GOLDD, 6.4);
+        font("helvetica", "normal", 7, MUTED); doc.text(p.label, x + 3.5, y + 9.8);
+        font("times", "normal", 12.5, INK); doc.text(cash(Math.round(q.total * p.pct)), x + 3.5, y + 15.4);
       });
       y += 24;
 
@@ -2155,10 +2375,13 @@
       });
     });
 
+    /* Open on the recommended entry programme, unless the link carries a shared configuration. */
+    let restored = false;
     try {
       const shared = new URLSearchParams(location.search).get("c");
-      if (shared) decodeConfig(shared);
+      if (shared) restored = decodeConfig(shared);
     } catch (err) { /* keep defaults */ }
+    if (!restored) Object.assign(pick, PRESETS.floor.pick);
 
     bootPicker();
 
