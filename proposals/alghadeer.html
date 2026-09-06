@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al Ghadeer — One Digital Estate | Proposal by NixAI</title>
+  <meta name="description" content="A digital-transformation proposal for Al Ghadeer Real Estate Investments: website, CMS, mobile app, CRM and marketing automation, benchmarked against DAMAC, Emaar and Binghatti and priced feature by feature from $50,000 to over $1,000,000." />
+  <meta property="og:title" content="Al Ghadeer — One Digital Estate" />
+  <meta property="og:description" content="Set the depth of every feature and watch the programme move between $50,000 and $1,000,000+. Prepared by NixAI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/alghadeer/hero-masterplan.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #050e18;
+      --navy-2: #0b1a2b;
+      --navy-3: #12243a;
+      --ink: #0e1620;
+      --gold: #e3ac58;
+      --gold-soft: #f1cf94;
+      --gold-deep: #b98a3c;
+      --bronze: #a8743f;
+      --cream: #f9f4ec;
+      --paper: #fffaf1;
+      --sand: #efe4d0;
+      --muted: #545a63;
+      --faint: #8b9099;
+      --line: rgba(14,22,32,0.12);
+      --line-gold: rgba(185,138,60,0.38);
+      --line-gold-dark: rgba(227,172,88,0.28);
+      --ok: #2f8f5b;
+      --warn: #c98a2b;
+      --bad: #b8443a;
+      --serif: "Cormorant Garamond", "Times New Roman", serif;
+      --sans: Inter, system-ui, -apple-system, sans-serif;
+      --arabic: Cairo, "Noto Naskh Arabic", sans-serif;
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      background: var(--cream); color: var(--ink);
+      font-family: var(--sans); font-weight: 400; line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    strong { color: var(--ink); font-weight: 700; }
+    p { color: var(--muted); margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+    .ar { font-family: var(--arabic); direction: rtl; }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 80;
+      background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none;
+    }
+    .cursor, .cursor-dot { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 90; border-radius: 50%; }
+    .cursor { width: 36px; height: 36px; margin: -18px 0 0 -18px; border: 1px solid var(--gold-deep); }
+    .cursor-dot { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: var(--gold-deep); }
+    .cursor.is-link { border-color: var(--ink); }
+    @media (hover: none), (pointer: coarse) { .cursor, .cursor-dot { display: none; } }
+    @media (hover: hover) and (pointer: fine) { body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; } }
+
+    .shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .shell-wide { width: min(1320px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* Nav ------------------------------------------------------------------ */
+    .nav {
+      position: fixed; top: 16px; left: 16px; right: 16px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 10px 18px; background: rgba(5,14,24,0.72); border: 1px solid var(--line-gold-dark);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: var(--cream);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; }
+    .nav-brand img { height: 30px; width: 30px; object-fit: contain; }
+    .nav-brand .name { font-family: var(--serif); font-weight: 600; letter-spacing: 0.2em; font-size: 13px; text-transform: uppercase; color: var(--cream); }
+    .nav-brand .slash { color: var(--gold); font-family: var(--serif); font-size: 22px; line-height: 1; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(249,244,236,0.72); cursor: pointer; transition: color 200ms ease; }
+    .nav-links .menu-quote { display: none; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--cream);
+      padding: 10px 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+      border: 1px solid var(--gold); transition: background 200ms ease, color 200ms ease;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--navy); }
+    .nav-cta b { font-family: var(--serif); font-size: 16px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+    .nav-toggle { display: none; background: none; border: 1px solid var(--line-gold-dark); color: var(--cream); width: 42px; height: 42px; cursor: pointer; }
+
+    /* Cover ---------------------------------------------------------------- */
+    .cover { position: relative; min-height: 100vh; display: grid; align-items: end; overflow: hidden; background: var(--navy); color: var(--cream); }
+    .cover-media { position: absolute; inset: -12% 0; height: 124%; background: var(--navy) url("/assets/alghadeer/hero-masterplan.jpg") center 30%/cover no-repeat; will-change: transform; }
+    .cover-media::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(5,14,24,0.96) 0%, rgba(5,14,24,0.88) 28%, rgba(5,14,24,0.55) 52%, rgba(5,14,24,0.18) 72%, rgba(5,14,24,0.45) 100%),
+        linear-gradient(180deg, rgba(5,14,24,0.55) 0%, rgba(5,14,24,0.15) 35%, rgba(5,14,24,0.70) 78%, rgba(5,14,24,0.98) 100%);
+    }
+    .cover-inner { position: relative; z-index: 2; padding: 140px 0 48px; }
+    .cover-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 64px; }
+    .cover-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+    .cover-meta { text-align: right; color: var(--cream); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; background: rgba(5,14,24,0.55); border: 1px solid var(--line-gold-dark); padding: 12px 16px 14px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .cover-meta span { display: block; color: rgba(249,244,236,0.6); font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; }
+    h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(50px, 8.4vw, 112px); line-height: 0.92; letter-spacing: -0.02em; color: var(--cream); max-width: 860px; margin: 10px 0 22px; }
+    h1 .gold { color: var(--gold); font-style: italic; }
+    h1 .h1-line { display: block; overflow: hidden; }
+    h1 .h1-line span { display: block; }
+    .cover-sub { font-size: clamp(16px, 2vw, 20px); font-weight: 400; color: rgba(249,244,236,0.82); max-width: 600px; margin-bottom: 40px; }
+    .cover-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; border-top: 1px solid var(--line-gold-dark); padding-top: 22px; }
+    .cover-logos { display: flex; align-items: center; gap: 18px; }
+    .cover-logos img { height: 30px; width: auto; object-fit: contain; }
+    .cover-logos .word-mark { font-family: var(--serif); font-weight: 600; letter-spacing: 0.22em; font-size: 17px; text-transform: uppercase; color: var(--cream); }
+    .cover-logos .slash { color: var(--gold); font-family: var(--serif); font-size: 28px; }
+    .cover-stats { display: flex; gap: 36px; }
+    .cover-stats div span { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(249,244,236,0.6); margin-bottom: 4px; }
+    .cover-stats strong { font-family: var(--serif); font-size: 30px; font-weight: 500; color: var(--cream); }
+
+    /* Sections ------------------------------------------------------------- */
+    .section { padding: 108px 0; position: relative; scroll-margin-top: 88px; }
+    #cover, #next { scroll-margin-top: 0; }
+    .section.alt { background: var(--paper); }
+    .section.dark { background: var(--navy); color: var(--cream); }
+    .section.dark p { color: rgba(249,244,236,0.72); }
+    .section.dark strong { color: var(--cream); }
+    .section-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 14px; }
+    .dark .section-kicker { color: var(--gold); }
+    h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 5vw, 66px); line-height: 1.0; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 18px; }
+    h2 em { font-style: italic; color: var(--gold-deep); }
+    .dark h2 { color: var(--cream); }
+    .dark h2 em { color: var(--gold); }
+    .lead { font-size: 18px; color: var(--muted); max-width: 720px; }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 48px; align-items: end; margin-bottom: 56px; }
+
+    .quote-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-gold); border-bottom: 1px solid var(--line-gold); background: var(--paper); }
+    .quote-cell { padding: 28px 24px; border-right: 1px solid var(--line); }
+    .quote-cell:last-child { border-right: 0; }
+    .quote-cell span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .quote-cell b { font-weight: 600; font-size: 15px; color: var(--ink); }
+
+    .toc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-gold); }
+    .toc a { display: grid; grid-template-columns: 72px 1fr auto; gap: 16px; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: background 200ms ease, color 200ms ease; }
+    .toc a:nth-child(odd) { border-right: 1px solid var(--line); }
+    .toc a:hover { background: rgba(227,172,88,0.12); color: var(--ink); }
+    .toc .n { font-family: var(--serif); font-style: italic; color: var(--gold-deep); font-size: 24px; }
+    .toc .t { font-size: 14px; font-weight: 500; }
+    .toc .pg { font-size: 11px; letter-spacing: 0.12em; color: var(--faint); }
+
+    /* Audit ---------------------------------------------------------------- */
+    .sites { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+    .site { border: 1px solid var(--line-gold); background: rgba(255,255,255,0.5); padding: 24px; }
+    .site .url { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .site .url i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+    .site h3 { font-family: var(--serif); font-size: 30px; font-weight: 500; margin-bottom: 8px; line-height: 1.05; }
+    .site .stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 16px; }
+    .site ul { list-style: none; font-size: 13.5px; color: var(--muted); }
+    .site li { padding: 8px 0 8px 22px; border-top: 1px solid var(--line); position: relative; }
+    .site li::before { content: ""; position: absolute; left: 0; top: 17px; width: 10px; height: 1px; background: var(--gold-deep); }
+    .site li.bad::before { background: var(--bad); width: 10px; height: 10px; top: 13px; border-radius: 50%; }
+    .site li.bad { color: var(--ink); }
+    .site li code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: rgba(184,68,58,0.08); color: var(--bad); padding: 1px 6px; }
+    .contradiction { border: 1px solid var(--line-gold); background: var(--navy); color: var(--cream); padding: 26px 28px; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px; align-items: center; }
+    .contradiction h3 { font-family: var(--serif); font-size: 30px; font-weight: 500; line-height: 1.05; margin-bottom: 8px; }
+    .contradiction h3 em { color: var(--gold); }
+    .contradiction p { color: rgba(249,244,236,0.72); font-size: 13.5px; }
+    .truth { border-left: 1px solid var(--line-gold-dark); padding-left: 22px; }
+    .truth span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 700; }
+    .truth b { display: block; font-family: var(--serif); font-size: 26px; font-weight: 500; line-height: 1.15; color: var(--cream); }
+    .truth small { display: block; font-size: 12px; color: rgba(249,244,236,0.6); margin-top: 4px; }
+    .assets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+    .asset { border: 1px solid var(--line-gold); padding: 20px 18px; background: rgba(255,255,255,0.45); }
+    .asset b { display: block; font-family: var(--serif); font-size: 34px; font-weight: 500; color: var(--gold-deep); line-height: 1; margin-bottom: 8px; }
+    .asset span { font-size: 12px; color: var(--muted); }
+
+    /* Benchmark matrix ------------------------------------------------------ */
+    .bench-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .bench-tab { border: 1px solid var(--line-gold-dark); background: transparent; color: rgba(249,244,236,0.7); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; padding: 9px 14px; cursor: pointer; transition: all 180ms ease; }
+    .bench-tab:hover { color: var(--cream); border-color: var(--gold); }
+    .bench-tab.is-on { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .matrix { border: 1px solid var(--line-gold-dark); overflow-x: auto; }
+    .mrow { display: grid; grid-template-columns: minmax(260px, 2.2fr) repeat(4, minmax(110px, 1fr)); align-items: center; border-bottom: 1px solid rgba(227,172,88,0.14); transition: background 160ms ease; min-width: 720px; }
+    .mrow:last-child { border-bottom: 0; }
+    .mrow:hover { background: rgba(227,172,88,0.07); }
+    .mrow.head { background: var(--navy-2); position: sticky; top: 0; }
+    .mrow.head > div { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 700; padding: 16px 18px; text-align: center; }
+    .mrow.head > div:first-child { text-align: left; }
+    .mrow.head > div.you { color: var(--cream); background: rgba(227,172,88,0.14); }
+    .mrow.group { background: rgba(255,255,255,0.03); }
+    .mrow.group > div { grid-column: 1 / -1; padding: 14px 18px 6px; font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--gold-soft); }
+    .mrow > .f { padding: 13px 18px; font-size: 13.5px; color: rgba(249,244,236,0.88); }
+    .mrow > .f small { display: block; font-size: 11.5px; color: rgba(249,244,236,0.5); margin-top: 1px; }
+    .mrow > .c { text-align: center; padding: 10px; align-self: stretch; display: flex; align-items: center; justify-content: center; }
+    .mrow > .c.you { background: rgba(227,172,88,0.06); }
+    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--gold); position: relative; vertical-align: middle; }
+    .dot.full { background: var(--gold); }
+    .dot.half { background: linear-gradient(90deg, var(--gold) 50%, transparent 50%); }
+    .dot.none { border-color: rgba(249,244,236,0.28); }
+    .dot.none::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; background: rgba(249,244,236,0.35); transform: translate(-50%,-50%) rotate(-45deg); }
+    .bench-legend { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 14px; font-size: 12px; color: rgba(249,244,236,0.65); }
+    .bench-legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .bench-score { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+    .score { border: 1px solid var(--line-gold-dark); padding: 20px; }
+    .score span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+    .score b { font-family: var(--serif); font-size: 40px; font-weight: 500; color: var(--cream); line-height: 1; }
+    .score small { display: block; font-size: 12px; color: rgba(249,244,236,0.6); margin-top: 6px; }
+    .score.you { background: rgba(227,172,88,0.1); }
+
+    /* Pillars -------------------------------------------------------------- */
+    .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .pillar { background: var(--paper); border: 1px solid var(--line-gold); padding: 26px 22px 22px; min-height: 380px; display: flex; flex-direction: column; }
+    .pillar .tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 16px; font-weight: 700; }
+    .pillar h3 { font-family: var(--serif); font-size: 30px; font-weight: 500; color: var(--ink); margin-bottom: 10px; line-height: 1.05; }
+    .pillar p { flex: 1; font-size: 13.5px; }
+    .pillar .bench { margin-top: 14px; font-size: 12px; color: var(--ink); border-top: 1px solid var(--line-gold); padding-top: 12px; }
+    .pillar .bench b { color: var(--gold-deep); font-weight: 700; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+    .stack { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; border: 1px solid var(--line-gold); color: var(--muted); padding: 5px 9px; }
+
+    /* Picker --------------------------------------------------------------- */
+    .picker { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.45fr); gap: 22px; align-items: start; }
+    .picker-main { min-width: 0; }
+    .must { border: 1px solid var(--line-gold); padding: 16px 18px 14px; margin-bottom: 18px; background: rgba(227,172,88,0.08); }
+    .must-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--gold-deep); margin-bottom: 10px; }
+    .must-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .must-chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-gold); background: var(--paper); padding: 7px 10px; font-size: 12px; font-weight: 600; color: var(--ink); }
+    .must p { font-size: 13px; margin-top: 10px; }
+    .rail { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 18px; }
+    .rail-step { display: block; cursor: pointer; border: 1px solid var(--line); padding: 12px 10px; text-align: center; background: rgba(255,255,255,0.45); transition: border-color 200ms ease, background 200ms ease; }
+    .rail-step:hover { border-color: var(--gold-deep); }
+    .rail-step.is-hot { border-color: var(--gold-deep); background: rgba(227,172,88,0.12); }
+    .rail-step b { display: block; font-family: var(--serif); font-style: italic; color: var(--gold-deep); font-size: 17px; margin-bottom: 4px; }
+    .rail-step span { font-size: 11px; letter-spacing: 0.04em; color: var(--muted); }
+    .rail-step em { display: block; font-style: normal; font-size: 11px; color: var(--ink); font-weight: 600; margin-top: 3px; }
+
+    .scale { margin: 0 0 22px; }
+    .scale-track { position: relative; height: 3px; background: var(--sand); margin: 34px 0 12px; }
+    .scale-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--gold-deep); transition: width 420ms cubic-bezier(0.22,0.61,0.36,1); }
+    .scale-needle { position: absolute; top: 50%; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; background: var(--navy); border: 2px solid var(--cream); transform: rotate(45deg); transition: left 420ms cubic-bezier(0.22,0.61,0.36,1); }
+    .scale-ticks { position: relative; height: 34px; }
+    .scale-tick { position: absolute; top: 0; transform: translateX(-50%); text-align: center; white-space: nowrap; }
+    .scale-tick b { display: block; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--ink); }
+    .scale-tick span { display: block; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+    .scale-tick::after { content: ""; position: absolute; left: 50%; bottom: -12px; width: 1px; height: 9px; background: var(--gold-deep); }
+
+    .stage { margin-bottom: 26px; }
+    .stage-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--line-gold); padding-bottom: 8px; }
+    .stage-head b { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--gold-deep); }
+    .stage-head h3 { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+    .stage-head em { font-style: normal; font-size: 12px; color: var(--faint); margin-left: auto; }
+    .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .line { border: 1px solid var(--line); padding: 14px 15px 13px; background: rgba(255,255,255,0.55); transition: border-color 200ms ease, background 200ms ease; }
+    .line.is-on { border-color: var(--line-gold); background: rgba(227,172,88,0.09); }
+    .line.is-off { background: rgba(255,255,255,0.32); }
+    .line-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .line-head h4 { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+    .line-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+    .line-badge svg { width: 11px; height: 11px; fill: none; stroke-width: 2; }
+    .line-badge.is-core { color: var(--gold-deep); }
+    .line-badge.is-core svg { stroke: var(--gold-deep); }
+    .line-badge.is-opt { color: var(--faint); }
+    .line-badge.is-opt svg { stroke: var(--faint); }
+    .line-amt { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--ink); white-space: nowrap; }
+    .line.is-off .line-amt { color: var(--faint); }
+    .tiers { display: flex; gap: 4px; margin: 10px 0 9px; }
+    .tier-btn { flex: 1; min-width: 0; text-align: center; cursor: pointer; border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 6px 4px 5px; transition: border-color 180ms ease, background 180ms ease, color 180ms ease; }
+    .tier-btn:hover { border-color: var(--gold-deep); color: var(--ink); }
+    .tier-btn b { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .tier-btn em { display: block; font-style: normal; font-size: 10px; color: var(--faint); margin-top: 1px; }
+    .tier-btn.is-on { background: var(--navy); border-color: var(--navy); color: var(--cream); }
+    .tier-btn.is-on em { color: var(--gold-soft); }
+    .line-desc { font-size: 12px; line-height: 1.55; color: var(--muted); margin: 0; }
+    .line-note { display: block; margin-top: 7px; font-size: 10.5px; letter-spacing: 0.04em; color: var(--gold-deep); font-weight: 600; }
+    .picker-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 4px 0 22px; }
+    .picker-actions button { background: none; border: 0; color: var(--gold-deep); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; padding: 0; border-bottom: 1px solid var(--line-gold); }
+    .picker-actions button:hover { color: var(--ink); border-color: var(--gold-deep); }
+
+    .bill { position: sticky; top: 92px; border: 1px solid var(--gold-deep); background: var(--navy); color: var(--cream); padding: 22px 22px 18px; }
+    .bill span.k { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 700; }
+    .bill .pkg-name { font-family: var(--serif); font-style: italic; font-size: 28px; line-height: 1.1; margin-bottom: 4px; }
+    .bill .price { font-family: var(--serif); font-size: 50px; line-height: 1; color: var(--cream); margin: 10px 0 6px; font-weight: 500; }
+    .bill .weeks { font-size: 13px; color: var(--gold-soft); margin-bottom: 14px; }
+    .bill .bill-note { font-size: 13px; color: rgba(249,244,236,0.72); margin-bottom: 16px; }
+    .bill ul { list-style: none; border-top: 1px solid var(--line-gold-dark); padding-top: 12px; }
+    .bill li { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; padding: 6px 0; color: rgba(249,244,236,0.78); }
+    .bill li b { color: var(--cream); font-weight: 600; }
+    .bill .to-invest { display: block; margin-top: 16px; text-align: center; border: 1px solid var(--gold); color: var(--cream); padding: 12px 14px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; cursor: pointer; transition: background 200ms ease, color 200ms ease; }
+    .bill .to-invest:hover { background: var(--gold); color: var(--navy); }
+    .bill-dock { display: none; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 45; background: var(--navy); color: var(--cream); border: 1px solid var(--gold-deep); padding: 12px 14px; align-items: center; justify-content: space-between; gap: 12px; }
+    .bill-dock b { font-family: var(--serif); font-style: italic; font-size: 22px; }
+    .bill-dock span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-soft); }
+    .bill-dock a { border: 1px solid var(--gold); padding: 8px 12px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+
+    /* Mockups -------------------------------------------------------------- */
+    .mock-grid { display: grid; grid-template-columns: 1.55fr 0.75fr; gap: 22px; align-items: stretch; }
+    .mock-caption { margin-top: 12px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+    .browser { border: 1px solid var(--line-gold); background: #fff; box-shadow: 0 30px 60px -40px rgba(5,14,24,0.5); overflow: hidden; }
+    .browser-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #f2ede4; border-bottom: 1px solid var(--line); }
+    .browser-bar i { width: 9px; height: 9px; border-radius: 50%; background: #d9d2c4; display: inline-block; }
+    .browser-bar .url { margin-left: 10px; flex: 1; font-size: 11px; color: var(--muted); background: #fff; border: 1px solid var(--line); padding: 5px 10px; letter-spacing: 0.02em; }
+    .w-nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; background: var(--navy); color: var(--cream); }
+    .w-nav .brand { font-family: var(--serif); letter-spacing: 0.2em; font-size: 12px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+    .w-nav .brand img { height: 18px; }
+    .w-nav .links { display: flex; gap: 16px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(249,244,236,0.7); }
+    .w-nav .links b { color: var(--gold); font-weight: 600; }
+    .w-hero { position: relative; height: 210px; background: url("/assets/alghadeer/aerial-budoor.jpg") center/cover; }
+    .w-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,14,24,0.1), rgba(5,14,24,0.8)); }
+    .w-hero .txt { position: absolute; left: 22px; right: 22px; bottom: 18px; z-index: 2; color: var(--cream); display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+    .w-hero .txt small { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .w-hero .txt h4 { font-family: var(--serif); font-size: 30px; font-weight: 500; line-height: 1; }
+    .w-hero .txt .ar { font-size: 14px; color: rgba(249,244,236,0.8); margin-top: 4px; }
+    .w-hero .cta { border: 1px solid var(--gold); color: var(--cream); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 9px 12px; white-space: nowrap; }
+    .w-filters { display: grid; grid-template-columns: repeat(5, 1fr) auto; gap: 8px; padding: 14px 22px; border-bottom: 1px solid var(--line); background: var(--paper); }
+    .w-filters div { border: 1px solid var(--line); background: #fff; font-size: 11px; color: var(--muted); padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; }
+    .w-filters div b { color: var(--ink); font-weight: 600; }
+    .w-filters .go { background: var(--navy); color: var(--cream); border-color: var(--navy); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; justify-content: center; padding: 8px 14px; }
+    .w-units { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 16px 22px; }
+    .unit { border: 1px solid var(--line); background: #fff; }
+    .unit .img { height: 78px; background: linear-gradient(135deg, #e6dcc7, #cdbf9f); position: relative; }
+    .unit .img.b { background: linear-gradient(135deg, #d8d0c0, #b9ad95); }
+    .unit .img.c { background: linear-gradient(135deg, #e2d7c0, #c3ad80); }
+    .unit .st { position: absolute; top: 8px; left: 8px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; padding: 3px 7px; background: #fff; }
+    .unit .st.ok { color: var(--ok); } .unit .st.warn { color: var(--warn); } .unit .st.bad { color: var(--bad); }
+    .unit .body { padding: 10px 12px 12px; }
+    .unit .body h5 { font-size: 12.5px; font-weight: 600; }
+    .unit .body span { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .unit .body b { display: block; font-family: var(--serif); font-size: 18px; margin-top: 6px; color: var(--ink); }
+    .unit .body em { font-style: normal; font-size: 10px; color: var(--gold-deep); font-weight: 700; letter-spacing: 0.08em; }
+    .w-plan { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; margin: 0 22px 18px; border: 1px solid var(--line-gold); }
+    .w-plan div { padding: 10px 12px; border-right: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+    .w-plan div:last-child { border-right: 0; }
+    .w-plan b { display: block; font-family: var(--serif); font-size: 18px; color: var(--ink); }
+
+    .phone { border: 1px solid var(--line-gold); background: #fff; padding: 12px 12px 16px; box-shadow: 0 30px 60px -40px rgba(5,14,24,0.5); display: flex; flex-direction: column; }
+    .phone .screen { background: var(--navy); color: var(--cream); border-radius: 22px; padding: 18px 16px 16px; flex: 1; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+    .phone .screen::before { content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 70px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.15); }
+    .p-top { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .p-top img { height: 16px; }
+    .p-home { border: 1px solid var(--line-gold-dark); padding: 12px 12px 10px; background: rgba(255,255,255,0.03); }
+    .p-home small { display: block; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(249,244,236,0.55); margin-bottom: 4px; }
+    .p-home h5 { font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.05; }
+    .p-home .ar { font-size: 12px; color: rgba(249,244,236,0.7); margin-top: 3px; }
+    .p-prog { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; }
+    .ring { width: 56px; height: 56px; border-radius: 50%; background: conic-gradient(var(--gold) 0 53%, rgba(255,255,255,0.1) 53% 100%); display: grid; place-items: center; }
+    .ring i { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); display: grid; place-items: center; font-style: normal; font-family: var(--serif); font-size: 15px; color: var(--cream); }
+    .p-prog b { display: block; font-size: 12px; font-weight: 600; }
+    .p-prog span { font-size: 11px; color: rgba(249,244,236,0.6); }
+    .p-pay { background: var(--gold); color: var(--navy); padding: 12px 12px 11px; display: flex; justify-content: space-between; align-items: center; }
+    .p-pay small { display: block; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; opacity: 0.75; }
+    .p-pay b { font-family: var(--serif); font-size: 20px; font-weight: 600; }
+    .p-pay span { border: 1px solid var(--navy); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; padding: 6px 9px; }
+    .p-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .p-actions div { border: 1px solid var(--line-gold-dark); padding: 10px 4px 8px; text-align: center; font-size: 9px; color: rgba(249,244,236,0.8); letter-spacing: 0.02em; }
+    .p-actions svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.6; margin: 0 auto 5px; display: block; }
+    .p-feed { font-size: 11px; color: rgba(249,244,236,0.75); border-top: 1px solid var(--line-gold-dark); padding-top: 10px; }
+    .p-feed b { color: var(--cream); font-weight: 600; display: block; font-size: 11px; }
+    .p-feed span { display: block; margin-top: 4px; }
+    .p-tabs { display: flex; justify-content: space-around; border-top: 1px solid var(--line-gold-dark); padding-top: 10px; margin-top: auto; font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(249,244,236,0.5); }
+    .p-tabs b { color: var(--gold); font-weight: 700; }
+
+    .crm { margin-top: 22px; border: 1px solid var(--line-gold); background: #fff; box-shadow: 0 30px 60px -40px rgba(5,14,24,0.5); overflow: hidden; }
+    .crm-top { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: var(--paper); border-bottom: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+    .crm-top b { font-family: var(--serif); font-size: 18px; color: var(--ink); font-weight: 500; }
+    .crm-top .kpis { display: flex; gap: 18px; }
+    .crm-top .kpis span b { font-size: 16px; font-family: var(--serif); display: inline; margin-right: 4px; }
+    .crm-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 14px 18px 18px; background: #faf7f1; }
+    .col h6 { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .col h6 span { color: var(--gold-deep); }
+    .card { background: #fff; border: 1px solid var(--line); padding: 9px 10px 8px; margin-bottom: 7px; font-size: 11px; }
+    .card b { display: block; font-weight: 600; color: var(--ink); font-size: 11.5px; }
+    .card span { display: block; color: var(--muted); font-size: 10.5px; margin-top: 2px; }
+    .card .src { display: inline-block; margin-top: 6px; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; padding: 2px 6px; border: 1px solid var(--line); color: var(--muted); }
+    .card .src.wa { color: #1f8a5b; border-color: rgba(31,138,91,0.4); }
+    .card .src.yt { color: #b8443a; border-color: rgba(184,68,58,0.4); }
+    .card .src.web { color: var(--gold-deep); border-color: var(--line-gold); }
+    .card .src.mt { color: #2f5fb8; border-color: rgba(47,95,184,0.4); }
+    .card .hot { float: right; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); margin-top: 4px; }
+
+    /* Architecture / phases ------------------------------------------------ */
+    .arch { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .arch-card { border: 1px solid var(--line-gold); padding: 24px; background: rgba(255,255,255,0.45); }
+    .arch-card h3 { font-family: var(--serif); font-size: 26px; font-weight: 500; margin-bottom: 10px; }
+    .arch-card ul { list-style: none; color: var(--muted); font-size: 13.5px; }
+    .arch-card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .arch-card li:last-child { border-bottom: 0; }
+    .flow { margin-top: 18px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .flow-step { border: 1px solid var(--line-gold); padding: 16px 12px; text-align: center; background: rgba(255,255,255,0.4); }
+    .flow-step b { display: block; font-family: var(--serif); font-style: italic; color: var(--gold-deep); font-size: 20px; margin-bottom: 6px; }
+    .flow-step span { font-size: 12px; color: var(--muted); }
+
+    .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .phase { border: 1px solid var(--line-gold); padding: 22px 18px; min-height: 300px; background: rgba(255,255,255,0.4); }
+    .phase .wk { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; margin-bottom: 14px; }
+    .phase h3 { font-family: var(--serif); font-size: 27px; font-weight: 500; margin-bottom: 10px; }
+    .phase ul { list-style: none; color: var(--muted); font-size: 13px; }
+    .phase li { padding: 6px 0 6px 14px; position: relative; }
+    .phase li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 1px; background: var(--gold-deep); }
+
+    /* Investment ----------------------------------------------------------- */
+    .invest { border: 1px solid var(--line-gold); background: linear-gradient(180deg, rgba(227,172,88,0.10), rgba(249,244,236,0)); padding: 32px 32px 8px; }
+    .invest-top { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; padding-bottom: 24px; }
+    .invest-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; }
+    .invest-total { text-align: right; }
+    .invest-total span { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+    .invest-total strong { font-family: var(--serif); font-size: clamp(48px, 6vw, 76px); font-weight: 500; color: var(--ink); line-height: 1; }
+    .quote-row { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line); }
+    .quote-row h4 { font-size: 15.5px; font-weight: 600; margin-bottom: 4px; }
+    .quote-row h4 em { font-style: normal; color: var(--gold-deep); font-weight: 700; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .quote-row p { font-size: 13px; }
+    .quote-group { padding: 26px 0 4px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; }
+    .quote-row.sub { border-top: 1px solid var(--line-gold); }
+    .quote-row.sub h4 { font-family: var(--serif); font-style: italic; font-size: 22px; font-weight: 500; }
+    .quote-price { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--ink); white-space: nowrap; }
+    .quote-row.total { background: rgba(227,172,88,0.14); margin: 0 -32px; padding: 22px 32px; }
+    .pay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
+    .pay { border: 1px solid var(--line-gold); padding: 20px; background: rgba(255,255,255,0.4); }
+    .pay span { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .pay b { font-size: 22px; font-family: var(--serif); font-weight: 600; }
+    .units-note { margin-top: 22px; border: 1px solid var(--line-gold); background: var(--navy); color: var(--cream); padding: 22px 26px; display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; }
+    .units-note strong { font-family: var(--serif); font-size: 56px; font-weight: 500; color: var(--gold); line-height: 1; }
+    .units-note p { color: rgba(249,244,236,0.78); font-size: 14px; }
+    .compare { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .compare article { border: 1px solid var(--line-gold); padding: 22px; background: rgba(255,255,255,0.45); cursor: pointer; transition: border-color 200ms ease; }
+    .compare article:hover, .compare article.is-on { border-color: var(--gold-deep); }
+    .compare article.is-on { box-shadow: inset 0 0 0 1px var(--gold-deep); }
+    .compare .tag { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; }
+    .compare h3 { font-family: var(--serif); font-size: 30px; font-weight: 500; margin: 8px 0 4px; line-height: 1.05; }
+    .compare .amt { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--gold-deep); margin-bottom: 10px; }
+    .compare ul { list-style: none; font-size: 13px; color: var(--muted); }
+    .compare li { padding: 6px 0 6px 14px; position: relative; }
+    .compare li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 1px; background: var(--gold-deep); }
+
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .why article { border: 1px solid var(--line-gold); padding: 22px; background: rgba(255,255,255,0.4); }
+    .why h3 { font-family: var(--serif); font-size: 25px; font-weight: 500; margin-bottom: 8px; }
+    .terms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .term { border: 1px solid var(--line-gold); padding: 20px; background: rgba(255,255,255,0.4); }
+    .term h3 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 8px; }
+    .term p { font-size: 13px; }
+
+    .close { position: relative; min-height: 88vh; display: grid; align-items: end; overflow: hidden; background: var(--navy); color: var(--cream); }
+    .close-media { position: absolute; inset: -12% 0; height: 124%; background: var(--navy) url("/assets/alghadeer/aerial-sunset.jpg") center/cover no-repeat; will-change: transform; }
+    .close-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,14,24,0.95) 0%, rgba(5,14,24,0.85) 32%, rgba(5,14,24,0.45) 58%, rgba(5,14,24,0.25) 80%, rgba(5,14,24,0.5) 100%), linear-gradient(180deg, rgba(5,14,24,0.3), rgba(5,14,24,0.65) 62%, rgba(5,14,24,0.98) 100%); }
+    .close h2 { color: var(--cream); }
+    .close .lead { color: rgba(249,244,236,0.8); max-width: 640px; }
+    .close-inner { position: relative; z-index: 2; padding: 80px 0 48px; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 22px; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; transition: background 200ms ease, color 200ms ease, border-color 200ms ease; }
+    .btn-primary { background: var(--gold); color: var(--navy); border: 1px solid var(--gold); }
+    .btn-primary:hover { background: transparent; color: var(--cream); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 1px solid rgba(249,244,236,0.35); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    footer { border-top: 1px solid var(--line-gold-dark); padding: 28px 0 40px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .footer-mark { text-align: center; flex: 1; }
+    .footer-mark .word-mark { display: block; font-family: var(--serif); font-weight: 600; letter-spacing: 0.26em; font-size: 16px; text-transform: uppercase; color: var(--cream); margin-bottom: 7px; }
+    .footer-mark small { display: block; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(249,244,236,0.5); }
+    .nix { height: 18px; opacity: 0.95; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor, .cursor-dot, .scroll-progress { display: none !important; }
+      h1 .h1-line span { transform: none !important; }
+    }
+    @media (max-width: 1100px) {
+      .pillars { grid-template-columns: repeat(3, 1fr); }
+      .mock-grid { grid-template-columns: 1fr; }
+      .phone { max-width: 380px; }
+    }
+    @media (max-width: 980px) {
+      .nav-cta { display: none; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--navy); border: 1px solid var(--line-gold-dark); padding: 16px; }
+      .nav-links .menu-quote { display: inline-flex; margin-top: 8px; }
+      .nav-toggle { display: grid; place-items: center; }
+      .section-head, .sites, .contradiction, .assets, .pillars, .arch, .phases, .invest-top, .pay-grid, .why, .terms, .quote-bar, .toc, .flow, .picker, .lines, .compare, .bench-score, .units-note, .w-units, .w-plan, .crm-board { grid-template-columns: 1fr; }
+      .w-filters { grid-template-columns: 1fr 1fr; }
+      .scale-tick b { font-size: 14px; }
+      .scale-tick span { font-size: 8px; letter-spacing: 0.08em; }
+      .toc a:nth-child(odd) { border-right: 0; }
+      .cover-top, .cover-foot { flex-direction: column; align-items: flex-start; }
+      .cover-stats { width: 100%; flex-wrap: wrap; }
+      .cover-meta, .invest-total { text-align: left; }
+      h1 { font-size: 54px; }
+      .section { padding: 72px 0; }
+      .bill { position: static; }
+      .bill-dock { display: flex; }
+      .rail { grid-template-columns: repeat(3, 1fr); }
+      .truth { border-left: 0; padding-left: 0; border-top: 1px solid var(--line-gold-dark); padding-top: 14px; }
+    }
+    @media print {
+      .nav, .nav-toggle, .bill-dock, .cursor, .cursor-dot { display: none !important; }
+      .bill { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Proposal">
+    <a class="nav-brand" href="#cover">
+      <img src="/assets/alghadeer/logo-light.svg" alt="Al Ghadeer" />
+      <span class="slash" aria-hidden="true">/</span>
+      <span class="name">Al Ghadeer</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#today">Today</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#pillars">Pillars</a>
+      <a href="#journey">Configure</a>
+      <a href="#experience">Product</a>
+      <a href="#timeline">Roadmap</a>
+      <a href="#investment">Investment</a>
+      <a class="nav-cta menu-quote" href="#journey">Build the programme</a>
+    </div>
+    <a class="nav-cta" href="#journey">Build the programme <b id="nav-price">$50,000</b></a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" id="nav-toggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+
+  <header class="cover" id="cover">
+    <div class="cover-media" role="img" aria-label="Al Ghadeer masterplan render — arcaded boulevard, palms and a mosque at the heart of the community"></div>
+    <div class="cover-inner shell">
+      <div class="cover-top">
+        <div class="cover-kicker">Proposal &nbsp;·&nbsp; NIX-GHADEER-001 &nbsp;·&nbsp; Digital transformation</div>
+        <div class="cover-meta">
+          <span>Prepared for</span>
+          Al Ghadeer Real Estate Investments
+          <span style="margin-top:12px">Date</span>
+          6 September 2026
+        </div>
+      </div>
+      <h1>
+        <span class="h1-line"><span>Two websites.</span></span>
+        <span class="h1-line"><span class="gold">One digital</span></span>
+        <span class="h1-line"><span class="gold">estate.</span></span>
+      </h1>
+      <p class="cover-sub">Al Ghadeer has 17,362 units, a $2.84 billion portfolio, a million YouTube subscribers and a booth in London. What it does not have is the machine that turns that audience into reservations. This proposal is that machine — website, CMS, mobile app, CRM and marketing automation — priced feature by feature, so $50,000 and $1,000,000 become decisions instead of guesses.</p>
+      <div class="cover-foot">
+        <div class="cover-logos">
+          <span class="word-mark">Al Ghadeer</span>
+          <span class="slash">/</span>
+          <img src="/assets/nixai-logo-white.webp" alt="NixAI" style="height:22px" />
+        </div>
+        <div class="cover-stats">
+          <div><span>Configured programme</span><strong id="cover-price">$50,000</strong></div>
+          <div><span>Delivery</span><strong id="cover-weeks">4–5 months</strong></div>
+          <div><span>Pillars</span><strong>5</strong></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="quote-bar shell">
+    <div class="quote-cell"><span>Client</span><b>Al Ghadeer Real Estate Investments — Al-Ridha Investment Group</b></div>
+    <div class="quote-cell"><span>Programme</span><b>Website · CMS · Mobile app · CRM · Marketing automation</b></div>
+    <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
+    <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
+  </div>
+
+  <section class="section" id="contents">
+    <div class="shell">
+      <div class="section-kicker">00 &nbsp;/&nbsp; Contents</div>
+      <h2>The document.</h2>
+      <div class="toc" style="margin-top:36px">
+        <a href="#today"><span class="n">01</span><span class="t">Where Al Ghadeer stands today</span><span class="pg">—</span></a>
+        <a href="#benchmark"><span class="n">02</span><span class="t">What DAMAC, Emaar and Binghatti actually do</span><span class="pg">—</span></a>
+        <a href="#pillars"><span class="n">03</span><span class="t">Five pillars, one estate</span><span class="pg">—</span></a>
+        <a href="#journey"><span class="n">04</span><span class="t">Configure the programme, feature by feature</span><span class="pg">—</span></a>
+        <a href="#experience"><span class="n">05</span><span class="t">How it will look and feel</span><span class="pg">—</span></a>
+        <a href="#architecture"><span class="n">06</span><span class="t">Architecture, ownership and Iraq specifics</span><span class="pg">—</span></a>
+        <a href="#timeline"><span class="n">07</span><span class="t">Roadmap in four waves</span><span class="pg">—</span></a>
+        <a href="#investment"><span class="n">08</span><span class="t">Itemised quotation and terms</span><span class="pg">—</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 TODAY ----------------------------------------------------------- -->
+  <section class="section alt" id="today">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 &nbsp;/&nbsp; Where you stand</div>
+          <h2>A developer of cities, <em>with two brochures.</em></h2>
+        </div>
+        <p class="lead">We audited both domains the way a buyer in Baghdad, a broker in Najaf and an investor in London would. The brand is strong. The projects are real and enormous. The digital layer is two disconnected pamphlets that do not agree with each other, and neither of them can take a lead past a WhatsApp link.</p>
+      </div>
+
+      <div class="sites">
+        <article class="site">
+          <div class="url"><i></i> alghadeerrealestate.com · English</div>
+          <h3>A Framer template, published as-is.</h3>
+          <div class="stack"><span class="chip">Framer</span><span class="chip">English only</span><span class="chip">Lenis scroll</span><span class="chip">gtag</span></div>
+          <ul>
+            <li class="bad">Related-project cards render <code>undefined undefined</code> where the unit count and completion should be.</li>
+            <li class="bad">Partner categories are machine-translated: <code>The perpetrators</code> and <code>Donors</code> stand where “Contractors” and “Financiers” should.</li>
+            <li>Project pages show a single headline number — the total project value — and a “contact for details” button. No unit types, prices, plans, availability or payment terms.</li>
+            <li>No Arabic. The primary market reads the secondary site.</li>
+            <li>The only conversion path is a WhatsApp deep link and a contact form with no destination system behind it.</li>
+          </ul>
+        </article>
+        <article class="site">
+          <div class="url"><i></i> alghadeer.com · Arabic</div>
+          <h3>A hand-built SPA, better looking, equally alone.</h3>
+          <div class="stack"><span class="chip">Vite + React</span><span class="chip">Tailwind</span><span class="chip">Arabic only</span><span class="chip">No analytics</span></div>
+          <ul>
+            <li class="bad">The “from plan to reality” counter and the four headline statistics sit at <code>0</code> for visitors — the numbers never animate in.</li>
+            <li class="bad">The EN toggle leads to a different company story on a different domain, so search engines index two competing brands.</li>
+            <li>Project pages list three unit sizes and one enquiry form. No pricing, no phase status, no gallery captions, no brochure, no map.</li>
+            <li>Client-rendered: crawlers see an empty shell, so the site that speaks the market’s language is the one Google ranks least.</li>
+            <li>No CRM, no pixel, no retargeting, no attribution. A million YouTube subscribers arrive and leave anonymous.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="contradiction">
+        <div>
+          <h3>Two websites, <em>two different truths.</em></h3>
+          <p>The same project is described with different facts depending on the language a buyer reads. For a developer selling trust in advance of delivery, this is the most expensive bug on either site.</p>
+        </div>
+        <div class="truth">
+          <span>Budoor Al-Najaf — English site</span>
+          <b>1,414 units · 487,500 m²</b>
+          <small>Completion 25 %</small>
+        </div>
+        <div class="truth">
+          <span>Budoor Al-Najaf — Arabic site</span>
+          <b>1,200 units · 20,000 m²</b>
+          <small>Delivered units: 0</small>
+        </div>
+      </div>
+
+      <div class="section-kicker" style="margin-top:56px">01.1 &nbsp;/&nbsp; What you already own</div>
+      <h2 style="font-size:42px">The hard part is done. The audience exists.</h2>
+      <div class="assets">
+        <div class="asset"><b>1M+</b><span>YouTube subscribers — the largest owned audience of any Iraqi developer, with no funnel attached.</span></div>
+        <div class="asset"><b>17,362</b><span>Units across 7 projects in Baghdad, Najaf and Karbala — a $2.84 B portfolio that deserves a live inventory.</span></div>
+        <div class="asset"><b>London</b><span>Property Investor Show presence — diaspora investors who expect Emaar-grade digital and pay in GBP, EUR and USD.</span></div>
+        <div class="asset"><b>2014</b><span>A decade of delivery and a parent group — Al-Ridha — whose other companies can share the same platform later.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 BENCHMARK -------------------------------------------------------- -->
+  <section class="section dark" id="benchmark">
+    <div class="shell-wide">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">02 &nbsp;/&nbsp; The benchmark</div>
+          <h2>DAMAC, Emaar and Binghatti are not <em>magic.</em> They are a feature list.</h2>
+        </div>
+        <p class="lead">We inventoried the three sites you named, their owner apps, their broker tools and the systems visible behind them. Twenty-four capabilities explain the gap. Every one of them appears in section 04 as a line you can price at the depth you want.</p>
+      </div>
+
+      <div class="bench-tabs" id="bench-tabs"></div>
+      <div class="matrix" id="matrix"></div>
+      <div class="bench-legend">
+        <span><i class="dot full"></i> Fully present</span>
+        <span><i class="dot half"></i> Partial</span>
+        <span><i class="dot none"></i> Absent</span>
+      </div>
+
+      <div class="bench-score" id="bench-score"></div>
+
+      <p style="margin-top:28px;max-width:820px">Read the last column honestly: on the twenty-four capabilities that define the developers you want to resemble, Al Ghadeer today has <strong>none in full</strong> and eight in part. That is not a criticism of the brand. It is the size of the opportunity, and the reason this programme is scoped in five pillars rather than a redesign.</p>
+    </div>
+  </section>
+
+  <!-- 03 PILLARS ---------------------------------------------------------- -->
+  <section class="section" id="pillars">
+    <div class="shell-wide">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">03 &nbsp;/&nbsp; Solution</div>
+          <h2>Five pillars. <em>One estate.</em></h2>
+        </div>
+        <p class="lead">Everything below shares one identity, one inventory and one customer record. A unit reserved in the app disappears from the website in the same second, appears in the sales pipeline with its buyer, and triggers the follow-up journey — without a phone call.</p>
+      </div>
+      <div class="pillars">
+        <article class="pillar">
+          <div class="tag">01 &nbsp;/&nbsp; Website</div>
+          <h3>One bilingual site</h3>
+          <p>alghadeer.com becomes the single home in Arabic and English, server-rendered for search, with project pages that show unit types, prices, plans, phases and live availability — and a way to act on every screen.</p>
+          <div class="bench"><b>Benchmark</b>DAMAC unit search · Emaar 360° tours · Binghatti film-led project pages</div>
+          <div class="stack"><span class="chip">Next.js</span><span class="chip">RTL</span><span class="chip">SEO</span></div>
+        </article>
+        <article class="pillar">
+          <div class="tag">02 &nbsp;/&nbsp; CMS</div>
+          <h3>Content and inventory</h3>
+          <p>A headless CMS your marketing team edits in Arabic and English at once — projects, phases, units, prices, news, careers, offers — so the two-truths problem cannot happen again.</p>
+          <div class="bench"><b>Benchmark</b>Emaar's single source for 40+ communities · DAMAC offers hub</div>
+          <div class="stack"><span class="chip">Payload CMS</span><span class="chip">Bilingual</span><span class="chip">Roles</span></div>
+        </article>
+        <article class="pillar">
+          <div class="tag">03 &nbsp;/&nbsp; Mobile app</div>
+          <h3>Buyer, then owner</h3>
+          <p>iOS and Android from one React Native codebase. Discover and enquire before purchase; after purchase, pay instalments, follow construction, take handover and raise service requests.</p>
+          <div class="bench"><b>Benchmark</b>Emaar One · DAMAC Living · Binghatti Sphere</div>
+          <div class="stack"><span class="chip">React Native</span><span class="chip">iOS</span><span class="chip">Android</span></div>
+        </article>
+        <article class="pillar">
+          <div class="tag">04 &nbsp;/&nbsp; CRM</div>
+          <h3>Every lead, one record</h3>
+          <p>WhatsApp, calls, YouTube, Meta forms, the website and the London booth land in one pipeline with units attached. Sales sees who is hot; management sees what is selling and why.</p>
+          <div class="bench"><b>Benchmark</b>Emaar on Salesforce · DAMAC agents portal · broker EOI flows</div>
+          <div class="stack"><span class="chip">NixAI CRM</span><span class="chip">WhatsApp API</span><span class="chip">Pipeline</span></div>
+        </article>
+        <article class="pillar">
+          <div class="tag">05 &nbsp;/&nbsp; Marketing automation</div>
+          <h3>Follow-up that never sleeps</h3>
+          <p>Journeys in Arabic and English by phase, budget and city. A lead from a YouTube video receives the brochure, a site-visit invitation and a price update without anyone remembering to send them.</p>
+          <div class="bench"><b>Benchmark</b>DAMAC retargeting · Emaar launch drips · Binghatti register-interest everywhere</div>
+          <div class="stack"><span class="chip">Journeys</span><span class="chip">Scoring</span><span class="chip">Attribution</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 CONFIGURE -------------------------------------------------------- -->
+  <section class="section alt" id="journey">
+    <div class="shell-wide">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">04 &nbsp;/&nbsp; Build the programme</div>
+          <h2>$50k and $1M are <em>not packages.</em></h2>
+        </div>
+        <p class="lead">They are where the bill lands. Every capability below is priced on its own at the depth you choose. <strong>Mandatory</strong> lines exist in every version of the programme — but each has three depths, and that is most of the distance between the two numbers. Optional lines are added only where the benchmark justifies them.</p>
+      </div>
+
+      <div class="scale">
+        <div class="scale-ticks" id="scale-ticks"></div>
+        <div class="scale-track">
+          <div class="scale-fill" id="scale-fill" style="width:0%"></div>
+          <div class="scale-needle" id="scale-needle" style="left:0%"></div>
+        </div>
+      </div>
+
+      <div class="picker">
+        <div class="picker-main">
+          <div class="must">
+            <div class="must-label">Thirteen mandatory capabilities — in every number</div>
+            <div class="must-chips" id="must-chips"></div>
+            <p>All thirteen at <strong>Essential</strong> is <strong>$50,000</strong> — the floor, and the reason a connected estate cannot cost less. All thirteen at <strong>Flagship</strong> is <strong>$743,000</strong>, before a single optional line. Everything between those sums is a depth decision, capability by capability.</p>
+          </div>
+
+          <div class="rail" id="journey-rail" aria-label="Programme pillars"></div>
+
+          <div class="picker-actions">
+            <button type="button" data-preset="floor">Load the $50,000 foundation</button>
+            <button type="button" data-preset="middle">Load the $300,000 growth build</button>
+            <button type="button" data-preset="ceiling">Load the $1M flagship</button>
+          </div>
+
+          <div id="stages"></div>
+        </div>
+
+        <aside class="bill" id="bill" aria-live="polite">
+          <span class="k">Configured programme</span>
+          <div class="pkg-name" id="bill-name">Foundation programme</div>
+          <div class="price" id="bill-price">$50,000</div>
+          <div class="weeks" id="bill-weeks">Delivery 4–5 months</div>
+          <p class="bill-note" id="bill-why">Every mandatory capability at Essential depth.</p>
+          <ul id="bill-lines"></ul>
+          <a class="to-invest" href="#investment">See the itemised quotation</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 EXPERIENCE ------------------------------------------------------- -->
+  <section class="section" id="experience">
+    <div class="shell-wide">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">05 &nbsp;/&nbsp; Product experience</div>
+          <h2>How it should look <em>in Baghdad and in London.</em></h2>
+        </div>
+        <p class="lead">Navy, gold and cream — the palette already on your logo — carried across every surface. Directional frames, not final pixels: the real design happens in discovery with your sales and marketing teams.</p>
+      </div>
+
+      <div class="mock-grid">
+        <div>
+          <div class="browser">
+            <div class="browser-bar"><i></i><i></i><i></i><span class="url">alghadeer.com/en/projects/budoor-baghdad-city</span></div>
+            <div class="w-nav">
+              <div class="brand"><img src="/assets/alghadeer/logo-light.svg" alt="" /> Al Ghadeer</div>
+              <div class="links"><span>Projects</span><span>Investors</span><span>Brokers</span><span>News</span><b>العربية</b><span>USD ▾</span></div>
+            </div>
+            <div class="w-hero">
+              <div class="txt">
+                <div>
+                  <small>Baghdad · 53 % complete · Phase 4 selling</small>
+                  <h4>Budoor Baghdad City</h4>
+                  <div class="ar">بدور بغداد… أكثر من مجرد منزل</div>
+                </div>
+                <span class="cta">Book a site visit</span>
+              </div>
+            </div>
+            <div class="w-filters">
+              <div>Type <b>Villa</b></div>
+              <div>Bedrooms <b>3–4</b></div>
+              <div>Budget <b>$120k–180k</b></div>
+              <div>Phase <b>4</b></div>
+              <div>Status <b>Available</b></div>
+              <div class="go">Find units</div>
+            </div>
+            <div class="w-units">
+              <div class="unit"><div class="img"><span class="st ok">Available</span></div><div class="body"><h5>Villa B-214 · 200 m²</h5><span>3 bed · corner plot · boulevard side</span><b>$158,000</b><em>From $1,975 / month</em></div></div>
+              <div class="unit"><div class="img b"><span class="st warn">Reserved</span></div><div class="body"><h5>Villa B-217 · 250 m²</h5><span>4 bed · garden · near school</span><b>$187,500</b><em>Join waitlist</em></div></div>
+              <div class="unit"><div class="img c"><span class="st ok">Available</span></div><div class="body"><h5>Townhouse C-08 · 160 m²</h5><span>3 bed · two floors · park view</span><b>$124,000</b><em>From $1,550 / month</em></div></div>
+            </div>
+            <div class="w-plan">
+              <div>Down payment<b>20 %</b></div>
+              <div>Instalments<b>48 months</b></div>
+              <div>Handover<b>Q4 2027</b></div>
+              <div>Brochure · Floor plans · 360°<b>Download</b></div>
+            </div>
+          </div>
+          <div class="mock-caption">01 &nbsp;/&nbsp; Website — project page with live unit finder, phase status, payment plan and conversion on every screen</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column">
+          <div class="phone" style="flex:1">
+            <div class="screen">
+              <div class="p-top"><img src="/assets/alghadeer/logo-light.svg" alt="" /><span>My home</span></div>
+              <div class="p-home">
+                <small>Budoor Baghdad · Villa B-214</small>
+                <h5>Ahmed, your villa is 53 % built.</h5>
+                <div class="ar">بيتك يتقدّم حسب الجدول</div>
+              </div>
+              <div class="p-prog">
+                <div class="ring"><i>53%</i></div>
+                <div><b>Structure complete · finishing started</b><span>Updated 3 days ago · 12 new site photos</span></div>
+              </div>
+              <div class="p-pay">
+                <div><small>Next instalment · 15 Oct</small><b>$1,975</b></div>
+                <span>Pay now</span>
+              </div>
+              <div class="p-actions">
+                <div><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>Payments</div>
+                <div><svg viewBox="0 0 24 24"><path d="M14 3v5h5M5 3h9l5 5v13H5z"/></svg>Documents</div>
+                <div><svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/></svg>Handover</div>
+                <div><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Requests</div>
+              </div>
+              <div class="p-feed"><b>New launch · Phase 5 · 240 units</b><span>Owner priority booking opens Sunday. Reserve with your existing account.</span></div>
+              <div class="p-tabs"><b>Home</b><span>Explore</span><span>Pay</span><span>Support</span><span>Profile</span></div>
+            </div>
+          </div>
+          <div class="mock-caption">02 &nbsp;/&nbsp; Owner app — Emaar One and DAMAC Living, for Iraq</div>
+        </div>
+      </div>
+
+      <div class="crm">
+        <div class="crm-top">
+          <div><b>Sales pipeline · Budoor Baghdad · Phase 4</b> &nbsp; This week</div>
+          <div class="kpis"><span><b>312</b> new leads</span><span><b>41</b> site visits</span><span><b>18</b> reservations</span><span><b>$2.9M</b> contracted</span></div>
+        </div>
+        <div class="crm-board">
+          <div class="col"><h6>New <span>128</span></h6>
+            <div class="card"><i class="hot"></i><b>Zahraa K. — Karbala</b><span>Villa 200 m² · budget $150k</span><span class="src wa">WhatsApp</span></div>
+            <div class="card"><b>Omar H. — London</b><span>Investor · 2 units · GBP</span><span class="src yt">YouTube</span></div>
+            <div class="card"><b>Hussein A. — Baghdad</b><span>Townhouse · 48-month plan</span><span class="src web">Website</span></div>
+          </div>
+          <div class="col"><h6>Qualified <span>76</span></h6>
+            <div class="card"><i class="hot"></i><b>Sara M. — Najaf</b><span>Score 84 · called twice · brochure opened</span><span class="src mt">Meta form</span></div>
+            <div class="card"><b>Ali R. — Basra</b><span>Score 71 · wants Phase 5</span><span class="src wa">WhatsApp</span></div>
+          </div>
+          <div class="col"><h6>Site visit <span>41</span></h6>
+            <div class="card"><b>Mustafa J. — Baghdad</b><span>Thu 11:00 · sales centre · Agent: Noor</span><span class="src web">Website</span></div>
+            <div class="card"><b>Layla S. — Dubai</b><span>Virtual tour Sat 18:00 · Zoom</span><span class="src yt">YouTube</span></div>
+          </div>
+          <div class="col"><h6>Reserved <span>18</span></h6>
+            <div class="card"><i class="hot"></i><b>Villa B-217 · Hassan T.</b><span>$5,000 deposit · Qi Card · expires in 6 days</span><span class="src wa">WhatsApp</span></div>
+          </div>
+          <div class="col"><h6>Contracted <span>9</span></h6>
+            <div class="card"><b>Villa B-214 · Ahmed F.</b><span>20 % paid · e-signed · owner app activated</span><span class="src web">Website</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-caption">03 &nbsp;/&nbsp; CRM — every channel in one pipeline, with units, deposits and agents attached</div>
+    </div>
+  </section>
+
+  <!-- 06 ARCHITECTURE ----------------------------------------------------- -->
+  <section class="section alt" id="architecture">
+    <div class="shell">
+      <div class="section-kicker">06 &nbsp;/&nbsp; Architecture</div>
+      <h2>Built for Iraq. <em>Owned by Al Ghadeer.</em></h2>
+      <p class="lead" style="margin: 12px 0 36px">One API, one identity, one inventory. Website, app, CRM and automation are clients of the same platform, so a change to a unit price is made once and is true everywhere within a second.</p>
+      <div class="arch">
+        <article class="arch-card">
+          <h3>Platform &amp; data</h3>
+          <ul>
+            <li>Node.js services, PostgreSQL for inventory and CRM, MongoDB for content and events</li>
+            <li>Projects → phases → blocks → units, with statuses, price lists and holds</li>
+            <li>Single customer record shared by website, app, CRM and automation</li>
+            <li>Event bus: “unit reserved”, “instalment paid”, “lead scored” drive every downstream action</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Surfaces</h3>
+          <ul>
+            <li>Next.js website — server-rendered Arabic and English, RTL by design</li>
+            <li>React Native app — iOS and Android from one codebase</li>
+            <li>Payload CMS — bilingual editing, roles, approval workflow</li>
+            <li>NixAI CRM and automation console in Arabic and English for the sales floor</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Iraq specifics</h3>
+          <ul>
+            <li>Payments: Qi Card, ZainCash, FIB and AsiaHawala for Iraq; international cards for the diaspora</li>
+            <li>WhatsApp Business API as the primary channel; SMS via Zain, Asiacell and Korek aggregators</li>
+            <li>Hosting in-region (AWS Bahrain or UAE) or on your own servers in Baghdad — your choice, documented</li>
+            <li>Arabic-first content model with Kurdish and English as first-class locales</li>
+          </ul>
+        </article>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><b>01</b><span>Watches a YouTube video</span></div>
+        <div class="flow-step"><b>02</b><span>Lands on a project page</span></div>
+        <div class="flow-step"><b>03</b><span>Filters units, asks on WhatsApp</span></div>
+        <div class="flow-step"><b>04</b><span>CRM scores, agent books a visit</span></div>
+        <div class="flow-step"><b>05</b><span>Reserves and pays a deposit</span></div>
+        <div class="flow-step"><b>06</b><span>Follows construction in the app</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 TIMELINE --------------------------------------------------------- -->
+  <section class="section" id="timeline">
+    <div class="shell">
+      <div class="section-kicker">07 &nbsp;/&nbsp; Roadmap</div>
+      <h2 id="timeline-title">4 to 5 months. Four waves.</h2>
+      <p class="lead" style="margin-bottom:36px" id="timeline-lead">The programme ships in waves so Al Ghadeer is never waiting for everything to be ready. The website and CRM go live first; the app, payments and automation follow on the same platform. The months below follow the depths you selected in section 04.</p>
+      <div class="phases">
+        <article class="phase">
+          <div class="wk" id="ph-1-w">Months 1 — 2</div>
+          <h3>Foundation</h3>
+          <ul>
+            <li>Discovery with sales, marketing and management</li>
+            <li>Brand system for web, app and CRM</li>
+            <li>Inventory and content model agreed</li>
+            <li>Platform, environments and CMS provisioned</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk" id="ph-2-w">Months 2 — 3</div>
+          <h3>Launch</h3>
+          <ul id="ph-2-list">
+            <li>Website — Essential</li>
+            <li>CMS — Essential</li>
+            <li>CRM core — Essential</li>
+            <li>Both old domains redirected to one</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk" id="ph-3-w">Months 3 — 4</div>
+          <h3>Scale</h3>
+          <ul id="ph-3-list">
+            <li>Mobile app — Essential</li>
+            <li>Omnichannel inbox — Essential</li>
+            <li>Marketing automation — Essential</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk" id="ph-4-w">Months 4 — 5</div>
+          <h3>Optimise</h3>
+          <ul>
+            <li>QA across devices, UAT with the sales floor</li>
+            <li>Training in Arabic for editors, agents and marketers</li>
+            <li>App Store and Play release — allow two weeks</li>
+            <li>Hypercare and first optimisation cycle</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 INVESTMENT ------------------------------------------------------- -->
+  <section class="section alt" id="investment">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">08 &nbsp;/&nbsp; Investment</div>
+          <h2>One line per capability.</h2>
+        </div>
+        <p class="lead">This is the same list you configured, written as a quotation. Change a depth in section 04 and this table rewrites itself. Nothing here is a bundle — every line is a price we are willing to be held to.</p>
+      </div>
+      <div class="invest">
+        <div class="invest-top">
+          <div>
+            <div class="invest-label">Configured programme</div>
+            <h3 id="inv-name" style="font-family:var(--serif);font-size:34px;font-weight:500;margin:8px 0 10px">Foundation programme</h3>
+            <p id="inv-copy">Every mandatory capability at Essential depth, no optional lines.</p>
+          </div>
+          <div class="invest-total">
+            <span>Total investment</span>
+            <strong id="inv-price">$50,000</strong>
+          </div>
+        </div>
+        <div id="quote-rows"></div>
+        <div class="quote-row total">
+          <div>
+            <h4>Total</h4>
+            <p>Valid 30 days from 6 September 2026. Amounts in USD, excluding third-party fees listed under terms. Follows your selection in section 04.</p>
+          </div>
+          <div class="quote-price" id="inv-total">$50,000</div>
+        </div>
+      </div>
+
+      <div class="pay-grid">
+        <div class="pay"><span>To commence — 30%</span><b id="pay-1">$15,000</b></div>
+        <div class="pay"><span>Website + CRM live — 25%</span><b id="pay-2">$12,500</b></div>
+        <div class="pay"><span>App in stores — 25%</span><b id="pay-3">$12,500</b></div>
+        <div class="pay"><span>Programme acceptance — 20%</span><b id="pay-4">$10,000</b></div>
+      </div>
+
+      <div class="units-note">
+        <strong id="units-eq">0.3</strong>
+        <p>average units. Al Ghadeer's portfolio is $2.84 billion across 17,362 units — about <strong>$163,600</strong> per unit. The programme you have configured costs the equivalent of <strong id="units-eq-2">0.3 units</strong>. If the new estate sells <strong>one additional unit a month</strong> that the two old websites would not have, it has paid for itself <span id="units-payback">in the first month</span>.</p>
+      </div>
+
+      <p style="margin:34px 0 0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-deep)">Worked examples — click one to load it above</p>
+      <div class="compare" id="compare">
+        <article data-preset="floor">
+          <div class="tag">The foundation</div>
+          <h3>Thirteen mandatory lines, all Essential</h3>
+          <div class="amt">$50,000</div>
+          <ul>
+            <li>One bilingual website replacing both domains</li>
+            <li>CMS, companion app, CRM core, first journeys</li>
+            <li>Edge cases handled by your team, not the product</li>
+            <li>4–5 months</li>
+          </ul>
+        </article>
+        <article data-preset="middle">
+          <div class="tag">The growth build</div>
+          <h3>Professional everywhere, plus inventory and media</h3>
+          <div class="amt">$301,000</div>
+          <ul>
+            <li>Unit finder with live availability and payment plans</li>
+            <li>Owner app with payments, handover and construction updates</li>
+            <li>CRM with roles, scoring, WhatsApp inbox and automation journeys</li>
+            <li>8–11 months</li>
+          </ul>
+        </article>
+        <article data-preset="ceiling">
+          <div class="tag">The flagship</div>
+          <h3>Flagship everywhere, plus the benchmark extras</h3>
+          <div class="amt">$1,004,000</div>
+          <ul>
+            <li>Interactive 3D masterplan, 360° tours, film-led pages</li>
+            <li>Owner app, broker platform, Iraqi and international payments</li>
+            <li>AI concierge, attribution stack, data migration</li>
+            <li>14–18 months</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="shell">
+      <div class="section-kicker">08.1 &nbsp;/&nbsp; Partnership</div>
+      <h2>Why this should be <em>NixAI.</em></h2>
+      <p class="lead" style="margin-bottom:36px">You are not buying a website. You are buying the operating system of a developer that intends to be compared with Emaar — and a partner who will still be here when Al-Ridha's next company needs the same platform.</p>
+      <div class="why">
+        <article>
+          <h3>Five pillars, one team</h3>
+          <p>Website, CMS, app, CRM and automation are built by one team against one platform. There is no integration project afterwards, because there was never a seam.</p>
+        </article>
+        <article>
+          <h3>Arabic-first, not translated</h3>
+          <p>Arabic copy, RTL layouts, Iraqi phone formats, local payment rails and WhatsApp as the primary channel are in the design from day one — not bolted onto an English template.</p>
+        </article>
+        <article>
+          <h3>You own it</h3>
+          <p>Code, data, stores, domains and credentials are Al Ghadeer's. We build and hand over with documentation and training in Arabic — and stay on as long as you want us.</p>
+        </article>
+      </div>
+
+      <div class="section-kicker" style="margin-top:56px">08.2 &nbsp;/&nbsp; Terms</div>
+      <h2 style="font-size:42px">Clear conditions.</h2>
+      <div class="terms" style="margin-top:28px">
+        <article class="term">
+          <h3>Payment</h3>
+          <p>30% to commence, 25% when the website and CRM go live, 25% when the app is in both stores, 20% at programme acceptance. The split follows whatever total you configure; programmes above $300,000 can be re-phased into wave-based milestones.</p>
+        </article>
+        <article class="term">
+          <h3>Validity</h3>
+          <p>This proposal is valid for 30 days from 6 September 2026. After that we reconfirm timeline and fee against current capacity.</p>
+        </article>
+        <article class="term">
+          <h3>Included</h3>
+          <p>Every line in section 08 at the depth selected there, staging and production environments, store submission, documentation, training in Arabic and English, and hypercare at the level chosen on the QA line.</p>
+        </article>
+        <article class="term">
+          <h3>Client provides</h3>
+          <p>Brand assets, project data and renders, unit lists and price sheets, payment-gateway merchant accounts, Apple and Google developer accounts (or we open them in your name), WhatsApp Business verification, and timely feedback from a named product owner.</p>
+        </article>
+        <article class="term">
+          <h3>Not included</h3>
+          <p>Store fees, gateway and telecom fees, WhatsApp conversation charges, paid media budgets, third-party licences (maps, video hosting, 360° capture), photography, drone and 3D-modelling production, and hosting after the first 12 months.</p>
+        </article>
+        <article class="term">
+          <h3>Revisions</h3>
+          <p>Each wave includes two structured review rounds. Further design or scope change is estimated before work continues.</p>
+        </article>
+        <article class="term">
+          <h3>Intellectual property</h3>
+          <p>Upon final payment, all custom code and design for Al Ghadeer assign to the client. Open-source components remain under their own licences.</p>
+        </article>
+        <article class="term">
+          <h3>Group reuse</h3>
+          <p>The platform is multi-brand by design. Extending it to another Al-Ridha Investment Group company is a configuration and design exercise, quoted separately at a fraction of this programme.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" id="next">
+    <div class="close-media" role="img" aria-label="Aerial view of an Al Ghadeer community at sunset"></div>
+    <div class="close-inner shell">
+      <div class="section-kicker">Next</div>
+      <h2 style="max-width:900px">We can be in discovery in Baghdad the week the first transfer clears.</h2>
+      <p class="lead">Reply with the depth you chose on each line — or just the total the configurator settled on and we will reconstruct it. We will send a statement of work, a kickoff date, and the access list for brand assets, unit data and accounts.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:hello@nixailabs.com?subject=Al%20Ghadeer%20proposal%20NIX-GHADEER-001">Approve the programme</a>
+        <a class="btn btn-ghost" href="mailto:hello@nixailabs.com?subject=Al%20Ghadeer%20%E2%80%94%20a%20question">Ask a question</a>
+      </div>
+      <footer>
+        <img class="nix" src="/assets/nixai-logo-white.webp" alt="NixAI" />
+        <div class="footer-mark">
+          <span class="word-mark">Al Ghadeer</span>
+          <small>One digital estate</small>
+        </div>
+        <div style="font-size:12px;color:rgba(249,244,236,0.6);text-align:right">
+          hello@nixailabs.com<br />nixailabs.com
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <div class="bill-dock" id="bill-dock" aria-hidden="true">
+    <div>
+      <span id="dock-name">Foundation programme</span>
+      <b id="dock-price">$50,000</b>
+    </div>
+    <a href="#investment">Quotation</a>
+  </div>
+
+  <script src="/assets/gsap/gsap.min.js"></script>
+  <script src="/assets/gsap/ScrollTrigger.min.js"></script>
+  <script src="/assets/gsap/ScrollToPlugin.min.js"></script>
+  <script>
+    /* ---------------------------------------------------------------- Benchmark */
+    const BENCH_GROUPS = [
+      { id: "discover", label: "Discover" },
+      { id: "project", label: "Project pages" },
+      { id: "convert", label: "Convert" },
+      { id: "owners", label: "Owners" },
+      { id: "brokers", label: "Brokers" },
+      { id: "operate", label: "Operate" }
+    ];
+    /* values: 2 full, 1 partial, 0 absent — DAMAC, Emaar, Binghatti, Al Ghadeer today */
+    const BENCH = [
+      { g: "discover", f: "Unit search with filters", s: "type, bedrooms, price, community", v: [2, 2, 1, 0] },
+      { g: "discover", f: "Interactive map and masterplan", s: "projects and units placed on a map", v: [2, 1, 0, 0] },
+      { g: "discover", f: "Multi-language on one domain", s: "DAMAC ships seven; you ship two domains", v: [2, 2, 1, 1] },
+      { g: "discover", f: "Currency and measurement switcher", s: "AED, USD, GBP, EUR — sq ft or m²", v: [2, 1, 0, 0] },
+      { g: "discover", f: "360° and virtual tours", s: "communities, show units, amenities", v: [2, 2, 2, 0] },
+      { g: "discover", f: "Film-led project storytelling", s: "video hero, branded collections", v: [2, 1, 2, 1] },
+      { g: "project", f: "Starting price and unit types", s: "per project, per phase", v: [2, 2, 2, 1] },
+      { g: "project", f: "Payment plan and instalments", s: "down payment, schedule, handover date", v: [2, 2, 2, 0] },
+      { g: "project", f: "Floor plans and brochure download", s: "gated behind a lead form", v: [2, 2, 2, 0] },
+      { g: "project", f: "Construction status and live availability", s: "which units are still for sale", v: [1, 2, 1, 1] },
+      { g: "project", f: "Amenities, location and FAQ", s: "structured, not a paragraph", v: [2, 2, 1, 0] },
+      { g: "convert", f: "Register interest on every screen", s: "sticky, contextual to the unit", v: [2, 2, 2, 1] },
+      { g: "convert", f: "WhatsApp, call and callback", s: "routed to an agent, logged to CRM", v: [2, 2, 2, 1] },
+      { g: "convert", f: "Book a meeting with time slots", s: "Zoom or Teams, brand ambassador", v: [1, 1, 2, 0] },
+      { g: "convert", f: "Offers, launches and events hub", s: "summer rewards, roadshows", v: [2, 2, 1, 0] },
+      { g: "convert", f: "Wishlist and compare", s: "saved across devices", v: [0, 2, 0, 0] },
+      { g: "owners", f: "Owner app: payments, handover, requests", s: "Emaar One, DAMAC Living, Binghatti Sphere", v: [2, 2, 1, 0] },
+      { g: "owners", f: "Construction updates, amenity booking, permits", s: "with photos and notifications", v: [2, 2, 0, 0] },
+      { g: "brokers", f: "Broker portal and app with live inventory", s: "MyEmaar, DAMAC 360, Binghatti Partners", v: [2, 2, 2, 0] },
+      { g: "brokers", f: "EOI, unit booking, commission tiers, training", s: "brokers sell for you at scale", v: [2, 2, 1, 0] },
+      { g: "operate", f: "CRM behind every form and message", s: "Emaar runs on Salesforce", v: [2, 2, 2, 0] },
+      { g: "operate", f: "Marketing automation and retargeting", s: "journeys, pixels, attribution", v: [2, 2, 2, 1] },
+      { g: "operate", f: "Bilingual CMS with one source of truth", s: "no contradictory numbers", v: [2, 2, 2, 0] },
+      { g: "operate", f: "Press, awards, podcast and blog", s: "authority content that ranks", v: [2, 2, 2, 1] }
+    ];
+    const BENCH_COLS = ["DAMAC", "Emaar", "Binghatti", "Al Ghadeer today"];
+
+    function renderBench(filter) {
+      const dot = (v) => `<i class="dot ${v === 2 ? "full" : v === 1 ? "half" : "none"}" aria-label="${v === 2 ? "full" : v === 1 ? "partial" : "absent"}"></i>`;
+      let html = `<div class="mrow head"><div>Capability</div>${BENCH_COLS.map((c, i) => `<div class="${i === 3 ? "you" : ""}">${c}</div>`).join("")}</div>`;
+      BENCH_GROUPS.forEach((g) => {
+        if (filter !== "all" && filter !== g.id) return;
+        const rows = BENCH.filter((b) => b.g === g.id);
+        html += `<div class="mrow group"><div>${g.label}</div></div>`;
+        html += rows.map((r) => `<div class="mrow"><div class="f">${r.f}<small>${r.s}</small></div>${r.v.map((v, i) => `<div class="c ${i === 3 ? "you" : ""}">${dot(v)}</div>`).join("")}</div>`).join("");
+      });
+      document.getElementById("matrix").innerHTML = html;
+      document.querySelectorAll(".bench-tab").forEach((t) => t.classList.toggle("is-on", t.dataset.g === filter));
+    }
+    (function bootBench() {
+      const tabs = [{ id: "all", label: "All 24" }].concat(BENCH_GROUPS);
+      document.getElementById("bench-tabs").innerHTML = tabs.map((t) => `<button type="button" class="bench-tab" data-g="${t.id}">${t.label}</button>`).join("");
+      document.getElementById("bench-tabs").addEventListener("click", (e) => {
+        const b = e.target.closest(".bench-tab");
+        if (b) renderBench(b.dataset.g);
+      });
+      const score = BENCH_COLS.map((c, i) => {
+        const full = BENCH.filter((b) => b.v[i] === 2).length;
+        const part = BENCH.filter((b) => b.v[i] === 1).length;
+        return `<div class="score ${i === 3 ? "you" : ""}"><span>${c}</span><b>${full}<span style="display:inline;font-size:18px;color:rgba(249,244,236,0.5);letter-spacing:0;text-transform:none;font-weight:400;margin:0 0 0 4px">/ 24</span></b><small>${full} in full · ${part} partial · ${24 - full - part} absent</small></div>`;
+      }).join("");
+      document.getElementById("bench-score").innerHTML = score;
+      renderBench("all");
+    })();
+
+    /* ---------------------------------------------------------------- Configurator */
+    const STAGES = [
+      { id: "found", n: "00", label: "Foundations", note: "Under every pillar" },
+      { id: "web", n: "01", label: "Website" },
+      { id: "cms", n: "02", label: "CMS" },
+      { id: "app", n: "03", label: "Mobile app" },
+      { id: "crm", n: "04", label: "CRM" },
+      { id: "mkt", n: "05", label: "Marketing automation" }
+    ];
+
+    const FEATURES = [
+      /* Foundations ------------------------------------------------------ */
+      {
+        id: "discovery", stage: "found", core: true, name: "Discovery, brand system &amp; UX",
+        levels: [
+          { n: "Essential", p: 4000, d: "Two workshops with sales and marketing, the Al Ghadeer identity applied to a component library, and the key screens of website, app and CRM designed on standard patterns. No research phase, no prototype." },
+          { n: "Professional", p: 18000, d: "Buyer, owner, broker and sales-floor journey mapping, information architecture for Arabic and English, a full bilingual design system, every screen of every surface designed, and a clickable prototype for stakeholder sign-off." },
+          { n: "Flagship", p: 45000, d: "Everything in Professional, plus interviews with buyers in Baghdad, Najaf and Karbala and investors abroad, usability testing on prototypes, a motion and film language, brand guidelines for the digital estate, and design QA on every release." }
+        ]
+      },
+      {
+        id: "platform", stage: "found", core: true, name: "Backend platform &amp; integrations",
+        levels: [
+          { n: "Essential", p: 3000, d: "One REST API for website, app and CRM, with projects, units, leads and content, validation, and a single sign-on for staff." },
+          { n: "Professional", p: 22000, d: "Modular services, documented endpoints, an event bus that connects reservations, payments and automation, background jobs, seeded test data, and adapters for WhatsApp, Meta and Google lead sources." },
+          { n: "Flagship", p: 60000, d: "Everything in Professional, plus a versioned partner API for brokers and banks, webhooks, caching, full change history on units and leads, multi-brand tenancy for Al-Ridha group companies, and automated integration tests." }
+        ]
+      },
+      {
+        id: "infra", stage: "found", core: true, name: "Infrastructure, security &amp; data residency",
+        levels: [
+          { n: "Essential", p: 1500, d: "Managed cloud in the region, HTTPS with auto-renewing certificates, firewall, secrets held outside the code, daily encrypted backups, staging and production." },
+          { n: "Professional", p: 12000, d: "CI/CD on merge, a web application firewall, rate limiting and bot protection, encryption at rest, dependency and secret scanning, uptime and error alerting, log retention, and a tested restore drill." },
+          { n: "Flagship", p: 35000, d: "Everything in Professional, plus a third-party penetration test with remediation, DDoS protection, autoscaling, on-premises or hybrid deployment in Baghdad if required, a secrets manager with rotation, immutable audit logging, and a disaster-recovery plan with agreed recovery targets." }
+        ]
+      },
+      {
+        id: "qa", stage: "found", core: true, name: "QA, training, change management &amp; handover",
+        levels: [
+          { n: "Essential", p: 1500, d: "Manual QA on four devices and three browsers, app store submission, one training session in Arabic for editors and agents, repositories and environments handed to Al Ghadeer." },
+          { n: "Professional", p: 12000, d: "A device matrix, a regression suite on the unit finder, reservations and payments, role-based training tracks for editors, agents, marketers and management, Arabic user manuals, and 60 days of hypercare." },
+          { n: "Flagship", p: 35000, d: "Everything in Professional, plus load testing for launch-day traffic, accessibility audit, a change-management plan with champions in each sales centre, quarterly refresher training, and 12 months of hypercare with agreed response times." }
+        ]
+      },
+      {
+        id: "migration", stage: "found", core: false, name: "Data &amp; content migration",
+        levels: [
+          { n: "Content", p: 3000, d: "Both existing websites migrated into the CMS with one reconciled set of facts per project, and permanent redirects so search rankings carry over." },
+          { n: "Sales data", p: 9000, d: "Everything in Content, plus existing lead lists, Excel unit sheets, WhatsApp histories and broker lists cleaned, de-duplicated and imported into the CRM with owners assigned." },
+          { n: "Full history", p: 20000, d: "Everything in Sales data, plus historic contracts, payment schedules and owner records imported so existing owners can use the app from day one." }
+        ]
+      },
+
+      /* Website ---------------------------------------------------------- */
+      {
+        id: "web", stage: "web", core: true, name: "Corporate website — Next.js, Arabic &amp; English",
+        levels: [
+          { n: "Essential", p: 8000, d: "One domain replacing both. Home, about, projects, project page, news, careers, contact, privacy — in Arabic and English with right-to-left layout, server-rendered, on standard components." },
+          { n: "Professional", p: 30000, d: "Around twenty-five templates on the full design system: investors, brokers, offers, city landing pages for Baghdad, Najaf and Karbala, partner pages, FAQ, careers with applications, and a landing-page builder for campaigns." },
+          { n: "Flagship", p: 70000, d: "Everything in Professional, plus bespoke motion and film sequences, an interactive company timeline, a press and awards centre, an investor-relations hub with downloadable reports, personalised content by city and budget, and a performance budget held on every release." }
+        ]
+      },
+      {
+        id: "explorer", stage: "web", core: true, name: "Project &amp; unit explorer",
+        levels: [
+          { n: "Essential", p: 5000, d: "Project pages with unit types, sizes, starting prices, phase status, gallery, amenities and location map, plus a project filter by city and type. Availability is a status word maintained by editors." },
+          { n: "Professional", p: 28000, d: "A unit finder with filters by type, bedrooms, budget, phase and status, unit pages with floor plans and payment plan, saved searches and compare, brochure downloads behind a lead form, and availability fed live from the inventory engine." },
+          { n: "Flagship", p: 75000, d: "Everything in Professional, plus a clickable masterplan with unit-level availability, mortgage and instalment calculators in IQD and USD, unit reservation with deposit from the website, price-drop and phase-launch alerts, and a wishlist synchronised with the app." }
+        ]
+      },
+      {
+        id: "leadcap", stage: "web", core: true, name: "Lead capture &amp; conversion layer",
+        levels: [
+          { n: "Essential", p: 2000, d: "Register-interest forms on every project and unit, a WhatsApp button routed to the right sales centre, click-to-call, and every submission landing in the CRM with source and page." },
+          { n: "Professional", p: 10000, d: "Everything in Essential, plus book-a-visit and book-a-video-call with real calendar slots per sales centre and agent, callback requests, exit-intent and sticky CTAs, and a live-chat widget staffed by your team." },
+          { n: "Flagship", p: 28000, d: "Everything in Professional, plus an Arabic and English AI concierge that answers unit, price and payment questions from the live inventory and hands qualified leads to an agent, multi-step qualification forms, and A/B testing on every conversion element." }
+        ]
+      },
+      {
+        id: "seo", stage: "web", core: true, name: "SEO, performance &amp; analytics",
+        levels: [
+          { n: "Essential", p: 1500, d: "Technical SEO on a server-rendered site, hreflang between Arabic and English, sitemaps, structured data for projects, Core Web Vitals in the green, GA4 and Meta pixel with the core events." },
+          { n: "Professional", p: 8000, d: "Everything in Essential, plus keyword research in Arabic and English for Iraq and the diaspora, city landing pages built for search, a content plan, monthly ranking reports, and server-side tagging." },
+          { n: "Flagship", p: 20000, d: "Everything in Professional, plus a twelve-month SEO programme with content production, digital PR, Arabic-language authority building, competitor monitoring against DAMAC, Emaar and Binghatti in Iraq, and a quarterly executive review." }
+        ]
+      },
+      {
+        id: "media", stage: "web", core: false, name: "Immersive media",
+        levels: [
+          { n: "Gallery &amp; film", p: 5000, d: "Curated galleries per phase, drone-film hero sequences, and a video library that turns your YouTube archive into project storytelling on your own domain." },
+          { n: "360° &amp; tours", p: 22000, d: "Everything in Gallery, plus 360° panoramas of show units and amenities, guided virtual tours in Arabic and English, and tour booking for remote investors.", note: "Capture and 3D production quoted separately or supplied by Al Ghadeer." },
+          { n: "3D masterplan", p: 90000, d: "Everything in 360°, plus an interactive 3D masterplan per project with day and night states, unit-level availability and pricing, fly-throughs, and a sales-centre mode on touch screens." }
+        ]
+      },
+      {
+        id: "langs", stage: "web", core: false, name: "More languages &amp; currencies",
+        levels: [
+          { n: "Kurdish + IQD/USD", p: 4000, d: "Kurdish as a third locale across website and app, prices shown in IQD and USD with a switcher, and localised dates and numerals." },
+          { n: "Diaspora set", p: 12000, d: "Everything in the first level, plus Turkish and Farsi, GBP and EUR, geo-aware defaults for visitors in the UK, Europe and the Gulf, and localised store listings." }
+        ]
+      },
+
+      /* CMS -------------------------------------------------------------- */
+      {
+        id: "cms", stage: "cms", core: true, name: "Headless CMS — Payload",
+        levels: [
+          { n: "Essential", p: 4000, d: "Bilingual editing of pages, projects, news and careers with a media library, two roles, preview, and the project and unit-type model shared with the website and app." },
+          { n: "Professional", p: 16000, d: "Everything in Essential, plus approval workflow, scheduled publishing, per-project editors, offers and events, reusable content blocks, SEO fields, and audit history on every change." },
+          { n: "Flagship", p: 40000, d: "Everything in Professional, plus multi-brand support for group companies, AI-assisted Arabic and English drafting and translation with human approval, digital-asset management for renders and films, and content personalisation rules." }
+        ]
+      },
+      {
+        id: "inventory", stage: "cms", core: false, name: "Inventory &amp; pricing engine",
+        levels: [
+          { n: "Register", p: 8000, d: "Every unit as a record — project, phase, block, type, size, price, status — imported from your sheets and edited by sales admin, feeding the website and app." },
+          { n: "Live", p: 22000, d: "Everything in Register, plus holds with expiry, reservations, price lists per phase and launch, bulk updates, and status synchronised across website, app, CRM and brokers in real time." },
+          { n: "Commercial", p: 55000, d: "Everything in Live, plus payment-plan templates, discount and approval rules, phase-launch releases with priority queues, unit history and reporting, and integration with your accounting system." }
+        ]
+      },
+
+      /* Mobile app ------------------------------------------------------- */
+      {
+        id: "app", stage: "app", core: true, name: "Customer mobile app — React Native, iOS + Android",
+        levels: [
+          { n: "Essential", p: 8000, d: "A companion app for buyers on standard components: projects, unit types, gallery, news, enquiry and WhatsApp, push notifications for launches. Around ten screens." },
+          { n: "Professional", p: 55000, d: "An owner app in the class of Emaar One: secure login, my units, instalment schedule and payments, construction updates with photos, digital handover with document upload, service requests with status, and notifications — in Arabic and English." },
+          { n: "Flagship", p: 140000, d: "Everything in Professional, plus amenity booking, move-in permits and access cards, home services marketplace, community feed and events, owner priority booking at launches, referral rewards, biometric login, offline mode, and full analytics instrumentation." }
+        ]
+      },
+      {
+        id: "payments", stage: "app", core: false, name: "Online payments &amp; instalments",
+        levels: [
+          { n: "One rail", p: 8000, d: "One Iraqi gateway — Qi Card or ZainCash — for deposits and instalments in the app and on the website, with receipts and a ledger the CRM can see." },
+          { n: "Iraq set", p: 20000, d: "Qi Card, ZainCash, FIB and AsiaHawala with failover, plus international cards for the diaspora, automatic reminders before due dates, and reconciliation against the payment schedule." },
+          { n: "Finance grade", p: 45000, d: "Everything in Iraq set, plus Apple Pay and Google Pay, bank-transfer matching, instalment rescheduling with approvals, late-fee rules, statements and tax documents, and export to your accounting system." }
+        ]
+      },
+      {
+        id: "broker", stage: "app", core: false, name: "Broker &amp; partner platform",
+        levels: [
+          { n: "Portal", p: 15000, d: "Broker registration and approval, live inventory, marketing material downloads, lead registration to protect commissions, and a broker directory on the website." },
+          { n: "Portal + app", p: 40000, d: "Everything in Portal, plus a broker app in the class of MyEmaar and DAMAC 360: expressions of interest, unit holds, client management, commission statements, and training content." },
+          { n: "Programme", p: 95000, d: "Everything in Portal + app, plus commission tiers and leaderboards, event and roadshow booking, a partner API for large agencies, co-branded landing pages per broker, and automated payouts." }
+        ]
+      },
+      {
+        id: "fieldapp", stage: "app", core: false, name: "Sales-team field app",
+        levels: [
+          { n: "Visits", p: 12000, d: "Agents check in site visits, see the buyer's history, show available units on a tablet, and log outcomes — offline-tolerant for sales centres with weak connectivity." },
+          { n: "Close on site", p: 30000, d: "Everything in Visits, plus unit reservation with deposit capture, quotation generation, e-signature on reservation forms, and KYC document capture." }
+        ]
+      },
+
+      /* CRM -------------------------------------------------------------- */
+      {
+        id: "crm", stage: "crm", core: true, name: "CRM core — NixAI CRM for developers",
+        levels: [
+          { n: "Essential", p: 5500, d: "Leads, contacts, one pipeline, tasks and notes, units attached to deals, assignment by city, and a dashboard — in Arabic and English. One admin role plus agents." },
+          { n: "Professional", p: 35000, d: "Everything in Essential, plus role hierarchy for sales centres, managers and finance, lead scoring, round-robin and rule-based routing, duplicate detection, activity timelines, SLA timers on first response, calendar and email sync, and manager dashboards per project." },
+          { n: "Flagship", p: 90000, d: "Everything in Professional, plus territory and team management across Baghdad, Najaf and Karbala, forecasting, quota and commission tracking for internal agents, a rules engine for approvals, full audit trail, and a mobile CRM for agents." }
+        ]
+      },
+      {
+        id: "omni", stage: "crm", core: true, name: "Omnichannel inbox",
+        levels: [
+          { n: "Essential", p: 3000, d: "WhatsApp Business API, website forms and Meta lead forms flow into the CRM as conversations with the lead record, with templates for first reply." },
+          { n: "Professional", p: 18000, d: "Everything in Essential, plus Instagram and Facebook DMs, TikTok and YouTube lead forms, email, a shared team inbox with assignment and notes, canned replies in Arabic and English, and conversation analytics." },
+          { n: "Flagship", p: 45000, d: "Everything in Professional, plus AI-suggested replies, automatic language detection, sentiment and intent tagging, chat-to-visit booking inside WhatsApp, and quality scoring of agent conversations." }
+        ]
+      },
+      {
+        id: "salesops", stage: "crm", core: false, name: "Sales operations — quotations, reservations, contracts",
+        levels: [
+          { n: "Quotations", p: 10000, d: "Branded quotations and payment schedules generated from the unit and plan, sent by WhatsApp or email, with acceptance tracked." },
+          { n: "Reservations", p: 28000, d: "Everything in Quotations, plus reservation forms, deposit tracking, hold expiry, contract templates in Arabic and English, and e-signature." },
+          { n: "Contract to key", p: 65000, d: "Everything in Reservations, plus payment schedules with reminders and receipts, transfer and resale workflows, handover scheduling and snagging lists, and integration with your legal and accounting teams." }
+        ]
+      },
+      {
+        id: "telephony", stage: "crm", core: false, name: "Call centre &amp; telephony",
+        levels: [
+          { n: "Click-to-call", p: 6000, d: "Calls placed and logged from the CRM, missed-call capture, and the 6035 short number's calls matched to leads." },
+          { n: "Contact centre", p: 16000, d: "Everything in Click-to-call, plus IVR in Arabic and English, queues per city, call recording, whisper and monitoring, and agent performance reports." },
+          { n: "Intelligent", p: 35000, d: "Everything in Contact centre, plus AI call summaries and next-step suggestions written to the lead record, compliance checks, and predictive dialling for launch campaigns." }
+        ]
+      },
+      {
+        id: "care", stage: "crm", core: false, name: "Post-sales &amp; customer care",
+        levels: [
+          { n: "Tickets", p: 8000, d: "Service requests from the app and WhatsApp become tickets with categories, owners and SLAs, visible to the owner in the app." },
+          { n: "Handover &amp; snagging", p: 22000, d: "Everything in Tickets, plus handover scheduling, inspection checklists with photos, snagging lists with contractor assignment, and owner sign-off." },
+          { n: "Community operations", p: 50000, d: "Everything in Handover, plus maintenance contracts, preventive schedules, vendor management, service-charge billing, and satisfaction surveys — the back office of the community app." }
+        ]
+      },
+      {
+        id: "bi", stage: "crm", core: false, name: "Reporting &amp; business intelligence",
+        levels: [
+          { n: "Dashboards", p: 5000, d: "Live dashboards for leads, conversion, source, city and project, with weekly email summaries to management." },
+          { n: "Warehouse", p: 15000, d: "Everything in Dashboards, plus a data warehouse joining CRM, inventory, payments and web analytics, cost-per-lead and cost-per-sale by channel, and cohort views." },
+          { n: "Forecasting", p: 40000, d: "Everything in Warehouse, plus sales forecasting per phase, price-elasticity and absorption analysis, board-level reporting, and anomaly alerts when a channel or project drops." }
+        ]
+      },
+
+      /* Marketing automation --------------------------------------------- */
+      {
+        id: "automation", stage: "mkt", core: true, name: "Marketing automation engine",
+        levels: [
+          { n: "Essential", p: 3000, d: "Segments by city, project and budget, email and WhatsApp broadcasts with templates, and three automated journeys: new lead, brochure follow-up, and launch announcement." },
+          { n: "Professional", p: 24000, d: "Everything in Essential, plus a visual journey builder, behavioural triggers from website and app events, lead scoring that hands hot leads to agents, SMS via Iraqi operators, preference centre, and journey analytics." },
+          { n: "Flagship", p: 60000, d: "Everything in Professional, plus lifecycle programmes from first click to handover to referral, predictive send-time and channel, dynamic content by segment, owner and investor newsletters, and quarterly journey optimisation." }
+        ]
+      },
+      {
+        id: "tracking", stage: "mkt", core: false, name: "Paid media &amp; tracking infrastructure",
+        levels: [
+          { n: "Pixels", p: 4000, d: "Meta, Google, TikTok and Snapchat pixels with conversion events, UTM governance, and campaign landing pages in Arabic and English." },
+          { n: "Server-side", p: 12000, d: "Everything in Pixels, plus server-side tagging and conversions APIs, offline conversion upload from the CRM so ad platforms optimise toward site visits and reservations, and a cost-per-sale dashboard." },
+          { n: "Attribution", p: 30000, d: "Everything in Server-side, plus multi-touch attribution across YouTube, social, search, events and brokers, incrementality tests, and a media-mix view for the marketing budget." }
+        ]
+      },
+      {
+        id: "content", stage: "mkt", core: false, name: "Content &amp; social engine",
+        levels: [
+          { n: "Funnel", p: 3000, d: "Your YouTube channel wired to the estate: end screens, descriptions and pinned comments that lead to tracked project pages, plus lead magnets per project." },
+          { n: "Studio", p: 10000, d: "Everything in Funnel, plus a content calendar and approval flow in the CMS, social scheduling, UGC and testimonial collection from owners, and monthly performance reporting." },
+          { n: "Programme", p: 25000, d: "Everything in Studio, plus a twelve-month editorial programme across YouTube, Instagram, TikTok and LinkedIn in Arabic and English, investor guides, and podcast production support." }
+        ]
+      },
+      {
+        id: "ai", stage: "mkt", core: false, name: "AI sales &amp; service layer",
+        levels: [
+          { n: "Assistant", p: 10000, d: "An Arabic and English assistant on website and WhatsApp that answers project, unit and payment questions from live data and books visits, with handoff to agents." },
+          { n: "Qualifier", p: 30000, d: "Everything in Assistant, plus lead qualification and scoring by conversation, call and meeting summaries, agent copilots that draft replies and next steps, and recommendation of units per buyer." },
+          { n: "Operating layer", p: 80000, d: "Everything in Qualifier, plus AI over the owner app for service requests, automated document checks, content generation with approval, and a management copilot that answers questions about pipeline, inventory and payments." }
+        ]
+      },
+      {
+        id: "loyalty", stage: "mkt", core: false, name: "Loyalty &amp; referral programme",
+        levels: [
+          { n: "Referrals", p: 6000, d: "Owner referral codes in the app, tracked to reservation, with rewards paid on contract." },
+          { n: "Club", p: 18000, d: "Everything in Referrals, plus tiers for repeat buyers and investors, partner offers, priority access to launches, and events." }
+        ]
+      }
+    ];
+
+    const CORE = FEATURES.filter((f) => f.core);
+    const PRESETS = {
+      floor: { pick: { discovery: 0, platform: 0, infra: 0, qa: 0, web: 0, explorer: 0, leadcap: 0, seo: 0, cms: 0, app: 0, crm: 0, omni: 0, automation: 0 } },
+      middle: { pick: { discovery: 1, platform: 1, infra: 1, qa: 1, web: 1, explorer: 1, leadcap: 1, seo: 1, cms: 1, app: 1, crm: 1, omni: 1, automation: 1, inventory: 0, media: 0 } },
+      ceiling: { pick: { discovery: 2, platform: 2, infra: 2, qa: 2, web: 2, explorer: 2, leadcap: 2, seo: 2, cms: 2, app: 2, crm: 2, omni: 2, automation: 2, inventory: 2, media: 2, payments: 2, broker: 1, tracking: 1, migration: 1, ai: 0 } }
+    };
+
+    const BANDS = [
+      { max: 90000, name: "Foundation programme", why: "Every mandatory capability at Essential depth. One bilingual website replaces two, a CMS holds one truth, a companion app reaches buyers, a CRM receives every lead and three journeys follow up. Edge cases still live with your team." },
+      { max: 200000, name: "Connected programme", why: "The estate starts doing the sales team's work: deeper website and CRM, a real inventory, and journeys that respond to what buyers do rather than to a calendar." },
+      { max: 450000, name: "Growth programme", why: "Unit finder with live availability, an owner app with payments and construction updates, a CRM with roles and scoring, and automation that runs a launch without a spreadsheet. This is where most developers of your size should land first." },
+      { max: 800000, name: "Enterprise programme", why: "Owners, brokers and buyers each have their own surface. Payments, handover and service run through the platform. DAMAC Living and MyEmaar-class capability, built for Iraq." },
+      { max: Infinity, name: "Flagship programme", why: "An Emaar-class digital estate: 3D masterplans, an AI concierge, a broker programme, finance-grade payments, attribution across every channel — and a platform Al-Ridha's other companies can join." }
+    ];
+
+    const WEEKS = [
+      { max: 90000, label: "4–5 months", end: 5 },
+      { max: 200000, label: "6–8 months", end: 8 },
+      { max: 450000, label: "8–11 months", end: 11 },
+      { max: 800000, label: "11–15 months", end: 15 },
+      { max: 1200000, label: "14–18 months", end: 18 },
+      { max: Infinity, label: "18–24 months", end: 24 }
+    ];
+
+    const SCALE_MIN = 40000;
+    const SCALE_MAX = 1500000;
+    const UNIT_VALUE = 163600;
+    const money = (n) => "$" + n.toLocaleString("en-US");
+    const plain = (s) => s.replace(/&amp;/g, "&");
+    const scalePct = (v) => Math.max(0, Math.min(100, ((Math.log(v) - Math.log(SCALE_MIN)) / (Math.log(SCALE_MAX) - Math.log(SCALE_MIN))) * 100));
+
+    const pick = {};
+    FEATURES.forEach((f) => { pick[f.id] = f.core ? 0 : -1; });
+
+    function chosen(f) { const i = pick[f.id]; return i < 0 ? null : f.levels[i]; }
+    function total() { return FEATURES.reduce((s, f) => { const l = chosen(f); return s + (l ? l.p : 0); }, 0); }
+    function bandFor(t) { return BANDS.find((b) => t < b.max); }
+    function weeksFor(t) { return WEEKS.find((w) => t < w.max); }
+
+    function applyPreset(key) {
+      const preset = PRESETS[key];
+      if (!preset) return;
+      FEATURES.forEach((f) => { pick[f.id] = f.core ? 0 : -1; });
+      Object.entries(preset.pick).forEach(([id, i]) => { pick[id] = i; });
+      render();
+    }
+    function matchedPreset() {
+      return Object.keys(PRESETS).find((key) => {
+        const wanted = PRESETS[key].pick;
+        return FEATURES.every((f) => {
+          const want = Object.prototype.hasOwnProperty.call(wanted, f.id) ? wanted[f.id] : (f.core ? 0 : -1);
+          return pick[f.id] === want;
+        });
+      });
+    }
+    function fillList(el, items) { el.innerHTML = items.map((t) => `<li>${t}</li>`).join(""); }
+
+    function renderLines() {
+      document.querySelectorAll(".line").forEach((line) => {
+        const f = FEATURES.find((x) => x.id === line.dataset.id);
+        const lvl = chosen(f);
+        line.classList.toggle("is-on", !!lvl);
+        line.classList.toggle("is-off", !lvl);
+        line.querySelector(".line-amt").textContent = lvl ? money(lvl.p) : "—";
+        line.querySelectorAll(".tier-btn").forEach((btn) => {
+          const on = Number(btn.dataset.i) === pick[f.id];
+          btn.classList.toggle("is-on", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        const desc = line.querySelector(".line-desc");
+        if (lvl) {
+          desc.innerHTML = lvl.d + (lvl.note ? `<span class="line-note">${lvl.note}</span>` : "");
+        } else {
+          const first = f.levels[0];
+          desc.innerHTML = `<strong style="color:var(--faint);font-weight:600">Not included.</strong> ${first.n} would add ${money(first.p)} — ${first.d}`;
+        }
+      });
+    }
+
+    function renderQuote() {
+      const row = (f, lvl) => `
+        <div class="quote-row">
+          <div><h4>${f.name} <em>· ${lvl.n}</em></h4><p>${lvl.d}</p></div>
+          <div class="quote-price">${money(lvl.p)}</div>
+        </div>`;
+      let html = "";
+      let coreSum = 0, optSum = 0, optCount = 0;
+      STAGES.forEach((s) => {
+        const fs = FEATURES.filter((f) => f.stage === s.id && chosen(f));
+        if (!fs.length) return;
+        const sum = fs.reduce((a, f) => a + chosen(f).p, 0);
+        fs.forEach((f) => { if (f.core) coreSum += chosen(f).p; else { optSum += chosen(f).p; optCount++; } });
+        html += `<div class="quote-group">${s.n} — ${s.label}</div>`;
+        html += fs.map((f) => row(f, chosen(f))).join("");
+        html += `<div class="quote-row sub"><div><h4>${s.label} subtotal</h4></div><div class="quote-price">${money(sum)}</div></div>`;
+      });
+      document.getElementById("quote-rows").innerHTML = html;
+      return { coreSum, optSum, optCount };
+    }
+
+    function render() {
+      const t = total();
+      const band = bandFor(t);
+      const weeks = weeksFor(t);
+      const preset = matchedPreset();
+
+      renderLines();
+      const sums = renderQuote();
+
+      const pct = scalePct(t);
+      document.getElementById("scale-fill").style.width = pct + "%";
+      document.getElementById("scale-needle").style.left = pct + "%";
+
+      document.querySelectorAll("#compare article").forEach((card) => card.classList.toggle("is-on", card.dataset.preset === preset));
+      document.querySelectorAll(".picker-actions button").forEach((btn) => { btn.style.color = btn.dataset.preset === preset ? "var(--ink)" : ""; });
+
+      document.querySelectorAll(".rail-step").forEach((el) => {
+        const fs = FEATURES.filter((f) => f.stage === el.dataset.stage && chosen(f));
+        const sum = fs.reduce((a, f) => a + chosen(f).p, 0);
+        el.classList.toggle("is-hot", fs.length > 0);
+        el.querySelector("em").textContent = money(sum);
+      });
+
+      document.getElementById("must-chips").innerHTML = CORE.map((f) =>
+        `<span class="must-chip">${LOCK_SVG}${plain(f.name).split(" — ")[0]} <b style="color:var(--gold-deep);font-weight:700">${chosen(f).n}</b></span>`
+      ).join("");
+
+      const setText = (id, v) => { document.getElementById(id).textContent = v; };
+      setText("bill-name", band.name); setText("bill-price", money(t)); setText("bill-weeks", "Delivery " + weeks.label); setText("bill-why", band.why);
+      setText("cover-price", money(t)); setText("cover-weeks", weeks.label); setText("nav-price", money(t));
+      setText("dock-name", band.name); setText("dock-price", money(t));
+
+      document.getElementById("bill-lines").innerHTML = [
+        `<li><span>Mandatory — ${CORE.length} capabilities</span><b>${money(sums.coreSum)}</b></li>`,
+        `<li><span>Optional — ${sums.optCount} selected</span><b>${money(sums.optSum)}</b></li>`,
+        `<li><span>Against the $50k floor</span><b>${t > 50000 ? "+" + money(t - 50000) : "at floor"}</b></li>`,
+        `<li><span>In average units ($163.6k)</span><b>${(t / UNIT_VALUE).toFixed(1)}</b></li>`,
+        `<li><span>Total</span><b>${money(t)}</b></li>`
+      ].join("");
+
+      setText("inv-name", band.name); setText("inv-copy", band.why); setText("inv-price", money(t)); setText("inv-total", money(t));
+      setText("pay-1", money(Math.round(t * 0.3))); setText("pay-2", money(Math.round(t * 0.25))); setText("pay-3", money(Math.round(t * 0.25))); setText("pay-4", money(Math.round(t * 0.2)));
+
+      const units = t / UNIT_VALUE;
+      setText("units-eq", units.toFixed(1));
+      setText("units-eq-2", units.toFixed(1) + (units < 1.05 ? " unit" : " units"));
+      const months = Math.ceil(units);
+      setText("units-payback", months <= 1 ? "in the first month" : "within " + months + " months");
+
+      const m = weeks.end;
+      setText("timeline-title", weeks.label.replace("–", " to ").replace(" months", "") + " months. Four waves.");
+      setText("ph-1-w", "Months 1 — " + Math.max(1, Math.round(m * 0.25)));
+      setText("ph-2-w", "Months " + Math.max(1, Math.round(m * 0.2)) + " — " + Math.max(2, Math.round(m * 0.55)));
+      setText("ph-3-w", "Months " + Math.max(2, Math.round(m * 0.45)) + " — " + Math.max(3, Math.round(m * 0.85)));
+      setText("ph-4-w", "Months " + Math.max(3, Math.round(m * 0.8)) + " — " + m);
+
+      const lvlOf = (id) => chosen(FEATURES.find((f) => f.id === id)).n;
+      const launch = ["Website — " + lvlOf("web"), "Project & unit explorer — " + lvlOf("explorer"), "CMS — " + lvlOf("cms"), "CRM core — " + lvlOf("crm"), "Both old domains redirected to one"];
+      fillList(document.getElementById("ph-2-list"), launch);
+      const scale = ["Mobile app — " + lvlOf("app"), "Omnichannel inbox — " + lvlOf("omni"), "Marketing automation — " + lvlOf("automation")];
+      FEATURES.filter((f) => !f.core && chosen(f)).slice(0, 3).forEach((f) => scale.push(plain(f.name).split(" — ")[0] + " — " + chosen(f).n));
+      fillList(document.getElementById("ph-3-list"), scale);
+    }
+
+    const LOCK_SVG = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:var(--gold-deep);stroke-width:2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+
+    function bootPicker() {
+      const lockBadge = '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+      const plusBadge = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
+
+      document.getElementById("scale-ticks").innerHTML = [
+        { v: 50000, l: "Foundation" },
+        { v: 300000, l: "Growth" },
+        { v: 1000000, l: "Flagship" }
+      ].map((t) => `<div class="scale-tick" style="left:${scalePct(t.v)}%"><b>${money(t.v)}</b><span>${t.l}</span></div>`).join("");
+
+      document.getElementById("journey-rail").innerHTML = STAGES.map((s) =>
+        `<a class="rail-step is-hot" data-stage="${s.id}" href="#stage-${s.id}"><b>${s.n}</b><span>${s.label}</span><em>$0</em></a>`
+      ).join("");
+
+      document.getElementById("stages").innerHTML = STAGES.map((s) => {
+        const rows = FEATURES.filter((f) => f.stage === s.id).map((f) => {
+          const btns = [];
+          if (!f.core) btns.push(`<button type="button" class="tier-btn" data-id="${f.id}" data-i="-1"><b>Off</b><em>$0</em></button>`);
+          f.levels.forEach((lvl, i) => {
+            btns.push(`<button type="button" class="tier-btn" data-id="${f.id}" data-i="${i}"><b>${lvl.n}</b><em>${money(lvl.p)}</em></button>`);
+          });
+          return `
+            <div class="line" data-id="${f.id}">
+              <div class="line-head">
+                <div>
+                  <span class="line-badge ${f.core ? "is-core" : "is-opt"}">${f.core ? lockBadge + "Mandatory" : plusBadge + "Optional"}</span>
+                  <h4>${f.name}</h4>
+                </div>
+                <div class="line-amt">—</div>
+              </div>
+              <div class="tiers" role="group" aria-label="Depth for ${plain(f.name)}">${btns.join("")}</div>
+              <p class="line-desc"></p>
+            </div>`;
+        }).join("");
+        return `
+          <div class="stage" id="stage-${s.id}">
+            <div class="stage-head"><b>${s.n}</b><h3>${s.label}</h3>${s.note ? `<em>${s.note}</em>` : ""}</div>
+            <div class="lines">${rows}</div>
+          </div>`;
+      }).join("");
+
+      document.getElementById("stages").addEventListener("click", (e) => {
+        const btn = e.target.closest(".tier-btn");
+        if (!btn) return;
+        pick[btn.dataset.id] = Number(btn.dataset.i);
+        render();
+      });
+      document.getElementById("journey-rail").addEventListener("click", (e) => {
+        const step = e.target.closest(".rail-step");
+        if (!step) return;
+        e.preventDefault();
+        scrollToId("stage-" + step.dataset.stage);
+      });
+      document.querySelectorAll(".picker-actions button").forEach((btn) => btn.addEventListener("click", () => applyPreset(btn.dataset.preset)));
+      document.querySelectorAll("#compare article").forEach((card) => {
+        card.addEventListener("click", () => { applyPreset(card.dataset.preset); scrollToId("journey"); });
+      });
+      render();
+    }
+
+    /* ---------------------------------------------------------------- Chrome */
+    const toggle = document.getElementById("nav-toggle");
+    const links = document.getElementById("nav-links");
+    toggle?.addEventListener("click", () => links.classList.toggle("open"));
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      links?.classList.remove("open");
+      if (reduce || typeof gsap === "undefined") {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+      } else {
+        gsap.to(window, { duration: 1.15, scrollTo: { y: el, offsetY: 80 }, ease: "power3.inOut" });
+      }
+      history.replaceState(null, "", "#" + id);
+    }
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href").slice(1);
+        if (!id) return;
+        e.preventDefault();
+        scrollToId(id);
+      });
+    });
+
+    bootPicker();
+
+    if (!(reduce || typeof gsap === "undefined")) {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+      gsap.to("#scroll-progress", { scaleX: 1, ease: "none", scrollTrigger: { scrub: 0.25 } });
+
+      gsap.set(".nav", { y: -24, opacity: 0 });
+      gsap.set(".cover-media", { scale: 1.18, transformOrigin: "50% 40%" });
+      gsap.set(".cover-kicker, .cover-meta, .cover-sub, .cover-foot", { opacity: 0, y: 22 });
+      gsap.set("h1 .h1-line span", { yPercent: 110 });
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      intro
+        .to(".cover-media", { scale: 1, duration: 2.4, ease: "power2.out" }, 0)
+        .to(".nav", { y: 0, opacity: 1, duration: 0.8 }, 0.15)
+        .to(".cover-kicker", { opacity: 1, y: 0, duration: 0.7 }, 0.35)
+        .to(".cover-meta", { opacity: 1, y: 0, duration: 0.7 }, 0.45)
+        .to("h1 .h1-line span", { yPercent: 0, duration: 1.05, stagger: 0.12 }, 0.4)
+        .to(".cover-sub", { opacity: 1, y: 0, duration: 0.8 }, 0.85)
+        .to(".cover-foot", { opacity: 1, y: 0, duration: 0.8 }, 1.0);
+
+      gsap.to(".cover-media", { yPercent: 18, ease: "none", scrollTrigger: { trigger: ".cover", start: "top top", end: "bottom top", scrub: true } });
+      gsap.to(".close-media", { yPercent: 14, ease: "none", scrollTrigger: { trigger: "#next", start: "top bottom", end: "bottom top", scrub: true } });
+
+      gsap.utils.toArray(".section-head, .quote-bar, .toc, .contradiction, .matrix, .invest, .cta-row, .close-inner, .picker, .must, .browser, .phone, .crm, .units-note").forEach((el) => {
+        gsap.from(el, { opacity: 0, y: 48, duration: 0.95, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 82%", once: true } });
+      });
+      gsap.utils.toArray(".site, .asset, .pillar, .arch-card, .flow-step, .phase, .pay, .why article, .term, .stage-head, .compare article, .score, .bench-tab").forEach((el, i) => {
+        gsap.from(el, { opacity: 0, y: 28, duration: 0.7, delay: (i % 6) * 0.04, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+      });
+
+      let last = 0;
+      ScrollTrigger.create({
+        start: 0, end: "max",
+        onUpdate: (self) => {
+          const y = self.scroll();
+          if (y > 80) gsap.to(".nav", { y: y > last + 6 ? -88 : 0, duration: 0.35, overwrite: true });
+          else gsap.to(".nav", { y: 0, duration: 0.35, overwrite: true });
+          last = y;
+        }
+      });
+
+      if (finePointer) {
+        document.body.classList.add("has-cursor");
+        const ring = document.getElementById("cursor");
+        const dot = document.getElementById("cursor-dot");
+        window.addEventListener("mousemove", (e) => {
+          gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.12, ease: "power3.out" });
+          gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.45, ease: "power3.out" });
+        }, { passive: true });
+        document.addEventListener("mouseover", (e) => {
+          if (e.target.closest("a, button")) { ring.classList.add("is-link"); gsap.to(ring, { scale: 1.65, duration: 0.28, overwrite: "auto" }); }
+        });
+        document.addEventListener("mouseout", (e) => {
+          if (e.target.closest("a, button")) { ring.classList.remove("is-link"); gsap.to(ring, { scale: 1, duration: 0.28, overwrite: "auto" }); }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
