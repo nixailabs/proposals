@@ -2004,7 +2004,7 @@
       const t = total();
       const groups = STAGES.map((s) => {
         const items = FEATURES.filter((f) => f.stage === s.id && chosen(f)).map((f) => ({
-          name: plain(f.name), core: f.core, depth: chosen(f).n,
+          name: plain(f.name), core: f.core, depth: plain(chosen(f).n),
           desc: plain(chosen(f).d), note: chosen(f).note ? plain(chosen(f).note) : null, price: chosen(f).p
         }));
         return { n: s.n, label: s.label, items, sum: items.reduce((a, i) => a + i.price, 0) };
@@ -2013,7 +2013,7 @@
       const opt = FEATURES.filter((f) => !f.core && chosen(f));
       return {
         total: t, band: bandFor(t), why: bandFor(t).why + " " + pillarNote(), weeks: weeksFor(t), groups,
-        off: FEATURES.filter((f) => !chosen(f)).map((f) => ({ name: plain(f.name), depth: f.levels[0].n, from: f.levels[0].p })),
+        off: FEATURES.filter((f) => !chosen(f)).map((f) => ({ name: plain(f.name), depth: plain(f.levels[0].n), from: f.levels[0].p })),
         coreSum: core.reduce((a, f) => a + chosen(f).p, 0), coreCount: core.length,
         optSum: opt.reduce((a, f) => a + chosen(f).p, 0), optCount: opt.length,
         units: t / UNIT_VALUE, code: encodeConfig(), pay: paySchedule()
