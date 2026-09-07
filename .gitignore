@@ -1,2 +1,12 @@
 node_modules/
 verify-shots/
+
+# Source CI deck — 121 MB, kept on disk at brand/guidelines.pdf, not in git.
+# brand/guidelines.txt and brand/pages/ carry everything needed to audit BRAND.md.
+brand/guidelines.pdf
+
+# Re-brand verification captures (same rationale as verify-shots/)
+brand/before/
+brand/after/
+brand/pdf-before/
+brand/pdf-after/
