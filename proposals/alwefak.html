@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al Wefak Al Saudi — Corporate Website &amp; Mero Shopify Store | Proposal by NixAI</title>
+  <meta name="description" content="A corporate website for Al Wefak Al Saudi for Food Industries and a Shopify storefront that sells Mero across Egypt — designed to the standard of Heinz and Organimo, in the company's own honey, green and sand." />
+  <meta property="og:title" content="Al Wefak Al Saudi — Corporate Website &amp; Mero Shopify Store" />
+  <meta property="og:description" content="Two surfaces, one brand system. Corporate website in English and Arabic, and a Shopify store for Egypt. Prepared by NixAI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/alwefak/honey-dipper.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Manrope:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #fbf8f1;
+      --cream: #f5efe2;
+      --sand: #efe6d4;
+      --tan: #caaf88;
+      --tan-deep: #a98a5e;
+      --honey: #e29a1c;
+      --honey-deep: #b8720f;
+      --green: #0fa850;
+      --green-deep: #004820;
+      --leaf: #b9c918;
+      --comb: #f2e92a;
+      --mero: #d02020;
+      --ink: #172219;
+      --muted: #55655a;
+      --faint: #8d9a90;
+      --white: #ffffff;
+      --line: rgba(0,72,32,0.12);
+      --line-strong: rgba(226,154,28,0.55);
+      --serif: "Fraunces", "Times New Roman", serif;
+      --sans: Manrope, system-ui, -apple-system, sans-serif;
+      --arabic: "Noto Naskh Arabic", serif;
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 0 56 16v32L28 64 0 48V16z M28 64 56 80v17H0V80z' fill='none' stroke='rgba(169,138,94,0.16)' stroke-width='1'/></svg>");
+      background-size: 56px 97px;
+      mask-image: radial-gradient(ellipse at 80% 0%, rgba(0,0,0,0.9), transparent 55%), radial-gradient(ellipse at 0% 100%, rgba(0,0,0,0.6), transparent 50%);
+      -webkit-mask-image: radial-gradient(ellipse at 80% 0%, rgba(0,0,0,0.9), transparent 55%), radial-gradient(ellipse at 0% 100%, rgba(0,0,0,0.6), transparent 50%);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    strong { color: var(--ink); font-weight: 700; }
+    p { color: var(--muted); margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+    .ar { font-family: var(--arabic); direction: rtl; }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 80;
+      background: var(--honey); transform: scaleX(0); transform-origin: 0 50%;
+      pointer-events: none;
+    }
+    .cursor, .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 90;
+      border-radius: 50%;
+    }
+    .cursor { width: 36px; height: 36px; margin: -18px 0 0 -18px; border: 1px solid var(--honey); }
+    .cursor-dot { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: var(--green); }
+    .cursor.is-link { border-color: var(--green-deep); }
+    @media (hover: none), (pointer: coarse) { .cursor, .cursor-dot { display: none; } }
+    @media (hover: hover) and (pointer: fine) {
+      body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
+    }
+
+    .shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+
+    /* Nav ---------------------------------------------------------------- */
+    .nav {
+      position: fixed; top: 16px; left: 16px; right: 16px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 10px 18px;
+      background: rgba(251,248,241,0.82);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
+    .nav-brand img.emblem { height: 38px; width: auto; }
+    .nav-brand .slash { color: var(--honey); font-family: var(--serif); font-size: 22px; line-height: 1; }
+    .nav-brand img.word { height: 16px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; transition: color 200ms ease;
+    }
+    .nav-links .menu-quote { display: none; }
+    .nav-links a:hover { color: var(--green-deep); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-deep); color: var(--white);
+      padding: 10px 16px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+      transition: background 200ms ease, color 200ms ease;
+    }
+    .nav-cta:hover { background: var(--honey); color: var(--ink); }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--line);
+      color: var(--ink); width: 42px; height: 42px; cursor: pointer;
+    }
+
+    /* Cover -------------------------------------------------------------- */
+    .cover { position: relative; min-height: 100vh; display: grid; align-items: end; overflow: hidden; background: var(--cream); }
+    .cover-media {
+      position: absolute; inset: -10% 0; height: 120%;
+      background: var(--cream) url("/assets/alwefak/honey-dipper.jpg") 70% 45%/cover no-repeat;
+      will-change: transform;
+    }
+    .cover-media::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(251,248,241,0.98) 0%, rgba(251,248,241,0.92) 34%, rgba(251,248,241,0.55) 58%, rgba(251,248,241,0.08) 100%),
+        linear-gradient(180deg, rgba(251,248,241,0.3) 0%, rgba(251,248,241,0) 40%, rgba(251,248,241,0.94) 100%);
+    }
+    .cover-inner { position: relative; z-index: 2; padding: 140px 0 56px; }
+    .cover-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 64px; }
+    .cover-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--honey-deep); }
+    .cover-meta { text-align: right; color: var(--muted); font-size: 12px; letter-spacing: 0.06em; }
+    .cover-meta span { display: block; color: var(--faint); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; }
+    h1 {
+      font-family: var(--serif); font-weight: 500; font-style: italic;
+      font-size: clamp(46px, 7.6vw, 100px); line-height: 0.94;
+      letter-spacing: -0.02em; color: var(--green-deep); max-width: 940px;
+      margin: 10px 0 22px;
+    }
+    h1 em { font-style: italic; color: var(--honey-deep); }
+    h1 .h1-line { display: block; overflow: hidden; }
+    h1 .h1-line span { display: block; }
+    .cover-sub { font-size: clamp(16px, 2vw, 20px); color: var(--muted); max-width: 640px; margin-bottom: 40px; }
+    .cover-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; border-top: 1px solid var(--line); padding-top: 22px; }
+    .cover-logos { display: flex; align-items: center; gap: 18px; }
+    .cover-logos img { height: 44px; width: auto; object-fit: contain; }
+    .cover-logos img.nix-dark { height: 22px; }
+    .cover-logos .slash { color: var(--honey); font-family: var(--serif); font-size: 28px; }
+    .cover-stats { display: flex; gap: 36px; }
+    .cover-stats div span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+    .cover-stats strong { font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--green-deep); }
+
+    /* Sections ----------------------------------------------------------- */
+    .section { padding: 108px 0; position: relative; scroll-margin-top: 88px; }
+    #cover, #next { scroll-margin-top: 0; }
+    .section.alt { background: var(--cream); }
+    .section.dark { background: var(--green-deep); color: var(--white); }
+    .section.dark p { color: rgba(255,255,255,0.72); }
+    .section.dark strong { color: var(--white); }
+    .section.dark h2 { color: var(--comb); }
+    .section.dark .section-kicker { color: var(--tan); }
+    .section.dark .lead { color: rgba(255,255,255,0.8); }
+    .section-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--honey-deep); margin-bottom: 14px; }
+    h2 {
+      font-family: var(--serif); font-weight: 500; font-style: italic;
+      font-size: clamp(36px, 5vw, 64px); line-height: 1.02; color: var(--green-deep);
+      letter-spacing: -0.02em; margin-bottom: 18px;
+    }
+    h2.honey { color: var(--honey-deep); }
+    .lead { font-size: 18px; color: var(--muted); max-width: 720px; }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 48px; align-items: end; margin-bottom: 56px; }
+
+    /* Quote bar ---------------------------------------------------------- */
+    .quote-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper); }
+    .quote-cell { padding: 28px 24px; border-right: 1px solid var(--line); }
+    .quote-cell:last-child { border-right: 0; }
+    .quote-cell span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .quote-cell b { font-weight: 600; font-size: 15px; color: var(--ink); }
+
+    /* Contents ----------------------------------------------------------- */
+    .toc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); background: var(--white); }
+    .toc a {
+      display: grid; grid-template-columns: 72px 1fr auto; gap: 16px; align-items: center;
+      padding: 18px 22px; border-bottom: 1px solid var(--line); color: var(--muted);
+      cursor: pointer; transition: background 200ms ease, color 200ms ease;
+    }
+    .toc a:nth-child(odd) { border-right: 1px solid var(--line); }
+    .toc a:hover { background: rgba(226,154,28,0.08); color: var(--ink); }
+    .toc .n { font-family: var(--serif); font-style: italic; color: var(--honey-deep); font-size: 22px; }
+    .toc .t { font-size: 14px; font-weight: 600; }
+    .toc .pg { font-size: 11px; letter-spacing: 0.12em; color: var(--faint); }
+
+    /* Split / editorial -------------------------------------------------- */
+    .split { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 48px; align-items: center; }
+    .split img { width: 100%; height: 100%; object-fit: cover; min-height: 520px; }
+    .portrait-frame { position: relative; background: var(--white); }
+    .portrait-frame::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(226,154,28,0.6); pointer-events: none; }
+    .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+    .pillar { border: 1px solid var(--line); padding: 18px 18px 16px; background: var(--white); }
+    .pillar h3 { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--green-deep); margin-bottom: 6px; }
+    .pillar p { font-size: 13px; }
+
+    /* Facts strip -------------------------------------------------------- */
+    .facts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 48px; }
+    .fact { border: 1px solid var(--line); padding: 20px 18px; background: var(--white); }
+    .fact strong { display: block; font-family: var(--serif); font-style: italic; font-size: 34px; font-weight: 500; color: var(--honey-deep); line-height: 1; margin-bottom: 8px; }
+    .fact span { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+
+    /* Audit -------------------------------------------------------------- */
+    .audit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .finding { border: 1px solid var(--line); padding: 20px 18px 18px; background: var(--white); display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
+    .finding .dot { width: 10px; height: 10px; margin-top: 6px; border-radius: 50%; background: var(--mero); }
+    .finding .dot.amber { background: var(--honey); }
+    .finding h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .finding p { font-size: 13px; }
+
+    /* References --------------------------------------------------------- */
+    .refs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .ref { border: 1px solid rgba(255,255,255,0.14); padding: 28px 26px 24px; background: rgba(255,255,255,0.04); }
+    .ref .tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); font-weight: 700; margin-bottom: 14px; }
+    .ref h3 { font-family: var(--serif); font-style: italic; font-size: 34px; color: var(--white); margin-bottom: 6px; line-height: 1.05; }
+    .ref .stack { margin: 0 0 18px; }
+    .ref ul { list-style: none; font-size: 14px; color: rgba(255,255,255,0.78); }
+    .ref li { padding: 9px 0 9px 22px; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; }
+    .ref li:last-child { border-bottom: 0; }
+    .ref li::before { content: ""; position: absolute; left: 0; top: 18px; width: 10px; height: 1px; background: var(--honey); }
+    .ref li b { color: var(--white); font-weight: 600; }
+    .take { margin-top: 18px; border: 1px solid rgba(255,255,255,0.14); }
+    .take-row { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .take-row:last-child { border-bottom: 0; }
+    .take-row > div { padding: 16px 20px; font-size: 13.5px; color: rgba(255,255,255,0.78); border-right: 1px solid rgba(255,255,255,0.1); }
+    .take-row > div:last-child { border-right: 0; }
+    .take-row.head > div { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); font-weight: 700; padding: 12px 20px; }
+    .take-row b { color: var(--white); font-weight: 600; display: block; margin-bottom: 2px; }
+    .take-row .where { color: var(--comb); font-weight: 600; }
+
+    /* Platforms ---------------------------------------------------------- */
+    .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .platform { background: var(--white); border: 1px solid var(--line); padding: 28px 24px 24px; min-height: 340px; display: flex; flex-direction: column; }
+    .platform .tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 18px; font-weight: 700; }
+    .platform h3 { font-family: var(--serif); font-style: italic; font-size: 32px; color: var(--green-deep); margin-bottom: 12px; line-height: 1.05; }
+    .platform p { flex: 1; }
+    .stack { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; border: 1px solid var(--line); color: var(--muted); padding: 6px 10px; }
+    .dark .chip { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.75); }
+
+    /* Features ----------------------------------------------------------- */
+    .feat-block { margin-bottom: 42px; }
+    .feat-label { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--honey-deep); }
+    .feat-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .feat { border: 1px solid var(--line); padding: 20px 18px 18px; min-height: 164px; background: var(--white); }
+    .feat svg { width: 22px; height: 22px; stroke: var(--honey-deep); fill: none; stroke-width: 1.6; margin-bottom: 14px; }
+    .feat h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feat p { font-size: 13px; }
+
+    /* Experience mockups ------------------------------------------------- */
+    .mock-grid { display: grid; grid-template-columns: 1.55fr 0.8fr; gap: 24px; align-items: start; perspective: 1400px; }
+    .browser { background: var(--white); border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(0,72,32,0.12); will-change: transform; }
+    .browser-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--cream); }
+    .browser-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--tan); display: block; opacity: 0.7; }
+    .browser-bar .url { margin-left: 10px; flex: 1; font-size: 11px; color: var(--faint); background: var(--white); border: 1px solid var(--line); padding: 4px 10px; letter-spacing: 0.04em; }
+    .m-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; border-bottom: 1px solid var(--line); }
+    .m-nav img { height: 26px; }
+    .m-nav div { display: flex; gap: 16px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    .m-nav div span:last-child { color: var(--green-deep); border: 1px solid var(--green-deep); padding: 4px 8px; }
+    .m-hero { position: relative; min-height: 300px; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .m-hero-text { padding: 36px 26px 30px; background: var(--paper); }
+    .m-hero-text .k { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--honey-deep); font-weight: 700; margin-bottom: 10px; }
+    .m-hero-text h4 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 32px; line-height: 1; color: var(--green-deep); margin-bottom: 10px; }
+    .m-hero-text p { font-size: 11px; line-height: 1.6; }
+    .m-hero-text .b { display: inline-block; margin-top: 12px; background: var(--green-deep); color: var(--white); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; padding: 8px 12px; }
+    .m-hero-img { background: url("/assets/alwefak/honey-jar.jpg") center/cover; }
+    .m-cats { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); }
+    .m-cat { aspect-ratio: 1/1.15; position: relative; overflow: hidden; border-right: 1px solid var(--line); }
+    .m-cat:last-child { border-right: 0; }
+    .m-cat img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+    .m-cat:hover img { transform: scale(1.06); }
+    .m-cat span { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 8px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--white); background: linear-gradient(180deg, transparent, rgba(0,72,32,0.85)); }
+    .m-strip { display: flex; gap: 22px; padding: 12px 22px; border-top: 1px solid var(--line); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; white-space: nowrap; overflow: hidden; }
+    .m-strip span::before { content: "•"; color: var(--honey); margin-right: 8px; }
+
+    .phone { background: var(--ink); border-radius: 34px; padding: 12px; box-shadow: 0 30px 80px rgba(0,72,32,0.18); will-change: transform; }
+    .phone-screen { background: var(--white); border-radius: 24px; overflow: hidden; }
+    .p-top { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 8px; font-size: 10px; color: var(--muted); }
+    .p-top b { color: var(--mero); font-family: var(--serif); font-style: italic; font-size: 16px; }
+    .p-img { position: relative; aspect-ratio: 1/1; background: url("/assets/alwefak/mero-jam.jpg") center/cover; }
+    .p-img .badge { position: absolute; top: 12px; right: 12px; background: var(--comb); color: var(--green-deep); font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 8px; }
+    .p-body { padding: 14px 16px 16px; }
+    .p-body .k { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--honey-deep); font-weight: 700; }
+    .p-body h4 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 22px; color: var(--green-deep); line-height: 1.05; margin: 4px 0 6px; }
+    .p-body .ar-name { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .p-price { display: flex; align-items: baseline; gap: 8px; margin: 6px 0 10px; }
+    .p-price b { font-size: 20px; color: var(--ink); }
+    .p-price s { font-size: 12px; color: var(--faint); }
+    .p-vars { display: flex; gap: 6px; margin-bottom: 12px; }
+    .p-vars span { font-size: 10px; border: 1px solid var(--line); padding: 5px 8px; color: var(--muted); }
+    .p-vars span.on { border-color: var(--green-deep); color: var(--green-deep); font-weight: 700; }
+    .p-cta { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    .p-cta div { background: var(--green-deep); color: var(--white); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; padding: 11px 12px; text-align: center; }
+    .p-cta div.ghost { background: var(--white); color: var(--green-deep); border: 1px solid var(--green-deep); }
+    .p-tabs { display: flex; gap: 14px; margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+    .p-tabs span:first-child { color: var(--green-deep); border-bottom: 2px solid var(--honey); padding-bottom: 4px; }
+    .p-pay { display: flex; gap: 6px; margin-top: 12px; }
+    .p-pay span { font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 3px 6px; }
+
+    .swatches { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 40px; }
+    .swatch { border: 1px solid var(--line); background: var(--white); }
+    .swatch i { display: block; height: 64px; }
+    .swatch div { padding: 10px 10px 12px; }
+    .swatch b { display: block; font-size: 12px; }
+    .swatch span { font-size: 11px; color: var(--faint); letter-spacing: 0.06em; }
+    .type-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .type-card { border: 1px solid var(--line); background: var(--white); padding: 20px 22px; }
+    .type-card .k { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .type-card .s { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--green-deep); line-height: 1.1; }
+    .type-card .a { font-family: var(--arabic); direction: rtl; font-size: 26px; color: var(--green-deep); line-height: 1.4; }
+    .type-card p { font-size: 13px; margin-top: 6px; }
+
+    /* Architecture ------------------------------------------------------- */
+    .arch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .arch-card { border: 1px solid var(--line); padding: 24px; background: var(--white); }
+    .arch-card h3 { font-family: var(--serif); font-style: italic; font-size: 26px; margin-bottom: 10px; color: var(--green-deep); }
+    .arch-card ul { list-style: none; color: var(--muted); font-size: 14px; }
+    .arch-card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .arch-card li:last-child { border-bottom: 0; }
+    .flow { margin-top: 18px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .flow-step { border: 1px solid var(--line); padding: 16px 12px; text-align: center; background: var(--white); }
+    .flow-step b { display: block; font-family: var(--serif); font-style: italic; color: var(--honey-deep); font-size: 20px; margin-bottom: 6px; }
+    .flow-step span { font-size: 12px; color: var(--muted); }
+
+    /* Timeline ----------------------------------------------------------- */
+    .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .phase { border: 1px solid var(--line); padding: 22px 18px; min-height: 300px; background: var(--white); }
+    .phase .wk { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); font-weight: 700; margin-bottom: 14px; }
+    .phase h3 { font-family: var(--serif); font-style: italic; font-size: 26px; margin-bottom: 10px; color: var(--green-deep); }
+    .phase ul { list-style: none; color: var(--muted); font-size: 13px; }
+    .phase li { padding: 6px 0 6px 14px; position: relative; }
+    .phase li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 1px; background: var(--honey); }
+    .gantt { margin-top: 18px; border: 1px solid var(--line); background: var(--white); padding: 18px 20px 10px; }
+    .g-row { display: grid; grid-template-columns: 180px 1fr; gap: 14px; align-items: center; margin-bottom: 10px; }
+    .g-row span { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .g-track { position: relative; height: 12px; background: var(--sand); }
+    .g-bar { position: absolute; top: 0; bottom: 0; background: var(--green-deep); }
+    .g-bar.honey { background: var(--honey); }
+    .g-bar.tan { background: var(--tan); }
+    .g-weeks { display: grid; grid-template-columns: repeat(14, 1fr); margin: 6px 0 0 194px; font-size: 9px; color: var(--faint); letter-spacing: 0.06em; }
+
+    /* Investment --------------------------------------------------------- */
+    .invest { border: 1px solid var(--line-strong); background: linear-gradient(180deg, rgba(226,154,28,0.10), rgba(255,255,255,0.6)); padding: 32px 32px 8px; }
+    .invest-top { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; padding-bottom: 24px; }
+    .invest-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--honey-deep); font-weight: 700; }
+    .invest-total { text-align: right; }
+    .invest-total span { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+    .invest-total strong { font-family: var(--serif); font-style: italic; font-size: clamp(48px, 6vw, 72px); font-weight: 500; color: var(--green-deep); line-height: 1; }
+    .quote-group { padding: 18px 0 6px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); font-weight: 700; border-top: 1px solid var(--line); }
+    .quote-row { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line); }
+    .quote-row h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .quote-row p { font-size: 13px; }
+    .quote-price { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--ink); white-space: nowrap; }
+    .quote-row.sub { padding: 12px 0; }
+    .quote-row.sub h4 { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .quote-row.sub .quote-price { font-size: 20px; color: var(--muted); }
+    .quote-row.total { background: rgba(226,154,28,0.14); margin: 0 -32px; padding: 22px 32px; }
+    .pay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
+    .pay { border: 1px solid var(--line); padding: 20px; background: var(--white); }
+    .pay span { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .pay b { font-size: 22px; }
+    .addons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .addon { border: 1px dashed rgba(0,72,32,0.3); padding: 18px; display: flex; justify-content: space-between; gap: 16px; background: var(--white); }
+    .addon h4 { font-size: 15px; margin-bottom: 4px; }
+    .addon p { font-size: 13px; }
+    .addon em { font-style: normal; color: var(--honey-deep); font-weight: 700; white-space: nowrap; }
+    .invest-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+
+    /* Why / terms -------------------------------------------------------- */
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .why article { border: 1px solid var(--line); padding: 22px; background: var(--white); }
+    .why h3 { font-family: var(--serif); font-style: italic; font-size: 24px; margin-bottom: 8px; color: var(--green-deep); }
+    .terms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .term { border: 1px solid var(--line); padding: 20px; background: var(--white); }
+    .term h3 { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--honey-deep); margin-bottom: 8px; }
+    .term p { font-size: 13px; }
+
+    /* Close -------------------------------------------------------------- */
+    .close { position: relative; min-height: 88vh; display: grid; align-items: end; overflow: hidden; background: var(--green-deep); color: var(--white); }
+    .close-media { position: absolute; inset: -12% 0; height: 124%; background: var(--green-deep) url("/assets/alwefak/honey-jar.jpg") center/cover no-repeat; will-change: transform; }
+    .close-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,72,32,0.35), rgba(0,40,18,0.94) 70%); }
+    .close-inner { position: relative; z-index: 2; padding: 80px 0 48px; }
+    .close h2 { color: var(--comb); }
+    .close .lead, .close p { color: rgba(255,255,255,0.8); }
+    .close .section-kicker { color: var(--tan); }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 22px; font-size: 12px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; cursor: pointer; border: 1px solid transparent;
+      transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+    .btn-primary { background: var(--honey); color: var(--ink); border-color: var(--honey); }
+    .btn-primary:hover { background: var(--white); border-color: var(--white); }
+    .btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.35); }
+    .btn-ghost:hover { border-color: var(--honey); color: var(--honey); }
+    .btn-dark { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+    .btn-dark:hover { background: var(--honey); border-color: var(--honey); color: var(--ink); }
+    .btn-outline { background: transparent; color: var(--green-deep); border-color: var(--green-deep); }
+    .btn-outline:hover { background: var(--green-deep); color: var(--white); }
+
+    footer { border-top: 1px solid rgba(255,255,255,0.18); padding: 28px 0 40px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .footer-mark { text-align: center; flex: 1; }
+    .footer-mark img { height: 40px; width: auto; object-fit: contain; margin: 0 auto 8px; background: var(--white); padding: 6px 10px; }
+    .footer-mark small { display: block; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .nix { height: 22px; opacity: 0.95; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor, .cursor-dot, .scroll-progress { display: none !important; }
+      h1 .h1-line span { transform: none !important; }
+    }
+
+    @media (max-width: 980px) {
+      .nav-cta { display: none; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--paper); border: 1px solid var(--line); padding: 16px; }
+      .nav-links .menu-quote { display: inline-flex; margin-top: 8px; }
+      .nav-toggle { display: grid; place-items: center; }
+      .section-head, .split, .platforms, .feat-grid, .arch, .phases, .invest-top, .pay-grid, .addons, .why, .terms, .quote-bar, .toc, .flow, .pillars, .refs, .mock-grid, .type-row, .audit { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .swatches { grid-template-columns: repeat(3, 1fr); }
+      .take-row { grid-template-columns: 1fr; }
+      .take-row > div { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .take-row.head { display: none; }
+      .m-cats { grid-template-columns: repeat(3, 1fr); }
+      .m-hero { grid-template-columns: 1fr; }
+      .m-hero-img { min-height: 180px; }
+      .g-row { grid-template-columns: 1fr; gap: 6px; }
+      .g-weeks { margin-left: 0; }
+      .toc a:nth-child(odd) { border-right: 0; }
+      .cover-top, .cover-foot { flex-direction: column; align-items: flex-start; }
+      .cover-logos { width: 100%; }
+      .cover-logos img { height: 32px; }
+      .cover-stats { width: 100%; flex-wrap: wrap; gap: 20px; }
+      .cover-meta, .invest-total { text-align: left; }
+      .split img { min-height: 360px; }
+      h1 { font-size: 50px; }
+      .section { padding: 72px 0; }
+      .cover-media { background-position: 60% 30%; }
+    }
+
+    @media print {
+      .nav, .nav-toggle, .cursor, .cursor-dot, .scroll-progress { display: none !important; }
+      .cover, .close { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Proposal">
+    <a class="nav-brand" href="#cover">
+      <img class="emblem" src="/assets/alwefak/logo-en.png" alt="Al Wefak Al Saudi for Food Industries" />
+      <span class="slash" aria-hidden="true">/</span>
+      <img class="word" src="/assets/alwefak/nixai-wordmark-green.png" alt="NixAI" />
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#brief">Brief</a>
+      <a href="#references">References</a>
+      <a href="#solution">Solution</a>
+      <a href="#scope">Scope</a>
+      <a href="#experience">Experience</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#investment">Investment</a>
+      <a class="nav-cta menu-quote" href="#investment">View quotation</a>
+    </div>
+    <a class="nav-cta" href="#investment">View quotation</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" id="nav-toggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+
+  <header class="cover" id="cover">
+    <div class="cover-media" role="img" aria-label="Honeycomb and honey dipper, from the Al Wefak Al Saudi catalogue"></div>
+    <div class="cover-inner shell">
+      <div class="cover-top">
+        <div>
+          <div class="cover-kicker">Proposal &nbsp;·&nbsp; NIX-AWS-WEB-001</div>
+        </div>
+        <div class="cover-meta">
+          <span>Prepared for</span>
+          Al Wefak Al Saudi for Food Industries
+          <span style="margin-top:12px">Date</span>
+          16 September 2026
+        </div>
+      </div>
+      <h1>
+        <span class="h1-line"><span>The company site.</span></span>
+        <span class="h1-line"><span>The <em>Mero</em> store.</span></span>
+      </h1>
+      <p class="cover-sub">A corporate website for Al Wefak Al Saudi for Food Industries, and a Shopify storefront that sells Mero to households across Egypt — built to the standard of Heinz and Organimo, in your own honey, green and sand.</p>
+      <div class="cover-foot">
+        <div class="cover-logos">
+          <img src="/assets/alwefak/logo-lockup.png" alt="Al Wefak Al Saudi — الوفاق السعودي للصناعات الغذائية" />
+          <span class="slash">/</span>
+          <img class="nix-dark" src="/assets/alwefak/nixai-wordmark-green.png" alt="NixAI" />
+        </div>
+        <div class="cover-stats">
+          <div><span>Investment</span><strong data-count="30000" data-prefix="$">$30,000</strong></div>
+          <div><span>Delivery</span><strong>12–14 weeks</strong></div>
+          <div><span>Surfaces</span><strong data-count="2">2</strong></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="quote-bar shell">
+    <div class="quote-cell"><span>Client</span><b>Al Wefak Al Saudi for Food Industries</b></div>
+    <div class="quote-cell"><span>Project</span><b>Corporate website + Mero Shopify store (Egypt)</b></div>
+    <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
+    <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
+  </div>
+
+  <section class="section" id="contents">
+    <div class="shell">
+      <div class="section-kicker">00 &nbsp;/&nbsp; Contents</div>
+      <h2>The document.</h2>
+      <div class="toc" style="margin-top:36px">
+        <a href="#brief"><span class="n">01</span><span class="t">Understanding the brief</span><span class="pg">—</span></a>
+        <a href="#references"><span class="n">02</span><span class="t">What Heinz and Organimo actually do</span><span class="pg">—</span></a>
+        <a href="#solution"><span class="n">03</span><span class="t">Proposed solution</span><span class="pg">—</span></a>
+        <a href="#scope"><span class="n">04</span><span class="t">Scope of work</span><span class="pg">—</span></a>
+        <a href="#experience"><span class="n">05</span><span class="t">Look, feel and brand</span><span class="pg">—</span></a>
+        <a href="#architecture"><span class="n">06</span><span class="t">Architecture &amp; stack</span><span class="pg">—</span></a>
+        <a href="#timeline"><span class="n">07</span><span class="t">Delivery timeline</span><span class="pg">—</span></a>
+        <a href="#investment"><span class="n">08</span><span class="t">Investment</span><span class="pg">—</span></a>
+        <a href="#why"><span class="n">09</span><span class="t">Why NixAI / Terms</span><span class="pg">—</span></a>
+        <a href="#next"><span class="n">10</span><span class="t">Next steps</span><span class="pg">—</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="brief">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 &nbsp;/&nbsp; Understanding</div>
+          <h2>A sixty-country exporter. A website that should say so.</h2>
+        </div>
+        <p class="lead">Al Wefak Al Saudi has spent seventeen years earning shelf space from Riyadh to Kuala Lumpur. The digital shelf has not kept up. This proposal closes that gap on two fronts at once: the company's front door for buyers and distributors, and a Mero storefront for the Egyptian household.</p>
+      </div>
+      <div class="split">
+        <div class="portrait-frame">
+          <img src="/assets/alwefak/mero-jam.jpg" alt="Mero strawberry jam jar with fresh strawberries, from the Al Wefak catalogue" />
+        </div>
+        <div>
+          <p>Established in 2008 in El Obour City as the merger of Egyptian Honey World and Saudi Wadi Al-Nahil Trading &amp; Marketing, Al Wefak Al Saudi runs a 10,000 m² facility producing honey, jams, olive oil, herbal tea, tomato paste, ketchup, mustard, mayonnaise, chocolate spread, date syrup and sugarcane molasses. It pioneered one-dose glass jars for hotels and airlines, holds Halal, US FDA, SFDA and Kosher certification, and exports roughly 80% of output to more than sixty countries.</p>
+          <p>Two requests came to us. First, a <strong>static corporate website</strong> that presents the company, its categories, its certifications and its private-label capability to buyers, distributors and HORECA purchasers in English and Arabic. Second, a <strong>Shopify store</strong> that sells Mero directly to consumers in Egypt — where Euromonitor named the brand the most dynamic sweet-spreads company of 2025, with e-commerce as its fastest-growing channel.</p>
+          <div class="pillars">
+            <div class="pillar">
+              <h3>Two audiences</h3>
+              <p>A Carrefour buyer in Jeddah and a mother in Nasr City want different things. One site each, one brand system across both.</p>
+            </div>
+            <div class="pillar">
+              <h3>Reference-grade</h3>
+              <p>Heinz sets the bar for a food brand's corporate presence. Organimo sets it for scroll-driven product storytelling. We match both, in your colours.</p>
+            </div>
+            <div class="pillar">
+              <h3>Arabic where it sells</h3>
+              <p>The store is Arabic-first with English available. The corporate site is English-first with full Arabic RTL. Neither is a translation bolt-on.</p>
+            </div>
+            <div class="pillar">
+              <h3>Owned</h3>
+              <p>Code, Shopify account, domains, product data and content belong to Al Wefak Al Saudi. NixAI builds and hands over.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="facts">
+        <div class="fact"><strong data-count="35" data-suffix="+">35+</strong><span>years of food-industry expertise</span></div>
+        <div class="fact"><strong data-count="60" data-suffix="+">60+</strong><span>export countries</span></div>
+        <div class="fact"><strong data-count="10000">10,000</strong><span>m² facility in El Obour City</span></div>
+        <div class="fact"><strong data-count="10">10</strong><span>product categories, retail to HORECA</span></div>
+        <div class="fact"><strong>#1</strong><span>most dynamic sweet-spreads brand, Egypt 2025</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="audit">
+    <div class="shell">
+      <div class="section-kicker">01.1 &nbsp;/&nbsp; The current site</div>
+      <h2>What alwefakalsaudi.com does today.</h2>
+      <p class="lead" style="margin: 12px 0 36px">We reviewed the live site while preparing this document. These are the things a buyer or a shopper will notice before they notice the honey.</p>
+      <div class="audit" id="audit-grid">
+        <article class="finding"><div class="dot"></div><div><h3>It was down when we checked</h3><p>On 16 September the homepage returned HTTP 500 for several minutes. A buyer landing from Gulfood or a search result sees a server error, not a brand.</p></div></article>
+        <article class="finding"><div class="dot"></div><div><h3>Placeholder product data</h3><p>Product pages list pallet configuration and unit size as "According to the packaging". For a buyer, that is the one table that matters.</p></div></article>
+        <article class="finding"><div class="dot"></div><div><h3>No way to buy</h3><p>Mero is on Egyptian supermarket shelves and marketplaces, yet the company's own domain cannot take an order, a lead, or an email address.</p></div></article>
+        <article class="finding"><div class="dot amber"></div><div><h3>Template, not brand</h3><p>A generic catalogue theme with stock section layouts. None of the catalogue's honeycomb system, sand accents or product photography direction carries over.</p></div></article>
+        <article class="finding"><div class="dot amber"></div><div><h3>Duplicate indexing</h3><p>Google returns the same pages under <code>www.</code>, bare domain and <code>mail.alwefakalsaudi.com</code>. Search authority is split three ways.</p></div></article>
+        <article class="finding"><div class="dot amber"></div><div><h3>A person's inbox in the header</h3><p>An individual employee's email is the site-wide contact. Distributor enquiries deserve a routed form with an owner, a response time and a record.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="references">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">02 &nbsp;/&nbsp; References</div>
+          <h2>What Heinz and Organimo actually do.</h2>
+        </div>
+        <p class="lead">You sent two sites. We took them apart — code, sections, motion, commerce — so that "like Heinz" and "like Organimo" become a list of features we can be held to, not a mood.</p>
+      </div>
+      <div class="refs" id="refs-grid">
+        <article class="ref">
+          <div class="tag">Reference 01 &nbsp;/&nbsp; Corporate brand site</div>
+          <h3>heinz.com</h3>
+          <div class="stack"><span class="chip">Next.js</span><span class="chip">Contentful CMS</span><span class="chip">Framer Motion</span><span class="chip">Lottie</span><span class="chip">Swiper</span><span class="chip">No cart</span></div>
+          <ul>
+            <li><b>A brand site, not a shop.</b> Heinz sells nothing on heinz.com. Every product card ends in "See all stores" — a retailer locator. The site's job is desire and trust.</li>
+            <li><b>Single-colour brand world.</b> Heinz red ground, custom typefaces (HeinzLabel, HeinzSans), oversized uppercase headlines: "IT HAS TO BE HEINZ · ESTD 1869".</li>
+            <li><b>Lifestyle hero, motion on entry.</b> Full-viewport photography of people eating, polaroid frames, fade-in on load, a circular "scroll" prompt.</li>
+            <li><b>"Check 'em out" and "Find your flavor".</b> Horizontal carousels of 3D-rendered products on flat colour cards; category explorer on a cream ground.</li>
+            <li><b>"Make it real good" recipes.</b> A recipe carousel and full library — the reason to come back between purchases.</li>
+            <li><b>Typographic marquee.</b> "DIP IT · LIVE IT · LOVE IT · GO ALL IN" scrolling across a burgundy band.</li>
+            <li><b>TasteVIP capture, TikTok feed, purpose cards.</b> Email signup mid-page, embedded social videos, "Original flavor maker" and "Rooted in sustainability" story blocks, a country switcher in the footer.</li>
+          </ul>
+        </article>
+        <article class="ref">
+          <div class="tag">Reference 02 &nbsp;/&nbsp; Product storytelling store</div>
+          <h3>organimo.com</h3>
+          <div class="stack"><span class="chip">WordPress</span><span class="chip">WooCommerce</span><span class="chip">Custom theme</span><span class="chip">WebGL 3D</span><span class="chip">Klaviyo</span><span class="chip">Multi-currency</span></div>
+          <ul>
+            <li><b>A 3D scene as the hero.</b> The jar sits on a photoreal rock under a starfield; a loading counter runs to 100% before the page opens. "Limitless begins here." in serif italic and sans.</li>
+            <li><b>One product, told as a journey.</b> Scroll snaps section to section: from body to mind, the two ingredients, sourcing, benefits, proof, then — only then — "Shop now".</li>
+            <li><b>Text that assembles as you scroll.</b> Split-letter reveals, pinned chapters, the product rotating as the copy changes.</li>
+            <li><b>Benefits as numbered chapters.</b> Immune, cognitive, skin, heart, respiratory, digestive — each a pair of claims with the disclaimer handled.</li>
+            <li><b>Badge marquee.</b> Vegan · harvested in Canada · non-GMO · gluten-free · no preservatives · made in USA — a scrolling proof strip.</li>
+            <li><b>Commerce wired for growth.</b> Cart with count, currency selector, Stripe and Affirm, a wholesale page, Klaviyo email, TikTok and Meta pixels, social login.</li>
+            <li><b>Calm, premium palette.</b> Near-black, lavender-cream and metallic gold; Manrope throughout; generous whitespace — the opposite of a supermarket flyer.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="take">
+        <div class="take-row head"><div>What we take</div><div>Goes to</div><div>How it lands for Al Wefak</div></div>
+        <div class="take-row"><div><b>Brand-world layout</b>Colour and type carry the page, not stock section templates.</div><div class="where">Both surfaces</div><div>Sand honeycomb ground, deep-green type, honey accents, Mero red for the store — drawn from your catalogue, not a theme.</div></div>
+        <div class="take-row"><div><b>Product explorer</b>Heinz's category-first browsing with real detail pages.</div><div class="where">Corporate site</div><div>Ten categories, every SKU with pack sizes, shelf life, pallet configuration, certifications and a spec-sheet download.</div></div>
+        <div class="take-row"><div><b>Scroll-driven storytelling</b>Organimo's pinned chapters and text reveals.</div><div class="where">Both surfaces</div><div>"From hive to jar" on the corporate home; "Why Mero" chapters on the store home and flagship product pages.</div></div>
+        <div class="take-row"><div><b>Recipes as a return path</b>Heinz's "Make it real good" library.</div><div class="where">Mero store</div><div>Egyptian breakfast, Ramadan and dessert recipes, each linked to the jars that make it — shoppable from the recipe.</div></div>
+        <div class="take-row"><div><b>"See all stores" locator</b>Heinz sends shoppers to retailers.</div><div class="where">Corporate site</div><div>A "Where to buy" page: Egyptian retailers and marketplaces that stock Mero, export distributors by country, and a direct link into the Mero store.</div></div>
+        <div class="take-row"><div><b>Typographic marquee</b>Heinz's "Dip it · Live it · Love it" band.</div><div class="where">Mero store</div><div>An Arabic and English marquee — <span class="ar" style="display:inline-block;unicode-bidi:isolate">على الفطار · على السفرة · في رمضان</span> · on the breakfast table · at iftar — as a brand beat between chapters.</div></div>
+        <div class="take-row"><div><b>Proof strip</b>Organimo's badge marquee.</div><div class="where">Both surfaces</div><div>Halal · FDA · SFDA · Kosher · ISO · 60+ countries · one-dose pioneer · Gold award, Food Africa 2019.</div></div>
+        <div class="take-row"><div><b>Commerce stack</b>Organimo's cart, email and pixel wiring.</div><div class="where">Mero store</div><div>Shopify with Egyptian gateways, cash on delivery, WhatsApp order updates, Klaviyo flows, Meta and TikTok pixels.</div></div>
+        <div class="take-row"><div><b>Regional readiness</b>Heinz's one-system, many-markets model.</div><div class="where">Both surfaces</div><div>Arabic and English from day one; Shopify Markets ready to open a Saudi or Gulf storefront later without a rebuild.</div></div>
+        <div class="take-row"><div><b>Lead and email capture</b>Heinz's TasteVIP, Organimo's Klaviyo.</div><div class="where">Both surfaces</div><div>Distributor and private-label enquiry forms on the corporate site; newsletter and back-in-stock capture on the store.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="solution">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">03 &nbsp;/&nbsp; Solution</div>
+          <h2>Two surfaces. One brand system.</h2>
+        </div>
+        <p class="lead">Buyers live on the corporate site. Households live on the Mero store. Both inherit the same design tokens, photography direction and product data — so a jar looks the same on a distributor's spec sheet and in a shopper's cart.</p>
+      </div>
+      <div class="platforms">
+        <article class="platform">
+          <div class="tag">01 &nbsp;/&nbsp; Buyers &amp; distributors</div>
+          <h3>Corporate website</h3>
+          <p>A fast, static, bilingual site for Al Wefak Al Saudi for Food Industries. Company story, ten product categories with full SKU spec sheets, single-portion and HORECA range, private-label and export capability, certifications, news and a routed enquiry system. Built in Next.js, exported as static pages and served from a global CDN — no server to go down.</p>
+          <div class="stack"><span class="chip">Next.js static</span><span class="chip">EN / AR RTL</span><span class="chip">GSAP motion</span><span class="chip">Global CDN</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">02 &nbsp;/&nbsp; Egyptian households</div>
+          <h3>Mero Shopify store</h3>
+          <p>A custom Shopify Online Store 2.0 theme, Arabic-first with English, selling the Mero retail range across Egypt. Story-driven home, rich product pages with nutrition and pack variants, bundles, recipes, reviews, cash on delivery and local gateways, governorate-based shipping, WhatsApp order updates and email flows.</p>
+          <div class="stack"><span class="chip">Shopify OS 2.0</span><span class="chip">AR-first / EN</span><span class="chip">Paymob · Fawry · COD</span><span class="chip">Klaviyo</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">03 &nbsp;/&nbsp; Shared</div>
+          <h3>Brand &amp; content system</h3>
+          <p>One set of design tokens, type, iconography and motion rules applied to both builds. One product data model — names, Arabic names, pack sizes, nutrition, certifications, imagery — feeding the corporate catalogue and the Shopify products. A photography and copy direction so every new SKU lands consistently.</p>
+          <div class="stack"><span class="chip">Design tokens</span><span class="chip">Product data model</span><span class="chip">Photo direction</span><span class="chip">SEO / AIEO</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="scope">
+    <div class="shell">
+      <div class="section-kicker">04 &nbsp;/&nbsp; Scope of work</div>
+      <h2>What ships. Both surfaces, in full.</h2>
+      <p class="lead" style="margin-bottom:40px">A live corporate site and a live store your team can run. Everything below is included in the fixed fee.</p>
+
+      <div class="feat-block">
+        <div class="feat-label">Corporate website — alwefakalsaudi.com</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
+            <h3>Home with a story</h3>
+            <p>Full-bleed hero, scroll-pinned "from hive to jar" chapter, category explorer, certifications strip, export map of 60+ markets, and a distributor call to action.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg>
+            <h3>Company &amp; facility</h3>
+            <p>Founding story, the 2008 merger, El Obour facility, quality systems, leadership, awards, and a 2008–2026 timeline. Careers page with open roles.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>
+            <h3>Product catalogue</h3>
+            <p>Ten categories, every SKU: pack sizes, shelf life, units per carton, pallet configuration, certifications, Arabic and English names, and a PDF spec-sheet download per product.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            <h3>Single portion &amp; HORECA</h3>
+            <p>A dedicated section for the one-dose jars, portion pouches and catering packs — the range that wins hotels, airlines and QSR chains.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16v12H4z"/><path d="M8 7V5h8v2"/></svg>
+            <h3>Private label &amp; export</h3>
+            <p>Capability page with process, MOQs and lead times, plus a routed enquiry form that captures market, category, volume and contact into a shared inbox and sheet.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/></svg>
+            <h3>Certifications, where to buy &amp; news</h3>
+            <p>Halal, FDA, SFDA, Kosher and ISO certificates with validity dates; a "Where to buy" page of retailers, marketplaces and distributors by country; a light news section for Gulfood and Food Africa.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Mero Shopify store — Egypt</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 20V9"/></svg>
+            <h3>Custom theme, Arabic-first</h3>
+            <p>An Online Store 2.0 theme built for Mero, not a skinned template. Full RTL, Arabic and English via Shopify Translate &amp; Adapt, and sections your team can rearrange.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+            <h3>Story home &amp; collections</h3>
+            <p>"Why Mero" chapters with pinned scroll and text reveals; collections for honey, jams, spreads, sauces and pantry; filters by size, flavour and price.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+            <h3>Product pages that convert</h3>
+            <p>Gallery, size and flavour variants, nutrition and ingredients tabs, Halal and origin badges, delivery estimate by governorate, reviews, and "goes with" cross-sells.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+            <h3>Bundles, recipes &amp; reviews</h3>
+            <p>Breakfast box, Ramadan box and build-your-own bundles with discount rules; shoppable recipes linked to products; verified reviews with photos.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+            <h3>Egyptian checkout</h3>
+            <p>Cash on delivery, cards and wallets through Paymob or Fawry, ValU instalments, and shipping zones for Cairo, Giza, Alexandria and the governorates with courier integration.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <h3>Growth wiring</h3>
+            <p>Klaviyo welcome, abandoned-cart and back-in-stock flows; WhatsApp order notifications; Meta, TikTok and Google pixels; Google Merchant feed.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Shared — brand, launch &amp; handover</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+            <h3>Brand system in product</h3>
+            <p>Catalogue-derived palette, honeycomb pattern, type pairing with Arabic, iconography and motion rules — documented so future pages stay on brand.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M7 17l5 4 5-4M7 7l5-4 5 4M5 12h14"/></svg>
+            <h3>Content &amp; data migration</h3>
+            <p>Every SKU from the catalogue and current site entered into one structured dataset, then published to both surfaces. Copy edited in English; Arabic reviewed by a native editor.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <h3>SEO, AIEO, launch &amp; training</h3>
+            <p>Technical SEO, structured data for products and recipes, AI-engine-readable content, analytics, redirects from the old site, staff training and 30 days of hypercare.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="experience">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">05 &nbsp;/&nbsp; Look, feel and brand</div>
+          <h2>Your catalogue, turned into an interface.</h2>
+        </div>
+        <p class="lead">Directional frames built from the palette in your printed catalogue: sand honeycomb ground, deep green type, honey accents, Mero red where the store sells. Final UI is designed in discovery — these set the altitude, not the pixels.</p>
+      </div>
+      <div class="mock-grid">
+        <figure class="browser" aria-label="Directional frame of the corporate homepage">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="url">alwefakalsaudi.com</span></div>
+          <div class="m-nav">
+            <img src="/assets/alwefak/logo-en.png" alt="Al Wefak Al Saudi" />
+            <div><span>Company</span><span>Products</span><span>HORECA</span><span>Private label</span><span>عربي</span><span>Enquire</span></div>
+          </div>
+          <div class="m-hero">
+            <div class="m-hero-text">
+              <div class="k">Since 2008 · El Obour City · 60+ countries</div>
+              <h4>From the hive to sixty markets.</h4>
+              <p>Honey, jams, olive oil, herbal tea, tomato paste, sauces and syrups — produced in Egypt to Halal, FDA, SFDA and Kosher standards.</p>
+              <span class="b">Explore products</span>
+            </div>
+            <div class="m-hero-img" role="img" aria-label="Honey jar photography"></div>
+          </div>
+          <div class="m-cats">
+            <div class="m-cat"><img src="/assets/alwefak/honey-dipper.jpg" alt="" /><span>Honey</span></div>
+            <div class="m-cat"><img src="/assets/alwefak/jam-bread.jpg" alt="" /><span>Jams</span></div>
+            <div class="m-cat"><img src="/assets/alwefak/tomato-paste.jpg" alt="" /><span>Tomato</span></div>
+            <div class="m-cat"><img src="/assets/alwefak/molasses.jpg" alt="" /><span>Syrups</span></div>
+            <div class="m-cat"><img src="/assets/alwefak/herbal-tea.jpg" alt="" /><span>Herbs</span></div>
+            <div class="m-cat"><img src="/assets/alwefak/mero-jam.jpg" alt="" /><span>One dose</span></div>
+          </div>
+          <div class="m-strip"><span>Halal</span><span>US FDA</span><span>SFDA</span><span>Kosher</span><span>ISO 22000</span><span>Gold — Food Africa 2019</span><span>60+ countries</span></div>
+        </figure>
+        <figure class="phone" aria-label="Directional frame of a Mero product page on mobile">
+          <div class="phone-screen">
+            <div class="p-top"><span>☰</span><b>Mero</b><span>🛍 2</span></div>
+            <div class="p-img"><span class="badge">45% fruit</span></div>
+            <div class="p-body">
+              <div class="k">Jams · Strawberry</div>
+              <h4>Mero Strawberry Jam</h4>
+              <div class="ar-name ar">مربى الفراولة ميرو</div>
+              <div class="p-price"><b>EGP 89</b><s>EGP 99</s></div>
+              <div class="p-vars"><span>250g</span><span class="on">450g</span><span>800g</span><span>1.7kg</span></div>
+              <div class="p-cta"><div>Add to cart</div><div class="ghost">♡</div></div>
+              <div class="p-tabs"><span>Nutrition</span><span>Ingredients</span><span>Recipes</span><span>Reviews</span></div>
+              <div class="p-pay"><span>Cash on delivery</span><span>Paymob</span><span>ValU</span><span>Cairo 1–2 days</span></div>
+            </div>
+          </div>
+        </figure>
+      </div>
+
+      <div class="swatches">
+        <div class="swatch"><i style="background:#f5efe2"></i><div><b>Sand</b><span>#F5EFE2 · ground</span></div></div>
+        <div class="swatch"><i style="background:#caaf88"></i><div><b>Catalogue tan</b><span>#CAAF88 · rules</span></div></div>
+        <div class="swatch"><i style="background:#e29a1c"></i><div><b>Honey</b><span>#E29A1C · accent</span></div></div>
+        <div class="swatch"><i style="background:#f2e92a"></i><div><b>Comb yellow</b><span>#F2E92A · logo</span></div></div>
+        <div class="swatch"><i style="background:#0fa850"></i><div><b>Leaf green</b><span>#0FA850 · logo</span></div></div>
+        <div class="swatch"><i style="background:#004820"></i><div><b>Deep green</b><span>#004820 · type</span></div></div>
+        <div class="swatch"><i style="background:#d02020"></i><div><b>Mero red</b><span>#D02020 · store</span></div></div>
+      </div>
+      <div class="type-row">
+        <div class="type-card">
+          <div class="k">Display · Fraunces / Manrope</div>
+          <div class="s">Pure honey, from Egypt to sixty markets.</div>
+          <p>A warm, food-friendly serif for headlines; a clean geometric sans for interface and data tables.</p>
+        </div>
+        <div class="type-card">
+          <div class="k">Arabic · Noto Naskh / IBM Plex Sans Arabic</div>
+          <div class="a">عسل نقي، من مصر إلى ستين سوقاً.</div>
+          <p>Matched x-height and weight so Arabic and English pages feel like the same brand, not two sites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="architecture">
+    <div class="shell">
+      <div class="section-kicker">06 &nbsp;/&nbsp; Architecture</div>
+      <h2>Static where it should be static. Shopify where it should sell.</h2>
+      <p class="lead" style="margin: 12px 0 36px">The corporate site has no database and no server to fall over — it is pre-rendered and served from the edge. The store runs on Shopify's hosted platform, so checkout, payments and uptime are their problem, not yours.</p>
+      <div class="arch">
+        <article class="arch-card">
+          <h3>Corporate site — Next.js static export</h3>
+          <ul>
+            <li>Pre-rendered HTML and assets on Vercel or Cloudflare Pages, global CDN, HTTPS</li>
+            <li>Content in structured files (products, categories, certificates, news) editable by your team in a Git-backed editor</li>
+            <li>English and Arabic routes with full RTL layout, hreflang and canonical tags</li>
+            <li>Forms routed via a serverless function to email, Google Sheets or your CRM</li>
+            <li>GSAP ScrollTrigger for pinned chapters, reveals and parallax; motion respects reduced-motion settings</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Mero store — Shopify Online Store 2.0</h3>
+          <ul>
+            <li>Custom Liquid theme with JSON templates; every section configurable in the Shopify editor</li>
+            <li>Arabic-first with English via Translate &amp; Adapt; EGP pricing; Shopify Markets ready for KSA and Gulf</li>
+            <li>Payments: Paymob or Fawry gateway (cards, wallets, Fawry codes), cash on delivery, ValU instalments</li>
+            <li>Shipping profiles by governorate with Bosta or Mylerz integration; WhatsApp notifications</li>
+            <li>Apps kept minimal: Klaviyo, a reviews app, a bundles app — each chosen for Arabic support</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Shared product data</h3>
+          <ul>
+            <li>One master SKU sheet: names in both languages, category, sizes, nutrition, shelf life, pallet data, certifications, imagery</li>
+            <li>Published to the corporate catalogue as static pages and to Shopify as products and metafields</li>
+            <li>Structured data (Product, Recipe, Organization) on both surfaces for search and AI engines</li>
+            <li>Cross-links: a spec sheet on the corporate site points to the retail size on the store, and back</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Domains, ownership &amp; care</h3>
+          <ul>
+            <li>alwefakalsaudi.com for the corporate site; mero.eg (or shop.alwefakalsaudi.com) for the store — your choice, your registrar</li>
+            <li>Shopify account, hosting accounts, repositories and analytics all opened in Al Wefak Al Saudi's name</li>
+            <li>301 redirects from every current URL; www, bare and mail hostnames consolidated</li>
+            <li>Documentation, recorded training, and 30 days of hypercare after each launch</li>
+          </ul>
+        </article>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><b>01</b><span>Buyer lands from Gulfood or search</span></div>
+        <div class="flow-step"><b>02</b><span>Browses category, downloads spec sheet</span></div>
+        <div class="flow-step"><b>03</b><span>Enquiry routed to sales with a record</span></div>
+        <div class="flow-step"><b>04</b><span>Shopper finds Mero via recipe or ad</span></div>
+        <div class="flow-step"><b>05</b><span>Pays COD or card, tracked on WhatsApp</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="timeline">
+    <div class="shell">
+      <div class="section-kicker">07 &nbsp;/&nbsp; Timeline</div>
+      <h2 id="timeline-title">Twelve to fourteen weeks. Four movements.</h2>
+      <p class="lead" style="margin-bottom:36px">Discovery covers both surfaces at once. The corporate site goes live first, around week eight, while the store is still in build. The store follows around week twelve, with two weeks of buffer for gateway approval and courier onboarding.</p>
+      <div class="phases">
+        <article class="phase">
+          <div class="wk">Weeks 1 — 2</div>
+          <h3>Discover</h3>
+          <ul>
+            <li>Kickoff in El Obour with sales, export and marketing</li>
+            <li>Brand system from the catalogue: palette, type, pattern, motion</li>
+            <li>Sitemap and information architecture for both surfaces</li>
+            <li>Master SKU sheet started; photography gap list</li>
+            <li>Shopify, Paymob or Fawry, and courier accounts opened</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 2 — 8</div>
+          <h3>Corporate site</h3>
+          <ul>
+            <li>High-fidelity design, English then Arabic RTL</li>
+            <li>Next.js build, catalogue pages generated from the SKU sheet</li>
+            <li>Enquiry routing, certifications, news</li>
+            <li>SEO, redirects, performance pass</li>
+            <li>UAT and go-live of alwefakalsaudi.com</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 5 — 12</div>
+          <h3>Mero store</h3>
+          <ul>
+            <li>Store UX and theme design, Arabic-first</li>
+            <li>Theme build: home chapters, collections, product pages, bundles, recipes</li>
+            <li>Products and variants loaded, pricing in EGP</li>
+            <li>Payments, shipping zones, WhatsApp, Klaviyo, pixels</li>
+            <li>Test orders end to end, including COD returns</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 12 — 14</div>
+          <h3>Launch &amp; care</h3>
+          <ul>
+            <li>Store UAT with your sales and operations team</li>
+            <li>Soft launch to a friends-and-family list; first live orders</li>
+            <li>Public launch with Meta and TikTok campaigns wired</li>
+            <li>Training sessions, documentation, handover of all accounts</li>
+            <li>30 days of hypercare from each go-live</li>
+          </ul>
+        </article>
+      </div>
+      <div class="gantt" aria-hidden="true">
+        <div class="g-row"><span>Discovery &amp; brand system</span><div class="g-track"><div class="g-bar tan" style="left:0;width:14.3%"></div></div></div>
+        <div class="g-row"><span>Corporate website</span><div class="g-track"><div class="g-bar" style="left:7.1%;width:50%"></div></div></div>
+        <div class="g-row"><span>Mero Shopify store</span><div class="g-track"><div class="g-bar honey" style="left:28.6%;width:57.1%"></div></div></div>
+        <div class="g-row"><span>Launch, training, hypercare</span><div class="g-track"><div class="g-bar tan" style="left:78.6%;width:21.4%"></div></div></div>
+        <div class="g-weeks"><span>W1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="investment">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">08 &nbsp;/&nbsp; Investment</div>
+          <h2>One fixed fee. Both surfaces.</h2>
+        </div>
+        <p class="lead">A single project price covering discovery, the brand system, the bilingual corporate website, the Mero Shopify theme and commerce setup, content migration, SEO, launch, training and hypercare. No platform licence from us. No surprise line items for the scope above.</p>
+      </div>
+      <div class="invest" id="quote">
+        <div class="invest-top">
+          <div>
+            <div class="invest-label">Fixed project fee</div>
+            <h3 style="font-family:var(--serif);font-style:italic;font-size:32px;margin:8px 0 10px;color:var(--green-deep)">Corporate website + Mero store — end to end</h3>
+            <p>Two live surfaces, one brand system, one product dataset. Fully branded from your catalogue. Fully owned by Al Wefak Al Saudi.</p>
+          </div>
+          <div class="invest-total">
+            <span>Total investment</span>
+            <strong data-count="30000" data-prefix="$">$30,000</strong>
+          </div>
+        </div>
+
+        <div class="quote-group">A &nbsp;/&nbsp; Shared foundation</div>
+        <div class="quote-row" data-item data-name="Discovery, brand system &amp; UX for both surfaces" data-price="3500" data-group="A / Shared foundation" data-desc="Kickoff workshop, catalogue-derived brand system, sitemaps, wireframes and high-fidelity UI direction for both surfaces, master SKU data model.">
+          <div>
+            <h4>Discovery, brand system &amp; UX for both surfaces</h4>
+            <p>Kickoff workshop, catalogue-derived brand system, sitemaps, wireframes and high-fidelity UI direction, and the master SKU data model that feeds both builds.</p>
+          </div>
+          <div class="quote-price">$3,500</div>
+        </div>
+
+        <div class="quote-group">B &nbsp;/&nbsp; Corporate website</div>
+        <div class="quote-row" data-item data-name="Corporate website design &amp; build (EN / AR)" data-price="10000" data-group="B / Corporate website" data-desc="Home with scroll-driven story, company and facility, ten-category catalogue with SKU spec sheets and PDF downloads, single portion and HORECA, private label and export enquiry, certifications, news, careers, contact. Next.js static, Arabic RTL, GSAP motion, CDN hosting setup, forms routing.">
+          <div>
+            <h4>Corporate website design &amp; build — English and Arabic</h4>
+            <p>Home with scroll-driven story, company and facility, ten-category catalogue with SKU spec sheets and PDF downloads, single portion and HORECA, private label and export enquiry, certifications, news, careers, contact. Next.js static, full RTL, GSAP motion, CDN hosting and forms routing.</p>
+          </div>
+          <div class="quote-price">$10,000</div>
+        </div>
+        <div class="quote-row sub"><div><h4>Corporate website subtotal</h4></div><div class="quote-price">$10,000</div></div>
+
+        <div class="quote-group">C &nbsp;/&nbsp; Mero Shopify store</div>
+        <div class="quote-row" data-item data-name="Shopify theme design &amp; build (AR-first / EN)" data-price="9500" data-group="C / Mero Shopify store" data-desc="Custom Online Store 2.0 theme: story home with pinned chapters, collections and filters, conversion-grade product pages with nutrition and variants, bundles, shoppable recipes, reviews, cart drawer, account and policy pages, Arabic-first with English.">
+          <div>
+            <h4>Shopify theme design &amp; build — Arabic-first, English</h4>
+            <p>Custom Online Store 2.0 theme: story home with pinned chapters, collections and filters, conversion-grade product pages with nutrition and variants, bundles, shoppable recipes, reviews, cart drawer, account and policy pages.</p>
+          </div>
+          <div class="quote-price">$9,500</div>
+        </div>
+        <div class="quote-row" data-item data-name="Commerce setup for Egypt" data-price="4500" data-group="C / Mero Shopify store" data-desc="Paymob or Fawry gateway, cash on delivery, ValU, shipping zones by governorate with courier integration, EGP pricing and VAT, product and variant load for the full Mero retail range, Klaviyo flows, WhatsApp notifications, Meta, TikTok and Google pixels, Merchant feed.">
+          <div>
+            <h4>Commerce setup for Egypt</h4>
+            <p>Paymob or Fawry gateway, cash on delivery, ValU, shipping zones by governorate with courier integration, EGP pricing and VAT, product and variant load for the full Mero retail range, Klaviyo flows, WhatsApp notifications, Meta, TikTok and Google pixels, Merchant feed.</p>
+          </div>
+          <div class="quote-price">$4,500</div>
+        </div>
+        <div class="quote-row sub"><div><h4>Mero store subtotal</h4></div><div class="quote-price">$14,000</div></div>
+
+        <div class="quote-group">D &nbsp;/&nbsp; Launch</div>
+        <div class="quote-row" data-item data-name="Content migration, SEO / AIEO, QA, launch &amp; training" data-price="2500" data-group="D / Launch" data-desc="Every SKU migrated into the master dataset and published to both surfaces, English copy edit and Arabic native review, technical SEO and structured data, redirects, analytics, device QA, two go-lives, recorded training, 30 days of hypercare each.">
+          <div>
+            <h4>Content migration, SEO / AIEO, QA, launch &amp; training</h4>
+            <p>Every SKU migrated into the master dataset and published to both surfaces, English copy edit and Arabic native review, technical SEO and structured data, redirects, analytics, device QA, two go-lives, recorded training, 30 days of hypercare each.</p>
+          </div>
+          <div class="quote-price">$2,500</div>
+        </div>
+
+        <div class="quote-row total">
+          <div>
+            <h4>Total</h4>
+            <p>Valid 30 days from 16 September 2026. Amounts in USD.</p>
+          </div>
+          <div class="quote-price">$30,000</div>
+        </div>
+      </div>
+
+      <div class="pay-grid">
+        <div class="pay"><span>To commence — 40%</span><b>$12,000</b></div>
+        <div class="pay"><span>Corporate site live — 30%</span><b>$9,000</b></div>
+        <div class="pay"><span>Store UAT sign-off — 20%</span><b>$6,000</b></div>
+        <div class="pay"><span>Store launch — 10%</span><b>$3,000</b></div>
+      </div>
+
+      <p style="margin:28px 0 12px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--honey-deep);font-weight:700">Optional additions — not in the base fee</p>
+      <div class="addons">
+        <div class="addon" data-addon data-name="3D product hero &amp; WebGL jar" data-price="4500">
+          <div>
+            <h4>3D product hero &amp; WebGL jar</h4>
+            <p>Photoreal 3D renders of six hero SKUs and an Organimo-style rotating jar that responds to scroll on both home pages.</p>
+          </div>
+          <em>$4,500</em>
+        </div>
+        <div class="addon" data-addon data-name="Recipes &amp; content engine" data-price="3200">
+          <div>
+            <h4>Recipes &amp; content engine</h4>
+            <p>Twenty launch recipes written, shot direction, a headless CMS so marketing publishes recipes and news to both surfaces without a developer.</p>
+          </div>
+          <em>$3,200</em>
+        </div>
+        <div class="addon" data-addon data-name="Product photography day" data-price="2400">
+          <div>
+            <h4>Product photography day</h4>
+            <p>Art direction and a one-day studio shoot in Cairo for packshots and lifestyle images across the retail range, retouched for web.</p>
+          </div>
+          <em>$2,400</em>
+        </div>
+        <div class="addon" data-addon data-name="Shopify Markets — Saudi &amp; Gulf storefront" data-price="2800">
+          <div>
+            <h4>Shopify Markets — Saudi &amp; Gulf storefront</h4>
+            <p>SAR and AED pricing, Gulf shipping profiles, local payment methods and Arabic content variants, on the same store.</p>
+          </div>
+          <em>$2,800</em>
+        </div>
+        <div class="addon" data-addon data-name="Care &amp; growth retainer" data-price="1200" data-unit="/ mo">
+          <div>
+            <h4>Care &amp; growth retainer</h4>
+            <p>Monthly theme and site updates, new SKUs and campaigns, CRO experiments, monitoring and a priority support line.</p>
+          </div>
+          <em>$1,200 / mo</em>
+        </div>
+        <div class="addon" data-addon data-name="B2B wholesale portal" data-price="5500">
+          <div>
+            <h4>B2B wholesale portal</h4>
+            <p>Shopify B2B or a gated corporate-site portal: distributor logins, tiered price lists, carton-quantity ordering and proforma export.</p>
+          </div>
+          <em>$5,500</em>
+        </div>
+      </div>
+
+      <div class="invest-actions">
+        <a class="btn btn-dark" href="mailto:hello@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20approved">Approve quotation</a>
+        <button class="btn btn-outline" type="button" data-pdf><span>Download the quotation (PDF)</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="why">
+    <div class="shell">
+      <div class="section-kicker">09 &nbsp;/&nbsp; Partnership</div>
+      <h2>Why this should be NixAI.</h2>
+      <p class="lead" style="margin-bottom:36px">You are not buying two websites. You are buying a brand that reads the same to a Gulf buyer and to an Egyptian shopper — and a system that stays that way when the next twenty SKUs arrive.</p>
+      <div class="why">
+        <article>
+          <h3>Brand from your catalogue</h3>
+          <p>We design from the material you already print — the honeycomb, the sand rules, the green and yellow mark, the warm product photography — not from a food-industry template.</p>
+        </article>
+        <article>
+          <h3>Both surfaces, one team</h3>
+          <p>The people who design the spec sheet design the product page. That is how a jar's name, size and nutrition are identical on both sites on day one and on day five hundred.</p>
+        </article>
+        <article>
+          <h3>Egypt-native commerce</h3>
+          <p>Cash on delivery, Paymob and Fawry, ValU, governorate shipping, WhatsApp updates. We build stores for how Egyptians actually buy, not how Shopify's US defaults assume.</p>
+        </article>
+      </div>
+
+      <div class="section-kicker" style="margin-top:56px">09.1 &nbsp;/&nbsp; Terms</div>
+      <h2 style="font-size:42px">Clear conditions.</h2>
+      <div class="terms" style="margin-top:28px">
+        <article class="term">
+          <h3>Payment</h3>
+          <p>40% to commence, 30% when the corporate website goes live, 20% at store UAT sign-off, 10% at store launch. Amounts in USD by bank transfer.</p>
+        </article>
+        <article class="term">
+          <h3>Validity</h3>
+          <p>This quotation is valid for 30 days from 16 September 2026. After that date we reconfirm timeline and fee against current capacity.</p>
+        </article>
+        <article class="term">
+          <h3>Included</h3>
+          <p>The scope in sections 04–06, staging and production for both surfaces, content migration, SEO, training, documentation and 30 days of hypercare after each launch.</p>
+        </article>
+        <article class="term">
+          <h3>Client provides</h3>
+          <p>Logo source files, catalogue and product data, existing photography, certificates, company registration for Shopify and gateway KYC, domain access, and a named decision-maker for timely UAT feedback.</p>
+        </article>
+        <article class="term">
+          <h3>Not included</h3>
+          <p>Shopify subscription (from $39/month), app subscriptions, Paymob or Fawry transaction fees, courier fees, domain and hosting fees after the first year, paid media budgets, and new photography beyond the optional shoot day.</p>
+        </article>
+        <article class="term">
+          <h3>Revisions</h3>
+          <p>Each phase includes two structured review rounds. Further design or scope change is estimated before work continues.</p>
+        </article>
+        <article class="term">
+          <h3>Intellectual property</h3>
+          <p>Upon final payment, all custom code, theme and design for both surfaces assign to Al Wefak Al Saudi for Food Industries. Shopify and open-source components remain under their own licences.</p>
+        </article>
+        <article class="term">
+          <h3>Timeline dependencies</h3>
+          <p>Gateway approval and courier onboarding in Egypt typically take two to three weeks and start in week one. Delays on third-party approvals extend the store launch, not the fee.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" id="next">
+    <div class="close-media" role="img" aria-label="Honey jar and dipper, from the Al Wefak Al Saudi catalogue"></div>
+    <div class="close-inner shell">
+      <div class="section-kicker">10 &nbsp;/&nbsp; Next</div>
+      <h2 style="max-width:900px">We can be in discovery in El Obour the week the first transfer clears.</h2>
+      <p class="lead">Reply with approval of this quotation, or with the optional lines you want in the first release. We will send a one-page statement of work, a kickoff date, and the account list for Shopify, payments and domains.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:hello@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20approved">Approve quotation</a>
+        <button class="btn btn-ghost" type="button" data-pdf><span>Download the quotation</span></button>
+        <a class="btn btn-ghost" href="mailto:hello@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20%E2%80%94%20a%20question">Ask a question</a>
+      </div>
+      <footer>
+        <img class="nix" src="/assets/nixai-wordmark-light.png" alt="NixAI" />
+        <div class="footer-mark">
+          <img src="/assets/alwefak/logo-en.png" alt="Al Wefak Al Saudi for Food Industries" />
+          <small>Your life with Al Wefak flavor</small>
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6);text-align:right">
+          hello@nixailabs.com<br />nixailabs.com
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <script src="/assets/gsap/gsap.min.js"></script>
+  <script src="/assets/gsap/ScrollTrigger.min.js"></script>
+  <script src="/assets/gsap/ScrollToPlugin.min.js"></script>
+  <script src="/assets/vendor/jspdf.umd.min.js"></script>
+  <script>
+    const DOC_REF = "NIX-AWS-WEB-001";
+    const DOC_DATE = "16 September 2026";
+    const DOC_CLIENT = "Al Wefak Al Saudi for Food Industries";
+
+    const toggle = document.getElementById("nav-toggle");
+    const links = document.getElementById("nav-links");
+    toggle?.addEventListener("click", () => links.classList.toggle("open"));
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      links?.classList.remove("open");
+      if (reduce || typeof gsap === "undefined") {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+      } else {
+        gsap.to(window, { duration: 1.15, scrollTo: { y: el, offsetY: 80 }, ease: "power3.inOut" });
+      }
+      history.replaceState(null, "", "#" + id);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href").slice(1);
+        if (!id) return;
+        e.preventDefault();
+        scrollToId(id);
+      });
+    });
+
+    if (reduce || typeof gsap === "undefined") {
+      /* static page */
+    } else {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      gsap.to("#scroll-progress", { scaleX: 1, ease: "none", scrollTrigger: { scrub: 0.25 } });
+
+      gsap.set(".nav", { y: -24, opacity: 0 });
+      gsap.set(".cover-media", { scale: 1.14, transformOrigin: "70% 40%" });
+      gsap.set(".cover-kicker, .cover-meta, .cover-sub, .cover-foot", { opacity: 0, y: 22 });
+      gsap.set("h1 .h1-line span", { yPercent: 110 });
+
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      intro
+        .to(".cover-media", { scale: 1, duration: 2.4, ease: "power2.out" }, 0)
+        .to(".nav", { y: 0, opacity: 1, duration: 0.8 }, 0.15)
+        .to(".cover-kicker", { opacity: 1, y: 0, duration: 0.7 }, 0.35)
+        .to(".cover-meta", { opacity: 1, y: 0, duration: 0.7 }, 0.45)
+        .to("h1 .h1-line span", { yPercent: 0, duration: 1.05, stagger: 0.12 }, 0.4)
+        .to(".cover-sub", { opacity: 1, y: 0, duration: 0.8 }, 0.85)
+        .to(".cover-foot", { opacity: 1, y: 0, duration: 0.8 }, 1.0);
+
+      document.querySelectorAll("[data-count]").forEach((el) => {
+        const end = Number(el.dataset.count);
+        const prefix = el.dataset.prefix || "";
+        const suffix = el.dataset.suffix || "";
+        const obj = { v: 0 };
+        const run = () => gsap.to(obj, {
+          v: end, duration: 1.6, ease: "power2.out",
+          onUpdate: () => { el.textContent = prefix + Math.round(obj.v).toLocaleString("en-US") + suffix; }
+        });
+        if (el.closest(".cover")) intro.add(run, 1.15);
+        else ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: run });
+      });
+
+      gsap.to(".cover-media", { yPercent: 14, ease: "none", scrollTrigger: { trigger: ".cover", start: "top top", end: "bottom top", scrub: true } });
+      gsap.to(".close-media", { yPercent: 14, ease: "none", scrollTrigger: { trigger: "#next", start: "top bottom", end: "bottom top", scrub: true } });
+
+      gsap.utils.toArray(".section-head, .quote-bar, .toc, .split, .take, .invest, .cta-row, .close-inner, .gantt, .browser, .phone, .type-row").forEach((el) => {
+        gsap.from(el, { opacity: 0, y: 48, duration: 0.95, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 82%", once: true } });
+      });
+
+      gsap.utils.toArray(".platform, .feat, .arch-card, .flow-step, .phase, .quote-row, .pay, .addon, .why article, .term, .pillar, .fact, .finding, .ref, .swatch").forEach((el, i) => {
+        gsap.from(el, { opacity: 0, y: 28, duration: 0.7, delay: (i % 6) * 0.04, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+      });
+
+      gsap.utils.toArray(".section-kicker, h2").forEach((el) => {
+        gsap.from(el, { opacity: 0, y: 16, duration: 0.65, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 86%", once: true } });
+      });
+
+      gsap.utils.toArray(".g-bar").forEach((el) => {
+        gsap.from(el, { scaleX: 0, transformOrigin: "0 50%", duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
+      });
+
+      let last = 0;
+      ScrollTrigger.create({
+        start: 0, end: "max",
+        onUpdate: (self) => {
+          const y = self.scroll();
+          if (y > 80) gsap.to(".nav", { y: y > last + 6 ? -88 : 0, duration: 0.35, overwrite: true });
+          else gsap.to(".nav", { y: 0, duration: 0.35, overwrite: true });
+          last = y;
+        }
+      });
+
+      if (finePointer) {
+        document.body.classList.add("has-cursor");
+        const ring = document.getElementById("cursor");
+        const dot = document.getElementById("cursor-dot");
+        const move = (e) => {
+          gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.12, ease: "power3.out" });
+          gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.45, ease: "power3.out" });
+        };
+        window.addEventListener("mousemove", move, { passive: true });
+        document.querySelectorAll("a, button").forEach((el) => {
+          el.addEventListener("mouseenter", () => { ring.classList.add("is-link"); gsap.to(ring, { scale: 1.65, duration: 0.28, ease: "power3.out", overwrite: "auto" }); });
+          el.addEventListener("mouseleave", () => { ring.classList.remove("is-link"); gsap.to(ring, { scale: 1, duration: 0.28, ease: "power3.out", overwrite: "auto" }); });
+        });
+        window.addEventListener("mousedown", () => gsap.to(ring, { scale: 0.75, duration: 0.15, overwrite: "auto" }));
+        window.addEventListener("mouseup", () => gsap.to(ring, { scale: ring.classList.contains("is-link") ? 1.65 : 1, duration: 0.2, overwrite: "auto" }));
+
+        document.querySelectorAll(".btn, .nav-cta").forEach((btn) => {
+          btn.addEventListener("mousemove", (e) => {
+            const r = btn.getBoundingClientRect();
+            gsap.to(btn, { x: (e.clientX - r.left - r.width / 2) * 0.28, y: (e.clientY - r.top - r.height / 2) * 0.28, duration: 0.35, ease: "power3.out" });
+          });
+          btn.addEventListener("mouseleave", () => gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "power3.out" }));
+        });
+
+        const mocks = document.querySelector(".mock-grid");
+        mocks?.addEventListener("mousemove", (e) => {
+          const r = mocks.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          gsap.to(".browser", { rotateY: x * 6, rotateX: -y * 4, duration: 0.5, ease: "power2.out", transformPerspective: 1200 });
+          gsap.to(".phone", { rotateY: x * 10 + 4, rotateX: -y * 6, y: y * -10, duration: 0.5, ease: "power2.out", transformPerspective: 1000 });
+        });
+        mocks?.addEventListener("mouseleave", () => {
+          gsap.to(".browser, .phone", { rotateY: 0, rotateX: 0, y: 0, duration: 0.7, ease: "power3.out" });
+        });
+      }
+    }
+
+    /* ==== QUOTATION PDF ==== */
+    function decode(s) { const t = document.createElement("textarea"); t.innerHTML = s; return t.value; }
+    function cash(n) { return "$" + Number(n).toLocaleString("en-US"); }
+    function collectQuote() {
+      const items = [...document.querySelectorAll("[data-item]")].map((el) => ({
+        group: decode(el.dataset.group), name: decode(el.dataset.name), desc: decode(el.dataset.desc || ""), price: Number(el.dataset.price)
+      }));
+      const addons = [...document.querySelectorAll("[data-addon]")].map((el) => ({
+        name: decode(el.dataset.name), price: Number(el.dataset.price), unit: el.dataset.unit || ""
+      }));
+      const total = items.reduce((s, i) => s + i.price, 0);
+      return { items, addons, total };
+    }
+    function rasterise(src, boxPx) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const nw = img.naturalWidth || boxPx, nh = img.naturalHeight || boxPx;
+            const s = (boxPx / Math.max(nw, nh)) * 2;
+            const c = document.createElement("canvas");
+            c.width = Math.max(1, Math.round(nw * s)); c.height = Math.max(1, Math.round(nh * s));
+            c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+            resolve({ url: c.toDataURL("image/png"), w: c.width, h: c.height });
+          } catch (e) { resolve(null); }
+        };
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+    function buildQuotationPdf(jsPDF, q, logos) {
+      const doc = new jsPDF({ unit: "mm", format: "a4" });
+      const W = 210, H = 297, ML = 18, RIGHT = W - 18, CW = RIGHT - ML;
+      const INK = [23, 34, 25], MUTED = [85, 101, 90], FAINT = [141, 154, 144], GREEN = [0, 72, 32], HONEY = [184, 114, 15], LINE = [200, 190, 170], SAND = [245, 239, 226];
+      let y = 20;
+      const font = (f, s, sz, c) => { doc.setFont(f, s); doc.setFontSize(sz); doc.setTextColor(c[0], c[1], c[2]); };
+      const rule = (x1, yy, x2, c, w) => { doc.setDrawColor(c[0], c[1], c[2]); doc.setLineWidth(w); doc.line(x1, yy, x2, yy); };
+      const wrap = (t, w) => doc.splitTextToSize(t, w);
+      const kick = (t, x, yy, c, sz) => { font("helvetica", "bold", sz, c); doc.text(t.toUpperCase(), x, yy, { charSpace: 0.6 }); };
+      const ensure = (need) => { if (y + need > H - 22) { doc.addPage(); y = 20; } };
+
+      /* header */
+      if (logos.client) { const h = 14, w = h * (logos.client.w / logos.client.h); doc.addImage(logos.client.url, "PNG", ML, y - 4, w, h); }
+      if (logos.nixai) { const h = 5.2, w = h * (logos.nixai.w / logos.nixai.h); doc.addImage(logos.nixai.url, "PNG", RIGHT - w, y + 1, w, h); }
+      y += 18; rule(ML, y, RIGHT, HONEY, 0.4); y += 10;
+      kick("Quotation · " + DOC_REF, ML, y, HONEY, 7.5); y += 8;
+      font("times", "italic", 26, GREEN); doc.text("The company site. The Mero store.", ML, y); y += 8;
+      font("helvetica", "normal", 9.5, MUTED);
+      wrap("A corporate website for Al Wefak Al Saudi for Food Industries in English and Arabic, and a Shopify storefront selling Mero across Egypt — designed to the standard of the Heinz and Organimo references, in the company's own brand.", CW).forEach((l) => { doc.text(l, ML, y); y += 4.6; });
+      y += 6;
+      [["Prepared for", DOC_CLIENT], ["Prepared by", "NixAI · hello@nixailabs.com"], ["Date", DOC_DATE], ["Validity", "30 days from issue"], ["Delivery", "12 to 14 weeks from kickoff"]].forEach((r) => {
+        kick(r[0], ML, y, FAINT, 6.4); font("helvetica", "normal", 9, INK); doc.text(r[1], ML + 34, y); y += 5.6;
+      });
+      y += 4;
+      doc.setFillColor(SAND[0], SAND[1], SAND[2]); doc.rect(ML, y, CW, 18, "F");
+      font("helvetica", "normal", 11, INK); doc.text("Total fixed fee", ML + 5, y + 11.5);
+      font("times", "italic", 20, GREEN); doc.text(cash(q.total), RIGHT - 5, y + 12, { align: "right" });
+      y += 28;
+
+      /* items */
+      kick("Itemised quotation", ML, y, HONEY, 7.5); y += 7;
+      let lastGroup = null;
+      q.items.forEach((it) => {
+        if (it.group !== lastGroup) {
+          ensure(16); if (lastGroup) y += 3;
+          kick(it.group, ML, y, GREEN, 7); y += 2.6; rule(ML, y, RIGHT, HONEY, 0.3); y += 6; lastGroup = it.group;
+        }
+        font("helvetica", "normal", 8.4, MUTED);
+        const desc = wrap(it.desc, CW - 30);
+        ensure(8 + desc.length * 3.8 + 4);
+        font("helvetica", "bold", 9.6, INK); doc.text(wrap(it.name, CW - 34)[0], ML, y);
+        font("times", "italic", 12.5, INK); doc.text(cash(it.price), RIGHT, y, { align: "right" });
+        y += 5;
+        font("helvetica", "normal", 8.4, MUTED); desc.forEach((l) => { doc.text(l, ML, y); y += 3.8; });
+        y += 2.2; rule(ML, y, RIGHT, LINE, 0.15); y += 4.4;
+      });
+      ensure(22); y += 2;
+      doc.setFillColor(SAND[0], SAND[1], SAND[2]); doc.rect(ML, y, CW, 15, "F");
+      font("helvetica", "normal", 12, INK); doc.text("Total investment", ML + 5, y + 10);
+      font("times", "italic", 18, GREEN); doc.text(cash(q.total), RIGHT - 5, y + 10.3, { align: "right" });
+      y += 21;
+      font("helvetica", "normal", 7.6, FAINT); doc.text("Amounts in USD. Shopify subscription, app fees, gateway and courier fees, domains and paid media are excluded.", ML, y); y += 10;
+
+      /* payment */
+      ensure(40);
+      kick("Payment schedule", ML, y, HONEY, 7); y += 6.5;
+      [["40% to commence", 0.4], ["30% when the corporate website goes live", 0.3], ["20% at store UAT sign-off", 0.2], ["10% at store launch", 0.1]].forEach((p) => {
+        font("helvetica", "normal", 8.8, MUTED); doc.text(p[0], ML, y);
+        font("times", "italic", 12, INK); doc.text(cash(Math.round(q.total * p[1])), RIGHT, y, { align: "right" });
+        y += 3; rule(ML, y, RIGHT, LINE, 0.15); y += 5;
+      });
+      y += 6;
+
+      /* add-ons */
+      ensure(50);
+      kick("Optional additions — not in the base fee", ML, y, HONEY, 7); y += 6.5;
+      q.addons.forEach((a) => {
+        ensure(9);
+        font("helvetica", "normal", 8.8, INK); doc.text(a.name, ML, y);
+        font("times", "italic", 12, MUTED); doc.text(cash(a.price) + (a.unit ? " " + a.unit : ""), RIGHT, y, { align: "right" });
+        y += 3; rule(ML, y, RIGHT, LINE, 0.15); y += 5;
+      });
+      y += 6;
+
+      /* terms */
+      ensure(80);
+      kick("Terms", ML, y, HONEY, 7); y += 6.5;
+      [
+        ["Included", "Discovery, brand system, bilingual corporate website, Mero Shopify theme and Egyptian commerce setup, content migration, SEO and structured data, staging and production, training, documentation, and 30 days of hypercare after each launch."],
+        ["Not included", "Shopify subscription (from $39/month), app subscriptions, Paymob or Fawry transaction fees, courier fees, domains and hosting after the first year, paid media, and new photography beyond the optional shoot day."],
+        ["Client provides", "Logo source files, catalogue and product data, existing photography, certificates, company registration for Shopify and gateway KYC, domain access, and a named decision-maker for UAT."],
+        ["Revisions", "Two structured review rounds per phase. Further design or scope change is estimated before work continues."],
+        ["Ownership", "On final payment all custom code, theme and design assign to Al Wefak Al Saudi for Food Industries. Shopify and open-source components remain under their own licences."],
+        ["Validity", "Valid 30 days from " + DOC_DATE + ". After that date we reconfirm timeline and fee against current capacity."]
+      ].forEach((t) => {
+        font("helvetica", "normal", 8.2, MUTED);
+        const lines = wrap(t[1], CW - 32);
+        ensure(lines.length * 3.7 + 4);
+        font("helvetica", "bold", 8.4, INK); doc.text(t[0], ML, y);
+        font("helvetica", "normal", 8.2, MUTED); lines.forEach((l, i) => doc.text(l, ML + 32, y + i * 3.7));
+        y += Math.max(7, lines.length * 3.7 + 3.2);
+      });
+      y += 6;
+
+      /* acceptance */
+      ensure(50);
+      rule(ML, y, RIGHT, HONEY, 0.3); y += 7;
+      kick("Acceptance", ML, y, HONEY, 7); y += 6;
+      font("helvetica", "normal", 8.2, MUTED); doc.text("Signing below accepts this quotation at the total shown above.", ML, y); y += 7;
+      const bw = (CW - 8) / 2;
+      [["For " + DOC_CLIENT, ""], ["For NixAI", "hello@nixailabs.com · nixailabs.com"]].forEach((b, i) => {
+        const x = ML + i * (bw + 8);
+        doc.setDrawColor(LINE[0], LINE[1], LINE[2]); doc.setLineWidth(0.2); doc.rect(x, y, bw, 33);
+        kick(b[0], x + 4, y + 6.5, FAINT, 6.2);
+        font("helvetica", "normal", 7.2, FAINT);
+        ["Name", "Title", "Signature"].forEach((lab, j) => { const ly = y + 14 + j * 6.6; doc.text(lab, x + 4, ly); rule(x + 19, ly + 0.7, x + bw - 4, LINE, 0.15); });
+        if (b[1]) { font("helvetica", "normal", 6.8, FAINT); doc.text(b[1], x + 4, y + 31); }
+      });
+
+      const pages = doc.getNumberOfPages();
+      for (let i = 1; i <= pages; i++) {
+        doc.setPage(i);
+        rule(ML, H - 16, RIGHT, LINE, 0.15);
+        font("helvetica", "normal", 6.8, FAINT);
+        doc.text(DOC_CLIENT + " × NixAI · " + DOC_REF + " · " + cash(q.total) + " · Valid 30 days from " + DOC_DATE, ML, H - 11.5);
+        doc.text("Page " + i + " of " + pages, RIGHT, H - 11.5, { align: "right" });
+      }
+      doc.setProperties({ title: "Al Wefak Al Saudi — Quotation " + DOC_REF, subject: "Corporate website + Mero Shopify store", author: "NixAI", creator: "NixAI" });
+      return doc;
+    }
+    let LOGO_CACHE = null;
+    async function getLogos() {
+      if (LOGO_CACHE) return LOGO_CACHE;
+      const pair = await Promise.all([rasterise("/assets/alwefak/logo-en.png", 260), rasterise("/assets/alwefak/nixai-wordmark-green.png", 220)]);
+      LOGO_CACHE = { client: pair[0], nixai: pair[1] };
+      return LOGO_CACHE;
+    }
+    function flash(btn, text) {
+      const label = btn.querySelector("span") || btn;
+      if (label.dataset.original === undefined) label.dataset.original = label.textContent;
+      label.textContent = text; clearTimeout(label._t);
+      label._t = setTimeout(() => { label.textContent = label.dataset.original; }, 2400);
+    }
+    async function exportQuotation(btn) {
+      const lib = window.jspdf && window.jspdf.jsPDF;
+      if (!lib) { flash(btn, "PDF unavailable"); return; }
+      const label = btn.querySelector("span") || btn;
+      if (label.dataset.original === undefined) label.dataset.original = label.textContent;
+      label.textContent = "Preparing…";
+      try {
+        const q = collectQuote();
+        const doc = buildQuotationPdf(lib, q, await getLogos());
+        doc.save("Al-Wefak-Al-Saudi-Quotation-" + DOC_REF + ".pdf");
+        flash(btn, "Downloaded");
+      } catch (err) { console.error(err); flash(btn, "Export failed"); }
+    }
+    document.addEventListener("click", (e) => {
+      const p = e.target.closest("[data-pdf]");
+      if (p) { e.preventDefault(); exportQuotation(p); }
+    });
+  </script>
+</body>
+</html>
