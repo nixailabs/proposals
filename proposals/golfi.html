@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golfi — North Coast Golf Car Booking | Quotation by NixAI</title>
+  <meta name="description" content="An interactive quotation for Golfi: book golf cars across North Coast compounds. Every feature priced at three depths, so $20,000, $30,000 and $55,000 become decisions instead of guesses." />
+  <meta property="og:title" content="Golfi — North Coast Golf Car Booking" />
+  <meta property="og:description" content="Set the depth of each feature and watch the billable project move between $20,000 and $55,000. Prepared by NixAI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/golfi/golfi-hero-fairway.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f6f0e6;
+      --paper: #fbf7ef;
+      --sand: #e8dcc8;
+      --champagne: #d4c4a8;
+      --bronze: #b8956a;
+      --bronze-deep: #8b7355;
+      --gold-line: rgba(184,149,106,0.38);
+      --ink: #1a1814;
+      --charcoal: #2c2a26;
+      --muted: #5c564c;
+      --faint: #8a8276;
+      --line: rgba(44,42,38,0.12);
+      --line-gold: rgba(184,149,106,0.32);
+      --serif: "Playfair Display", "Times New Roman", serif;
+      --sans: Inter, system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    strong { color: var(--ink); font-weight: 700; }
+    p { color: var(--muted); margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 80;
+      background: var(--bronze); transform: scaleX(0); transform-origin: 0 50%;
+      pointer-events: none;
+    }
+    .cursor, .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 90;
+      border-radius: 50%;
+    }
+    .cursor {
+      width: 36px; height: 36px; margin: -18px 0 0 -18px;
+      border: 1px solid var(--bronze);
+    }
+    .cursor-dot {
+      width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px;
+      background: var(--bronze-deep);
+    }
+    .cursor.is-link { border-color: var(--ink); }
+    @media (hover: none), (pointer: coarse) {
+      .cursor, .cursor-dot { display: none; }
+    }
+    @media (hover: hover) and (pointer: fine) {
+      body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
+    }
+
+    .shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .shell-wide { width: min(1280px, calc(100% - 40px)); margin: 0 auto; }
+
+    .nav {
+      position: fixed; top: 16px; left: 16px; right: 16px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 10px 18px;
+      background: rgba(246,240,230,0.78);
+      border: 1px solid var(--line-gold);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; }
+    .nav-brand .mark {
+      width: 28px; height: 28px; border: 1px solid var(--bronze);
+      display: grid; place-items: center;
+      font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--bronze-deep);
+    }
+    .nav-brand .name {
+      font-family: var(--serif); font-weight: 500; letter-spacing: 0.22em;
+      font-size: 13px; text-transform: uppercase; color: var(--ink);
+    }
+    .nav-brand .slash { color: var(--bronze); font-family: var(--serif); font-size: 22px; line-height: 1; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; transition: color 200ms ease;
+    }
+    .nav-links .menu-quote { display: none; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--ink);
+      padding: 10px 16px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+      border: 1px solid var(--bronze);
+      transition: background 200ms ease, color 200ms ease;
+    }
+    .nav-cta:hover { background: var(--bronze); color: var(--cream); }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--line-gold);
+      color: var(--ink); width: 42px; height: 42px; cursor: pointer;
+    }
+
+    .cover {
+      position: relative; min-height: 100vh;
+      display: grid; align-items: end;
+      overflow: hidden;
+    }
+    .cover-media {
+      position: absolute; inset: -12% 0;
+      height: 124%;
+      background: #e8dcc8 url("/assets/golfi/golfi-hero-fairway.jpg") center/cover no-repeat;
+      will-change: transform;
+    }
+    .cover-media::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(243,236,224,0.97) 0%, rgba(243,236,224,0.92) 26%, rgba(243,236,224,0.52) 48%, rgba(246,240,230,0.10) 68%, rgba(246,240,230,0.34) 100%),
+        linear-gradient(180deg, rgba(246,240,230,0.30) 0%, rgba(246,240,230,0.22) 38%, rgba(246,240,230,0.72) 82%, rgba(246,240,230,0.97) 100%);
+    }
+    .cover-inner { position: relative; z-index: 2; padding: 140px 0 48px; }
+    .cover-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 24px; margin-bottom: 72px;
+    }
+    .cover-kicker {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--bronze-deep);
+    }
+    .cover-meta {
+      text-align: right; color: var(--ink); font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+      background: rgba(246,240,230,0.86); border: 1px solid var(--line-gold);
+      padding: 12px 16px 14px;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .cover-meta span {
+      display: block; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    h1 {
+      font-family: var(--serif); font-weight: 500; font-style: italic;
+      font-size: clamp(48px, 8vw, 104px); line-height: 0.92;
+      letter-spacing: -0.02em; color: var(--ink); max-width: 780px;
+      margin: 10px 0 22px;
+    }
+    h1 .gold { color: var(--bronze-deep); font-style: italic; }
+    h1 .h1-line { display: block; overflow: hidden; }
+    h1 .h1-line span { display: block; }
+    .cover-sub {
+      font-size: clamp(16px, 2vw, 20px); font-weight: 400; color: var(--charcoal);
+      max-width: 560px; margin-bottom: 40px;
+    }
+    .cover-foot {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+      border-top: 1px solid var(--line-gold); padding-top: 22px;
+    }
+    .cover-logos { display: flex; align-items: center; gap: 18px; }
+    .cover-logos img { height: 28px; width: auto; object-fit: contain; }
+    .cover-logos .word-mark {
+      font-family: var(--serif); font-weight: 500; letter-spacing: 0.24em;
+      font-size: 17px; text-transform: uppercase; color: var(--ink);
+    }
+    .cover-logos .slash { color: var(--bronze); font-family: var(--serif); font-size: 28px; }
+    .cover-stats { display: flex; gap: 36px; }
+    .cover-stats div span {
+      display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 4px;
+    }
+    .cover-stats strong {
+      font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--ink);
+    }
+
+    .section { padding: 108px 0; position: relative; scroll-margin-top: 88px; }
+    #cover, #next { scroll-margin-top: 0; }
+    .section.alt { background: var(--paper); }
+    .section-kicker {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--bronze-deep); margin-bottom: 14px;
+    }
+    h2 {
+      font-family: var(--serif); font-weight: 500; font-style: italic;
+      font-size: clamp(36px, 5vw, 64px); line-height: 1.02; color: var(--bronze);
+      letter-spacing: -0.02em; margin-bottom: 18px;
+    }
+    h2.ink { color: var(--ink); }
+    .lead { font-size: 18px; color: var(--muted); max-width: 720px; }
+    .section-head {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 48px; align-items: end; margin-bottom: 56px;
+    }
+
+    .quote-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line-gold); border-bottom: 1px solid var(--line-gold);
+      background: var(--paper);
+    }
+    .quote-cell { padding: 28px 24px; border-right: 1px solid var(--line); }
+    .quote-cell:last-child { border-right: 0; }
+    .quote-cell span {
+      display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--faint); margin-bottom: 8px;
+    }
+    .quote-cell b { font-weight: 600; font-size: 15px; color: var(--ink); }
+
+    .toc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-gold); }
+    .toc a {
+      display: grid; grid-template-columns: 72px 1fr auto; gap: 16px; align-items: center;
+      padding: 18px 22px; border-bottom: 1px solid var(--line); color: var(--muted);
+      cursor: pointer; transition: background 200ms ease, color 200ms ease;
+    }
+    .toc a:nth-child(odd) { border-right: 1px solid var(--line); }
+    .toc a:hover { background: rgba(184,149,106,0.10); color: var(--ink); }
+    .toc .n { font-family: var(--serif); font-style: italic; color: var(--bronze); font-size: 22px; }
+    .toc .t { font-size: 14px; font-weight: 500; }
+    .toc .pg { font-size: 11px; letter-spacing: 0.12em; color: var(--faint); }
+
+    .split { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 48px; align-items: center; }
+    .split img { width: 100%; height: 100%; object-fit: cover; min-height: 520px; }
+    .portrait-frame { position: relative; }
+    .portrait-frame::after {
+      content: ""; position: absolute; inset: 18px; border: 1px solid rgba(184,149,106,0.55); pointer-events: none;
+    }
+    .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+    .pillar { border: 1px solid var(--line-gold); padding: 18px 18px 16px; background: rgba(255,255,255,0.35); }
+    .pillar h3 { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--ink); margin-bottom: 6px; }
+    .pillar p { font-size: 13px; }
+
+    .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .req-grid .req.wide { grid-column: 1 / -1; }
+    .req {
+      display: grid; grid-template-columns: 44px 1fr; gap: 14px;
+      border: 1px solid var(--line-gold); padding: 18px 18px 16px;
+      background: rgba(255,255,255,0.4);
+      transition: border-color 200ms ease;
+    }
+    .req:hover { border-color: var(--bronze); }
+    .req .idx { font-family: var(--serif); font-style: italic; color: var(--bronze); font-size: 22px; line-height: 1; }
+    .req h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .req p { font-size: 13px; }
+
+    .platforms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .platform {
+      background: var(--paper); border: 1px solid var(--line-gold); padding: 26px 20px 22px;
+      min-height: 320px; display: flex; flex-direction: column;
+    }
+    .platform p { font-size: 14px; }
+    .platform .tag {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronze-deep);
+      margin-bottom: 18px; font-weight: 700;
+    }
+    .platform h3 {
+      font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--ink);
+      margin-bottom: 12px; line-height: 1.05;
+    }
+    .platform p { flex: 1; }
+    .stack { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+      border: 1px solid var(--line-gold); color: var(--muted); padding: 6px 10px;
+    }
+
+    .feat-block { margin-bottom: 42px; }
+    .feat-label {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bronze-deep);
+    }
+    .feat-label::after { content: ""; flex: 1; height: 1px; background: var(--line-gold); }
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .feat { border: 1px solid var(--line-gold); padding: 20px 18px 18px; min-height: 164px; background: rgba(255,255,255,0.4); }
+    .feat svg { width: 22px; height: 22px; stroke: var(--bronze); fill: none; stroke-width: 1.6; margin-bottom: 14px; }
+    .feat h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .feat p { font-size: 13px; }
+
+    .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: end; perspective: 1200px; }
+    .phone { background: #fff; border: 1px solid var(--line-gold); padding: 14px 14px 18px; will-change: transform; }
+    .phone img { width: 100%; height: auto; }
+    .phone figcaption {
+      margin-top: 14px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .dash-shot { margin-top: 22px; border: 1px solid var(--line-gold); }
+    .dash-shot img { width: 100%; }
+
+    .arch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .arch-card { border: 1px solid var(--line-gold); padding: 24px; background: rgba(255,255,255,0.45); }
+    .arch-card h3 { font-family: var(--serif); font-style: italic; font-size: 26px; margin-bottom: 10px; }
+    .arch-card ul { list-style: none; color: var(--muted); font-size: 14px; }
+    .arch-card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .arch-card li:last-child { border-bottom: 0; }
+    .flow { margin-top: 18px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .flow-step { border: 1px solid var(--line-gold); padding: 16px 12px; text-align: center; background: rgba(255,255,255,0.4); }
+    .flow-step b { display: block; font-family: var(--serif); font-style: italic; color: var(--bronze); font-size: 20px; margin-bottom: 6px; }
+    .flow-step span { font-size: 12px; color: var(--muted); }
+
+    .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .phase { border: 1px solid var(--line-gold); padding: 22px 18px; min-height: 280px; background: rgba(255,255,255,0.4); }
+    .phase .wk {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bronze-deep); font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .phase h3 { font-family: var(--serif); font-style: italic; font-size: 26px; margin-bottom: 10px; }
+    .phase ul { list-style: none; color: var(--muted); font-size: 13px; }
+    .phase li { padding: 6px 0 6px 14px; position: relative; }
+    .phase li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 1px; background: var(--bronze); }
+
+    /* Journey picker ---------------------------------------------------- */
+    .picker {
+      display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.45fr);
+      gap: 22px; align-items: start;
+    }
+    .picker-main { min-width: 0; }
+
+    .must {
+      border: 1px solid var(--line-gold); padding: 16px 18px 14px; margin-bottom: 18px;
+      background: rgba(184,149,106,0.08);
+    }
+    .must-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+      color: var(--bronze-deep); margin-bottom: 10px;
+    }
+    .must-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .must-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--line-gold); background: var(--paper);
+      padding: 7px 10px; font-size: 12px; font-weight: 600; color: var(--ink);
+    }
+    .must-chip svg { width: 13px; height: 13px; stroke: var(--bronze-deep); fill: none; stroke-width: 1.8; }
+    .must p { font-size: 13px; margin-top: 10px; }
+
+    .rail {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 18px;
+    }
+    .rail-step {
+      display: block; cursor: pointer;
+      border: 1px solid var(--line); padding: 12px 10px; text-align: center;
+      background: rgba(255,255,255,0.45); transition: border-color 200ms ease, background 200ms ease;
+    }
+    .rail-step:hover { border-color: var(--bronze); }
+    .rail-step.is-hot { border-color: var(--bronze); background: rgba(184,149,106,0.12); }
+    .rail-step b {
+      display: block; font-family: var(--serif); font-style: italic; color: var(--bronze); font-size: 16px; margin-bottom: 4px;
+    }
+    .rail-step span { font-size: 11px; letter-spacing: 0.04em; color: var(--muted); }
+
+    /* Scale --------------------------------------------------------------- */
+    .scale { margin: 0 0 22px; }
+    .scale-track {
+      position: relative; height: 3px; background: var(--sand); margin: 34px 0 12px;
+    }
+    .scale-fill {
+      position: absolute; left: 0; top: 0; bottom: 0; background: var(--bronze);
+      transition: width 420ms cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .scale-needle {
+      position: absolute; top: 50%; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px;
+      background: var(--ink); border: 2px solid var(--cream);
+      transform: rotate(45deg);
+      transition: left 420ms cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .scale-ticks { position: relative; height: 34px; }
+    .scale-tick {
+      position: absolute; top: 0; transform: translateX(-50%); text-align: center; white-space: nowrap;
+    }
+    .scale-tick b {
+      display: block; font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink);
+    }
+    .scale-tick span {
+      display: block; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);
+    }
+    .scale-tick::after {
+      content: ""; position: absolute; left: 50%; bottom: -12px; width: 1px; height: 9px; background: var(--champagne);
+    }
+
+    /* Line items ---------------------------------------------------------- */
+    .stage { margin-bottom: 26px; }
+    .stage-head {
+      display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;
+      border-bottom: 1px solid var(--line-gold); padding-bottom: 8px;
+    }
+    .stage-head b {
+      font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--bronze);
+    }
+    .stage-head h3 {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink);
+    }
+    .stage-head em { font-style: normal; font-size: 12px; color: var(--faint); margin-left: auto; }
+
+    .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .line {
+      border: 1px solid var(--line); padding: 14px 15px 13px;
+      background: rgba(255,255,255,0.55);
+      transition: border-color 200ms ease, background 200ms ease;
+    }
+    .line.is-on { border-color: var(--line-gold); background: rgba(184,149,106,0.09); }
+    .line.is-off { background: rgba(255,255,255,0.32); }
+    .line-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .line-head h4 { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+    .line-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .line-badge svg { width: 11px; height: 11px; fill: none; stroke-width: 2; }
+    .line-badge.is-core { color: var(--bronze-deep); }
+    .line-badge.is-core svg { stroke: var(--bronze-deep); }
+    .line-badge.is-opt { color: var(--faint); }
+    .line-badge.is-opt svg { stroke: var(--faint); }
+    .line-amt {
+      font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--ink); white-space: nowrap;
+    }
+    .line.is-off .line-amt { color: var(--faint); }
+    .tiers { display: flex; gap: 4px; margin: 10px 0 9px; }
+    .tier-btn {
+      flex: 1; min-width: 0; text-align: center; cursor: pointer;
+      border: 1px solid var(--line); background: var(--paper); color: var(--muted);
+      padding: 6px 4px 5px;
+      transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+    }
+    .tier-btn:hover { border-color: var(--bronze); color: var(--ink); }
+    .tier-btn b {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .tier-btn em {
+      display: block; font-style: normal; font-size: 10px; color: var(--faint); margin-top: 1px;
+    }
+    .tier-btn.is-on {
+      background: var(--ink); border-color: var(--ink); color: var(--cream);
+    }
+    .tier-btn.is-on em { color: var(--champagne); }
+    .line-desc { font-size: 12px; line-height: 1.55; color: var(--muted); margin: 0; }
+    .line-note {
+      display: block; margin-top: 7px; font-size: 10.5px; letter-spacing: 0.04em;
+      color: var(--bronze-deep); font-weight: 600;
+    }
+
+    .picker-actions {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      margin: 4px 0 22px;
+    }
+    .picker-actions button {
+      background: none; border: 0; color: var(--bronze-deep); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; padding: 0;
+      border-bottom: 1px solid var(--line-gold);
+    }
+    .picker-actions button:hover { color: var(--ink); border-color: var(--bronze); }
+
+    .bill {
+      position: sticky; top: 92px;
+      border: 1px solid var(--bronze);
+      background: var(--ink); color: var(--cream);
+      padding: 22px 22px 18px;
+    }
+    .bill span.k {
+      display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--champagne); margin-bottom: 8px; font-weight: 700;
+    }
+    .bill .pkg-name {
+      font-family: var(--serif); font-style: italic; font-size: 28px; line-height: 1.1; margin-bottom: 4px;
+    }
+    .bill .price {
+      font-family: var(--serif); font-style: italic; font-size: 48px; line-height: 1; color: var(--cream);
+      margin: 10px 0 6px;
+    }
+    .bill .weeks { font-size: 13px; color: var(--champagne); margin-bottom: 14px; }
+    .bill .bill-note { font-size: 13px; color: rgba(246,240,230,0.72); margin-bottom: 16px; }
+    .bill ul { list-style: none; border-top: 1px solid rgba(184,149,106,0.28); padding-top: 12px; }
+    .bill li {
+      display: flex; justify-content: space-between; gap: 10px;
+      font-size: 12px; padding: 6px 0; color: rgba(246,240,230,0.78);
+    }
+    .bill li b { color: var(--cream); font-weight: 600; }
+    .bill .to-invest {
+      display: block; margin-top: 16px; text-align: center;
+      border: 1px solid var(--bronze); color: var(--cream);
+      padding: 12px 14px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
+      cursor: pointer; transition: background 200ms ease, color 200ms ease;
+    }
+    .bill .to-invest:hover { background: var(--bronze); color: var(--ink); }
+
+    .bill-dock {
+      display: none; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 45;
+      background: var(--ink); color: var(--cream); border: 1px solid var(--bronze);
+      padding: 12px 14px; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .bill-dock b { font-family: var(--serif); font-style: italic; font-size: 22px; }
+    .bill-dock span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--champagne); }
+    .bill-dock a {
+      border: 1px solid var(--bronze); padding: 8px 12px;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
+    }
+
+    .invest {
+      border: 1px solid var(--line-gold);
+      background: linear-gradient(180deg, rgba(184,149,106,0.10), rgba(246,240,230,0));
+      padding: 32px 32px 8px;
+    }
+    .invest-top { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; padding-bottom: 24px; }
+    .invest-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronze-deep); font-weight: 700; }
+    .invest-total { text-align: right; }
+    .invest-total span { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+    .invest-total strong {
+      font-family: var(--serif); font-style: italic; font-size: clamp(48px, 6vw, 72px);
+      font-weight: 500; color: var(--ink); line-height: 1;
+    }
+    .quote-row {
+      display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+      padding: 20px 0; border-top: 1px solid var(--line);
+    }
+    .quote-row h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .quote-row h4 em {
+      font-style: normal; color: var(--bronze-deep); font-weight: 700;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .quote-row p { font-size: 13px; }
+    .quote-group {
+      padding: 26px 0 4px; font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--bronze-deep); font-weight: 700;
+    }
+    .quote-row.sub { border-top: 1px solid var(--line-gold); }
+    .quote-row.sub h4 { font-family: var(--serif); font-style: italic; font-size: 21px; font-weight: 500; }
+    .quote-price { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--ink); white-space: nowrap; }
+    .quote-row.total { background: rgba(184,149,106,0.12); margin: 0 -32px; padding: 22px 32px; }
+    .pay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
+    .pay { border: 1px solid var(--line-gold); padding: 20px; background: rgba(255,255,255,0.4); }
+    .pay span { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .pay b { font-size: 22px; }
+
+    .compare { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .compare article {
+      border: 1px solid var(--line-gold); padding: 22px; background: rgba(255,255,255,0.45);
+      cursor: pointer; transition: border-color 200ms ease;
+    }
+    .compare article:hover, .compare article.is-on { border-color: var(--bronze); }
+    .compare article.is-on { box-shadow: inset 0 0 0 1px var(--bronze); }
+    .compare .tag { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bronze-deep); font-weight: 700; }
+    .compare h3 { font-family: var(--serif); font-style: italic; font-size: 30px; margin: 8px 0 4px; }
+    .compare .amt { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--bronze); margin-bottom: 10px; }
+    .compare ul { list-style: none; font-size: 13px; color: var(--muted); }
+    .compare li { padding: 6px 0 6px 14px; position: relative; }
+    .compare li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 1px; background: var(--bronze); }
+
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .why article { border: 1px solid var(--line-gold); padding: 22px; background: rgba(255,255,255,0.4); }
+    .why h3 { font-family: var(--serif); font-style: italic; font-size: 24px; margin-bottom: 8px; }
+    .terms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .term { border: 1px solid var(--line-gold); padding: 20px; background: rgba(255,255,255,0.4); }
+    .term h3 { font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bronze-deep); margin-bottom: 8px; }
+    .term p { font-size: 13px; }
+
+    .close {
+      position: relative; min-height: 88vh; display: grid; align-items: end;
+      overflow: hidden;
+    }
+    .close-media {
+      position: absolute; inset: -12% 0; height: 124%;
+      background: #e8dcc8 url("/assets/golfi/golfi-clubhouse-dusk.jpg") center/cover no-repeat;
+      will-change: transform;
+    }
+    .close-media::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(243,236,224,0.95) 0%, rgba(243,236,224,0.88) 30%, rgba(243,236,224,0.46) 52%, rgba(246,240,230,0.20) 74%, rgba(246,240,230,0.40) 100%),
+        linear-gradient(180deg, rgba(246,240,230,0.34), rgba(246,240,230,0.62) 62%, rgba(246,240,230,0.96) 100%);
+    }
+    .close h2 { color: var(--bronze-deep); }
+    .close .lead { color: var(--charcoal); max-width: 620px; }
+    .close-inner { position: relative; z-index: 2; padding: 80px 0 48px; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 14px 22px; font-size: 12px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; cursor: pointer; transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+    .btn-primary { background: transparent; color: var(--ink); border: 1px solid var(--bronze); }
+    .btn-primary:hover { background: var(--bronze); color: var(--cream); }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .btn-ghost:hover { border-color: var(--bronze); color: var(--bronze-deep); }
+
+    footer {
+      border-top: 1px solid var(--line-gold); padding: 28px 0 40px;
+      display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap;
+    }
+    .footer-mark { text-align: center; flex: 1; }
+    .footer-mark .word-mark {
+      display: block; font-family: var(--serif); font-weight: 500; letter-spacing: 0.26em;
+      font-size: 16px; text-transform: uppercase; color: var(--ink); margin-bottom: 7px;
+    }
+    .footer-mark small {
+      display: block; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--faint);
+    }
+    .nix { height: 18px; opacity: 0.9; filter: brightness(0.25); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor, .cursor-dot, .scroll-progress { display: none !important; }
+      h1 .h1-line span { transform: none !important; }
+    }
+
+    @media (max-width: 980px) {
+      .nav-cta { display: none; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0;
+        background: var(--paper); border: 1px solid var(--line-gold); padding: 16px;
+      }
+      .nav-links .menu-quote { display: inline-flex; margin-top: 8px; }
+      .nav-toggle { display: grid; place-items: center; }
+      .section-head, .split, .req-grid, .platforms, .feat-grid, .phones, .arch, .phases,
+      .invest-top, .pay-grid, .why, .terms, .quote-bar, .toc, .flow, .pillars,
+      .picker, .lines, .rail, .compare {
+        grid-template-columns: 1fr;
+      }
+      .scale-tick b { font-size: 14px; }
+      .scale-tick span { font-size: 8px; letter-spacing: 0.08em; }
+      .toc a:nth-child(odd) { border-right: 0; }
+      .cover-top, .cover-foot { flex-direction: column; align-items: flex-start; }
+      .cover-stats { width: 100%; flex-wrap: wrap; }
+      .cover-meta, .invest-total { text-align: left; }
+      .split img { min-height: 360px; }
+      h1 { font-size: 52px; }
+      .section { padding: 72px 0; }
+      .bill { position: static; }
+      .bill-dock { display: flex; }
+      .rail { grid-template-columns: repeat(3, 1fr); }
+      .flow { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media print {
+      .nav, .nav-toggle, .bill-dock, .cursor, .cursor-dot { display: none !important; }
+      .bill { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Proposal">
+    <a class="nav-brand" href="#cover">
+      <span class="mark" aria-hidden="true">G</span>
+      <span class="slash" aria-hidden="true">/</span>
+      <span class="name">Golfi</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#brief">Brief</a>
+      <a href="#journey">Journey</a>
+      <a href="#solution">Solution</a>
+      <a href="#experience">Product</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#investment">Investment</a>
+      <a class="nav-cta menu-quote" href="#journey">Build the bill</a>
+    </div>
+    <a class="nav-cta" href="#journey">Build the bill</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" id="nav-toggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+
+  <header class="cover" id="cover">
+    <div class="cover-media" role="img" aria-label="Champagne golf car at a North Coast compound, golden hour"></div>
+    <div class="cover-inner shell">
+      <div class="cover-top">
+        <div class="cover-kicker">Quotation &nbsp;·&nbsp; NIX-GOLFI-001 &nbsp;·&nbsp; Rev. 2</div>
+        <div class="cover-meta">
+          <span>Prepared for</span>
+          Golfi
+          <span style="margin-top:12px">Date</span>
+          27 September 2026 (rev. 2)
+        </div>
+      </div>
+      <h1>
+        <span class="h1-line"><span>Golfi.</span></span>
+        <span class="h1-line"><span class="gold">Your North Coast</span></span>
+        <span class="h1-line"><span class="gold">summer awaits.</span></span>
+      </h1>
+      <p class="cover-sub">The car stays at the gate. The golf car is how the villa reaches the beach, the café, the marina. This quotation prices that product feature by feature — so $20,000, $30,000 and $55,000 stop being mysteries and become decisions.</p>
+      <div class="cover-foot">
+        <div class="cover-logos">
+          <span class="word-mark">Golfi</span>
+          <span class="slash">/</span>
+          <img src="/assets/nixai-wordmark-light.png" alt="NixAI" style="height:18px;filter:brightness(0.25)" />
+        </div>
+        <div class="cover-stats">
+          <div><span>Selected build</span><strong id="cover-price">$20,000</strong></div>
+          <div><span>Delivery</span><strong id="cover-weeks">12–14 weeks</strong></div>
+          <div><span>Platforms</span><strong>4</strong></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="quote-bar shell">
+    <div class="quote-cell"><span>Client</span><b>Golfi</b></div>
+    <div class="quote-cell"><span>Project</span><b>North Coast golf-car booking</b></div>
+    <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
+    <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
+  </div>
+
+  <section class="section" id="contents">
+    <div class="shell">
+      <div class="section-kicker">00 &nbsp;/&nbsp; Contents</div>
+      <h2>The document.</h2>
+      <div class="toc" style="margin-top:36px">
+        <a href="#brief"><span class="n">01</span><span class="t">The North Coast brief</span><span class="pg">—</span></a>
+        <a href="#mapped"><span class="n">02</span><span class="t">Ten mandatory features</span><span class="pg">—</span></a>
+        <a href="#journey"><span class="n">03</span><span class="t">Price it feature by feature</span><span class="pg">—</span></a>
+        <a href="#solution"><span class="n">04</span><span class="t">Four surfaces</span><span class="pg">—</span></a>
+        <a href="#experience"><span class="n">05</span><span class="t">How it should feel</span><span class="pg">—</span></a>
+        <a href="#architecture"><span class="n">06</span><span class="t">Architecture &amp; stack</span><span class="pg">—</span></a>
+        <a href="#timeline"><span class="n">07</span><span class="t">Delivery</span><span class="pg">—</span></a>
+        <a href="#investment"><span class="n">08</span><span class="t">Itemised quotation</span><span class="pg">—</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="brief">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 &nbsp;/&nbsp; Understanding</div>
+          <h2>Not a golf app. A summer movement layer.</h2>
+        </div>
+        <p class="lead">On the North Coast, the private car dies at the compound gate. From there, people live in golf cars — villa to beach club, souk to marina, kids to the commercial strip. Golfi books that ride. The guest is a vacationer, not a player.</p>
+      </div>
+      <div class="split">
+        <div class="portrait-frame">
+          <img src="/assets/golfi/golfi-cart-portrait.jpg" alt="Champagne luxury golf car on cream stone at a Mediterranean compound" />
+        </div>
+        <div>
+          <p>Golfi asked for a mobile product that lets guests find a golf car in their area, book it, pay, and ride — with a web dashboard so operations can run the fleet, and a guest web app so a villa can book from a browser without installing anything. The question underneath was commercial: why would that cost $20,000, $30,000, or $55,000?</p>
+          <p>The honest answer is that all three build the same list of features. What changes is how deep each one goes. Authentication can be a password and an SMS code, or it can verify that this phone really belongs to that villa. A payment gateway can hand a failed card to your customer service, or it can retry, refund and reconcile on its own. Booking can hold a slot, or it can price Friday differently and reassign a car that breaks down. Same feature, three depths, three prices — and section 03 lets you set each one and watch the bill.</p>
+          <div class="pillars">
+            <div class="pillar">
+              <h3>Quiet</h3>
+              <p>Cream, bronze, champagne. A product that looks like the villa, not a ride-hailing template.</p>
+            </div>
+            <div class="pillar">
+              <h3>Honest</h3>
+              <p>A slot that is booked is gone. Guest and operator see the same car, the same hour.</p>
+            </div>
+            <div class="pillar">
+              <h3>Local</h3>
+              <p>Sahel hours, compound gates, beach destinations — not a generic “golf course rental.”</p>
+            </div>
+            <div class="pillar">
+              <h3>Owned</h3>
+              <p>Source, stores, and data belong to Golfi. NixAI builds and hands over.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mapped">
+    <div class="shell">
+      <div class="section-kicker">02 &nbsp;/&nbsp; Mandatory in every number</div>
+      <h2 class="ink">Ten features. None of them optional.</h2>
+      <p class="lead" style="margin: 12px 0 36px">These ten exist at $20,000 and at $55,000. What moves between those two numbers is the depth of each one — how many cases the product handles itself before a human has to step in. Below is the shallowest honest version of each.</p>
+      <div class="req-grid">
+        <article class="req"><div class="idx">01</div><div><h3>Discovery, UX &amp; brand</h3><p>Golfi applied to the product. At Basic, eight screens on standard components; deeper, a full design system and testing with guests.</p></div></article>
+        <article class="req"><div class="idx">02</div><div><h3>Authentication</h3><p>Guests on mobile, operators on the dashboard. At Basic, password and SMS code; deeper, villa verification and household accounts.</p></div></article>
+        <article class="req"><div class="idx">03</div><div><h3>Payment gateway</h3><p>Card checkout inside the booking. At Basic, a hosted page and a human for refunds; deeper, retries, rules, and reconciliation.</p></div></article>
+        <article class="req"><div class="idx">04</div><div><h3>Booking engine</h3><p>A held slot no one else can take. At Basic, one compound by count; deeper, calendars, peak pricing, and reassignment.</p></div></article>
+        <article class="req"><div class="idx">05</div><div><h3>React Native mobile</h3><p>iOS and Android from one codebase. At Basic, eight screens; deeper, push, offline cache, motion, live ride status, and instrumentation.</p></div></article>
+        <article class="req"><div class="idx">06</div><div><h3>Operator dashboard</h3><p>Fleet, the book, guests, money. At Basic, one shared admin account; deeper, role levels, gateway transactions, and a rules engine.</p></div></article>
+        <article class="req"><div class="idx">07</div><div><h3>Backend API — Node.js + MongoDB</h3><p>One API behind both surfaces. At Basic, REST with booking locks; deeper, queues, caching, and a versioned public API.</p></div></article>
+        <article class="req"><div class="idx">08</div><div><h3>Server deployment &amp; security</h3><p>Where it actually runs. At Basic, HTTPS, firewall and daily backups; deeper, WAF, scanning, and a penetration test.</p></div></article>
+        <article class="req"><div class="idx">09</div><div><h3>QA, stores &amp; handover</h3><p>Submission and transfer. At Basic, four devices and hypercare for 30 days; deeper, automated regression and load tests.</p></div></article>
+        <article class="req"><div class="idx">10</div><div><h3>Guest web app — Next.js</h3><p>The booking flow in the browser at golfi.app, on the same API and design system as the mobile app. One depth, one price: listed at $7,500, quoted at $5,000.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="journey">
+    <div class="shell-wide">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">03 &nbsp;/&nbsp; Build the quotation</div>
+          <h2>$20k, $30k and $55k are not packages.</h2>
+        </div>
+        <p class="lead">They are where the bill lands. Every feature below is priced on its own, at the depth you choose. <strong>Mandatory</strong> features cannot be switched off — but even they have three depths, and that is most of the difference between the three numbers. Optional features are added only if the summer needs them.</p>
+      </div>
+
+      <div class="scale">
+        <div class="scale-ticks" id="scale-ticks"></div>
+        <div class="scale-track">
+          <div class="scale-fill" id="scale-fill" style="width:0%"></div>
+          <div class="scale-needle" id="scale-needle" style="left:0%"></div>
+        </div>
+      </div>
+
+      <div class="picker">
+        <div class="picker-main">
+          <div class="must">
+            <div class="must-label">The ten mandatory features — in every number</div>
+            <div class="must-chips" id="must-chips"></div>
+            <p>All ten at <strong>Basic</strong> is <strong>$20,000</strong> — the floor, and the reason a real product cannot cost less. All ten at <strong>Advanced</strong> is <strong>$55,000</strong>, before a single optional feature. The guest web app has one depth and one price — $7,500 list, <strong>$5,000</strong> for Golfi — so it sits unchanged in every number. Everything else between those two sums is a depth decision, feature by feature.</p>
+          </div>
+
+          <div class="rail" id="journey-rail" aria-label="Guest journey stages"></div>
+
+          <div class="picker-actions">
+            <button type="button" data-preset="floor">Load the $20,000 floor</button>
+            <button type="button" data-preset="middle">Load a $30,000 build</button>
+            <button type="button" data-preset="ceiling">Load the $55,000 ceiling</button>
+          </div>
+
+          <div id="stages"></div>
+        </div>
+
+        <aside class="bill" id="bill" aria-live="polite">
+          <span class="k">Billable project</span>
+          <div class="pkg-name" id="bill-name">Entry build</div>
+          <div class="price" id="bill-price">$20,000</div>
+          <div class="weeks" id="bill-weeks">Delivery 12–14 weeks</div>
+          <p class="bill-note" id="bill-why">Every mandatory feature at Basic depth. A guest signs in, books a car, pays, and rides — and operations can run it.</p>
+          <ul id="bill-lines"></ul>
+          <a class="to-invest" href="#investment">See the itemised quotation</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="solution">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">04 &nbsp;/&nbsp; Solution</div>
+          <h2 class="ink">Four surfaces. One summer.</h2>
+        </div>
+        <p class="lead">Guests live in the phone — or in the browser, when they have not installed anything yet. Operations live in the dashboard. Everything meets in a Node.js API on MongoDB — the same truth for cars, compounds, and time.</p>
+      </div>
+      <div class="platforms">
+        <article class="platform">
+          <div class="tag">01 &nbsp;/&nbsp; Guest</div>
+          <h3>Mobile application</h3>
+          <p>iOS and Android from one React Native codebase. Discover cars in the compound, open a profile, book a window, pay, and keep my rides — designed as a North Coast amenity, not a taxi skin.</p>
+          <div class="stack"><span class="chip">React Native</span><span class="chip">iOS</span><span class="chip">Android</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">02 &nbsp;/&nbsp; Guest, in the browser</div>
+          <h3>Web app</h3>
+          <p>The same booking flow at golfi.app, built in Next.js on the mobile app’s API and design system. Browse, book, pay, my rides — from a laptop, a shared link, or a phone that has not downloaded the app. One depth, one price: $7,500 list, $5,000 for Golfi.</p>
+          <div class="stack"><span class="chip">Next.js</span><span class="chip">Web</span><span class="chip">Shared API</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">03 &nbsp;/&nbsp; Operations</div>
+          <h3>Web admin</h3>
+          <p>A Next.js dashboard for the fleet desk. Cars, compounds, bookings, guests, and payments. Roles arrive at Standard depth — valet, finance, compound manager.</p>
+          <div class="stack"><span class="chip">Next.js</span><span class="chip">Web</span><span class="chip">Roles</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">04 &nbsp;/&nbsp; Platform</div>
+          <h3>API &amp; data</h3>
+          <p>Node.js services and MongoDB collections for users, cars, areas, slots, payments, and notifications. Built so a new compound is a record, not a rewrite.</p>
+          <div class="stack"><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip">Gateway</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="scope">
+    <div class="shell">
+      <div class="section-kicker">04.1 &nbsp;/&nbsp; The floor, in detail</div>
+      <h2>What $20,000 already is.</h2>
+      <p class="lead" style="margin-bottom:40px">Every screen below exists at the floor price, with all ten mandatory features at Basic. Choosing deeper levels does not replace this — it removes the phone calls ops would otherwise make to keep it running.</p>
+
+      <div class="feat-block">
+        <div class="feat-label">Guest mobile app</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+            <h3>Cars in the area</h3>
+            <p>Browse the compound’s fleet. Filter by seats when you add types later. Empty states that still feel like Sahel.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M5 11h14M7 7V5M17 7V5"/></svg>
+            <h3>Car profile</h3>
+            <p>Photograph, seats, pickup note, hourly rate, and a direct path to the next open window.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+            <h3>Booking</h3>
+            <p>Pick a date and a window. The slot is held server-side so two villas cannot take the same car.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+            <h3>Payment</h3>
+            <p>Card checkout in the booking. Receipt in the app. The dashboard sees the same settlement.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <h3>My rides</h3>
+            <p>Upcoming and past. Cancel inside the notice window. The car returns to the pool the moment it is released.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 19c1.2-3.2 3.6-5 7-5s5.8 1.8 7 5"/></svg>
+            <h3>Account</h3>
+            <p>Phone or email sign-in. Profile, saved destination note, and ride history on the guest device.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Operator dashboard</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <h3>Fleet &amp; compounds</h3>
+            <p>Create cars and the first area. Photograph, seats, rate, and archive — no app store update.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+            <h3>The book</h3>
+            <p>Day view of rides. Status. Operator cancel or move with the guest notified in the same action.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/></svg>
+            <h3>Guests &amp; payments</h3>
+            <p>Who booked, what they paid, what is outstanding. One admin role at Basic; roles and permissions at Standard.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">05 &nbsp;/&nbsp; Product experience</div>
+          <h2>How Golfi should feel in the hand.</h2>
+        </div>
+        <p class="lead">Directional frames in the language of the coast: cream ground, bronze type, champagne metal. Final UI is designed in discovery — these frames show altitude, not a locked pixel grid.</p>
+      </div>
+      <div class="phones">
+        <figure class="phone">
+          <img src="/assets/golfi/golfi-app-map.jpg" alt="iPhone mockup of Golfi showing golf cars available near the villa" />
+          <figcaption>01 &nbsp;/&nbsp; Cars near the villa</figcaption>
+        </figure>
+        <figure class="phone">
+          <img src="/assets/golfi/golfi-app-cart.jpg" alt="iPhone mockup of a golf car profile" />
+          <figcaption>02 &nbsp;/&nbsp; Choose the car</figcaption>
+        </figure>
+        <figure class="phone">
+          <img src="/assets/golfi/golfi-app-pay.jpg" alt="iPhone mockup of Golfi checkout" />
+          <figcaption>03 &nbsp;/&nbsp; Pay and ride</figcaption>
+        </figure>
+      </div>
+      <figure class="dash-shot">
+        <img src="/assets/golfi/golfi-admin-dashboard.jpg" alt="Golfi operator dashboard on a cream canvas with bronze metrics" />
+      </figure>
+      <p style="margin-top:14px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint)">04 &nbsp;/&nbsp; Next.js admin — fleet, today’s book, compound load</p>
+    </div>
+  </section>
+
+  <section class="section alt" id="architecture">
+    <div class="shell">
+      <div class="section-kicker">06 &nbsp;/&nbsp; Architecture</div>
+      <h2 class="ink">The stack you asked for.</h2>
+      <p class="lead" style="margin: 12px 0 36px">React Native, Node.js, MongoDB, Next.js — one team ships iOS, Android, and admin against a single API, then adds a compound without rewriting the summer.</p>
+      <div class="arch">
+        <article class="arch-card">
+          <h3>Mobile — React Native</h3>
+          <ul>
+            <li>One codebase for iOS and Android, native store binaries</li>
+            <li>Home, cars, profile, booking, pay, my rides, account</li>
+            <li>Gateway checkout in the booking, not a detour to a browser</li>
+            <li>Push, offline cache and deep links from Standard depth upward</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>API — Node.js + MongoDB</h3>
+          <ul>
+            <li>REST for app and admin</li>
+            <li>Collections: users, cars, compounds, slots, payments, notifications</li>
+            <li>Slot reservation with conflict checks — no double book on Friday</li>
+            <li>Indexes for area and time as the coast catalog grows</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Admin — Next.js</h3>
+          <ul>
+            <li>Server-rendered dashboard, role-aware routes</li>
+            <li>CRUD for cars, compounds, hours, and the book</li>
+            <li>Payment ledger; analytics at whichever level you select</li>
+            <li>Audit of who moved a ride or changed a rate</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Brand, hosting &amp; ownership</h3>
+          <ul>
+            <li>Cream, bronze, champagne tokens — no generic teal rental kit</li>
+            <li>Staging and production under your accounts</li>
+            <li>Repositories, keys, and store listings in Golfi control</li>
+            <li>30 days of hypercare after store approval</li>
+          </ul>
+        </article>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><b>01</b><span>Open the app</span></div>
+        <div class="flow-step"><b>02</b><span>Find a car</span></div>
+        <div class="flow-step"><b>03</b><span>Book a window</span></div>
+        <div class="flow-step"><b>04</b><span>Auth + pay</span></div>
+        <div class="flow-step"><b>05</b><span>Ride the coast</span></div>
+        <div class="flow-step"><b>06</b><span>Ops sees the book</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="timeline">
+    <div class="shell">
+      <div class="section-kicker">07 &nbsp;/&nbsp; Timeline</div>
+      <h2 id="timeline-title">12 to 14 weeks. Four movements.</h2>
+      <p class="lead" style="margin-bottom:36px" id="timeline-lead">Mobile, web app, API and dashboard run in parallel from week one, and twelve weeks is the honest floor — three of them go to discovery and design before code, and App Store and Play review alone can take two. The weeks below follow the depths you selected in section 03: a deeper booking engine or payment gateway is real engineering time, not a bigger invoice.</p>
+      <div class="phases">
+        <article class="phase">
+          <div class="wk" id="ph-1-w">Weeks 1 — 3</div>
+          <h3>Discover</h3>
+          <ul>
+            <li>Workshop: compounds, gates, guest hours</li>
+            <li>Information architecture and the journey you picked</li>
+            <li>Cream / bronze UI for mobile and admin</li>
+            <li>API contracts, MongoDB schema, environments provisioned</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk" id="ph-2-w">Weeks 2 — 9</div>
+          <h3>Build the ride</h3>
+          <ul id="ph-2-list">
+            <li>Node.js: auth, cars, slots, payments</li>
+            <li>React Native browse, book, pay</li>
+            <li>My rides and cancel</li>
+            <li>Internal TestFlight / Play — first MVP</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk" id="ph-3-w">Weeks 6 — 12</div>
+          <h3>Operate</h3>
+          <ul id="ph-3-list">
+            <li>Next.js: cars, compound, the book</li>
+            <li>Payment ledger and guest list</li>
+            <li>Store listings and privacy copy</li>
+            <li>Operator rehearsal</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk" id="ph-4-w">Weeks 11 — 14</div>
+          <h3>Launch</h3>
+          <ul>
+            <li>QA on iOS, Android, and the dashboard</li>
+            <li>UAT with Golfi operations at the desk</li>
+            <li>App Store and Play review — allow two weeks</li>
+            <li>Cutover, monitoring, and hypercare</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="investment">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">08 &nbsp;/&nbsp; Investment</div>
+          <h2>One line per feature.</h2>
+        </div>
+        <p class="lead">This is the same list you just configured, written as a quotation. Change a depth in section 03 and this table rewrites itself. Nothing here is a bundle — every line is a price we are willing to be held to.</p>
+      </div>
+      <div class="invest">
+        <div class="invest-top">
+          <div>
+            <div class="invest-label">Configured build</div>
+            <h3 id="inv-name" style="font-family:var(--serif);font-style:italic;font-size:32px;margin:8px 0 10px">Entry build</h3>
+            <p id="inv-copy">Every mandatory feature at Basic depth, no optional features. The floor of a real product.</p>
+          </div>
+          <div class="invest-total">
+            <span>Total investment</span>
+            <strong id="inv-price">$20,000</strong>
+          </div>
+        </div>
+        <div id="quote-rows"></div>
+        <div class="quote-row total">
+          <div>
+            <h4>Total</h4>
+            <p>Revision 2, valid 30 days from 27 September 2026. Amounts in USD. Follows your selection in section 03.</p>
+          </div>
+          <div class="quote-price" id="inv-total">$20,000</div>
+        </div>
+      </div>
+
+      <div class="pay-grid">
+        <div class="pay"><span>To commence — 40%</span><b id="pay-1">$8,000</b></div>
+        <div class="pay"><span>After 1st MVP — 30%</span><b id="pay-2">$6,000</b></div>
+        <div class="pay"><span>After UAT — 20%</span><b id="pay-3">$4,000</b></div>
+        <div class="pay"><span>At store launch — 10%</span><b id="pay-4">$2,000</b></div>
+      </div>
+
+      <p style="margin:34px 0 0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--bronze-deep)">Worked examples — click one to load it above</p>
+      <div class="compare" id="compare">
+        <article data-preset="floor">
+          <div class="tag">The floor</div>
+          <h3>Same ten, all Basic</h3>
+          <div class="amt">$20,000</div>
+          <ul>
+            <li>Every mandatory feature, Basic depth</li>
+            <li>Guest web app included at $5,000</li>
+            <li>One compound, one shared admin account</li>
+            <li>Unusual cases go to customer service</li>
+            <li>12–14 weeks</li>
+          </ul>
+        </article>
+        <article data-preset="middle">
+          <div class="tag">The middle</div>
+          <h3>Deep where guests feel it</h3>
+          <div class="amt">$30,000</div>
+          <ul>
+            <li>Standard auth, payments, booking, app</li>
+            <li>Basic dashboard, backend, servers and QA</li>
+            <li>Plus transactional notifications</li>
+            <li>16–18 weeks</li>
+          </ul>
+        </article>
+        <article data-preset="ceiling">
+          <div class="tag">The ceiling</div>
+          <h3>Same ten, all Advanced</h3>
+          <div class="amt">$55,000</div>
+          <ul>
+            <li>Every mandatory feature, Advanced depth</li>
+            <li>Role matrix, rules engine, penetration test</li>
+            <li>Still before any optional feature</li>
+            <li>26–30 weeks</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="shell">
+      <div class="section-kicker">08.1 &nbsp;/&nbsp; Partnership</div>
+      <h2>Why this should be NixAI.</h2>
+      <p class="lead" style="margin-bottom:36px">You are not buying screens. You are buying a product that has to look like the North Coast in June and still look like the North Coast when the fifth compound opens.</p>
+      <div class="why">
+        <article>
+          <h3>Quiet luxury, not a kit</h3>
+          <p>Cream, bronze, champagne, serif display. The product will not arrive as a generic rental app with a green pin.</p>
+        </article>
+        <article>
+          <h3>One team, four surfaces</h3>
+          <p>Mobile, web app, API, and admin are built together. A paid slot on the phone is the same slot the desk sees that afternoon.</p>
+        </article>
+        <article>
+          <h3>You own it</h3>
+          <p>Code, stores, data, and credentials transfer to Golfi. The next summer’s features start from your repositories.</p>
+        </article>
+      </div>
+
+      <div class="section-kicker" style="margin-top:56px">08.2 &nbsp;/&nbsp; Terms</div>
+      <h2 class="ink" style="font-size:42px">Clear conditions.</h2>
+      <div class="terms" style="margin-top:28px">
+        <article class="term">
+          <h3>Payment</h3>
+          <p>40% to commence, 30% after delivery of the first MVP, 20% after UAT sign-off, 10% at store launch. The split follows whatever total you configure.</p>
+        </article>
+        <article class="term">
+          <h3>Validity</h3>
+          <p>This quotation (revision 2, adding the guest web app) is valid for 30 days from 27 September 2026. After that date we reconfirm timeline and fee against current capacity.</p>
+        </article>
+        <article class="term">
+          <h3>Included</h3>
+          <p>Every line shown in section 08 at the depth selected there, staging and production, store submission, documentation, and hypercare at the level chosen on the QA line.</p>
+        </article>
+        <article class="term">
+          <h3>Client provides</h3>
+          <p>Brand direction already discussed, compound and fleet data for launch, a payment-gateway merchant account, Apple and Google developer accounts (or we open them in your name), and timely UAT feedback.</p>
+        </article>
+        <article class="term">
+          <h3>Not included</h3>
+          <p>Apple / Google developer fees, SMS and WhatsApp gateway costs, hardware locks, GPS trackers, and merchant fees. The one hardware-dependent line — remote lock and immobilise — is quoted only against a tracker vendor that exposes an API, and is dropped if the fleet has none fitted.</p>
+        </article>
+        <article class="term">
+          <h3>Revisions</h3>
+          <p>Each phase includes two structured review rounds. Further design or scope change is estimated before work continues.</p>
+        </article>
+        <article class="term">
+          <h3>Intellectual property</h3>
+          <p>Upon final payment, all custom code and design for Golfi assign to the client. Third-party open-source remains under its own licences.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" id="next">
+    <div class="close-media" role="img" aria-label="North Coast beach club terrace at dusk with valet golf cars"></div>
+    <div class="close-inner shell">
+      <div class="section-kicker">Next</div>
+      <h2 style="max-width:900px">We can be in discovery the week the first transfer clears.</h2>
+      <p class="lead">Reply with the depth you chose on each line — or just the total the picker settled on, and we will reconstruct it. We will send a one-page statement of work, a kickoff date, and the access list for accounts and fleet data.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:hello@nixailabs.com?subject=Golfi%20quotation%20NIX-GOLFI-001">Approve quotation</a>
+        <a class="btn btn-ghost" href="mailto:hello@nixailabs.com?subject=Golfi%20%E2%80%94%20a%20question">Ask a question</a>
+      </div>
+      <footer>
+        <img class="nix" src="/assets/nixai-wordmark-light.png" alt="NixAI" />
+        <div class="footer-mark">
+          <span class="word-mark">Golfi</span>
+          <small>Your North Coast summer</small>
+        </div>
+        <div style="font-size:12px;color:var(--faint);text-align:right">
+          hello@nixailabs.com<br />nixailabs.com
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <div class="bill-dock" id="bill-dock" aria-hidden="true">
+    <div>
+      <span id="dock-name">Entry build</span>
+      <b id="dock-price">$20,000</b>
+    </div>
+    <a href="#investment">Quotation</a>
+  </div>
+
+  <script src="/assets/gsap/gsap.min.js"></script>
+  <script src="/assets/gsap/ScrollTrigger.min.js"></script>
+  <script src="/assets/gsap/ScrollToPlugin.min.js"></script>
+  <script>
+    const STAGES = [
+      { id: "found", n: "00", label: "Foundations", note: "Under every step" },
+      { id: "arrive", n: "01", label: "Arrive & sign in" },
+      { id: "find", n: "02", label: "Find a car" },
+      { id: "book", n: "03", label: "Book the window" },
+      { id: "pay", n: "04", label: "Pay" },
+      { id: "ride", n: "05", label: "Ride the coast" },
+      { id: "operate", n: "06", label: "Operate" }
+    ];
+
+    const FEATURES = [
+      {
+        id: "discovery", stage: "found", core: true, name: "Discovery, UX &amp; brand",
+        levels: [
+          { n: "Basic", p: 1400, d: "The Golfi brand applied to standard components, eight key screens drawn. No research phase, no prototype." },
+          { n: "Standard", p: 2800, d: "Guest and operator journey workshops, information architecture, a full design system, and every screen designed for app and dashboard." },
+          { n: "Advanced", p: 4800, d: "Everything in Standard, plus a clickable prototype, usability testing with real guests inside a compound, a motion specification, and design QA on every build." }
+        ]
+      },
+      {
+        id: "backend", stage: "found", core: true, name: "Backend API — Node.js &amp; MongoDB",
+        levels: [
+          { n: "Basic", p: 1200, d: "One REST API for app and dashboard. Collections for users, cars, compounds, slots and payments, with validation and server-side booking locks." },
+          { n: "Standard", p: 2400, d: "Modular services, documented endpoints, background jobs for notifications and settlement, indexed queries for search, and seeded test data." },
+          { n: "Advanced", p: 4200, d: "Everything in Standard, plus event-driven jobs on a queue, caching, soft deletes and full history, webhook fan-out, versioned public API, and automated integration tests." }
+        ]
+      },
+      {
+        id: "deploy", stage: "found", core: true, name: "Server deployment &amp; security",
+        levels: [
+          { n: "Basic", p: 900, d: "A managed cloud instance, HTTPS with auto-renewing certificates, firewall, secrets held outside the codebase, daily encrypted backups, and one staging plus one production environment deployed by runbook." },
+          { n: "Standard", p: 1900, d: "CI/CD on merge, a web application firewall, rate limiting and bot protection, database encryption at rest, dependency and secret scanning, uptime and error alerting, log retention, and a tested restore drill." },
+          { n: "Advanced", p: 3400, d: "Everything in Standard, plus a third-party penetration test with remediation, DDoS protection, autoscaling behind a load balancer, a secrets manager with rotation, least-privilege infrastructure roles, immutable audit logging, and a disaster-recovery plan with agreed recovery targets." }
+        ]
+      },
+      {
+        id: "qa", stage: "found", core: true, name: "QA, stores &amp; handover",
+        levels: [
+          { n: "Basic", p: 1100, d: "Manual QA on four devices, App Store and Play submission, repositories and environments handed to Golfi." },
+          { n: "Standard", p: 2200, d: "A device matrix, a regression suite, automated tests on booking and payment, store-listing optimisation, and 30 days of hypercare." },
+          { n: "Advanced", p: 3600, d: "Everything in Standard, plus peak-weekend load testing, crash and performance budgets, accessibility audit, and 90 days of hypercare with agreed response times." }
+        ]
+      },
+      {
+        id: "auth", stage: "arrive", core: true, name: "Authentication &amp; guest identity",
+        levels: [
+          { n: "Basic", p: 1200, d: "Phone or email with a password, an SMS one-time code, one guest role, forgot password. Anything unusual — a changed number, a lost account — is handled by your customer service, not the product." },
+          { n: "Standard", p: 2300, d: "One-time code plus Apple and Google sign-in, compound access codes, an editable profile, sessions across devices, and separate guest, operator and admin roles." },
+          { n: "Advanced", p: 4000, d: "Everything in Standard, plus villa and resident verification, household sub-accounts for family and staff, licence upload for driver eligibility, device management, support impersonation, and a full audit trail." }
+        ]
+      },
+      {
+        id: "waiver", stage: "arrive", core: false, name: "Driver eligibility &amp; waiver",
+        levels: [
+          { n: "Included", p: 1200, d: "Age and licence capture, a digital waiver, and compound rules accepted before the first ride is confirmed." }
+        ]
+      },
+      {
+        id: "lang", stage: "arrive", core: false, name: "Arabic &amp; English",
+        levels: [
+          { n: "Basic", p: 1600, d: "Both languages in the app and the dashboard, right-to-left layout on the app, with Arabic copy supplied by Golfi." },
+          { n: "Full", p: 3000, d: "Full right-to-left across app and dashboard, an Arabic type system, localised dates, numbers and currency, dual-language content fields for cars and compounds, Arabic notification templates, and Arabic store listings." }
+        ]
+      },
+      {
+        id: "app", stage: "find", core: true, name: "Guest mobile app — React Native, iOS + Android",
+        levels: [
+          { n: "Basic", p: 3200, d: "One codebase, both stores. Around eight screens on standard components: browse, car detail, book, pay, my rides, profile." },
+          { n: "Standard", p: 5600, d: "Around sixteen screens on the full design system, image galleries, onboarding, push handling, offline cache, and deep links." },
+          { n: "Advanced", p: 8800, d: "Everything in Standard, plus bespoke motion, live ride status, in-app support, referrals and credits, an accessibility pass, tablet layouts, a performance budget, and analytics instrumentation." }
+        ]
+      },
+      {
+        id: "webapp", stage: "find", core: true, name: "Guest web app — Next.js",
+        levels: [
+          { n: "Included", p: 5000, list: 7500, d: "The guest product in the browser at golfi.app: browse cars in the compound, book a window, pay, and see my rides — without installing anything. Built on the same API and design system as the mobile app, so a villa can book from a laptop, a shared link, or a phone that has not downloaded the app yet.", note: "Listed at $7,500. Quoted to Golfi at $5,000 — a $2,500 reduction because the web app reuses the mobile app’s API, components and booking flow." }
+        ]
+      },
+      {
+        id: "multi", stage: "find", core: false, name: "More compounds &amp; fleet partners",
+        levels: [
+          { n: "Areas", p: 2000, d: "Several compounds in one app, all operated by Golfi. Guests pick their area; inventory and rates are held per compound." },
+          { n: "Partners", p: 5500, d: "Third-party fleet owners onboard themselves, with their own logins, a commission split, and payout statements per compound." }
+        ]
+      },
+      {
+        id: "booking", stage: "book", core: true, name: "Booking engine",
+        levels: [
+          { n: "Basic", p: 2000, d: "Choose a car and a time window in one compound. Availability by count, confirm and cancel, and server-side locking so two villas cannot take the same car. Clashes and special requests are resolved by ops on the phone." },
+          { n: "Standard", p: 4000, d: "A real-time calendar per car, car types and rates, hourly and daily pricing, extend a ride, buffers between rides, cancellation windows, a waitlist, and automatic overtime charging." },
+          { n: "Advanced", p: 7000, d: "Everything in Standard, plus multi-compound inventory, weekend and peak pricing rules, recurring and season bookings, automatic car assignment, substitution when a car fails, no-show handling, maintenance blocks, and delivery windows with an ETA." }
+        ]
+      },
+      {
+        id: "paygw", stage: "pay", core: true, name: "Payment gateway",
+        levels: [
+          { n: "Basic", p: 1600, d: "One gateway — Paymob or Fawry — with a hosted card page, success and failure states, and a receipt. Refunds and failed charges are handled by a person in the gateway portal, not in your product." },
+          { n: "Standard", p: 3200, d: "Cards saved and tokenised inside the app, automatic retry on failure, webhook reconciliation, refunds issued from the dashboard, emailed receipts, and a deposit hold." },
+          { n: "Advanced", p: 5800, d: "Two gateways with failover, Apple Pay and Google Pay, pre-authorisation captured on return, automated refund rules for late cancellation and overtime, a chargeback workflow, split settlement to compound owners, and payout statements." }
+        ]
+      },
+      {
+        id: "promo", stage: "pay", core: false, name: "Promotions &amp; credits",
+        levels: [
+          { n: "Codes", p: 900, d: "Promo codes, fixed or percentage, with validity windows and usage limits." },
+          { n: "Wallet", p: 2600, d: "A credit wallet, referrals, whole-summer season passes, and guest tiers that change the price a returning villa sees." }
+        ]
+      },
+      {
+        id: "deposit", stage: "pay", core: false, name: "Deposit, condition &amp; damage",
+        levels: [
+          { n: "Included", p: 1400, d: "A refundable deposit held at booking, before-and-after condition photos, and a damage claim the operator can raise against a specific ride." }
+        ]
+      },
+      {
+        id: "notif", stage: "ride", core: false, name: "Notifications",
+        levels: [
+          { n: "Basic", p: 1500, d: "Push and email for the three that matter: confirmation, cancellation, and the return reminder. Provider setup, device tokens, and deep links into the booking." },
+          { n: "Full", p: 2900, d: "Everything in Basic, plus WhatsApp and SMS templates, a guest preference centre, scheduled campaigns, and operator alerts when a car is late back." }
+        ]
+      },
+      {
+        id: "support", stage: "ride", core: false, name: "Ratings &amp; in-app support",
+        levels: [
+          { n: "Basic", p: 600, d: "A rating and comment after the ride, and a one-tap call or WhatsApp through to the operator." },
+          { n: "Inbox", p: 2400, d: "A support inbox inside the app with operator replies, canned responses, escalation, and SLA timers on the desk." }
+        ]
+      },
+      {
+        id: "delivery", stage: "ride", core: false, name: "Delivery to the villa",
+        levels: [
+          { n: "Basic", p: 1100, d: "The guest gives a villa address; staff receive a handover checklist to complete on arrival." },
+          { n: "Staff app", p: 2900, d: "A light staff application: assign, en route, delivered, collected — with a photographed condition report at both ends." }
+        ]
+      },
+      {
+        id: "lock", stage: "ride", core: false, name: "Remote lock &amp; immobilise",
+        levels: [
+          { n: "Included", p: 3600, d: "Lock, unlock and immobilise a car from the app and the desk, through your tracker vendor's API.", note: "Hardware dependent — quoted only against a vendor that exposes an API. We will not commit to it before that is confirmed." }
+        ]
+      },
+      {
+        id: "dash", stage: "operate", core: true, name: "Operator dashboard — Next.js",
+        levels: [
+          { n: "Basic", p: 2400, d: "Login, fleet records, a bookings table with statuses, manual booking on a guest's behalf, a guest list, and settings. One admin account — everyone at the desk shares it." },
+          { n: "Standard", p: 4800, d: "User management with role levels — owner, manager, finance, valet — each with its own permissions and its own audit trail. A payment-gateway transaction view showing every charge, refund and failure against the booking that caused it. Fleet timeline, pricing and promo management, exports, and notification templates." },
+          { n: "Advanced", p: 8400, d: "Everything in Standard, plus a full permission matrix with per-compound admins under one brand, staff invitations, suspension and impersonation for support, settlement and payout statements, refunds issued from the dashboard, a maintenance module, staff shifts, alerting, and a rules engine so pricing and policy change without a release." }
+        ]
+      },
+      {
+        id: "analytics", stage: "operate", core: false, name: "Product analytics &amp; reporting — PostHog",
+        levels: [
+          { n: "Level 1", p: 900, d: "PostHog installed in the app and dashboard with the core events tagged — view, book, pay, cancel — plus KPI cards on the dashboard for bookings, revenue and fleet utilisation." },
+          { n: "Level 2", p: 2200, d: "PostHog funnels, cohorts and session replay on the booking flow, so you can watch where a guest gives up. Utilisation by car, hour and gate, revenue per compound, scheduled email reports, and CSV export." },
+          { n: "Level 3", p: 4500, d: "A warehouse and BI layer alongside PostHog: season-over-season retention, weekend demand forecasting, spend per villa, a custom report builder, feature flags and A/B experiments, and anomaly alerts when a compound drops." }
+        ]
+      }
+    ];
+
+    const CORE = FEATURES.filter((f) => f.core);
+    const PRESETS = {
+      floor: { label: "the $20,000 floor", pick: { discovery: 0, backend: 0, deploy: 0, qa: 0, auth: 0, app: 0, webapp: 0, booking: 0, paygw: 0, dash: 0 } },
+      middle: { label: "a $30,000 build", pick: { discovery: 1, backend: 0, deploy: 0, qa: 0, auth: 1, app: 1, webapp: 0, booking: 1, paygw: 1, dash: 0, notif: 0 } },
+      ceiling: { label: "the $55,000 ceiling", pick: { discovery: 2, backend: 2, deploy: 2, qa: 2, auth: 2, app: 2, webapp: 0, booking: 2, paygw: 2, dash: 2 } }
+    };
+
+    const BANDS = [
+      { max: 23000, name: "Entry build", why: "Every mandatory feature at Basic depth. A guest signs in, books a car, pays and rides — from the app or the browser — and operations can run it from one shared admin account. Edge cases live with your customer service." },
+      { max: 37000, name: "Considered build", why: "The features a guest touches are deep; the desk, the backend and the servers stay lean. This is where most first summers should land." },
+      { max: 51000, name: "Deep build", why: "Booking, payments and the dashboard now handle their own exceptions, with real user roles and a hardened deployment. Ops stops phoning guests to fix things the product should fix." },
+      { max: Infinity, name: "Complete build", why: "Multi-compound, rules-driven, instrumented and penetration-tested. The product can be handed to an operations team and a second brand without a release." }
+    ];
+
+    const WEEKS = [
+      { max: 22000, label: "12–14 weeks", end: 14 },
+      { max: 27000, label: "14–16 weeks", end: 16 },
+      { max: 31000, label: "16–18 weeks", end: 18 },
+      { max: 36000, label: "18–20 weeks", end: 20 },
+      { max: 43000, label: "20–23 weeks", end: 23 },
+      { max: 50000, label: "23–26 weeks", end: 26 },
+      { max: 58000, label: "26–30 weeks", end: 30 },
+      { max: 75000, label: "30–33 weeks", end: 33 },
+      { max: Infinity, label: "33–36 weeks", end: 36 }
+    ];
+
+    const SCALE_MIN = 17000;
+    const SCALE_MAX = 67000;
+    const FLOOR = 20000;
+    const money = (n) => "$" + n.toLocaleString("en-US");
+    const plain = (s) => s.replace(/&amp;/g, "&");
+
+    /* -1 means the feature is not included; core features cannot be -1 */
+    const pick = {};
+    FEATURES.forEach((f) => { pick[f.id] = f.core ? 0 : -1; });
+
+    function chosen(f) {
+      const i = pick[f.id];
+      return i < 0 ? null : f.levels[i];
+    }
+
+    function total() {
+      return FEATURES.reduce((sum, f) => {
+        const lvl = chosen(f);
+        return sum + (lvl ? lvl.p : 0);
+      }, 0);
+    }
+
+    function bandFor(t) { return BANDS.find((b) => t < b.max); }
+    function weeksFor(t) { return WEEKS.find((w) => t < w.max); }
+
+    function applyPreset(key) {
+      const preset = PRESETS[key];
+      if (!preset) return;
+      FEATURES.forEach((f) => { pick[f.id] = f.core ? 0 : -1; });
+      Object.entries(preset.pick).forEach(([id, i]) => { pick[id] = i; });
+      render();
+    }
+
+    function matchedPreset() {
+      return Object.keys(PRESETS).find((key) => {
+        const wanted = PRESETS[key].pick;
+        return FEATURES.every((f) => {
+          const want = Object.prototype.hasOwnProperty.call(wanted, f.id) ? wanted[f.id] : (f.core ? 0 : -1);
+          return pick[f.id] === want;
+        });
+      });
+    }
+
+    function fillList(el, items) {
+      el.innerHTML = items.map((t) => `<li>${t}</li>`).join("");
+    }
+
+    function renderLines() {
+      document.querySelectorAll(".line").forEach((line) => {
+        const f = FEATURES.find((x) => x.id === line.dataset.id);
+        const lvl = chosen(f);
+        line.classList.toggle("is-on", !!lvl);
+        line.classList.toggle("is-off", !lvl);
+        line.querySelector(".line-amt").innerHTML = lvl ? (lvl.list ? `<s style="color:var(--faint);font-size:0.7em;margin-right:8px">${money(lvl.list)}</s>${money(lvl.p)}` : money(lvl.p)) : "—";
+        line.querySelectorAll(".tier-btn").forEach((btn) => {
+          const on = Number(btn.dataset.i) === pick[f.id];
+          btn.classList.toggle("is-on", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        const desc = line.querySelector(".line-desc");
+        if (lvl) {
+          desc.innerHTML = lvl.d + (lvl.note ? `<span class="line-note">${lvl.note}</span>` : "");
+        } else {
+          const first = f.levels[0];
+          desc.innerHTML = `<strong style="color:var(--faint);font-weight:600">Not included.</strong> ${first.n} would add ${money(first.p)} — ${first.d}`;
+        }
+      });
+    }
+
+    function renderQuote(t) {
+      const row = (f, lvl) => `
+        <div class="quote-row">
+          <div>
+            <h4>${f.name} <em>· ${lvl.n}</em></h4>
+            <p>${lvl.d}${lvl.list ? ` <strong style="color:var(--bronze-deep)">List price ${money(lvl.list)}, discounted by ${money(lvl.list - lvl.p)} for Golfi.</strong>` : ""}</p>
+          </div>
+          <div class="quote-price">${lvl.list ? `<s style="color:var(--faint);font-size:0.62em;margin-right:10px">${money(lvl.list)}</s>` : ""}${money(lvl.p)}</div>
+        </div>`;
+
+      const coreRows = CORE.map((f) => row(f, chosen(f)));
+      const coreSum = CORE.reduce((s, f) => s + chosen(f).p, 0);
+      const discount = CORE.reduce((s, f) => s + (chosen(f).list ? chosen(f).list - chosen(f).p : 0), 0);
+      const opts = FEATURES.filter((f) => !f.core && chosen(f));
+      const optSum = opts.reduce((s, f) => s + chosen(f).p, 0);
+
+      let html = `<div class="quote-group">Mandatory — ${CORE.length} features, at the depth you chose</div>`;
+      html += coreRows.join("");
+      html += `<div class="quote-row sub"><div><h4>Mandatory subtotal</h4><p>The product cannot ship without these ${CORE.length} lines.${discount ? ` Includes ${money(discount)} of discount on the web app, already deducted.` : ""}</p></div><div class="quote-price">${money(coreSum)}</div></div>`;
+
+      html += `<div class="quote-group">Optional — ${opts.length ? opts.length + " selected" : "none selected"}</div>`;
+      if (opts.length) {
+        html += opts.map((f) => row(f, chosen(f))).join("");
+        html += `<div class="quote-row sub"><div><h4>Optional subtotal</h4></div><div class="quote-price">${money(optSum)}</div></div>`;
+      } else {
+        html += `<div class="quote-row"><div><h4>No optional features selected</h4><p>Switch any of them on in section 03 and they appear here as their own line.</p></div><div class="quote-price">$0</div></div>`;
+      }
+      document.getElementById("quote-rows").innerHTML = html;
+      return { coreSum, optSum, optCount: opts.length, discount };
+    }
+
+    function render() {
+      const t = total();
+      const band = bandFor(t);
+      const weeks = weeksFor(t);
+      const preset = matchedPreset();
+
+      renderLines();
+      const sums = renderQuote(t);
+
+      const pct = Math.max(0, Math.min(100, ((t - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100));
+      document.getElementById("scale-fill").style.width = pct + "%";
+      document.getElementById("scale-needle").style.left = pct + "%";
+
+      document.querySelectorAll("#compare article").forEach((card) => {
+        card.classList.toggle("is-on", card.dataset.preset === preset);
+      });
+      document.querySelectorAll(".picker-actions button").forEach((btn) => {
+        btn.style.color = btn.dataset.preset === preset ? "var(--ink)" : "";
+      });
+
+      const hot = new Set();
+      FEATURES.forEach((f) => { if (chosen(f)) hot.add(f.stage); });
+      document.querySelectorAll(".rail-step").forEach((el) => {
+        el.classList.toggle("is-hot", hot.has(el.dataset.stage));
+      });
+
+      document.getElementById("must-chips").innerHTML = CORE.map((f) =>
+        `<span class="must-chip">${LOCK_SVG}${plain(f.name).split(" — ")[0]} <b style="color:var(--bronze-deep);font-weight:700">${chosen(f).n}</b></span>`
+      ).join("");
+
+      document.getElementById("bill-name").textContent = band.name;
+      document.getElementById("bill-price").textContent = money(t);
+      document.getElementById("bill-weeks").textContent = "Delivery " + weeks.label;
+      document.getElementById("bill-why").textContent = band.why;
+      document.getElementById("cover-price").textContent = money(t);
+      document.getElementById("cover-weeks").textContent = weeks.label;
+      document.getElementById("dock-name").textContent = band.name;
+      document.getElementById("dock-price").textContent = money(t);
+
+      document.getElementById("bill-lines").innerHTML = [
+        `<li><span>Mandatory — ${CORE.length} features</span><b>${money(sums.coreSum)}</b></li>`,
+        `<li><span>Optional — ${sums.optCount} selected</span><b>${money(sums.optSum)}</b></li>`,
+        `<li><span>Web app discount, deducted</span><b style="white-space:nowrap">&minus;${money(sums.discount)}</b></li>`,
+        `<li><span>Against the $20k floor</span><b>${t > FLOOR ? "+" + money(t - FLOOR) : "at floor"}</b></li>`,
+        `<li><span>Total</span><b>${money(t)}</b></li>`
+      ].join("");
+
+      document.getElementById("inv-name").textContent = band.name;
+      document.getElementById("inv-copy").textContent = band.why;
+      document.getElementById("inv-price").textContent = money(t);
+      document.getElementById("inv-total").textContent = money(t);
+      document.getElementById("pay-1").textContent = money(Math.round(t * 0.4));
+      document.getElementById("pay-2").textContent = money(Math.round(t * 0.3));
+      document.getElementById("pay-3").textContent = money(Math.round(t * 0.2));
+      document.getElementById("pay-4").textContent = money(Math.round(t * 0.1));
+
+      const w = weeks.end;
+      document.getElementById("timeline-title").textContent = weeks.label.replace("–", " to ").replace(" weeks", "") + " weeks. Four movements.";
+      document.getElementById("ph-1-w").textContent = "Weeks 1 — " + Math.max(2, Math.round(w * 0.18));
+      document.getElementById("ph-2-w").textContent = "Weeks " + Math.max(2, Math.round(w * 0.15)) + " — " + Math.round(w * 0.62);
+      document.getElementById("ph-3-w").textContent = "Weeks " + Math.round(w * 0.42) + " — " + Math.round(w * 0.85);
+      document.getElementById("ph-4-w").textContent = "Weeks " + Math.round(w * 0.8) + " — " + w;
+
+      const lvlOf = (id) => chosen(FEATURES.find((f) => f.id === id)).n;
+      fillList(document.getElementById("ph-2-list"), [
+        "Authentication — " + lvlOf("auth"),
+        "Booking engine — " + lvlOf("booking"),
+        "Payment gateway — " + lvlOf("paygw"),
+        "React Native app — " + lvlOf("app"),
+        "Guest web app — " + lvlOf("webapp")
+      ]);
+      const opsItems = ["Next.js dashboard — " + lvlOf("dash"), "Backend API — " + lvlOf("backend"), "Deployment & security — " + lvlOf("deploy")];
+      FEATURES.filter((f) => !f.core && chosen(f)).slice(0, 2).forEach((f) => {
+        opsItems.push(plain(f.name) + " — " + chosen(f).n);
+      });
+      fillList(document.getElementById("ph-3-list"), opsItems);
+    }
+
+    const LOCK_SVG = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:var(--bronze-deep);stroke-width:2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+
+    function bootPicker() {
+      const lockBadge = '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+      const plusBadge = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
+
+      document.getElementById("scale-ticks").innerHTML = [
+        { v: 20000, l: "Floor" },
+        { v: 30000, l: "Middle" },
+        { v: 55000, l: "All advanced" }
+      ].map((t) => {
+        const pct = ((t.v - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
+        return `<div class="scale-tick" style="left:${pct}%"><b>${money(t.v)}</b><span>${t.l}</span></div>`;
+      }).join("");
+
+      document.getElementById("journey-rail").innerHTML = STAGES.map((s) =>
+        `<a class="rail-step is-hot" data-stage="${s.id}" href="#stage-${s.id}"><b>${s.n}</b><span>${s.label}</span></a>`
+      ).join("");
+
+      document.getElementById("stages").innerHTML = STAGES.map((s) => {
+        const rows = FEATURES.filter((f) => f.stage === s.id).map((f) => {
+          const btns = [];
+          if (!f.core) btns.push(`<button type="button" class="tier-btn" data-id="${f.id}" data-i="-1"><b>Off</b><em>$0</em></button>`);
+          f.levels.forEach((lvl, i) => {
+            btns.push(`<button type="button" class="tier-btn" data-id="${f.id}" data-i="${i}"><b>${lvl.n}</b><em>${lvl.list ? `<s style="opacity:0.55;margin-right:6px">${money(lvl.list)}</s>` : ""}${money(lvl.p)}</em></button>`);
+          });
+          return `
+            <div class="line" data-id="${f.id}">
+              <div class="line-head">
+                <div>
+                  <span class="line-badge ${f.core ? "is-core" : "is-opt"}">${f.core ? lockBadge + "Mandatory" : plusBadge + "Optional"}</span>
+                  <h4>${f.name}</h4>
+                </div>
+                <div class="line-amt">—</div>
+              </div>
+              <div class="tiers" role="group" aria-label="Depth for ${plain(f.name)}">${btns.join("")}</div>
+              <p class="line-desc"></p>
+            </div>`;
+        }).join("");
+        return `
+          <div class="stage" id="stage-${s.id}">
+            <div class="stage-head">
+              <b>${s.n}</b>
+              <h3>${s.label}</h3>
+              ${s.note ? `<em>${s.note}</em>` : ""}
+            </div>
+            <div class="lines">${rows}</div>
+          </div>`;
+      }).join("");
+
+      document.getElementById("stages").addEventListener("click", (e) => {
+        const btn = e.target.closest(".tier-btn");
+        if (!btn) return;
+        pick[btn.dataset.id] = Number(btn.dataset.i);
+        render();
+      });
+
+      document.getElementById("journey-rail").addEventListener("click", (e) => {
+        const step = e.target.closest(".rail-step");
+        if (!step) return;
+        e.preventDefault();
+        scrollToId("stage-" + step.dataset.stage);
+      });
+
+      document.querySelectorAll(".picker-actions button").forEach((btn) => {
+        btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
+      });
+      document.querySelectorAll("#compare article").forEach((card) => {
+        card.addEventListener("click", () => {
+          applyPreset(card.dataset.preset);
+          scrollToId("journey");
+        });
+      });
+      render();
+    }
+
+    const toggle = document.getElementById("nav-toggle");
+    const links = document.getElementById("nav-links");
+    toggle?.addEventListener("click", () => links.classList.toggle("open"));
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      links?.classList.remove("open");
+      if (reduce || typeof gsap === "undefined") {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+      } else {
+        gsap.to(window, { duration: 1.15, scrollTo: { y: el, offsetY: 80 }, ease: "power3.inOut" });
+      }
+      history.replaceState(null, "", "#" + id);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href").slice(1);
+        if (!id) return;
+        e.preventDefault();
+        scrollToId(id);
+      });
+    });
+
+    bootPicker();
+
+    if (reduce || typeof gsap === "undefined") {
+      /* static page */
+    } else {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      gsap.to("#scroll-progress", {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: { scrub: 0.25 }
+      });
+
+      gsap.set(".nav", { y: -24, opacity: 0 });
+      gsap.set(".cover-media", { scale: 1.18, transformOrigin: "50% 40%" });
+      gsap.set(".cover-kicker, .cover-meta, .cover-sub, .cover-foot", { opacity: 0, y: 22 });
+      gsap.set("h1 .h1-line span", { yPercent: 110 });
+
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      intro
+        .to(".cover-media", { scale: 1, duration: 2.4, ease: "power2.out" }, 0)
+        .to(".nav", { y: 0, opacity: 1, duration: 0.8 }, 0.15)
+        .to(".cover-kicker", { opacity: 1, y: 0, duration: 0.7 }, 0.35)
+        .to(".cover-meta", { opacity: 1, y: 0, duration: 0.7 }, 0.45)
+        .to("h1 .h1-line span", { yPercent: 0, duration: 1.05, stagger: 0.12 }, 0.4)
+        .to(".cover-sub", { opacity: 1, y: 0, duration: 0.8 }, 0.85)
+        .to(".cover-foot", { opacity: 1, y: 0, duration: 0.8 }, 1.0);
+
+      gsap.to(".cover-media", {
+        yPercent: 18,
+        ease: "none",
+        scrollTrigger: { trigger: ".cover", start: "top top", end: "bottom top", scrub: true }
+      });
+      gsap.to(".close-media", {
+        yPercent: 14,
+        ease: "none",
+        scrollTrigger: { trigger: "#next", start: "top bottom", end: "bottom top", scrub: true }
+      });
+
+      gsap.utils.toArray(".section-head, .quote-bar, .toc, .split, .dash-shot, .invest, .cta-row, .close-inner, .picker, .must").forEach((el) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 48,
+          duration: 0.95,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 82%", once: true }
+        });
+      });
+
+      gsap.utils.toArray(".req, .platform, .feat, .phone, .arch-card, .flow-step, .phase, .pay, .why article, .term, .pillar, .stage-head, .compare article").forEach((el, i) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 28,
+          duration: 0.7,
+          delay: (i % 6) * 0.04,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 88%", once: true }
+        });
+      });
+
+      let last = 0;
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          const y = self.scroll();
+          if (y > 80) {
+            gsap.to(".nav", { y: y > last + 6 ? -88 : 0, duration: 0.35, overwrite: true });
+          } else {
+            gsap.to(".nav", { y: 0, duration: 0.35, overwrite: true });
+          }
+          last = y;
+        }
+      });
+
+      if (finePointer) {
+        document.body.classList.add("has-cursor");
+        const ring = document.getElementById("cursor");
+        const dot = document.getElementById("cursor-dot");
+        const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        const move = (e) => {
+          pos.x = e.clientX;
+          pos.y = e.clientY;
+          gsap.to(dot, { x: pos.x, y: pos.y, duration: 0.12, ease: "power3.out" });
+          gsap.to(ring, { x: pos.x, y: pos.y, duration: 0.45, ease: "power3.out" });
+        };
+        window.addEventListener("mousemove", move, { passive: true });
+        document.querySelectorAll("a, button").forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            ring.classList.add("is-link");
+            gsap.to(ring, { scale: 1.65, duration: 0.28, ease: "power3.out", overwrite: "auto" });
+          });
+          el.addEventListener("mouseleave", () => {
+            ring.classList.remove("is-link");
+            gsap.to(ring, { scale: 1, duration: 0.28, ease: "power3.out", overwrite: "auto" });
+          });
+        });
+      }
+    }
+  </script>
+</body>
+</html>
