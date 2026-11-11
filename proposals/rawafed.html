@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rawafed Health International — Mobile App for rawafedhealth.com | Proposal by NixAI</title>
+  <meta name="description" content="A React Native shopping app for iOS and Android built on the existing WooCommerce store at rawafedhealth.com — with a frank audit of what the WooCommerce APIs give us, what they don't, and how we close the gap. Prepared by NixAI." />
+  <meta property="og:title" content="Rawafed Health International — Mobile App Proposal" />
+  <meta property="og:description" content="One React Native app, both stores, the WooCommerce you already run. Prepared by NixAI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/rawafed/hero-symbol.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #ffffff;
+      --tint: #eaf6fc;         /* blue 50 */
+      --tint-2: #d2ecf8;       /* blue 100 */
+      --blue: #1fa1db;         /* primary */
+      --blue-light: #35ace9;
+      --blue-deep: #137fb0;    /* blue 700 */
+      --navy: #16386b;         /* secondary */
+      --navy-deep: #0e2648;    /* navy 800 */
+      --navy-900: #091a33;
+      --grey: #646565;
+      --ink: #16386b;
+      --muted: #4a5568;
+      --faint: #8a94a6;
+      --alert: #c0392b;
+      --ok: #1f9d6d;
+      --line: rgba(22,56,107,0.14);
+      --line-strong: rgba(31,161,219,0.6);
+      --sans: "Source Sans 3", "Myriad Pro", system-ui, -apple-system, sans-serif;
+      --arabic: "IBM Plex Sans Arabic", "Graphik Arabic", system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(circle at 1px 1px, rgba(31,161,219,0.18) 1px, transparent 1.2px);
+      background-size: 26px 26px;
+      mask-image: radial-gradient(ellipse at 85% 0%, rgba(0,0,0,0.8), transparent 50%), radial-gradient(ellipse at 0% 100%, rgba(0,0,0,0.5), transparent 45%);
+      -webkit-mask-image: radial-gradient(ellipse at 85% 0%, rgba(0,0,0,0.8), transparent 50%), radial-gradient(ellipse at 0% 100%, rgba(0,0,0,0.5), transparent 45%);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    strong { color: var(--navy); font-weight: 700; }
+    p { color: var(--muted); margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+    .ar { font-family: var(--arabic); direction: rtl; unicode-bidi: isolate; }
+    .k-blue { color: var(--blue); }
+
+    .scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 80; background: var(--blue); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+    .cursor, .cursor-dot { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 90; border-radius: 50%; }
+    .cursor { width: 36px; height: 36px; margin: -18px 0 0 -18px; border: 1px solid var(--blue); }
+    .cursor-dot { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: var(--navy); }
+    .cursor.is-link { border-color: var(--navy); }
+    @media (hover: none), (pointer: coarse) { .cursor, .cursor-dot { display: none; } }
+    @media (hover: hover) and (pointer: fine) { body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; } }
+
+    .shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+
+    /* Nav ---------------------------------------------------------------- */
+    .nav {
+      position: fixed; top: 16px; left: 16px; right: 16px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 10px 18px; border-radius: 14px;
+      background: rgba(255,255,255,0.84); border: 1px solid var(--line);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
+    .nav-brand img.emblem { height: 34px; width: auto; }
+    .nav-brand .slash { color: var(--blue); font-weight: 300; font-size: 26px; line-height: 1; }
+    .nav-brand img.word { height: 15px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: color 200ms ease; }
+    .nav-links .menu-quote { display: none; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: var(--white); padding: 10px 16px; border-radius: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 200ms ease, color 200ms ease; }
+    .nav-cta:hover { background: var(--blue); color: var(--white); }
+    .nav-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); width: 42px; height: 42px; cursor: pointer; }
+
+    /* Cover -------------------------------------------------------------- */
+    .cover { position: relative; min-height: 100vh; display: grid; align-items: end; overflow: hidden; background: var(--tint); }
+    .cover-media { position: absolute; inset: -10% 0; height: 120%; background: var(--tint) url("/assets/rawafed/hero-symbol.jpg") 78% 40%/cover no-repeat; will-change: transform; }
+    .cover-media::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.94) 36%, rgba(255,255,255,0.55) 60%, rgba(255,255,255,0.06) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.96) 100%);
+    }
+    .cover-inner { position: relative; z-index: 2; padding: 140px 0 56px; }
+    .cover-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 64px; }
+    .cover-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-deep); }
+    .cover-meta { text-align: right; color: var(--muted); font-size: 12px; letter-spacing: 0.04em; }
+    .cover-meta span { display: block; color: var(--faint); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; }
+    h1 { font-family: var(--sans); font-weight: 800; font-size: clamp(46px, 7.4vw, 98px); line-height: 0.96; letter-spacing: -0.03em; color: var(--navy); max-width: 960px; margin: 10px 0 22px; }
+    h1 em { font-style: normal; color: var(--blue); }
+    h1 .h1-line { display: block; overflow: hidden; }
+    h1 .h1-line span { display: block; }
+    .cover-sub { font-size: clamp(16px, 2vw, 20px); color: var(--muted); max-width: 660px; margin-bottom: 40px; }
+    .cover-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; border-top: 1px solid var(--line); padding-top: 22px; }
+    .cover-logos { display: flex; align-items: center; gap: 18px; }
+    .cover-logos img { height: 46px; width: auto; object-fit: contain; }
+    .cover-logos img.nix-dark { height: 20px; }
+    .cover-logos .slash { color: var(--blue); font-weight: 300; font-size: 30px; }
+    .cover-stats { display: flex; gap: 36px; }
+    .cover-stats div span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+    .cover-stats strong { font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
+
+    /* Sections ----------------------------------------------------------- */
+    .section { padding: 108px 0; position: relative; scroll-margin-top: 88px; }
+    #cover, #next { scroll-margin-top: 0; }
+    .section.alt { background: var(--tint); }
+    .section.dark { background: var(--navy); color: var(--white); }
+    .section.dark p { color: rgba(255,255,255,0.74); }
+    .section.dark strong { color: var(--white); }
+    .section.dark h2 { color: var(--white); }
+    .section.dark h2 em { color: var(--blue-light); }
+    .section.dark .section-kicker { color: var(--blue-light); }
+    .section.dark .lead { color: rgba(255,255,255,0.82); }
+    .section-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-deep); margin-bottom: 14px; }
+    h2 { font-family: var(--sans); font-weight: 800; font-size: clamp(34px, 4.8vw, 60px); line-height: 1.02; color: var(--navy); letter-spacing: -0.03em; margin-bottom: 18px; }
+    h2 em { font-style: normal; color: var(--blue); }
+    .lead { font-size: 18px; color: var(--muted); max-width: 720px; }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 48px; align-items: end; margin-bottom: 56px; }
+
+    /* Quote bar ---------------------------------------------------------- */
+    .quote-bar { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 14px; background: var(--white); overflow: hidden; }
+    .quote-cell { padding: 28px 24px; border-right: 1px solid var(--line); }
+    .quote-cell:last-child { border-right: 0; }
+    .quote-cell span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .quote-cell b { font-weight: 600; font-size: 15px; color: var(--navy); }
+
+    /* Contents ----------------------------------------------------------- */
+    .toc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--white); }
+    .toc a { display: grid; grid-template-columns: 72px 1fr auto; gap: 16px; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: background 200ms ease, color 200ms ease; }
+    .toc a:nth-child(odd) { border-right: 1px solid var(--line); }
+    .toc a:hover { background: var(--tint); color: var(--navy); }
+    .toc .n { font-weight: 800; color: var(--blue); font-size: 22px; letter-spacing: -0.02em; }
+    .toc .t { font-size: 14px; font-weight: 600; }
+    .toc .pg { font-size: 11px; letter-spacing: 0.12em; color: var(--faint); }
+    .toc a.hot .t::after { content: "Read first"; margin-left: 10px; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white); background: var(--blue); padding: 3px 7px; border-radius: 6px; vertical-align: middle; }
+
+    /* Split / editorial -------------------------------------------------- */
+    .split { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 48px; align-items: center; }
+    .split img { width: 100%; height: 100%; object-fit: cover; min-height: 520px; border-radius: 18px; }
+    .portrait-frame { position: relative; background: var(--white); border-radius: 18px; overflow: hidden; }
+    .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+    .pillar { border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; background: var(--white); }
+    .pillar h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 6px; letter-spacing: -0.01em; }
+    .pillar p { font-size: 13px; }
+    .facts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 48px; }
+    .fact { border: 1px solid var(--line); border-radius: 14px; padding: 20px 18px; background: var(--white); }
+    .fact strong { display: block; font-size: 34px; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 8px; letter-spacing: -0.03em; }
+    .fact span { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+
+    /* API audit (dark) --------------------------------------------------- */
+    .verdict { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 40px; }
+    .verdict article { border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 24px 22px 22px; background: rgba(255,255,255,0.05); }
+    .verdict .lamp { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+    .verdict .lamp i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .verdict .lamp.ok { color: #7ee2b5; } .verdict .lamp.ok i { background: #7ee2b5; }
+    .verdict .lamp.warn { color: #ffd166; } .verdict .lamp.warn i { background: #ffd166; }
+    .verdict .lamp.bad { color: #ff8a7a; } .verdict .lamp.bad i { background: #ff8a7a; }
+    .verdict h3 { font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 8px; line-height: 1.1; letter-spacing: -0.01em; }
+    .verdict p { font-size: 14px; }
+    .matrix { border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; overflow: hidden; }
+    .m-row { display: grid; grid-template-columns: 1.05fr 1.1fr 1.25fr; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .m-row:last-child { border-bottom: 0; }
+    .m-row > div { padding: 16px 20px; font-size: 13.5px; color: rgba(255,255,255,0.78); border-right: 1px solid rgba(255,255,255,0.1); }
+    .m-row > div:last-child { border-right: 0; }
+    .m-row.head > div { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-light); font-weight: 700; padding: 12px 20px; background: rgba(255,255,255,0.04); }
+    .m-row b { color: var(--white); font-weight: 600; display: block; margin-bottom: 2px; }
+    .m-row .state { display: inline-block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; padding: 3px 8px; border-radius: 6px; margin-bottom: 6px; }
+    .state.ok { background: rgba(126,226,181,0.16); color: #7ee2b5; }
+    .state.warn { background: rgba(255,209,102,0.16); color: #ffd166; }
+    .state.bad { background: rgba(255,138,122,0.18); color: #ff8a7a; }
+    .m-row code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--blue-light); background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 5px; }
+    .m-row .fix { color: var(--white); }
+    .callout { margin-top: 28px; border: 1px solid var(--blue-light); border-radius: 16px; padding: 26px 28px; background: rgba(31,161,219,0.12); display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; }
+    .callout svg { width: 30px; height: 30px; stroke: var(--blue-light); fill: none; stroke-width: 1.8; margin-top: 2px; }
+    .callout h3 { color: var(--white); font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .callout p { font-size: 14.5px; }
+    .callout ol { margin: 10px 0 0 18px; color: rgba(255,255,255,0.82); font-size: 14px; }
+    .callout li { margin-bottom: 6px; }
+    .callout li b { color: var(--white); }
+
+    /* Platforms ---------------------------------------------------------- */
+    .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .platform { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 28px 24px 24px; min-height: 340px; display: flex; flex-direction: column; }
+    .platform .tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-deep); margin-bottom: 18px; font-weight: 700; }
+    .platform h3 { font-size: 30px; font-weight: 800; color: var(--navy); margin-bottom: 12px; line-height: 1.05; letter-spacing: -0.02em; }
+    .platform h3 em { font-style: normal; color: var(--blue); }
+    .platform p { flex: 1; }
+    .stack { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); padding: 6px 10px; }
+    .dark .chip { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.75); }
+
+    /* Features ----------------------------------------------------------- */
+    .feat-block { margin-bottom: 42px; }
+    .feat-label { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-deep); }
+    .feat-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .feat { border: 1px solid var(--line); border-radius: 14px; padding: 20px 18px 18px; min-height: 164px; background: var(--white); }
+    .feat svg { width: 22px; height: 22px; stroke: var(--blue); fill: none; stroke-width: 1.7; margin-bottom: 14px; }
+    .feat h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+    .feat p { font-size: 13px; }
+    .feat.bridge { border-style: dashed; border-color: var(--line-strong); background: linear-gradient(180deg, rgba(31,161,219,0.06), var(--white)); }
+    .feat .pill { display: inline-block; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-deep); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 6px; margin-left: 6px; vertical-align: middle; font-weight: 700; }
+
+    /* Experience mockups ------------------------------------------------- */
+    .mock-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: start; perspective: 1400px; }
+    .phone { background: var(--navy-900); border-radius: 38px; padding: 12px; box-shadow: 0 30px 80px rgba(22,56,107,0.22); will-change: transform; }
+    .phone-screen { background: var(--white); border-radius: 28px; overflow: hidden; min-height: 620px; display: flex; flex-direction: column; }
+    .p-status { display: flex; justify-content: space-between; padding: 12px 18px 0; font-size: 10px; color: var(--navy); font-weight: 600; }
+    .p-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px 8px; }
+    .p-top img { height: 22px; }
+    .p-top .ic { display: flex; gap: 10px; }
+    .p-top .ic i { width: 22px; height: 22px; border: 1px solid var(--line); border-radius: 7px; display: block; }
+    .p-search { margin: 6px 14px 10px; border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; font-size: 11px; color: var(--faint); display: flex; justify-content: space-between; }
+    .p-search .ar { color: var(--faint); }
+    .p-hero { margin: 0 14px; border-radius: 14px; background: var(--navy); color: var(--white); padding: 16px 16px 14px; position: relative; overflow: hidden; }
+    .p-hero .k { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); font-weight: 700; margin-bottom: 6px; }
+    .p-hero h4 { font-size: 20px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .p-hero h4 em { font-style: normal; color: var(--blue-light); }
+    .p-hero p { font-size: 10px; color: rgba(255,255,255,0.78); max-width: 60%; }
+    .p-hero img { position: absolute; right: -6px; bottom: -6px; width: 88px; height: 88px; object-fit: contain; border-radius: 12px; background: var(--white); padding: 4px; }
+    .p-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 14px 14px 6px; }
+    .p-cat { text-align: center; font-size: 8.5px; color: var(--muted); font-weight: 600; }
+    .p-cat i { display: block; aspect-ratio: 1; border-radius: 14px; background: var(--tint); margin-bottom: 5px; border: 1px solid var(--line); }
+    .p-sec { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 16px 6px; font-size: 11px; font-weight: 700; color: var(--navy); }
+    .p-sec span { font-size: 9px; color: var(--blue-deep); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .p-prods { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 14px 14px; }
+    .p-prod { border: 1px solid var(--line); border-radius: 12px; padding: 8px; }
+    .p-prod img { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 8px; background: var(--tint); margin-bottom: 6px; }
+    .p-prod b { display: block; font-size: 10px; color: var(--navy); line-height: 1.2; }
+    .p-prod span { font-size: 9px; color: var(--faint); }
+    .p-prod .pr { font-size: 11px; font-weight: 700; color: var(--navy); margin-top: 3px; }
+    .p-prod .pr small { font-size: 8px; font-weight: 600; color: var(--muted); margin-left: 3px; }
+    .p-tabbar { margin-top: auto; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); padding: 10px 8px 14px; font-size: 8px; text-align: center; color: var(--faint); font-weight: 600; }
+    .p-tabbar i { display: block; width: 18px; height: 18px; border-radius: 6px; margin: 0 auto 3px; background: var(--tint); }
+    .p-tabbar .on { color: var(--blue-deep); }
+    .p-tabbar .on i { background: var(--blue); }
+
+    .p-img { position: relative; margin: 8px 14px 0; border-radius: 16px; background: var(--tint); aspect-ratio: 1/0.92; display: grid; place-items: center; overflow: hidden; }
+    .p-img img { width: 82%; height: 82%; object-fit: contain; }
+    .p-img .badge { position: absolute; top: 12px; left: 12px; background: var(--navy); color: var(--white); font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; }
+    .p-img .dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; }
+    .p-img .dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--line); } .p-img .dots i:first-child { background: var(--blue); }
+    .p-body { padding: 14px 16px 16px; }
+    .p-body .k { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-deep); font-weight: 700; }
+    .p-body h4 { font-size: 24px; font-weight: 800; color: var(--navy); line-height: 1.02; letter-spacing: -0.02em; margin: 4px 0 4px; }
+    .p-body h4 em { font-style: normal; color: var(--blue); }
+    .p-body .ar-name { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .p-price { display: flex; align-items: flex-end; gap: 10px; margin: 8px 0 10px; }
+    .p-price .num { font-size: 26px; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -0.02em; }
+    .p-price .num small { font-size: 13px; font-weight: 700; }
+    .p-price .cur { font-size: 10px; color: var(--muted); font-weight: 600; line-height: 1.1; }
+    .p-price .bnpl { margin-left: auto; font-size: 8.5px; color: var(--muted); text-align: right; line-height: 1.3; }
+    .p-price .bnpl b { color: var(--navy); font-size: 9px; }
+    .p-vars { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+    .p-vars span { font-size: 10px; border: 1px solid var(--line); border-radius: 7px; padding: 5px 9px; color: var(--muted); font-weight: 600; }
+    .p-vars span.on { border-color: var(--navy); color: var(--navy); background: var(--tint); }
+    .p-cta { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    .p-cta div { background: var(--navy); color: var(--white); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; padding: 12px 12px; text-align: center; border-radius: 10px; }
+    .p-cta div.ghost { background: var(--white); color: var(--navy); border: 1px solid var(--navy); }
+    .p-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+    .p-meta span { font-size: 9px; color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+    .p-meta span b { display: block; color: var(--navy); font-size: 10px; }
+
+    .p-title { padding: 12px 16px 4px; font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+    .p-title small { display: block; font-size: 10px; color: var(--faint); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+    .p-steps { display: flex; gap: 6px; padding: 8px 16px 10px; }
+    .p-steps span { flex: 1; height: 3px; border-radius: 3px; background: var(--line); }
+    .p-steps span.on { background: var(--blue); }
+    .p-pay { margin: 0 14px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .p-pay div { display: flex; justify-content: space-between; align-items: center; padding: 11px 12px; border-bottom: 1px solid var(--line); font-size: 11px; font-weight: 600; color: var(--navy); }
+    .p-pay div:last-child { border-bottom: 0; }
+    .p-pay div i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--line); display: inline-block; margin-right: 8px; vertical-align: middle; }
+    .p-pay div.on i { border-color: var(--blue); background: radial-gradient(circle, var(--blue) 45%, transparent 50%); }
+    .p-pay div small { font-size: 9px; color: var(--faint); font-weight: 600; }
+    .p-pay .logo { font-size: 9px; font-weight: 800; letter-spacing: 0.04em; color: var(--white); background: var(--navy); border-radius: 5px; padding: 2px 6px; }
+    .p-pay .logo.tabby { background: #3bffa0; color: #0b2c1c; } .p-pay .logo.tamara { background: #ffbfa3; color: #4b1d0a; } .p-pay .logo.mada { background: #1e5a98; }
+    .p-summary { margin: 10px 14px 0; background: var(--tint); border-radius: 14px; padding: 12px 14px; font-size: 11px; color: var(--muted); }
+    .p-summary div { display: flex; justify-content: space-between; padding: 3px 0; }
+    .p-summary div.t { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 8px; color: var(--navy); font-weight: 800; font-size: 14px; }
+    .p-order { margin: 12px 14px 0; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+    .p-order .st { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--navy); font-weight: 700; margin-bottom: 8px; }
+    .p-order .st i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+    .p-order .track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .p-order .track span { height: 4px; border-radius: 4px; background: var(--line); }
+    .p-order .track span.on { background: var(--blue); }
+    .p-order .lbls { display: grid; grid-template-columns: repeat(4, 1fr); font-size: 7.5px; color: var(--faint); margin-top: 5px; text-align: center; font-weight: 600; }
+    .p-note { margin: 10px 14px 0; font-size: 9.5px; color: var(--faint); display: flex; gap: 6px; align-items: flex-start; }
+    .p-note i { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); margin-top: 4px; flex: none; }
+    .mock-cap { margin-top: 14px; font-size: 12px; color: var(--muted); text-align: center; }
+    .mock-cap b { color: var(--navy); display: block; font-size: 13px; }
+
+    .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 40px; }
+    .swatch { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--white); }
+    .swatch i { display: block; height: 60px; }
+    .swatch div { padding: 10px 10px 12px; }
+    .swatch b { display: block; font-size: 12px; }
+    .swatch span { font-size: 11px; color: var(--faint); letter-spacing: 0.04em; }
+    .type-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .type-card { border: 1px solid var(--line); border-radius: 14px; background: var(--white); padding: 20px 22px; }
+    .type-card .k { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .type-card .s { font-size: 30px; font-weight: 800; color: var(--navy); line-height: 1.05; letter-spacing: -0.02em; }
+    .type-card .s em { font-style: normal; color: var(--blue); }
+    .type-card .a { font-family: var(--arabic); direction: rtl; font-size: 26px; color: var(--navy); line-height: 1.5; font-weight: 600; }
+    .type-card .pr { font-size: 34px; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -0.02em; }
+    .type-card .pr small { font-size: 17px; }
+    .type-card .pr-cur { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 4px; }
+    .type-card p { font-size: 13px; margin-top: 8px; }
+
+    /* Architecture ------------------------------------------------------- */
+    .arch { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .arch-card { border: 1px solid var(--line); border-radius: 16px; padding: 24px; background: var(--white); }
+    .arch-card.bridge { border-color: var(--line-strong); background: linear-gradient(180deg, rgba(31,161,219,0.08), var(--white)); }
+    .arch-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--navy); letter-spacing: -0.02em; }
+    .arch-card ul { list-style: none; color: var(--muted); font-size: 14px; }
+    .arch-card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .arch-card li:last-child { border-bottom: 0; }
+    .flow { margin-top: 18px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .flow-step { border: 1px solid var(--line); border-radius: 14px; padding: 16px 12px; text-align: center; background: var(--white); }
+    .flow-step b { display: block; color: var(--blue); font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .flow-step span { font-size: 12px; color: var(--muted); }
+
+    /* Timeline ----------------------------------------------------------- */
+    .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .phase { border: 1px solid var(--line); border-radius: 16px; padding: 22px 18px; min-height: 300px; background: var(--white); }
+    .phase .wk { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-deep); font-weight: 700; margin-bottom: 14px; }
+    .phase h3 { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--navy); letter-spacing: -0.02em; }
+    .phase ul { list-style: none; color: var(--muted); font-size: 13px; }
+    .phase li { padding: 6px 0 6px 14px; position: relative; }
+    .phase li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 2px; background: var(--blue); }
+    .gantt { margin-top: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); padding: 18px 20px 10px; }
+    .g-row { display: grid; grid-template-columns: 200px 1fr; gap: 14px; align-items: center; margin-bottom: 10px; }
+    .g-row span { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .g-track { position: relative; height: 12px; background: var(--tint); border-radius: 6px; }
+    .g-bar { position: absolute; top: 0; bottom: 0; background: var(--navy); border-radius: 6px; }
+    .g-bar.blue { background: var(--blue); }
+    .g-bar.light { background: var(--tint-2); }
+    .g-weeks { display: grid; grid-template-columns: repeat(16, 1fr); margin: 6px 0 0 214px; font-size: 9px; color: var(--faint); letter-spacing: 0.04em; }
+
+    /* Investment --------------------------------------------------------- */
+    .invest { border: 1px solid var(--line-strong); border-radius: 20px; background: linear-gradient(180deg, rgba(31,161,219,0.08), rgba(255,255,255,0.7)); padding: 32px 32px 8px; }
+    .invest-top { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; padding-bottom: 24px; }
+    .invest-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-deep); font-weight: 700; }
+    .invest-total { text-align: right; }
+    .invest-total span { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+    .invest-total strong { font-size: clamp(48px, 6vw, 72px); font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -0.03em; }
+    .quote-group { padding: 18px 0 6px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-deep); font-weight: 700; border-top: 1px solid var(--line); }
+    .quote-row { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line); }
+    .quote-row h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--navy); }
+    .quote-row p { font-size: 13px; }
+    .quote-price { font-size: 28px; font-weight: 800; color: var(--navy); white-space: nowrap; letter-spacing: -0.02em; }
+    .quote-row.sub { padding: 12px 0; }
+    .quote-row.sub h4 { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .quote-row.sub .quote-price { font-size: 20px; color: var(--muted); }
+    .quote-row.total { background: rgba(31,161,219,0.14); margin: 0 -32px; padding: 22px 32px; border-radius: 0 0 20px 20px; }
+    .pay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
+    .pay { border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--white); }
+    .pay span { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .pay b { font-size: 22px; font-weight: 800; color: var(--navy); }
+    .addons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .addon { border: 1px dashed rgba(22,56,107,0.35); border-radius: 14px; padding: 18px; display: flex; justify-content: space-between; gap: 16px; background: var(--white); }
+    .addon h4 { font-size: 15px; margin-bottom: 4px; color: var(--navy); }
+    .addon p { font-size: 13px; }
+    .addon em { font-style: normal; color: var(--blue-deep); font-weight: 800; white-space: nowrap; }
+    .invest-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+
+    /* Why / terms -------------------------------------------------------- */
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .why article { border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: var(--white); }
+    .why h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--navy); letter-spacing: -0.02em; }
+    .terms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .term { border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--white); }
+    .term h3 { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-deep); margin-bottom: 8px; }
+    .term p { font-size: 13px; }
+
+    /* Close -------------------------------------------------------------- */
+    .close { position: relative; min-height: 88vh; display: grid; align-items: end; overflow: hidden; background: var(--navy-deep); color: var(--white); }
+    .close-media { position: absolute; inset: -12% 0; height: 124%; background: var(--navy-deep) url("/assets/rawafed/retail-wall.jpg") center 30%/cover no-repeat; will-change: transform; }
+    .close-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,38,72,0.45), rgba(9,26,51,0.96) 70%); }
+    .close-inner { position: relative; z-index: 2; padding: 80px 0 48px; }
+    .close h2 { color: var(--white); }
+    .close h2 em { color: var(--blue-light); }
+    .close .lead, .close p { color: rgba(255,255,255,0.82); }
+    .close .section-kicker { color: var(--blue-light); }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 22px; border-radius: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; border: 1px solid transparent; transition: background 200ms ease, color 200ms ease, border-color 200ms ease; }
+    .btn-primary { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .btn-primary:hover { background: var(--white); border-color: var(--white); color: var(--navy); }
+    .btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.35); }
+    .btn-ghost:hover { border-color: var(--blue-light); color: var(--blue-light); }
+    .btn-dark { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .btn-dark:hover { background: var(--blue); border-color: var(--blue); }
+    .btn-outline { background: transparent; color: var(--navy); border-color: var(--navy); }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+    footer { border-top: 1px solid rgba(255,255,255,0.18); padding: 28px 0 40px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .footer-mark { text-align: center; flex: 1; }
+    .footer-mark img { height: 40px; width: auto; object-fit: contain; margin: 0 auto 8px; }
+    .footer-mark small { display: block; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .nix { height: 22px; opacity: 0.95; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor, .cursor-dot, .scroll-progress { display: none !important; }
+      h1 .h1-line span { transform: none !important; }
+    }
+
+    @media (max-width: 980px) {
+      .nav-cta { display: none; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+      .nav-links .menu-quote { display: inline-flex; margin-top: 8px; }
+      .nav-toggle { display: grid; place-items: center; }
+      .section-head, .split, .platforms, .feat-grid, .arch, .phases, .invest-top, .pay-grid, .addons, .why, .terms, .quote-bar, .toc, .pillars, .mock-row, .type-row, .verdict { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr 1fr; }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .swatches { grid-template-columns: repeat(3, 1fr); }
+      .m-row { grid-template-columns: 1fr; }
+      .m-row > div { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .m-row.head { display: none; }
+      .callout { grid-template-columns: 1fr; }
+      .g-row { grid-template-columns: 1fr; gap: 6px; }
+      .g-weeks { margin-left: 0; }
+      .toc a:nth-child(odd) { border-right: 0; }
+      .cover-top, .cover-foot { flex-direction: column; align-items: flex-start; }
+      .cover-logos { width: 100%; }
+      .cover-logos img { height: 34px; }
+      .cover-stats { width: 100%; flex-wrap: wrap; gap: 20px; }
+      .cover-meta, .invest-total { text-align: left; }
+      .split img { min-height: 360px; }
+      h1 { font-size: 50px; }
+      .section { padding: 72px 0; }
+      .cover-media { background-position: 60% 30%; }
+      .phone { max-width: 360px; margin: 0 auto; }
+    }
+
+    @media print {
+      .nav, .nav-toggle, .cursor, .cursor-dot, .scroll-progress { display: none !important; }
+      .cover, .close { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Proposal">
+    <a class="nav-brand" href="#cover">
+      <img class="emblem" src="/assets/rawafed/logo.png" alt="Rawafed Health International Co." />
+      <span class="slash" aria-hidden="true">/</span>
+      <img class="word" src="/assets/rawafed/nixai-wordmark-navy.png" alt="NixAI" />
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#brief">Brief</a>
+      <a href="#audit">WooCommerce audit</a>
+      <a href="#solution">Solution</a>
+      <a href="#scope">Scope</a>
+      <a href="#experience">Experience</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#investment">Investment</a>
+      <a class="nav-cta menu-quote" href="#investment">View quotation</a>
+    </div>
+    <a class="nav-cta" href="#investment">View quotation</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" id="nav-toggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+
+  <header class="cover" id="cover">
+    <div class="cover-media" role="img" aria-label="The Rawafed ribbon symbol, from the RHI business profile"></div>
+    <div class="cover-inner shell">
+      <div class="cover-top">
+        <div>
+          <div class="cover-kicker">Proposal &nbsp;·&nbsp; NIX-RHI-APP-001</div>
+        </div>
+        <div class="cover-meta">
+          <span>Prepared for</span>
+          Rawafed Health International Co.
+          <span style="margin-top:12px">Date</span>
+          11 November 2026
+        </div>
+      </div>
+      <h1>
+        <span class="h1-line"><span>Your store,</span></span>
+        <span class="h1-line"><span>in their <em>pocket.</em></span></span>
+      </h1>
+      <p class="cover-sub">A React Native shopping app for iOS and Android, built on the WooCommerce store you already run at rawafedhealth.com — Arabic and English, tabby, tamara and mada, orders that track themselves. Plus a straight answer on what WooCommerce can and cannot give a mobile app, and how we close that gap.</p>
+      <div class="cover-foot">
+        <div class="cover-logos">
+          <img src="/assets/rawafed/logo.png" alt="Rawafed Health International Co. — شركة روافد الصحة العالمية" />
+          <span class="slash">/</span>
+          <img class="nix-dark" src="/assets/rawafed/nixai-wordmark-navy.png" alt="NixAI" />
+        </div>
+        <div class="cover-stats">
+          <div><span>Investment</span><strong data-count="26000" data-prefix="$">$26,000</strong></div>
+          <div><span>Delivery</span><strong>14–16 weeks</strong></div>
+          <div><span>Platforms</span><strong>iOS + Android</strong></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="quote-bar shell" style="margin-top:-1px">
+    <div class="quote-cell"><span>Client</span><b>Rawafed Health International Co. (RHI)</b></div>
+    <div class="quote-cell"><span>Project</span><b>React Native mobile app on existing WooCommerce</b></div>
+    <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
+    <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
+  </div>
+
+  <section class="section" id="contents">
+    <div class="shell">
+      <div class="section-kicker">00 &nbsp;/&nbsp; Contents</div>
+      <h2>The document.</h2>
+      <div class="toc" style="margin-top:36px">
+        <a href="#brief"><span class="n">01</span><span class="t">Understanding the brief</span><span class="pg">—</span></a>
+        <a href="#audit" class="hot"><span class="n">02</span><span class="t">WooCommerce API audit</span><span class="pg">—</span></a>
+        <a href="#solution"><span class="n">03</span><span class="t">Proposed solution</span><span class="pg">—</span></a>
+        <a href="#scope"><span class="n">04</span><span class="t">Scope of work</span><span class="pg">—</span></a>
+        <a href="#experience"><span class="n">05</span><span class="t">Look, feel and brand</span><span class="pg">—</span></a>
+        <a href="#architecture"><span class="n">06</span><span class="t">Architecture &amp; stack</span><span class="pg">—</span></a>
+        <a href="#timeline"><span class="n">07</span><span class="t">Delivery timeline</span><span class="pg">—</span></a>
+        <a href="#investment"><span class="n">08</span><span class="t">Investment</span><span class="pg">—</span></a>
+        <a href="#why"><span class="n">09</span><span class="t">Why NixAI / Terms</span><span class="pg">—</span></a>
+        <a href="#next"><span class="n">10</span><span class="t">Next steps</span><span class="pg">—</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="brief">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 &nbsp;/&nbsp; Understanding</div>
+          <h2>Twenty-five years of trust. <em>One more channel.</em></h2>
+        </div>
+        <p class="lead">Rawafed Health International distributes medical equipment, rehabilitation and orthopaedic products, dental and consumer health brands across the Kingdom — from Riyadh, Al Khobar and Jeddah, to hospitals, clinics and, increasingly, directly to patients through rawafedhealth.com. The website is live and selling. What is missing is the surface most of your customers reach for first: a phone.</p>
+      </div>
+      <div class="split">
+        <div class="portrait-frame"><img src="/assets/rawafed/retail-wall.jpg" alt="Bauerfeind retail wall in the RHI showroom" /></div>
+        <div>
+          <p>Your brief is clear and, importantly, honest about where the value is. The backend exists: WooCommerce 9.3 on WordPress, Arabic-first with English via WPML, 670-plus products across 21 categories and 14 brands, prices in SAR, tabby and tamara instalments, MyFatoorah for cards, free shipping across KSA. You do not want a second store to manage. You want a <strong>native app that sells from the same catalogue, the same stock, the same orders</strong> — and feels like Rawafed, not like a website in a frame.</p>
+          <p>We agree with that instinct, and we have done the homework to back it. Before writing a single line of this proposal we audited the public APIs of rawafedhealth.com from the outside. The results are in section 02, and they shape the scope: WooCommerce gives a mobile app more than most people expect, but it stops short in a handful of places that matter — customer login, payments, order history, wishlist, push. We close every one of them with a small companion plugin on your WordPress, so the app never carries an admin key and your team never manages two systems.</p>
+          <div class="pillars">
+            <div class="pillar"><h3>Same backend</h3><p>One catalogue, one stock, one order list. Products edited in WooCommerce appear in the app without an app release.</p></div>
+            <div class="pillar"><h3>Truly native</h3><p>React Native on iOS and Android. Real navigation, offline-tolerant cart, biometric login, push notifications — not a WebView.</p></div>
+            <div class="pillar"><h3>Arabic first</h3><p>Full RTL layouts, Graphik-Arabic-class typography, prices set the way your brand book says — numerals bold, ريال beneath.</p></div>
+            <div class="pillar"><h3>Clinical clarity</h3><p>Your brand principle, applied to a shopping flow. Navy for text, blue for emphasis only, white space everywhere.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>672</strong><span>products live on rawafedhealth.com (EN + AR)</span></div>
+        <div class="fact"><strong>21</strong><span>categories · 14 brands incl. Bauerfeind, 3M Littmann, GUM</span></div>
+        <div class="fact"><strong>3</strong><span>regions — Riyadh, Al Khobar, Jeddah</span></div>
+        <div class="fact"><strong>3</strong><span>payment gateways already live — MyFatoorah, tabby, tamara</span></div>
+        <div class="fact"><strong>2</strong><span>languages via WPML — Arabic default, English</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="audit">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">02 &nbsp;/&nbsp; WooCommerce API audit — read this first</div>
+          <h2>What your WooCommerce gives us. <em>And what it doesn't.</em></h2>
+        </div>
+        <p class="lead">We tested the live endpoints at rawafedhealth.com on 11 November 2026, as an outside client would. The verdict in one line: <strong>the catalogue and cart are ready for a mobile app today; customer accounts, payments, order history, wishlist and push are not exposed in any form an app can safely use.</strong> That gap is the single most important fact in this proposal, and it is why a companion WordPress plugin is in scope rather than an option.</p>
+      </div>
+
+      <div class="verdict">
+        <article>
+          <div class="lamp ok"><i></i>Ready today</div>
+          <h3>Catalogue, cart, checkout draft</h3>
+          <p>The public <strong>Store API</strong> (<code style="color:#9fd9f5">/wc/store/v1</code>) serves products, variations, attributes, categories, brands, reviews, coupons, shipping rates and the cart. It accepts a <strong>Cart-Token</strong> header instead of cookies, which is exactly what a headless mobile app needs. WPML answers in English or Arabic per request.</p>
+        </article>
+        <article>
+          <div class="lamp warn"><i></i>Works, with care</div>
+          <h3>Payments &amp; caching</h3>
+          <p>Checkout creates the order and hands back a <strong>redirect URL</strong> for MyFatoorah, tabby or tamara — none of them are native-card gateways here. The app must open a secure in-app browser and catch the return. LiteSpeed Cache on the site must exclude <code style="color:#9fd9f5">/wp-json</code> or the app will show stale stock.</p>
+        </article>
+        <article>
+          <div class="lamp bad"><i></i>Not available</div>
+          <h3>Login, orders, wishlist, push</h3>
+          <p>The Store API is <strong>unauthenticated by design</strong>. There is no login endpoint, no JWT plugin on the site, and the only authenticated API (<code style="color:#9fd9f5">/wc/v3</code>) needs admin-level keys that must <strong>never</strong> ship inside an app. My Orders, addresses, YITH wishlist, Request-a-Quote, account deletion and push tokens have no mobile-usable endpoint at all.</p>
+        </article>
+      </div>
+
+      <div class="matrix">
+        <div class="m-row head"><div>Capability the app needs</div><div>What rawafedhealth.com exposes today</div><div>What we do about it</div></div>
+        <div class="m-row">
+          <div><b>Browse catalogue, categories, brands</b>672 products, variable products with sizes and colours, images, stock status, sale prices in minor units (e.g. 94000 = 940.00 SAR).</div>
+          <div><span class="state ok">Available</span><br /><code>GET /wc/store/v1/products</code>, <code>/products/categories</code>, <code>/products/brands</code>, <code>/products/attributes</code>. Public, no key. No total-count header, so paging is by probing.</div>
+          <div class="fix">Consume directly. Normalise the minor-unit prices, cache images, and read <code>?lang=en</code> / default Arabic from WPML. Paging handled client-side.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Search</b>Arabic and English, by name, brand, SKU, with filters.</div>
+          <div><span class="state warn">Basic</span><br />Store API <code>?search=</code> matches titles only; no Arabic stemming, no SKU match, no faceted counts.</div>
+          <div class="fix">Bridge plugin adds a scoped search endpoint over name + SKU + brand with counts. Algolia-grade typo-tolerant search is an optional add-on.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Cart &amp; coupons</b>Add, update, remove, apply coupon, shipping estimate.</div>
+          <div><span class="state ok">Available</span><br /><code>/wc/store/v1/cart/*</code> with the <code>Cart-Token</code> header. Guest carts expire after 2 days, customer carts after 7 on the server.</div>
+          <div class="fix">Consume directly. Persist the cart locally and rebuild it if the server session has expired, so a shopper never opens the app to an empty cart.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Customer login &amp; registration</b>Phone or email, remembered across launches, Face ID / fingerprint.</div>
+          <div><span class="state bad">Not exposed</span><br />Store API has no auth. <code>/wp/v2/users/me</code> returns 401. No JWT plugin installed (<code>/jwt-auth/v1/token</code> → 404). <code>/wc/v3</code> needs admin keys.</div>
+          <div class="fix"><strong>Crucial.</strong> Bridge plugin issues short-lived JWTs with refresh tokens, SMS OTP login on Saudi numbers, Sign in with Apple and Google, and merges the guest cart into the account on login. App never holds a store key.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Checkout &amp; payment</b>Address, shipping, pay with MyFatoorah card / Apple Pay / mada, tabby, tamara, cash where allowed.</div>
+          <div><span class="state warn">Redirect only</span><br /><code>POST /wc/store/v1/checkout</code> places the order and returns <code>payment_result.redirect_url</code>. Live gateways: <code>myfatoorah_v2</code>, <code>tabby_installments</code>, <code>tamara-gateway</code> — all hosted pages.</div>
+          <div class="fix"><strong>Crucial.</strong> Place the order natively, then open the gateway in a secure in-app browser sheet and return via deep link; confirm server-side through gateway webhooks, never by trusting the device. Apple Pay and mada ride on your MyFatoorah account settings.</div>
+        </div>
+        <div class="m-row">
+          <div><b>My orders, tracking, re-order, addresses</b></div>
+          <div><span class="state bad">Not exposed</span><br />Order history exists only in <code>/wc/v3/orders</code> (admin) or in the website's cookie session. No mobile-safe read.</div>
+          <div class="fix">Bridge plugin exposes <code>/rhi/v1/me/orders</code>, <code>/me/addresses</code> scoped strictly to the logged-in customer, plus order-status timeline and one-tap re-order.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Wishlist &amp; Request a Quote</b>YITH plugins are installed on the site.</div>
+          <div><span class="state bad">No REST</span><br />Neither YITH Wishlist nor YITH Request-a-Quote exposes a REST namespace (<code>/yith/*</code> → 404).</div>
+          <div class="fix">Bridge plugin reads and writes the same YITH tables, so a wishlist saved on the web shows in the app and quote requests land in the same admin queue.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Push notifications</b>Order shipped, back in stock, offers.</div>
+          <div><span class="state bad">None</span><br />WooCommerce's <code>wc-push-notifications</code> namespace is for store owners, not customers.</div>
+          <div class="fix">Bridge plugin registers device tokens and fires FCM / APNs on WooCommerce order-status hooks. Marketing campaigns are an optional add-on.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Password reset, account deletion</b>Apple requires in-app account deletion for approval.</div>
+          <div><span class="state bad">Not exposed</span><br />Both exist only as website forms.</div>
+          <div class="fix">Bridge plugin adds OTP-verified reset and a deletion endpoint that anonymises the WooCommerce customer and keeps order records for accounting.</div>
+        </div>
+        <div class="m-row">
+          <div><b>Performance &amp; staging</b></div>
+          <div><span class="state warn">Needs configuration</span><br />LiteSpeed Cache is active; no object cache for REST; no staging site detected. WooCommerce plugin updates can change Store API fields.</div>
+          <div class="fix">We exclude <code>/wp-json</code> from page cache, add a Redis object cache if the host allows, pin the Bridge to tested WooCommerce versions, and ask your host for a staging copy before week two.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <svg viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <div>
+          <h3>Why this matters for the contract</h3>
+          <p>An app built on the Store API alone can browse and fill a cart, and nothing else. Anyone who quotes you a "WooCommerce app" without server-side work is either planning to embed admin keys in the binary — a security failure that would expose every order and customer in your store — or planning a WebView. Three things therefore need to be agreed before kickoff:</p>
+          <ol>
+            <li><b>Install access.</b> We deploy a small, open-source-licensed companion plugin ("RHI Mobile Bridge") on your WordPress, ideally on a staging copy first. It adds endpoints only; it changes nothing on the website.</li>
+            <li><b>MyFatoorah account settings.</b> Apple Pay and mada inside the app depend on those methods being enabled on your MyFatoorah merchant account. We will verify with them in week one.</li>
+            <li><b>An SMS provider.</b> OTP login on Saudi numbers needs a sender ID with Unifonic, Msegat or your existing provider. Account in your name; we integrate.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="solution">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">03 &nbsp;/&nbsp; Proposed solution</div>
+          <h2>One app. One bridge. <em>Zero duplication.</em></h2>
+        </div>
+        <p class="lead">Three deliverables, designed together so the app behaves like a first-class channel of the store rather than an add-on: the React Native app itself, the companion plugin that gives it a safe, customer-scoped API, and a mobile design system drawn from your brand guidelines.</p>
+      </div>
+      <div class="platforms">
+        <article class="platform">
+          <div class="tag">Deliverable A</div>
+          <h3>The <em>app</em></h3>
+          <p>A single React Native codebase shipping to the App Store and Google Play. Home, categories and brands, search, product pages with sizes and colours, cart, checkout with tabby / tamara / MyFatoorah, account, orders, wishlist, request a quote, notifications. Arabic default with full RTL, English on toggle. Biometric login. Offline-tolerant.</p>
+          <div class="stack"><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">TypeScript</span><span class="chip">iOS 16+</span><span class="chip">Android 9+</span><span class="chip">RTL</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">Deliverable B</div>
+          <h3>The <em>bridge</em></h3>
+          <p>A companion WordPress plugin that fills the gaps found in section 02: JWT + OTP authentication, customer-scoped orders and addresses, wishlist and quote endpoints over the existing YITH data, push-token registry wired to order hooks, password reset, account deletion, search with counts, and payment-return verification via gateway webhooks. Open source licence, yours to keep.</p>
+          <div class="stack"><span class="chip">PHP 8</span><span class="chip">WP REST</span><span class="chip">JWT</span><span class="chip">FCM / APNs</span><span class="chip">Webhooks</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">Deliverable C</div>
+          <h3>The <em>system</em></h3>
+          <p>A mobile design system built from the RHI Brand Guidelines: navy #16386B type on white, primary blue #1FA1DB for emphasis and action, the 55 / 15 / 15 / 10 / 5 colour proportion, two-tone headlines, prices set as bold numerals with the currency beneath, Myriad-class Latin with Graphik-class Arabic. Delivered as Figma components and a tokenised React Native theme.</p>
+          <div class="stack"><span class="chip">Figma</span><span class="chip">Design tokens</span><span class="chip">WCAG AA</span><span class="chip">EN / AR</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="scope">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">04 &nbsp;/&nbsp; Scope of work</div>
+          <h2>Everything a patient, a nurse or a <em>procurement officer</em> needs.</h2>
+        </div>
+        <p class="lead">Grouped by what the customer is doing. Items marked <span class="pill" style="display:inline-block;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-deep);border:1px solid var(--line-strong);border-radius:6px;padding:2px 6px;font-weight:700">Bridge</span> depend on the companion plugin from section 02.</p>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Discover</div>
+        <div class="feat-grid">
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg><h3>Home &amp; collections</h3><p>Editorial home with featured brands, departments, offers and new arrivals — driven by WooCommerce categories and tags, so marketing changes it without a release.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><h3>Search &amp; filters <span class="pill">Bridge</span></h3><p>Instant search in Arabic and English across names, SKUs and brands; filter by category, brand, size, price and availability with result counts.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM8 7V4h8v3"/></svg><h3>Category &amp; brand pages</h3><p>21 categories and 14 brands as first-class destinations. Bauerfeind, 3M Littmann, GUM and usmile get brand landings with their own story and range.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg><h3>Product pages</h3><p>Gallery, two-tone title, Arabic and English names, variations with size and colour swatches, stock state, specifications, downloads, reviews, tabby / tamara split preview.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg><h3>Wishlist <span class="pill">Bridge</span></h3><p>Save products across devices and the website — same YITH list, so a brace saved on the laptop appears on the phone.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg><h3>Request a quote <span class="pill">Bridge</span></h3><p>For clinics and institutional buyers: add items to a quote, submit with facility details, track status. Lands in your existing YITH quote queue.</p></div>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Buy</div>
+        <div class="feat-grid">
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h11.2L21 7H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg><h3>Cart</h3><p>Store API cart with Cart-Token sessions, quantity edits, coupons, shipping estimate, saved-for-later; persists locally and rebuilds on the server if the session has expired.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6z"/></svg><h3>Checkout</h3><p>Addresses with Saudi city and district pickers and map pin, shipping options from WooCommerce, order notes, VAT shown as your store configures it.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg><h3>Payments <span class="pill">Bridge</span></h3><p>MyFatoorah card, Apple Pay and mada (subject to your merchant settings), tabby and tamara — each opened in a secure in-app sheet, returned by deep link, confirmed by webhook before the app says "paid".</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><h3>Order confirmation</h3><p>Receipt screen with order number, items, totals, expected delivery, and a shareable PDF invoice fetched from WooCommerce.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5z"/><circle cx="7" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg><h3>Orders &amp; tracking <span class="pill">Bridge</span></h3><p>Order history scoped to the signed-in customer, status timeline (received, processing, shipped, delivered), courier link, one-tap re-order and return request.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-8-8"/><path d="M20 4v5h-5"/></svg><h3>Returns &amp; support</h3><p>Return request from an order, WhatsApp and call shortcuts to your team, FAQ and policies pulled from the website pages so there is one source of truth.</p></div>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Account &amp; trust</div>
+        <div class="feat-grid">
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><h3>Login &amp; registration <span class="pill">Bridge</span></h3><p>Saudi mobile OTP, email and password, Sign in with Apple and Google. Face ID / fingerprint on return. Guest checkout stays available; the guest cart merges on login.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><h3>Push notifications <span class="pill">Bridge</span></h3><p>Order status, back-in-stock on wishlisted items, and quote replies — fired from WooCommerce hooks through FCM and APNs. Opt-in managed in the app.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h10M4 19h16"/></svg><h3>Arabic &amp; English</h3><p>Arabic default, English on toggle, with mirrored layouts, Arabic-Indic or Western numerals by preference, and WPML content served per language from the same store.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><h3>Profile, security &amp; deletion <span class="pill">Bridge</span></h3><p>Addresses, phone, language, notification preferences, password reset by OTP, and in-app account deletion as Apple's App Store requires.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M8 14l3-3 2 2 4-4"/></svg><h3>Analytics</h3><p>Firebase Analytics and Crashlytics, Meta and TikTok app events for your paid campaigns, and a weekly dashboard of installs, sessions and conversion.</p></div>
+          <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg><h3>Store listings &amp; release</h3><p>App Store and Google Play listings in Arabic and English, screenshots, privacy labels, review handling, and a release pipeline that lets us ship updates over the air.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="experience">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">05 &nbsp;/&nbsp; Look, feel and brand</div>
+          <h2>Clinical clarity, <em>in the hand.</em></h2>
+        </div>
+        <p class="lead">Three screens from the proposed app, set to your brand rules: navy on white for every word a person has to read, primary blue only where we want the eye to land, your two-tone headline treatment, and prices exactly as the guidelines draw them. Illustrative — the real screens are designed with you in weeks two and three.</p>
+      </div>
+
+      <div class="mock-row">
+        <div>
+          <div class="phone" data-tilt>
+            <div class="phone-screen">
+              <div class="p-status"><span>9:41</span><span>●●● ⌾</span></div>
+              <div class="p-top"><img src="/assets/rawafed/logo.png" alt="" /><div class="ic"><i></i><i></i></div></div>
+              <div class="p-search"><span>Search braces, stethoscopes, brands…</span><span class="ar">بحث</span></div>
+              <div class="p-hero">
+                <div class="k">Bauerfeind · Knee</div>
+                <h4>Genu<em>train</em><br />for active knees.</h4>
+                <p>Clinically proven support. Sizes 0–6. Free shipping across KSA.</p>
+                <img src="/assets/rawafed/p-genutrain.jpg" alt="" />
+              </div>
+              <div class="p-cats">
+                <div class="p-cat"><i></i>Orthopedic</div>
+                <div class="p-cat"><i></i>Rehab</div>
+                <div class="p-cat"><i></i>Medical</div>
+                <div class="p-cat"><i></i>Consumer</div>
+              </div>
+              <div class="p-sec">Trending now <span>See all</span></div>
+              <div class="p-prods">
+                <div class="p-prod"><img src="/assets/rawafed/p-littmann.png" alt="" /><b>Littmann Classic III</b><span>3M · Black</span><div class="pr">455<small>.00 SAR</small></div></div>
+                <div class="p-prod"><img src="/assets/rawafed/p-venotrain.jpg" alt="" /><b>VenoTrain micro</b><span>Bauerfeind · AD</span><div class="pr">375<small>.00 SAR</small></div></div>
+              </div>
+              <div class="p-tabbar"><div class="on"><i></i>Home</div><div><i></i>Shop</div><div><i></i>Cart</div><div><i></i>Saved</div><div><i></i>Account</div></div>
+            </div>
+          </div>
+          <div class="mock-cap"><b>Home</b>Departments, brands and offers from WooCommerce categories and tags.</div>
+        </div>
+
+        <div>
+          <div class="phone" data-tilt>
+            <div class="phone-screen">
+              <div class="p-status"><span>9:41</span><span>●●● ⌾</span></div>
+              <div class="p-img"><span class="badge">In stock · Riyadh</span><img src="/assets/rawafed/p-genutrain.jpg" alt="" /><div class="dots"><i></i><i></i><i></i></div></div>
+              <div class="p-body">
+                <div class="k">Bauerfeind · Orthopedic</div>
+                <h4>Genu<em>train</em> S</h4>
+                <div class="ar-name ar">دعامة الركبة جينوترين إس</div>
+                <div class="p-price">
+                  <div><div class="num">940<small>.00</small></div><div class="cur">ريال · SAR</div></div>
+                  <div class="bnpl"><b>4 × 235.00 SAR</b><br />with tabby or tamara</div>
+                </div>
+                <div class="p-vars"><span>Size 1</span><span class="on">Size 2</span><span>Size 3</span><span>Size 4</span><span>Titan</span></div>
+                <div class="p-cta"><div>Add to cart · أضف إلى السلة</div><div class="ghost">♡</div></div>
+                <div class="p-meta"><span><b>Free shipping</b>Across Saudi Arabia</span><span><b>Easy returns</b>14-day policy</span></div>
+              </div>
+              <div class="p-tabbar"><div><i></i>Home</div><div class="on"><i></i>Shop</div><div><i></i>Cart</div><div><i></i>Saved</div><div><i></i>Account</div></div>
+            </div>
+          </div>
+          <div class="mock-cap"><b>Product</b>Two-tone title, brand-book price style, variations from WooCommerce, BNPL preview.</div>
+        </div>
+
+        <div>
+          <div class="phone" data-tilt>
+            <div class="phone-screen">
+              <div class="p-status"><span>9:41</span><span>●●● ⌾</span></div>
+              <div class="p-title">Payment<small>Step 3 of 3 · الدفع</small></div>
+              <div class="p-steps"><span class="on"></span><span class="on"></span><span class="on"></span></div>
+              <div class="p-pay">
+                <div class="on"><span><i></i>Card · Apple Pay · mada</span><span class="logo">MyFatoorah</span></div>
+                <div><span><i></i>Split in 4, no interest</span><span class="logo tabby">tabby</span></div>
+                <div><span><i></i>Pay later, 30 days</span><span class="logo tamara">tamara</span></div>
+              </div>
+              <div class="p-summary">
+                <div><span>Genutrain S · Size 2</span><span>940.00</span></div>
+                <div><span>Littmann Classic III</span><span>455.00</span></div>
+                <div><span>Shipping</span><span>Free</span></div>
+                <div class="t"><span>Total (incl. VAT)</span><span>1,395.00 SAR</span></div>
+              </div>
+              <div class="p-order">
+                <div class="st"><i></i>Order #RH-48213 · Shipped</div>
+                <div class="track"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
+                <div class="lbls"><span>Received</span><span>Processing</span><span>Shipped</span><span>Delivered</span></div>
+              </div>
+              <div class="p-note"><i></i>Payment opens in a secure sheet and returns to the app. Confirmed by the gateway, not by the phone.</div>
+              <div class="p-tabbar"><div><i></i>Home</div><div><i></i>Shop</div><div class="on"><i></i>Cart</div><div><i></i>Saved</div><div><i></i>Account</div></div>
+            </div>
+          </div>
+          <div class="mock-cap"><b>Pay &amp; track</b>Your three live gateways, then an order timeline driven by WooCommerce status.</div>
+        </div>
+      </div>
+
+      <div class="swatches">
+        <div class="swatch"><i style="background:#ffffff;border-bottom:1px solid var(--line)"></i><div><b>White</b><span>#FFFFFF · 55%</span></div></div>
+        <div class="swatch"><i style="background:#eaf6fc"></i><div><b>Blue tint</b><span>#EAF6FC · 15%</span></div></div>
+        <div class="swatch"><i style="background:#16386b"></i><div><b>Navy</b><span>#16386B · 15%</span></div></div>
+        <div class="swatch"><i style="background:#1fa1db"></i><div><b>Primary blue</b><span>#1FA1DB · 10%</span></div></div>
+        <div class="swatch"><i style="background:#35ace9"></i><div><b>Light blue</b><span>#35ACE9</span></div></div>
+        <div class="swatch"><i style="background:#646565"></i><div><b>Grey</b><span>#646565 · 5%</span></div></div>
+      </div>
+      <div class="type-row">
+        <div class="type-card"><div class="k">Headline · two-tone</div><div class="s">Veno<em>train</em> micro</div><p>Navy with one keyword in primary blue, per the brand book. Myriad Variable Concept in production; Source Sans 3 as the open preview.</p></div>
+        <div class="type-card"><div class="k">Arabic · Graphik Arabic class</div><div class="a">صحة أفضل. حياة أفضل. نوصلها إليك.</div><p>IBM Plex Sans Arabic as the open preview until licensed Graphik Arabic files are supplied. Full RTL mirroring.</p></div>
+        <div class="type-card"><div class="k">Price · as the guidelines draw it</div><div class="pr">192<small>.50</small></div><div class="pr-cur">ريال · SAR</div><p>Bold numerals, half-size decimals, currency beneath. The same rule in lists, product pages, cart and receipts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="architecture">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">06 &nbsp;/&nbsp; Architecture &amp; stack</div>
+          <h2>Your WooCommerce stays the <em>only</em> source of truth.</h2>
+        </div>
+        <p class="lead">No second database, no sync jobs, no admin keys on the device. The app talks to WooCommerce's public Store API for everything public, and to the Bridge plugin — running inside your WordPress, authenticated per customer — for everything personal.</p>
+      </div>
+      <div class="arch">
+        <article class="arch-card">
+          <h3>Mobile app</h3>
+          <ul>
+            <li>React Native with Expo, TypeScript, over-the-air updates for non-native changes</li>
+            <li>Store API client with Cart-Token sessions and local cart persistence</li>
+            <li>Secure token storage (Keychain / Keystore), biometric unlock</li>
+            <li>In-app secure browser sheet for payment with deep-link return</li>
+            <li>i18n with RTL layouts, Arabic default, English toggle</li>
+            <li>Firebase Analytics, Crashlytics, push via FCM / APNs</li>
+          </ul>
+        </article>
+        <article class="arch-card bridge">
+          <h3>RHI Mobile Bridge — WordPress plugin</h3>
+          <ul>
+            <li><code>/rhi/v1/auth</code> — OTP, email, Apple, Google; JWT access + refresh; cart merge on login</li>
+            <li><code>/rhi/v1/me</code> — profile, addresses, orders, order timeline, re-order, returns</li>
+            <li><code>/rhi/v1/wishlist</code>, <code>/rhi/v1/quotes</code> — over existing YITH data</li>
+            <li><code>/rhi/v1/search</code> — name + SKU + brand, counts, both languages</li>
+            <li><code>/rhi/v1/devices</code> — push tokens; hooks on <code>woocommerce_order_status_*</code></li>
+            <li>Gateway webhook verification, rate limiting, audit log; no admin capabilities exposed</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Existing store, untouched</h3>
+          <ul>
+            <li>WordPress 7.1 · WooCommerce 9.3 · WPML 5.2 — products, stock, prices, orders</li>
+            <li>Store API <code>/wc/store/v1</code> — catalogue, cart, checkout</li>
+            <li>MyFatoorah v2, tabby, tamara — same merchant accounts, same settlement</li>
+            <li>YITH Wishlist and Request-a-Quote — same tables, same admin screens</li>
+            <li>LiteSpeed Cache — <code>/wp-json</code> excluded; Redis object cache if host permits</li>
+            <li>Website continues to work exactly as today</li>
+          </ul>
+        </article>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><b>1</b><span>Browse via Store API, per language</span></div>
+        <div class="flow-step"><b>2</b><span>Cart-Token cart, persisted on device</span></div>
+        <div class="flow-step"><b>3</b><span>Login via Bridge; guest cart merged</span></div>
+        <div class="flow-step"><b>4</b><span>Checkout POST creates the order</span></div>
+        <div class="flow-step"><b>5</b><span>Gateway sheet; webhook confirms payment</span></div>
+        <div class="flow-step"><b>6</b><span>Status hooks push updates to the phone</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="timeline">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">07 &nbsp;/&nbsp; Delivery timeline</div>
+          <h2 id="timeline-title">Fourteen to sixteen weeks. <em>Four movements.</em></h2>
+        </div>
+        <p class="lead">The Bridge is built early and in parallel with design, so the app is wired to real accounts and real orders from the first sprint — not mocked data that breaks at the end. Store review time is inside the plan.</p>
+      </div>
+      <div class="phases">
+        <article class="phase">
+          <div class="wk">Weeks 1–3</div>
+          <h3>Discover &amp; design</h3>
+          <ul>
+            <li>Kickoff in Riyadh or online; access to WordPress staging, MyFatoorah, SMS provider</li>
+            <li>Confirm gateway capabilities (Apple Pay, mada) with MyFatoorah</li>
+            <li>Mobile design system from the brand guidelines</li>
+            <li>Flows and high-fidelity screens, Arabic and English</li>
+            <li>Clickable prototype signed off</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 2–6</div>
+          <h3>Build the Bridge</h3>
+          <ul>
+            <li>Companion plugin on staging: auth, me, wishlist, quotes, search, devices</li>
+            <li>Cache exclusions and object cache</li>
+            <li>Gateway webhooks and payment verification</li>
+            <li>Security review and rate limiting</li>
+            <li>Deployed to production behind a feature flag</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 4–12</div>
+          <h3>Build the app</h3>
+          <ul>
+            <li>Sprint 1 — catalogue, search, product, cart</li>
+            <li>Sprint 2 — login, checkout, payments, orders</li>
+            <li>Sprint 3 — wishlist, quotes, push, profile, analytics</li>
+            <li>Weekly TestFlight and Play internal builds to your team</li>
+            <li>Arabic native review of every screen</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 12–16</div>
+          <h3>Harden &amp; launch</h3>
+          <ul>
+            <li>Device matrix QA, payment end-to-end on live gateways</li>
+            <li>Store listings, privacy labels, review submissions</li>
+            <li>Soft launch to staff and showroom customers</li>
+            <li>Public release, training, documentation</li>
+            <li>30 days of hypercare</li>
+          </ul>
+        </article>
+      </div>
+      <div class="gantt">
+        <div class="g-row"><span>Discover &amp; design</span><div class="g-track"><div class="g-bar" style="left:0%;width:18.75%"></div></div></div>
+        <div class="g-row"><span>Bridge plugin</span><div class="g-track"><div class="g-bar blue" style="left:6.25%;width:31.25%"></div></div></div>
+        <div class="g-row"><span>App build — 3 sprints</span><div class="g-track"><div class="g-bar" style="left:18.75%;width:56.25%"></div></div></div>
+        <div class="g-row"><span>QA, stores &amp; launch</span><div class="g-track"><div class="g-bar blue" style="left:68.75%;width:31.25%"></div></div></div>
+        <div class="g-row"><span>Hypercare</span><div class="g-track"><div class="g-bar light" style="left:87.5%;width:12.5%"></div></div></div>
+        <div class="g-weeks"><span>W1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="investment">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">08 &nbsp;/&nbsp; Investment</div>
+          <h2>One fixed fee. <em>Both platforms.</em></h2>
+        </div>
+        <p class="lead">A single project price covering design, the React Native app on iOS and Android, the companion WordPress plugin that makes a secure app possible, payment integration, QA, store submission, training and hypercare. No per-platform surcharge. No surprise line items for the scope above.</p>
+      </div>
+      <div class="invest" id="quote">
+        <div class="invest-top">
+          <div>
+            <div class="invest-label">Fixed project fee</div>
+            <h3 style="font-size:30px;font-weight:800;letter-spacing:-0.02em;margin:8px 0 10px;color:var(--navy)">Rawafed Health app — iOS and Android, on your WooCommerce</h3>
+            <p>One codebase, two stores, the backend you already own. Fully branded from your guidelines. Fully owned by Rawafed Health International.</p>
+          </div>
+          <div class="invest-total">
+            <span>Total investment</span>
+            <strong data-count="26000" data-prefix="$">$26,000</strong>
+          </div>
+        </div>
+
+        <div class="quote-group">A &nbsp;/&nbsp; Foundation</div>
+        <div class="quote-row" data-item data-name="Discovery, mobile design system &amp; UX (EN / AR)" data-price="3500" data-group="A / Foundation" data-desc="Kickoff, API and gateway verification, mobile design system from the RHI Brand Guidelines, flows and high-fidelity screens for every feature in Arabic and English, clickable prototype, tokenised React Native theme.">
+          <div>
+            <h4>Discovery, mobile design system &amp; UX — Arabic and English</h4>
+            <p>Kickoff, API and gateway verification, mobile design system from the RHI Brand Guidelines, flows and high-fidelity screens for every feature in both languages, clickable prototype, tokenised React Native theme.</p>
+          </div>
+          <div class="quote-price">$3,500</div>
+        </div>
+
+        <div class="quote-group">B &nbsp;/&nbsp; The app</div>
+        <div class="quote-row" data-item data-name="React Native app — iOS &amp; Android" data-price="12500" data-group="B / The app" data-desc="Home and collections, categories and brands, search and filters, product pages with variations and reviews, cart and coupons, checkout with addresses and shipping, order confirmation, orders and tracking, returns, wishlist, request a quote, login with OTP / Apple / Google and biometrics, push notifications, profile and account deletion, Arabic default with full RTL and English, analytics and crash reporting.">
+          <div>
+            <h4>React Native app — iOS &amp; Android</h4>
+            <p>Every feature in section 04: home and collections, search and filters, product pages with variations and reviews, cart, checkout, orders and tracking, returns, wishlist, request a quote, login with OTP / Apple / Google and biometrics, push, profile and account deletion, Arabic default with full RTL and English, analytics and crash reporting.</p>
+          </div>
+          <div class="quote-price">$12,500</div>
+        </div>
+
+        <div class="quote-group">C &nbsp;/&nbsp; WooCommerce integration</div>
+        <div class="quote-row" data-item data-name="RHI Mobile Bridge — companion WordPress plugin" data-price="5500" data-group="C / WooCommerce integration" data-desc="Customer-scoped REST API on your WordPress closing the gaps found in the audit: JWT + OTP authentication with Apple and Google sign-in, cart merge on login, orders and addresses, wishlist and quotes over existing YITH data, search with counts, push-token registry wired to order-status hooks, password reset, account deletion, rate limiting, audit log, cache configuration, staging and production deployment.">
+          <div>
+            <h4>RHI Mobile Bridge — companion WordPress plugin</h4>
+            <p>The customer-scoped API your store does not have today (section 02): JWT + OTP authentication with Apple and Google sign-in, cart merge, orders and addresses, wishlist and quotes over existing YITH data, search with counts, push-token registry on order hooks, password reset, account deletion, rate limiting, cache configuration, staging and production deployment.</p>
+          </div>
+          <div class="quote-price">$5,500</div>
+        </div>
+        <div class="quote-row" data-item data-name="Payments — MyFatoorah, tabby, tamara in-app flows" data-price="2500" data-group="C / WooCommerce integration" data-desc="Native order placement via Store API checkout, secure in-app payment sheet for MyFatoorah (card, Apple Pay, mada subject to merchant settings), tabby and tamara, deep-link return, server-side verification via gateway webhooks, failure and cancellation handling, end-to-end testing on live gateways.">
+          <div>
+            <h4>Payments — MyFatoorah, tabby and tamara in-app flows</h4>
+            <p>Native order placement, secure in-app payment sheet for MyFatoorah (card, Apple Pay and mada subject to merchant settings), tabby and tamara, deep-link return, server-side verification via gateway webhooks, failure and cancellation handling, end-to-end tests on live gateways.</p>
+          </div>
+          <div class="quote-price">$2,500</div>
+        </div>
+        <div class="quote-row sub"><div><h4>Integration subtotal</h4></div><div class="quote-price">$8,000</div></div>
+
+        <div class="quote-group">D &nbsp;/&nbsp; Launch</div>
+        <div class="quote-row" data-item data-name="QA, store submission, training &amp; hypercare" data-price="2000" data-group="D / Launch" data-desc="Device-matrix QA on iOS and Android, Arabic native review, security review of the Bridge, App Store and Google Play listings in both languages, privacy labels and review handling, over-the-air release pipeline, recorded training for the e-commerce team, documentation, 30 days of hypercare.">
+          <div>
+            <h4>QA, store submission, training &amp; hypercare</h4>
+            <p>Device-matrix QA, Arabic native review, security review of the Bridge, App Store and Google Play listings in both languages, privacy labels and review handling, over-the-air release pipeline, recorded training, documentation, 30 days of hypercare.</p>
+          </div>
+          <div class="quote-price">$2,000</div>
+        </div>
+
+        <div class="quote-row total">
+          <div>
+            <h4>Total</h4>
+            <p>Valid 30 days from 11 November 2026. Amounts in USD.</p>
+          </div>
+          <div class="quote-price">$26,000</div>
+        </div>
+      </div>
+
+      <div class="pay-grid">
+        <div class="pay"><span>To commence — 40%</span><b>$10,400</b></div>
+        <div class="pay"><span>Design sign-off + Bridge live on staging — 30%</span><b>$7,800</b></div>
+        <div class="pay"><span>App UAT sign-off — 20%</span><b>$5,200</b></div>
+        <div class="pay"><span>Public release — 10%</span><b>$2,600</b></div>
+      </div>
+
+      <p style="margin:28px 0 12px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-deep);font-weight:700">Optional additions — not in the base fee</p>
+      <div class="addons">
+        <div class="addon" data-addon data-name="Smart search — Algolia with Arabic" data-price="2400">
+          <div>
+            <h4>Smart search — Algolia with Arabic</h4>
+            <p>Typo-tolerant, synonym-aware search across both languages with instant facets, synced from WooCommerce. Replaces the Bridge search endpoint.</p>
+          </div>
+          <em>$2,400</em>
+        </div>
+        <div class="addon" data-addon data-name="Push marketing &amp; segments" data-price="1800">
+          <div>
+            <h4>Push marketing &amp; segments</h4>
+            <p>OneSignal campaigns from a dashboard: offers, brand launches, abandoned-cart nudges, segmented by region, brand interest and purchase history.</p>
+          </div>
+          <em>$1,800</em>
+        </div>
+        <div class="addon" data-addon data-name="AI product advisor" data-price="3800">
+          <div>
+            <h4>AI product advisor</h4>
+            <p>Guided size finder for Bauerfeind braces and compression, and a bilingual assistant that maps a need ("knee pain after running") to the right range — with clinical disclaimers. Fits your AI Solutions department.</p>
+          </div>
+          <em>$3,800</em>
+        </div>
+        <div class="addon" data-addon data-name="Institutional buyer mode" data-price="4500">
+          <div>
+            <h4>Institutional buyer mode</h4>
+            <p>Hospital and clinic accounts with approved price lists, quote-to-order conversion, purchase-order numbers and multi-user approval inside the same app.</p>
+          </div>
+          <em>$4,500</em>
+        </div>
+        <div class="addon" data-addon data-name="Loyalty &amp; wallet" data-price="2800">
+          <div>
+            <h4>Loyalty &amp; wallet</h4>
+            <p>Points on every order, tiers, referral codes and a store-credit wallet redeemable at checkout, with the ledger in WooCommerce.</p>
+          </div>
+          <em>$2,800</em>
+        </div>
+        <div class="addon" data-addon data-name="Care &amp; growth retainer" data-price="1000" data-unit="/ mo">
+          <div>
+            <h4>Care &amp; growth retainer</h4>
+            <p>OS and WooCommerce update compatibility, Bridge maintenance, store re-submissions, monitoring, small features and a priority support line.</p>
+          </div>
+          <em>$1,000 / mo</em>
+        </div>
+      </div>
+
+      <div class="invest-actions">
+        <a class="btn btn-dark" href="mailto:hello@nixailabs.com?subject=Rawafed%20Health%20%E2%80%94%20NIX-RHI-APP-001%20%E2%80%94%20approved">Approve quotation</a>
+        <button class="btn btn-outline" type="button" data-pdf><span>Download the quotation (PDF)</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="why">
+    <div class="shell">
+      <div class="section-kicker">09 &nbsp;/&nbsp; Partnership</div>
+      <h2>Why this should be <em>NixAI.</em></h2>
+      <p class="lead" style="margin-bottom:36px">You are not buying an app shell. You are buying a team that audited your store before quoting it, that will not put an admin key in a binary, and that builds for how Saudis actually pay.</p>
+      <div class="why">
+        <article>
+          <h3>We read the API first</h3>
+          <p>Section 02 is the result of testing your live endpoints, not a template. The scope, the Bridge and the fee follow from what we found — so there is no "we didn't know WooCommerce couldn't do that" in month three.</p>
+        </article>
+        <article>
+          <h3>Security by architecture</h3>
+          <p>Customer-scoped tokens, nothing admin-level on the device, payments confirmed by webhook, account deletion built in. Your store passes App Store review and a security audit on the same design.</p>
+        </article>
+        <article>
+          <h3>Gulf-native commerce</h3>
+          <p>tabby and tamara previews on the product page, mada and Apple Pay through MyFatoorah, Saudi OTP login, Arabic-first with English — built the way the Kingdom buys, not the way a US default assumes.</p>
+        </article>
+      </div>
+
+      <div class="section-kicker" style="margin-top:56px">09.1 &nbsp;/&nbsp; Terms</div>
+      <h2 style="font-size:40px">Clear conditions.</h2>
+      <div class="terms" style="margin-top:28px">
+        <article class="term">
+          <h3>Payment</h3>
+          <p>40% to commence, 30% at design sign-off with the Bridge live on staging, 20% at app UAT sign-off, 10% at public release. Amounts in USD by bank transfer.</p>
+        </article>
+        <article class="term">
+          <h3>Validity</h3>
+          <p>This quotation is valid for 30 days from 11 November 2026. After that date we reconfirm timeline and fee against current capacity.</p>
+        </article>
+        <article class="term">
+          <h3>Included</h3>
+          <p>The scope in sections 03–06, the companion plugin and its deployment to staging and production, both store submissions, training, documentation and 30 days of hypercare after public release.</p>
+        </article>
+        <article class="term">
+          <h3>Client provides</h3>
+          <p>WordPress administrator access and a staging copy from your host, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple Developer and Google Play developer accounts in RHI's name, licensed brand font files, and a named decision-maker for timely UAT feedback.</p>
+        </article>
+        <article class="term">
+          <h3>Not included</h3>
+          <p>Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades (e.g. Redis), changes to the website itself, new product photography, and paid media budgets.</p>
+        </article>
+        <article class="term">
+          <h3>Revisions</h3>
+          <p>Each phase includes two structured review rounds. Further design or scope change is estimated before work continues.</p>
+        </article>
+        <article class="term">
+          <h3>Intellectual property</h3>
+          <p>Upon final payment, all custom app code, the Bridge plugin and all design assets assign to Rawafed Health International Co. React Native, WordPress and open-source components remain under their own licences.</p>
+        </article>
+        <article class="term">
+          <h3>Dependencies</h3>
+          <p>Store review by Apple and Google typically takes two to seven days per submission and is inside the plan. Gateway capability changes, host limitations or delayed access to WordPress extend the schedule, not the fee.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" id="next">
+    <div class="close-media" role="img" aria-label="Bauerfeind retail display in the RHI showroom"></div>
+    <div class="close-inner shell">
+      <div class="section-kicker">10 &nbsp;/&nbsp; Next</div>
+      <h2 style="max-width:900px">We can be in discovery the week the first transfer clears, <em>and on TestFlight by week six.</em></h2>
+      <p class="lead">Reply with approval of this quotation, or with the optional lines you want in the first release. We will send a one-page statement of work, a kickoff date, and the short access list for WordPress staging, MyFatoorah, SMS and the developer accounts.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:hello@nixailabs.com?subject=Rawafed%20Health%20%E2%80%94%20NIX-RHI-APP-001%20%E2%80%94%20approved">Approve quotation</a>
+        <button class="btn btn-ghost" type="button" data-pdf><span>Download the quotation</span></button>
+        <a class="btn btn-ghost" href="mailto:hello@nixailabs.com?subject=Rawafed%20Health%20%E2%80%94%20a%20question">Ask a question</a>
+      </div>
+      <footer>
+        <img class="nix" src="/assets/nixai-wordmark-light.png" alt="NixAI" />
+        <div class="footer-mark">
+          <img src="/assets/rawafed/logo-white.png" alt="Rawafed Health International Co." />
+          <small>Better health. Better life. Delivered to you.</small>
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6);text-align:right">
+          hello@nixailabs.com<br />nixailabs.com
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <script src="/assets/gsap/gsap.min.js"></script>
+  <script src="/assets/gsap/ScrollTrigger.min.js"></script>
+  <script src="/assets/gsap/ScrollToPlugin.min.js"></script>
+  <script src="/assets/vendor/jspdf.umd.min.js"></script>
+  <script>
+    const DOC_REF = "NIX-RHI-APP-001";
+    const DOC_DATE = "11 November 2026";
+    const DOC_CLIENT = "Rawafed Health International Co.";
+
+    const toggle = document.getElementById("nav-toggle");
+    const links = document.getElementById("nav-links");
+    toggle?.addEventListener("click", () => links.classList.toggle("open"));
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      links?.classList.remove("open");
+      if (reduce || typeof gsap === "undefined") {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+      } else {
+        gsap.to(window, { duration: 1.15, scrollTo: { y: el, offsetY: 80 }, ease: "power3.inOut" });
+      }
+      history.replaceState(null, "", "#" + id);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href").slice(1);
+        if (!id) return;
+        e.preventDefault();
+        scrollToId(id);
+      });
+    });
+
+    if (reduce || typeof gsap === "undefined") {
+      /* static page */
+    } else {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      gsap.to("#scroll-progress", { scaleX: 1, ease: "none", scrollTrigger: { scrub: 0.25 } });
+
+      gsap.set(".nav", { y: -24, opacity: 0 });
+      gsap.set(".cover-media", { scale: 1.12, transformOrigin: "78% 40%" });
+      gsap.set(".cover-kicker, .cover-meta, .cover-sub, .cover-foot", { opacity: 0, y: 22 });
+      gsap.set("h1 .h1-line span", { yPercent: 110 });
+
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      intro
+        .to(".cover-media", { scale: 1, duration: 2.4, ease: "power2.out" }, 0)
+        .to(".nav", { y: 0, opacity: 1, duration: 0.8 }, 0.15)
+        .to(".cover-kicker", { opacity: 1, y: 0, duration: 0.7 }, 0.35)
+        .to(".cover-meta", { opacity: 1, y: 0, duration: 0.7 }, 0.45)
+        .to("h1 .h1-line span", { yPercent: 0, duration: 1.05, stagger: 0.12 }, 0.4)
+        .to(".cover-sub", { opacity: 1, y: 0, duration: 0.8 }, 0.85)
+        .to(".cover-foot", { opacity: 1, y: 0, duration: 0.8 }, 1.0);
+
+      document.querySelectorAll("[data-count]").forEach((el) => {
+        const end = Number(el.dataset.count);
+        const prefix = el.dataset.prefix || "";
+        const suffix = el.dataset.suffix || "";
+        const obj = { v: 0 };
+        const run = () => gsap.to(obj, {
+          v: end, duration: 1.6, ease: "power2.out",
+          onUpdate: () => { el.textContent = prefix + Math.round(obj.v).toLocaleString("en-US") + suffix; }
+        });
+        if (el.closest(".cover")) intro.add(run, 1.15);
+        else ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: run });
+      });
+
+      gsap.to(".cover-media", { yPercent: 14, ease: "none", scrollTrigger: { trigger: ".cover", start: "top top", end: "bottom top", scrub: true } });
+      gsap.to(".close-media", { yPercent: 14, ease: "none", scrollTrigger: { trigger: "#next", start: "top bottom", end: "bottom top", scrub: true } });
+
+      gsap.utils.toArray(".section-head, .quote-bar, .toc, .split, .matrix, .callout, .invest, .cta-row, .close-inner, .gantt, .type-row").forEach((el) => {
+        gsap.from(el, { opacity: 0, y: 48, duration: 0.95, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 82%", once: true } });
+      });
+
+      gsap.utils.toArray(".platform, .feat, .arch-card, .flow-step, .phase, .quote-row, .pay, .addon, .why article, .term, .pillar, .fact, .verdict article, .swatch, .mock-row > div").forEach((el, i) => {
+        gsap.from(el, { opacity: 0, y: 28, duration: 0.7, delay: (i % 6) * 0.04, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+      });
+
+      gsap.utils.toArray(".section-kicker, h2").forEach((el) => {
+        gsap.from(el, { opacity: 0, y: 16, duration: 0.65, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 86%", once: true } });
+      });
+
+      gsap.utils.toArray(".g-bar").forEach((el) => {
+        gsap.from(el, { scaleX: 0, transformOrigin: "0 50%", duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
+      });
+
+      let last = 0;
+      ScrollTrigger.create({
+        start: 0, end: "max",
+        onUpdate: (self) => {
+          const y = self.scroll();
+          if (y > 80) gsap.to(".nav", { y: y > last + 6 ? -88 : 0, duration: 0.35, overwrite: true });
+          else gsap.to(".nav", { y: 0, duration: 0.35, overwrite: true });
+          last = y;
+        }
+      });
+
+      if (finePointer) {
+        document.body.classList.add("has-cursor");
+        const ring = document.getElementById("cursor");
+        const dot = document.getElementById("cursor-dot");
+        const move = (e) => {
+          gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.12, ease: "power3.out" });
+          gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.45, ease: "power3.out" });
+        };
+        window.addEventListener("mousemove", move, { passive: true });
+        document.querySelectorAll("a, button").forEach((el) => {
+          el.addEventListener("mouseenter", () => { ring.classList.add("is-link"); gsap.to(ring, { scale: 1.65, duration: 0.28, ease: "power3.out", overwrite: "auto" }); });
+          el.addEventListener("mouseleave", () => { ring.classList.remove("is-link"); gsap.to(ring, { scale: 1, duration: 0.28, ease: "power3.out", overwrite: "auto" }); });
+        });
+        window.addEventListener("mousedown", () => gsap.to(ring, { scale: 0.75, duration: 0.15, overwrite: "auto" }));
+        window.addEventListener("mouseup", () => gsap.to(ring, { scale: ring.classList.contains("is-link") ? 1.65 : 1, duration: 0.2, overwrite: "auto" }));
+
+        document.querySelectorAll(".btn, .nav-cta").forEach((btn) => {
+          btn.addEventListener("mousemove", (e) => {
+            const r = btn.getBoundingClientRect();
+            gsap.to(btn, { x: (e.clientX - r.left - r.width / 2) * 0.28, y: (e.clientY - r.top - r.height / 2) * 0.28, duration: 0.35, ease: "power3.out" });
+          });
+          btn.addEventListener("mouseleave", () => gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "power3.out" }));
+        });
+
+        document.querySelectorAll("[data-tilt]").forEach((ph) => {
+          ph.addEventListener("mousemove", (e) => {
+            const r = ph.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            gsap.to(ph, { rotateY: x * 12, rotateX: -y * 8, y: -6, duration: 0.5, ease: "power2.out", transformPerspective: 1000 });
+          });
+          ph.addEventListener("mouseleave", () => gsap.to(ph, { rotateY: 0, rotateX: 0, y: 0, duration: 0.7, ease: "power3.out" }));
+        });
+      }
+    }
+
+    /* ==== QUOTATION PDF ==== */
+    function decode(s) { const t = document.createElement("textarea"); t.innerHTML = s; return t.value; }
+    function cash(n) { return "$" + Number(n).toLocaleString("en-US"); }
+    function collectQuote() {
+      const items = [...document.querySelectorAll("[data-item]")].map((el) => ({
+        group: decode(el.dataset.group), name: decode(el.dataset.name), desc: decode(el.dataset.desc || ""), price: Number(el.dataset.price)
+      }));
+      const addons = [...document.querySelectorAll("[data-addon]")].map((el) => ({
+        name: decode(el.dataset.name), price: Number(el.dataset.price), unit: el.dataset.unit || ""
+      }));
+      const total = items.reduce((s, i) => s + i.price, 0);
+      return { items, addons, total };
+    }
+    function rasterise(src, boxPx) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const nw = img.naturalWidth || boxPx, nh = img.naturalHeight || boxPx;
+            const s = (boxPx / Math.max(nw, nh)) * 2;
+            const c = document.createElement("canvas");
+            c.width = Math.max(1, Math.round(nw * s)); c.height = Math.max(1, Math.round(nh * s));
+            c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+            resolve({ url: c.toDataURL("image/png"), w: c.width, h: c.height });
+          } catch (e) { resolve(null); }
+        };
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+    function buildQuotationPdf(jsPDF, q, logos) {
+      const doc = new jsPDF({ unit: "mm", format: "a4" });
+      const W = 210, H = 297, ML = 18, RIGHT = W - 18, CW = RIGHT - ML;
+      const INK = [22, 56, 107], MUTED = [74, 85, 104], FAINT = [138, 148, 166], NAVY = [22, 56, 107], BLUE = [19, 127, 176], LINE = [205, 214, 228], TINT = [234, 246, 252];
+      let y = 20;
+      const font = (f, s, sz, c) => { doc.setFont(f, s); doc.setFontSize(sz); doc.setTextColor(c[0], c[1], c[2]); };
+      const rule = (x1, yy, x2, c, w) => { doc.setDrawColor(c[0], c[1], c[2]); doc.setLineWidth(w); doc.line(x1, yy, x2, yy); };
+      const wrap = (t, w) => doc.splitTextToSize(t, w);
+      const kick = (t, x, yy, c, sz) => { font("helvetica", "bold", sz, c); doc.text(t.toUpperCase(), x, yy, { charSpace: 0.6 }); };
+      const ensure = (need) => { if (y + need > H - 22) { doc.addPage(); y = 20; } };
+
+      /* header */
+      if (logos.client) { const h = 12, w = h * (logos.client.w / logos.client.h); doc.addImage(logos.client.url, "PNG", ML, y - 3, w, h); }
+      if (logos.nixai) { const h = 5.2, w = h * (logos.nixai.w / logos.nixai.h); doc.addImage(logos.nixai.url, "PNG", RIGHT - w, y + 1, w, h); }
+      y += 16; rule(ML, y, RIGHT, BLUE, 0.4); y += 10;
+      kick("Quotation · " + DOC_REF, ML, y, BLUE, 7.5); y += 8;
+      font("helvetica", "bold", 24, NAVY); doc.text("Your store, in their pocket.", ML, y); y += 8;
+      font("helvetica", "normal", 9.5, MUTED);
+      wrap("A React Native shopping app for iOS and Android built on the existing WooCommerce store at rawafedhealth.com, with a companion WordPress plugin that gives the app secure, customer-scoped access to accounts, orders, wishlist, quotes and push — closing the gaps found in our API audit.", CW).forEach((l) => { doc.text(l, ML, y); y += 4.6; });
+      y += 6;
+      [["Prepared for", DOC_CLIENT], ["Prepared by", "NixAI · hello@nixailabs.com"], ["Date", DOC_DATE], ["Validity", "30 days from issue"], ["Delivery", "14 to 16 weeks from kickoff"]].forEach((r) => {
+        kick(r[0], ML, y, FAINT, 6.4); font("helvetica", "normal", 9, INK); doc.text(r[1], ML + 34, y); y += 5.6;
+      });
+      y += 4;
+      doc.setFillColor(TINT[0], TINT[1], TINT[2]); doc.rect(ML, y, CW, 18, "F");
+      font("helvetica", "normal", 11, INK); doc.text("Total fixed fee", ML + 5, y + 11.5);
+      font("helvetica", "bold", 20, NAVY); doc.text(cash(q.total), RIGHT - 5, y + 12, { align: "right" });
+      y += 28;
+
+      /* audit note */
+      kick("WooCommerce API audit — summary", ML, y, BLUE, 7.5); y += 6.5;
+      font("helvetica", "normal", 8.4, MUTED);
+      wrap("Tested live on " + DOC_DATE + ". The public Store API provides catalogue, cart and checkout (returning a hosted-payment redirect for MyFatoorah, tabby and tamara). It does not provide customer authentication, order history, addresses, wishlist, request-a-quote, push or account deletion, and the authenticated WooCommerce REST API requires admin-level keys that must never ship inside an app. The companion plugin in line C closes these gaps; it is required for a secure, App-Store-compliant release, not optional.", CW).forEach((l) => { doc.text(l, ML, y); y += 3.9; });
+      y += 8;
+
+      /* items */
+      kick("Itemised quotation", ML, y, BLUE, 7.5); y += 7;
+      let lastGroup = null;
+      q.items.forEach((it) => {
+        if (it.group !== lastGroup) {
+          ensure(16); if (lastGroup) y += 3;
+          kick(it.group, ML, y, NAVY, 7); y += 2.6; rule(ML, y, RIGHT, BLUE, 0.3); y += 6; lastGroup = it.group;
+        }
+        font("helvetica", "normal", 8.4, MUTED);
+        const desc = wrap(it.desc, CW - 30);
+        ensure(8 + desc.length * 3.8 + 4);
+        font("helvetica", "bold", 9.6, INK); doc.text(wrap(it.name, CW - 34)[0], ML, y);
+        font("helvetica", "bold", 12, INK); doc.text(cash(it.price), RIGHT, y, { align: "right" });
+        y += 5;
+        font("helvetica", "normal", 8.4, MUTED); desc.forEach((l) => { doc.text(l, ML, y); y += 3.8; });
+        y += 2.2; rule(ML, y, RIGHT, LINE, 0.15); y += 4.4;
+      });
+      ensure(22); y += 2;
+      doc.setFillColor(TINT[0], TINT[1], TINT[2]); doc.rect(ML, y, CW, 15, "F");
+      font("helvetica", "normal", 12, INK); doc.text("Total investment", ML + 5, y + 10);
+      font("helvetica", "bold", 18, NAVY); doc.text(cash(q.total), RIGHT - 5, y + 10.3, { align: "right" });
+      y += 21;
+      font("helvetica", "normal", 7.6, FAINT); doc.text("Amounts in USD. Developer-account, SMS, push, gateway and hosting fees are excluded.", ML, y); y += 10;
+
+      /* payment */
+      ensure(40);
+      kick("Payment schedule", ML, y, BLUE, 7); y += 6.5;
+      [["40% to commence", 0.4], ["30% at design sign-off with the Bridge live on staging", 0.3], ["20% at app UAT sign-off", 0.2], ["10% at public release", 0.1]].forEach((p) => {
+        font("helvetica", "normal", 8.8, MUTED); doc.text(p[0], ML, y);
+        font("helvetica", "bold", 11.5, INK); doc.text(cash(Math.round(q.total * p[1])), RIGHT, y, { align: "right" });
+        y += 3; rule(ML, y, RIGHT, LINE, 0.15); y += 5;
+      });
+      y += 6;
+
+      /* add-ons */
+      ensure(50);
+      kick("Optional additions — not in the base fee", ML, y, BLUE, 7); y += 6.5;
+      q.addons.forEach((a) => {
+        ensure(9);
+        font("helvetica", "normal", 8.8, INK); doc.text(a.name, ML, y);
+        font("helvetica", "bold", 11, MUTED); doc.text(cash(a.price) + (a.unit ? " " + a.unit : ""), RIGHT, y, { align: "right" });
+        y += 3; rule(ML, y, RIGHT, LINE, 0.15); y += 5;
+      });
+      y += 6;
+
+      /* terms */
+      ensure(80);
+      kick("Terms", ML, y, BLUE, 7); y += 6.5;
+      [
+        ["Included", "Discovery and mobile design system, React Native app for iOS and Android, the RHI Mobile Bridge companion plugin deployed to staging and production, payment integration, QA, both store submissions, training, documentation, and 30 days of hypercare after public release."],
+        ["Not included", "Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades, changes to the website itself, new product photography, and paid media."],
+        ["Client provides", "WordPress administrator access and a staging copy, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple and Google developer accounts in RHI's name, licensed brand font files, and a named decision-maker for UAT."],
+        ["Revisions", "Two structured review rounds per phase. Further design or scope change is estimated before work continues."],
+        ["Ownership", "On final payment all custom app code, the Bridge plugin and design assets assign to Rawafed Health International Co. React Native, WordPress and open-source components remain under their own licences."],
+        ["Validity", "Valid 30 days from " + DOC_DATE + ". After that date we reconfirm timeline and fee against current capacity."]
+      ].forEach((t) => {
+        font("helvetica", "normal", 8.2, MUTED);
+        const lines = wrap(t[1], CW - 32);
+        ensure(lines.length * 3.7 + 4);
+        font("helvetica", "bold", 8.4, INK); doc.text(t[0], ML, y);
+        font("helvetica", "normal", 8.2, MUTED); lines.forEach((l, i) => doc.text(l, ML + 32, y + i * 3.7));
+        y += Math.max(7, lines.length * 3.7 + 3.2);
+      });
+      y += 6;
+
+      /* acceptance */
+      ensure(50);
+      rule(ML, y, RIGHT, BLUE, 0.3); y += 7;
+      kick("Acceptance", ML, y, BLUE, 7); y += 6;
+      font("helvetica", "normal", 8.2, MUTED); doc.text("Signing below accepts this quotation at the total shown above.", ML, y); y += 7;
+      const bw = (CW - 8) / 2;
+      [["For " + DOC_CLIENT, ""], ["For NixAI", "hello@nixailabs.com · nixailabs.com"]].forEach((b, i) => {
+        const x = ML + i * (bw + 8);
+        doc.setDrawColor(LINE[0], LINE[1], LINE[2]); doc.setLineWidth(0.2); doc.rect(x, y, bw, 33);
+        kick(b[0], x + 4, y + 6.5, FAINT, 6.2);
+        font("helvetica", "normal", 7.2, FAINT);
+        ["Name", "Title", "Signature"].forEach((lab, j) => { const ly = y + 14 + j * 6.6; doc.text(lab, x + 4, ly); rule(x + 19, ly + 0.7, x + bw - 4, LINE, 0.15); });
+        if (b[1]) { font("helvetica", "normal", 6.8, FAINT); doc.text(b[1], x + 4, y + 31); }
+      });
+
+      const pages = doc.getNumberOfPages();
+      for (let i = 1; i <= pages; i++) {
+        doc.setPage(i);
+        rule(ML, H - 16, RIGHT, LINE, 0.15);
+        font("helvetica", "normal", 6.8, FAINT);
+        doc.text(DOC_CLIENT + " × NixAI · " + DOC_REF + " · " + cash(q.total) + " · Valid 30 days from " + DOC_DATE, ML, H - 11.5);
+        doc.text("Page " + i + " of " + pages, RIGHT, H - 11.5, { align: "right" });
+      }
+      doc.setProperties({ title: "Rawafed Health — Quotation " + DOC_REF, subject: "React Native mobile app on WooCommerce", author: "NixAI", creator: "NixAI" });
+      return doc;
+    }
+    let LOGO_CACHE = null;
+    async function getLogos() {
+      if (LOGO_CACHE) return LOGO_CACHE;
+      const pair = await Promise.all([rasterise("/assets/rawafed/logo.png", 320), rasterise("/assets/rawafed/nixai-wordmark-navy.png", 220)]);
+      LOGO_CACHE = { client: pair[0], nixai: pair[1] };
+      return LOGO_CACHE;
+    }
+    function flash(btn, text) {
+      const label = btn.querySelector("span") || btn;
+      if (label.dataset.original === undefined) label.dataset.original = label.textContent;
+      label.textContent = text; clearTimeout(label._t);
+      label._t = setTimeout(() => { label.textContent = label.dataset.original; }, 2400);
+    }
+    async function exportQuotation(btn) {
+      const lib = window.jspdf && window.jspdf.jsPDF;
+      if (!lib) { flash(btn, "PDF unavailable"); return; }
+      const label = btn.querySelector("span") || btn;
+      if (label.dataset.original === undefined) label.dataset.original = label.textContent;
+      label.textContent = "Preparing…";
+      try {
+        const q = collectQuote();
+        const doc = buildQuotationPdf(lib, q, await getLogos());
+        doc.save("Rawafed-Health-Quotation-" + DOC_REF + ".pdf");
+        flash(btn, "Downloaded");
+      } catch (err) { console.error(err); flash(btn, "Export failed"); }
+    }
+    document.addEventListener("click", (e) => {
+      const p = e.target.closest("[data-pdf]");
+      if (p) { e.preventDefault(); exportQuotation(p); }
+    });
+  </script>
+</body>
+</html>
