@@ -48,6 +48,8 @@
       transition: background 0.2s;
     }
     .cta a:hover { background: #c73652; }
+    .cta a.reject { background: transparent; color: #666; border: 1px solid #ccc; margin-left: 10px; }
+    .cta a.reject:hover { color: #c73652; border-color: #c73652; background: transparent; }
     footer { text-align: center; padding: 24px; font-size: 0.8rem; color: #aaa; }
   </style>
 </head>
@@ -95,7 +97,8 @@
 
     <div class="cta">
       <p style="margin-bottom:20px;color:#666;">Ready to move forward?</p>
-      <a href="mailto:hello@nixailabs.co">Accept Proposal</a>
+      <a href="mailto:ayousef@nixailabs.com?subject=Demo%20Client%20proposal%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20prepared%20for%20Demo%20Client.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept Proposal</a>
+      <a class="reject" href="mailto:ayousef@nixailabs.com?subject=Demo%20Client%20proposal%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20prepared%20for%20Demo%20Client.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject Proposal</a>
     </div>
   </main>
 

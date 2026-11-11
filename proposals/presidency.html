@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presidency of Egypt | Website Review &amp; Redesign Plan</title>
+  <meta name="description" content="A clear review of the official Presidency website, with a plan to make it more beautiful, easier to use, and trusted, in Arabic, English, and French." />
+  <meta property="og:title" content="Presidency of Egypt | Website Review and Redesign Plan" />
+  <meta property="og:description" content="A warm, easy-to-read plan for a dignified, luxurious, and accessible new experience for the national Presidency website." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #fbfaf6;
+      --paper-2: #f4f1ea;
+      --white: #ffffff;
+      --ink: #1c1813;
+      --muted: #5f584c;
+      --faint: #928a7b;
+      --line: #e8e2d5;
+      --line-strong: #d9d0be;
+      --red: #c0182b;
+      --red-deep: #9c1022;
+      --gold: #a9822f;
+      --gold-bright: #c39a45;
+      --gold-line: #d8bd7e;
+      --black: #16120d;
+      --shadow-sm: 0 2px 10px rgba(28, 24, 19, 0.05);
+      --shadow: 0 20px 50px rgba(28, 24, 19, 0.10);
+      --shadow-red: 0 18px 44px rgba(192, 24, 43, 0.22);
+      --radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { color: var(--muted); margin: 0 0 18px; }
+    strong { color: var(--ink); font-weight: 700; }
+    code {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--red-deep);
+      background: rgba(192, 24, 43, 0.07);
+      border: 1px solid rgba(192, 24, 43, 0.16);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.88em;
+      word-break: break-word;
+    }
+
+    .shell { width: min(1160px, calc(100% - 44px)); margin: 0 auto; }
+
+    /* Top brand strip -------------------------------------------------- */
+    .topbar { background: var(--white); border-bottom: 1px solid var(--line); }
+    .topbar-inner { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 14px 0; }
+    .topbar .rule { height: 1px; flex: 1; max-width: 120px; background: linear-gradient(90deg, transparent, var(--gold-line)); }
+    .topbar .rule.r { background: linear-gradient(90deg, var(--gold-line), transparent); }
+    .topbar .crest { font-family: "Cormorant Garamond", serif; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 13px; color: var(--ink); text-align: center; }
+    .topbar .crest span { display: block; font-family: "JetBrains Mono", monospace; font-weight: 500; letter-spacing: 0.28em; font-size: 9.5px; color: var(--gold); margin-top: 2px; }
+
+    /* Section labels --------------------------------------------------- */
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; color: var(--red); font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--red); }
+
+    h1 { font-family: "Cormorant Garamond", serif; max-width: 940px; font-size: clamp(46px, 7vw, 94px); line-height: 1.02; letter-spacing: -0.005em; color: var(--ink); margin-bottom: 22px; font-weight: 700; }
+    .accent-red { color: var(--red); }
+    .accent-gold { color: var(--gold); font-style: italic; }
+
+    .hero { position: relative; padding: 84px 0 70px; overflow: hidden; background: linear-gradient(180deg, var(--white), var(--paper) 60%); }
+    .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: linear-gradient(90deg, var(--red), var(--gold-bright)); }
+    .hero-seal-bg { position: absolute; right: -120px; top: 40px; width: 520px; height: 520px; border-radius: 50%; border: 1px solid var(--line-strong); opacity: 0.5; pointer-events: none; }
+    .hero-seal-bg::before { content: ""; position: absolute; inset: 42px; border-radius: 50%; border: 1px dashed var(--gold-line); }
+    .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(310px, 0.94fr); gap: 52px; align-items: center; }
+    .hero-copy { max-width: 700px; font-size: clamp(17px, 1.9vw, 21px); color: var(--muted); margin-bottom: 30px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 32px; font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--faint); }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-meta span::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--gold-bright); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 14px 26px; border-radius: 4px; border: 1px solid transparent; font-weight: 700; font-size: 14px; letter-spacing: 0.02em; transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease; }
+    .button.primary { color: var(--white); background: var(--red); box-shadow: var(--shadow-red); }
+    .button.primary:hover { background: var(--red-deep); transform: translateY(-2px); }
+    .button.secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+    .button.secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* Official document / seal card ------------------------------------ */
+    .seal-card { position: relative; background: var(--white); border: 1px solid var(--line-strong); border-radius: 8px; box-shadow: var(--shadow); overflow: hidden; }
+    .seal-card::before { content: ""; position: absolute; inset: 8px; border: 1px solid var(--gold-line); border-radius: 4px; pointer-events: none; }
+    .seal-head { background: var(--red); color: var(--white); padding: 16px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .seal-head .t { font-family: "Cormorant Garamond", serif; font-weight: 700; font-size: 17px; letter-spacing: 0.03em; }
+    .seal-head .s { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; opacity: 0.85; }
+    .seal-body { padding: 26px 24px 24px; }
+    .seal-title { font-family: "Cormorant Garamond", serif; font-size: 27px; font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 4px; }
+    .seal-sub { color: var(--gold); font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; }
+    .seal-rows { display: grid; gap: 0; margin-bottom: 20px; border-top: 1px solid var(--line); }
+    .seal-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 2px; border-bottom: 1px solid var(--line); }
+    .seal-row small { color: var(--faint); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .seal-row b { color: var(--ink); font-size: 14px; font-weight: 600; text-align: right; }
+    .seal-flag { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .seal-flag .cell { border: 1px solid var(--line); border-radius: 6px; padding: 14px; text-align: center; background: var(--paper); }
+    .seal-flag small { display: block; color: var(--faint); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .seal-flag strong { font-family: "Cormorant Garamond", serif; font-size: 30px; color: var(--red); font-weight: 700; }
+
+    /* Solid red stats band --------------------------------------------- */
+    .stats-band { background: var(--red); position: relative; }
+    .stats-band::before, .stats-band::after { content: ""; position: absolute; left: 0; right: 0; height: 3px; background: var(--gold-bright); }
+    .stats-band::before { top: 0; } .stats-band::after { bottom: 0; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-card { padding: 40px 24px; text-align: center; border-right: 1px solid rgba(255, 255, 255, 0.18); }
+    .stat-card:last-child { border-right: none; }
+    .stat-card b { font-family: "Cormorant Garamond", serif; display: block; color: var(--white); font-size: 52px; line-height: 1; margin-bottom: 8px; font-weight: 700; }
+    .stat-card span { color: rgba(255, 255, 255, 0.86); font-size: 13px; letter-spacing: 0.02em; }
+
+    /* Sections --------------------------------------------------------- */
+    .section { padding: 96px 0; }
+    .section.alt { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .section-head { display: grid; grid-template-columns: minmax(0, 0.94fr) minmax(260px, 0.52fr); gap: 40px; align-items: end; margin-bottom: 40px; }
+    .section-kicker { font-family: "JetBrains Mono", monospace; color: var(--red); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+    .section-kicker::after { content: ""; height: 1px; width: 46px; background: var(--gold-line); }
+    h2 { font-family: "Cormorant Garamond", serif; color: var(--ink); font-size: clamp(34px, 5vw, 58px); line-height: 1.05; letter-spacing: -0.005em; font-weight: 700; }
+    h3 { font-family: "Cormorant Garamond", serif; color: var(--ink); font-size: 24px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; }
+    h4 { color: var(--ink); font-size: 16px; margin: 0 0 8px; font-weight: 700; }
+    .lead { font-size: 18px; color: var(--muted); margin-bottom: 0; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+
+    .card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); position: relative; }
+    .card.top-red::before, .card.top-gold::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 3px; border-radius: var(--radius) var(--radius) 0 0; }
+    .card.top-red::before { background: var(--red); }
+    .card.top-gold::before { background: var(--gold-bright); }
+    .section-card { background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--gold-bright); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-sm); }
+
+    .tag { display: inline-flex; align-items: center; border-radius: 3px; padding: 5px 11px; font-size: 11px; font-weight: 700; margin-bottom: 16px; letter-spacing: 0.06em; text-transform: uppercase; font-family: "JetBrains Mono", monospace; }
+    .tag.gold { color: var(--gold); background: rgba(169, 130, 47, 0.10); border: 1px solid rgba(169, 130, 47, 0.28); }
+    .tag.red { color: var(--red); background: rgba(192, 24, 43, 0.08); border: 1px solid rgba(192, 24, 43, 0.24); }
+    .tag.ink { color: var(--ink); background: var(--paper-2); border: 1px solid var(--line-strong); }
+
+    ul, ol { padding-left: 20px; color: var(--muted); }
+    li { margin-bottom: 9px; }
+    li::marker { color: var(--gold); }
+
+    .findings { display: grid; gap: 14px; }
+    .finding { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 20px; align-items: start; padding: 26px 28px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .finding .num { font-family: "Cormorant Garamond", serif; font-size: 46px; color: var(--red); line-height: 0.9; font-weight: 700; }
+    .finding h4 { color: var(--ink); font-size: 18px; margin-bottom: 6px; }
+    .finding p { margin: 0; font-size: 14.5px; }
+
+    .audit-list { display: grid; gap: 16px; }
+    .audit-item { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 24px; padding: 28px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .audit-item .label { border-left: 3px solid var(--red); padding-left: 14px; }
+    .audit-item .label.ok { border-left-color: var(--gold-bright); }
+    .audit-item strong { display: block; font-family: "Cormorant Garamond", serif; color: var(--ink); font-size: 21px; line-height: 1.1; margin-bottom: 6px; }
+    .audit-item .sev { display: block; color: var(--red); font-size: 11px; font-family: "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+    .audit-item .sev.ok { color: var(--gold); }
+
+    .positioning { border-radius: var(--radius); padding: 44px; background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow-sm); text-align: center; position: relative; margin-bottom: 24px; }
+    .positioning::before { content: "\201C"; position: absolute; top: 6px; left: 28px; font-family: "Cormorant Garamond", serif; font-size: 90px; color: var(--gold-line); line-height: 1; }
+    .positioning p { font-family: "Cormorant Garamond", serif; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.32; color: var(--ink); margin: 0; font-weight: 600; font-style: italic; }
+
+    .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+    .ba-cell { border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; background: var(--white); }
+    .ba-cell.before { background: rgba(192, 24, 43, 0.04); border-color: rgba(192, 24, 43, 0.2); }
+    .ba-cell.after { background: rgba(169, 130, 47, 0.05); border-color: rgba(169, 130, 47, 0.28); }
+    .ba-cell .label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .ba-cell.before .label { color: var(--red); }
+    .ba-cell.after .label { color: var(--gold); }
+    .ba-cell p { margin: 0; color: var(--ink); font-size: 14px; }
+
+    .datatable { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 14px; }
+    .datatable th, .datatable td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .datatable th { background: var(--red); color: var(--white); font-weight: 600; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-family: "JetBrains Mono", monospace; }
+    .datatable td { color: var(--muted); }
+    .datatable tr:nth-child(even) td { background: var(--paper); }
+    .datatable tr:last-child td { border-bottom: none; }
+    .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow-sm); }
+
+    .sitemap { columns: 2; column-gap: 40px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 34px; box-shadow: var(--shadow-sm); }
+    .sitemap ul { break-inside: avoid; margin-bottom: 18px; }
+    .sitemap > ul { padding-left: 18px; }
+    .sitemap > ul > li { font-family: "Cormorant Garamond", serif; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .sitemap li ul { margin-top: 8px; }
+    .sitemap li ul li { font-family: Inter, sans-serif; font-size: 14px; font-weight: 400; color: var(--muted); }
+    .sitemap em { color: var(--gold); font-style: normal; font-size: 12px; font-family: "JetBrains Mono", monospace; }
+
+    .timeline { display: grid; gap: 18px; }
+    .timeline-card { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; padding: 30px; background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--red); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .timeline-card .phase { color: var(--red); font-family: "JetBrains Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; }
+    .timeline-card .time { color: var(--gold); font-size: 13px; font-weight: 700; margin-top: 8px; font-family: "JetBrains Mono", monospace; }
+    .timeline-card .out { color: var(--faint); font-size: 13px; font-style: italic; margin-top: 12px; }
+
+    .nav { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 9px; }
+    .nav a { width: 9px; height: 9px; border-radius: 999px; background: var(--line-strong); border: 1px solid transparent; transition: all 0.2s ease; }
+    .nav a:hover, .nav a.active { background: var(--red); transform: scale(1.4); box-shadow: 0 0 0 3px rgba(192, 24, 43, 0.15); }
+
+    .cta { padding: 40px 0 100px; }
+    .cta-panel { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--red); color: var(--white); padding: clamp(36px, 6vw, 68px); text-align: center; box-shadow: var(--shadow-red); }
+    .cta-panel::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 10px; pointer-events: none; }
+    .cta-panel .section-kicker { color: rgba(255,255,255,0.85); justify-content: center; }
+    .cta-panel .section-kicker::after { background: rgba(255,255,255,0.5); }
+    .cta-panel h2 { color: var(--white); max-width: 860px; margin: 0 auto 18px; }
+    .cta-panel p { color: rgba(255, 255, 255, 0.9); max-width: 780px; margin: 0 auto 30px; font-size: 18px; }
+    .cta-panel .button.primary { background: var(--white); color: var(--red); box-shadow: none; }
+    .cta-panel .button.primary:hover { background: var(--paper); }
+    .cta-panel .button.secondary { color: var(--white); border-color: rgba(255,255,255,0.55); }
+    .cta-panel .button.secondary:hover { color: var(--white); border-color: var(--white); background: rgba(255,255,255,0.12); }
+
+    footer { background: var(--black); color: rgba(255, 255, 255, 0.6); padding: 30px 0; font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .footer-inner .g { color: var(--gold-bright); }
+
+    .reveal { opacity: 0; transform: translateY(22px); }
+
+    @media (max-width: 980px) {
+      .hero-grid, .section-head, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat-card:nth-child(2) { border-right: none; }
+      .stat-card { border-bottom: 1px solid rgba(255,255,255,0.18); }
+      .nav { display: none; }
+      .sitemap { columns: 1; }
+      .audit-item, .timeline-card, .finding { grid-template-columns: 1fr; }
+      .before-after { grid-template-columns: 1fr; }
+      .hero-seal-bg { display: none; }
+    }
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 32px, 1160px); }
+      .hero { padding: 60px 0 44px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat-card { border-right: none; }
+      .section { padding: 64px 0; }
+      .card, .section-card, .positioning, .sitemap, .timeline-card { padding: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media print {
+      body { background: #ffffff; }
+      .nav, .button, .hero-seal-bg { display: none !important; }
+      .hero, .section, .section.alt { padding: 30px 0; background: #ffffff; }
+      .hero-grid, .section-head, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .card, .section-card, .stat-card, .timeline-card, .positioning, .sitemap, .finding, .audit-item, .seal-card, .cta-panel { box-shadow: none; break-inside: avoid; }
+      .stats-band, .cta-panel { background: #ffffff !important; color: #16120d !important; border: 1px solid #d9d0be; }
+      .stat-card b, .cta-panel h2, .cta-panel p { color: #16120d !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Report sections">
+    <a href="#summary" aria-label="The big picture"></a>
+    <a href="#method" aria-label="How we looked"></a>
+    <a href="#audit" aria-label="What we found"></a>
+    <a href="#redesign" aria-label="The new look"></a>
+    <a href="#uiux" aria-label="Modern government UI/UX"></a>
+    <a href="#ia" aria-label="Easier to navigate"></a>
+    <a href="#urls" aria-label="Speaking every language well"></a>
+    <a href="#improvements" aria-label="What to fix first"></a>
+    <a href="#features" aria-label="New ideas"></a>
+    <a href="#roadmap" aria-label="The plan"></a>
+    <a href="#metrics" aria-label="How we measure success"></a>
+  </nav>
+
+  <div class="topbar">
+    <div class="shell topbar-inner">
+      <span class="rule"></span>
+      <div class="crest">Presidency of the Arab Republic of Egypt<span>Website Review &amp; Redesign Plan</span></div>
+      <span class="rule r"></span>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-seal-bg" aria-hidden="true"></div>
+      <div class="shell hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow">Website Review &amp; Redesign</div>
+          <h1>Your website carries the <span class="accent-red">voice of Egypt.</span> <span class="accent-gold">Let's make it feel that way.</span></h1>
+          <p class="hero-copy">We took a careful look at the Presidency website in Arabic, English, and French. The good news: the content and the security behind it are genuinely strong. The opportunity: with a cleaner, more elegant design and a few important fixes, the site can feel as dignified and trustworthy as the institution it represents. Here is a simple, honest plan to get there.</p>
+          <div class="hero-meta">
+            <span>presidency.eg</span>
+            <span>Arabic · English · French</span>
+            <span>Reviewed July 2026</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#summary">See the Plan</a>
+            <a class="button secondary" href="https://www.presidency.eg/en/" target="_blank" rel="noreferrer">Visit Current Site</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="seal-card" id="sealCard">
+            <div class="seal-head">
+              <span class="t">A National Website, Reimagined</span>
+              <span class="s">OFFICIAL</span>
+            </div>
+            <div class="seal-body">
+              <div class="seal-title">Elegant. Easy to use. Trusted.</div>
+              <div class="seal-sub">Red · White · Black · Gold</div>
+              <div class="seal-rows">
+                <div class="seal-row"><small>What this is</small><b>A review and a plan</b></div>
+                <div class="seal-row"><small>Inspired by</small><b>The world's best gov sites</b></div>
+                <div class="seal-row"><small>Our promise</small><b>Clear and honest</b></div>
+              </div>
+              <div class="seal-flag">
+                <div class="cell"><small>Languages</small><strong>3</strong></div>
+                <div class="cell"><small>Key findings</small><strong>5</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-band">
+      <div class="shell stats">
+        <div class="stat-card"><b data-count="3">0</b><span>Languages we reviewed</span></div>
+        <div class="stat-card"><b data-count="13">0</b><span>Pages we looked at closely</span></div>
+        <div class="stat-card"><b data-count="5">0</b><span>Big things to fix first</span></div>
+        <div class="stat-card"><b>3</b><span>Simple steps to a better site</span></div>
+      </div>
+    </div>
+
+    <!-- 01 The big picture -->
+    <section id="summary" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">01 / The Big Picture</div>
+            <h2>Great content that deserves a better home.</h2>
+          </div>
+          <p class="lead">Your website is the official voice of the Egyptian state, and it already speaks three languages. That is a strong start. Right now, though, the experience around that content does not quite match the importance of the institution. The plan below fixes that, step by step.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card top-gold">
+            <span class="tag gold">What is already good</span>
+            <h3>You have the hard part</h3>
+            <p>Real, valuable content: the President's speeches, official news, national initiatives, and the history of the presidential palaces. Three languages. Strong security. We are not starting from zero, we are polishing something that already matters.</p>
+          </div>
+          <div class="card top-red">
+            <span class="tag red">The main problem</span>
+            <h3>A few important pages do not work</h3>
+            <p>Some key pages open empty, the same content is loaded twice behind the scenes (which slows things down), and the English and French pages have web addresses written in Arabic letters. Visitors notice these things.</p>
+          </div>
+          <div class="card top-red">
+            <span class="tag ink">The other problem</span>
+            <h3>It could be easier for everyone</h3>
+            <p>The menus are hard for screen readers to follow, there is no search box, and some text is hard to read. These are exactly the areas a national website should get right for every visitor.</p>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:20px;">
+          <h3>Our recommendation, in one breath</h3>
+          <p>Fix the pages that are letting visitors down today, give the site a cleaner and more elegant look, make it easy to find things in all three languages, and then add a few thoughtful features. We suggest doing it in three simple stages so you see real improvements within weeks, not months.</p>
+          <ol>
+            <li><strong>Fix what is broken.</strong> Make the empty pages work, tidy up behind the scenes, and clean up the small things that make a site feel neglected.</li>
+            <li><strong>Give it a beautiful, easy-to-use design.</strong> A dignified light design in red, white, black, and gold, with clear menus and a proper search.</li>
+            <li><strong>Add helpful new features.</strong> A modern news center, a searchable speech library, and a way for people to follow updates.</li>
+          </ol>
+        </div>
+
+        <div class="findings reveal" style="margin-top:20px;">
+          <div class="finding"><div class="num">1</div><div><h4>Some important pages open empty</h4><p>The Speeches page, the "President Answers" page, and the National Projects page showed only a title and no content when we opened them. The National Projects page even has a menu of 21 topics, but choosing one says "No projects found." Visitors who land there may see nothing at all.</p></div></div>
+          <div class="finding"><div class="num">2</div><div><h4>Every page loads its content twice</h4><p>Behind the scenes, the full text of each page is included two times. This makes pages heavier and slower, and it confuses the tools that read pages aloud for people with low vision.</p></div></div>
+          <div class="finding"><div class="num">3</div><div><h4>English and French addresses are written in Arabic</h4><p>An English news article has a web address made of Arabic letters and symbols. It is hard to read, hard to share, and it makes the English and French pages harder to find on Google.</p></div></div>
+          <div class="finding"><div class="num">4</div><div><h4>The menu confuses screen readers</h4><p>Menu items like "Egypt," "Presidency," and "News" are labeled as page titles instead of menu links. For someone using a screen reader, this makes the site much harder to navigate.</p></div></div>
+          <div class="finding"><div class="num">5</div><div><h4>The three languages are not in sync, and some pages feel old</h4><p>The links, social icons, and even menu names are different in each language. Some featured reports are from 2021, and the small copyright line at the bottom still says 2020. Little details like these make an official site feel unattended.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 How we looked -->
+    <section id="method" class="section alt">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">02 / How We Looked</div>
+            <h2>Everything here comes from your real pages.</h2>
+          </div>
+          <p class="lead">We did not guess. We opened and read real pages across all three languages, then compared them. Here are the pages we studied and what we saw on each.</p>
+        </div>
+
+        <div class="table-wrap reveal">
+          <table class="datatable">
+            <thead><tr><th>#</th><th>Page we opened</th><th>What we saw</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>English home</td><td>Full news, initiatives with photos, related links, footer</td></tr>
+              <tr><td>2</td><td>Arabic home (the default)</td><td>Right-to-left home, richer footer with social links and RSS</td></tr>
+              <tr><td>3</td><td>French home</td><td>Shows a much fuller "Présidence" menu than English does</td></tr>
+              <tr><td>4</td><td>A news / speech article (EN)</td><td>Full speech, but the text appears twice</td></tr>
+              <tr><td>5</td><td>The President's Speeches (EN)</td><td>Only a title, no list of speeches</td></tr>
+              <tr><td>6</td><td>The President Answers (EN)</td><td>Only a title, no content</td></tr>
+              <tr><td>7</td><td>Historic Palaces (EN)</td><td>Rich content with tabs, but again duplicated</td></tr>
+              <tr><td>8</td><td>National Projects (EN)</td><td>A 21-topic filter that returns "No projects found"</td></tr>
+              <tr><td>9</td><td>Decent Life initiative (EN)</td><td>Just two short paragraphs</td></tr>
+              <tr><td>10</td><td>RSS feeds (AR)</td><td>Four working feeds: projects, news, events, live</td></tr>
+              <tr><td>11 – 13</td><td>Behind-the-scenes checks</td><td>Security is strong (modern, encrypted, well protected)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:20px;">
+          <span class="tag gold">A note on scope</span>
+          <p style="margin-bottom:0;">Two measurements are best confirmed with direct access before work begins: the site's exact loading speed and precise color-contrast levels. Everything in this document is based on the real pages we reviewed, and these final checks would simply put exact numbers next to findings we are already confident about. We would complete them in a short technical pass at the start of the project.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 What we found -->
+    <section id="audit" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">03 / What We Found</div>
+            <h2>The details, explained simply.</h2>
+          </div>
+          <p class="lead">Here is what we noticed, area by area. The encouraging part: most of these are template-level issues, so fixing them once fixes them across the whole site.</p>
+        </div>
+
+        <div class="audit-list reveal">
+          <div class="audit-item">
+            <div class="label"><strong>Finding your way around</strong><span class="sev">Hard to explore</span></div>
+            <div>
+              <p>The most important content, who the President is, the former presidents, the official reports, sits inside a "Presidency" menu that the English home page barely shows. It is there, but buried.</p>
+              <ul>
+                <li>The menus have different names in each language. "News" in English is "Presidential Activities" in Arabic. It can feel like three different websites.</li>
+                <li>The site is built like a rolling news feed, with no easy starting point for citizens looking for initiatives or journalists looking for speeches and photos.</li>
+                <li>There is no search box and no "you are here" trail on deeper pages, so it is easy to get lost.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div class="label"><strong>The look and feel</strong><span class="sev">Feels generic</span></div>
+            <div>
+              <p>Today the design looks like a standard portal template rather than a carefully crafted national identity. The bright red is used heavily, and the spacing and typography feel like defaults.</p>
+              <ul>
+                <li>The same news items repeat several times on the home page, which scatters attention instead of guiding it.</li>
+                <li>Some text, white on bright red and light gray helper text, is likely hard to read for many people.</li>
+                <li>There is no consistent, dignified visual style that instantly says "this is the office of the head of state."</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div class="label"><strong>The content itself</strong><span class="sev">Strong, but uneven</span></div>
+            <div>
+              <p>The core content is genuinely good, full speeches and beautifully detailed palace histories. The problem is around the edges.</p>
+              <ul>
+                <li>Some flagship pages are thin. The Decent Life initiative, a major national program, is just two short paragraphs.</li>
+                <li>A few key pages open empty, as noted above.</li>
+                <li>Old dates (2021 reports, a 2020 footer) make the site feel out of date, even though a lot of the news is current.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div class="label"><strong>Getting things done</strong><span class="sev">Some dead ends</span></div>
+            <div>
+              <p>When we tried the things a real visitor would do, a few led nowhere.</p>
+              <ul>
+                <li>"Read the latest speech" works, but "browse older speeches" does not, because that page is empty.</li>
+                <li>"Find a project by topic" fails on the very page built for it.</li>
+                <li>There is no clear way to contact the Presidency or sign up for updates. The RSS feeds exist, which is great, but they are hidden away.</li>
+                <li>One nice touch that already works: you can share and copy the link to any article.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div class="label"><strong>Welcoming to everyone</strong><span class="sev">Below the standard</span></div>
+            <div>
+              <p>Government websites should be usable by people with disabilities, and here there is real room to improve.</p>
+              <ul>
+                <li>Because content loads twice, screen readers announce everything twice, and keyboard users tab through everything twice.</li>
+                <li>The menu is not built as a proper menu, so it is confusing to navigate without a mouse.</li>
+                <li>There is no "skip to main content" shortcut and no working search, both of which help everyone.</li>
+                <li>Some color combinations are likely too low-contrast to read comfortably.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div class="label"><strong>Three languages, done right</strong><span class="sev">Out of sync</span></div>
+            <div>
+              <p>Arabic is the main language and reads right-to-left, which is correct and good. The three versions just need to line up.</p>
+              <ul>
+                <li>The footer links and social icons are different in each language.</li>
+                <li>The web addresses are in Arabic even on the English and French pages.</li>
+                <li>The French version is thinner and a little more out of date than the Arabic one.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div class="label"><strong>Speed and search visibility</strong><span class="sev">Weighed down</span></div>
+            <div>
+              <p>Because every page loads its content twice, pages are heavier and slower than they need to be, and search engines can see it as duplicated content.</p>
+              <ul>
+                <li>Some pages rely on extra code to fill in their content, and when that does not run, the page looks empty.</li>
+                <li>The Arabic web addresses on English and French pages also hold those pages back on Google.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div class="label ok"><strong>Trust and security</strong><span class="sev ok">A real strength</span></div>
+            <div>
+              <p>This is worth celebrating. The site is well protected, with strong, modern security settings that many organizations get wrong. That is a solid foundation to build on.</p>
+              <ul>
+                <li>To round it out, we would add a published privacy statement, an accessibility statement, and a clear "last updated" date on content, the trust signals people expect from an official source.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 The new look -->
+    <section id="redesign" class="section alt">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">04 / The New Look</div>
+            <h2>Light, elegant, and unmistakably Egyptian.</h2>
+          </div>
+          <p class="lead">We propose a clean, luxurious design on a light canvas, built around your national colors, red, white, black, and gold, inspired by the world's most respected government websites. Calm, confident, and beautiful.</p>
+        </div>
+
+        <div class="positioning reveal">
+          <p>When someone opens the site, it should feel as important and trustworthy as the office it represents. Plenty of white space, a confident solid red, warm gold for moments of ceremony, and elegant type that lets the content breathe.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card top-red">
+            <span class="tag red">The colors</span>
+            <ul>
+              <li><strong>White</strong> as the calm, spacious base, clean and timeless.</li>
+              <li><strong>Red</strong> as the confident brand color, refined and used with purpose.</li>
+              <li><strong>Gold</strong> for elegance and ceremony, used sparingly so it always feels special, with <strong>black</strong> for crisp, readable text.</li>
+            </ul>
+          </div>
+          <div class="card top-gold">
+            <span class="tag gold">The typography</span>
+            <ul>
+              <li>An elegant serif for headlines, the kind of typeface that feels official and refined.</li>
+              <li>A clear, modern, highly readable typeface for everything else, in all three languages.</li>
+              <li>Comfortably large text and generous spacing, especially for long speeches.</li>
+            </ul>
+          </div>
+          <div class="card top-red">
+            <span class="tag ink">The feel</span>
+            <ul>
+              <li>Solid color blocks and clean lines instead of clutter, a real sense of order and calm.</li>
+              <li>Gentle, tasteful motion: content fades in softly as you scroll. Elegance, not spectacle.</li>
+              <li>Everything stays fast, and calm for anyone who prefers less movement.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:20px;">
+          <h3>A consistent design kit</h3>
+          <p style="margin-bottom:0;">Rather than a one-off theme, we build a reusable design kit: a defined set of colors, fonts, buttons, cards, and page layouts that all work together. This keeps every page polished and on-brand, makes future updates easy for your team, and lets the site grow gracefully over time without losing its identity.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Modern government UI/UX -->
+    <section id="uiux" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">05 / Modern Government UI/UX</div>
+            <h2>What makes a government website feel modern.</h2>
+          </div>
+          <p class="lead">The best national websites in the world share a few habits. They are calm, clear, and built around people. Here is how we would bring those same habits to the Presidency site.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card top-red">
+            <h3>A strong, steady header</h3>
+            <p>One header on every page with the national emblem, a clear menu, an always-visible search box, and the language switch, so people never feel lost and always know they are on the official site.</p>
+          </div>
+          <div class="card top-gold">
+            <h3>A homepage built around tasks</h3>
+            <p>Lead with what visitors came to do, read the latest speech, follow a national project, reach the Presidency, instead of a rotating slideshow. Clear doorways, not decoration.</p>
+          </div>
+          <div class="card top-red">
+            <h3>One consistent component set</h3>
+            <p>Buttons, cards, tabs, and forms that look and behave the same on every page. Consistency is what makes a site feel considered and trustworthy.</p>
+          </div>
+          <div class="card top-gold">
+            <h3>Room to read</h3>
+            <p>Generous white space, large type, and comfortable line lengths, especially for long speeches. Content should feel calm and effortless to read on any screen.</p>
+          </div>
+          <div class="card top-red">
+            <h3>Accessible for every citizen</h3>
+            <p>Full keyboard use, clear focus outlines, strong contrast, a "skip to content" link, and an accessibility toolbar for text size and high contrast. A national site should welcome everyone.</p>
+          </div>
+          <div class="card top-gold">
+            <h3>Beautiful on a phone</h3>
+            <p>Designed for mobile first, so it works perfectly on a phone without needing a separate app. Most visitors arrive on a small screen.</p>
+          </div>
+          <div class="card top-red">
+            <h3>Clear trust signals</h3>
+            <p>Visible "last updated" dates, official badges, a secure lock, and named sources, so every page feels current, verified, and authoritative.</p>
+          </div>
+          <div class="card top-gold">
+            <h3>Information you can see</h3>
+            <p>Turn national projects and reports into maps, simple charts, and progress indicators instead of walls of text. Show results at a glance.</p>
+          </div>
+          <div class="card top-red">
+            <h3>Arabic-first, truly trilingual</h3>
+            <p>Designed right-to-left properly from the start, with the same quality and content in Arabic, English, and French.</p>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:20px;">
+          <span class="tag ink">The standard we design toward</span>
+          <p style="margin-bottom:0;">We aim for the level of the world's most respected government platforms: the United Kingdom's GOV.UK for clarity, the U.S. Web Design System for a documented component kit, Singapore's national portal for calm simplicity, and the French and UAE platforms for elegant multilingual design. The goal is not to copy them, but to give Egypt a website that belongs in their company.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Easier to navigate -->
+    <section id="ia" class="section alt">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">06 / Easier To Navigate</div>
+            <h2>Organized around what people come to do.</h2>
+          </div>
+          <p class="lead">One clear structure, identical in all three languages, with a prominent search box and a simple "you are here" trail on every page. Here is the menu we suggest.</p>
+        </div>
+
+        <div class="sitemap reveal">
+          <ul>
+            <li>The Presidency
+              <ul><li>The President (biography and role)</li><li>Former Presidents</li><li>Medals and Honors</li><li>Presidency Museums</li><li>Historic Palaces</li><li>Spokesperson</li></ul>
+            </li>
+            <li>News &amp; Media
+              <ul><li>Presidential News (with easy filters)</li><li>Speeches Library (search, transcripts, video, downloads)</li><li>Events and Conferences</li><li>Live Streaming</li><li>Photo and Video Gallery</li><li>Press resources for journalists</li></ul>
+            </li>
+            <li>Initiatives &amp; National Projects
+              <ul><li>National initiatives (Decent Life and others)</li><li>Projects by topic (the 21 areas, actually filled in)</li><li>Results and impact</li></ul>
+            </li>
+            <li>For Citizens
+              <ul><li>The President Answers</li><li>Contact the Presidency</li><li>Reports and transparency, kept current</li></ul>
+            </li>
+            <li>Search <em>always visible, works across everything</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Languages -->
+    <section id="urls" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">07 / Speaking Every Language Well</div>
+            <h2>An English page should have an English address.</h2>
+          </div>
+          <p class="lead">This is one of the easiest wins with the biggest payoff, and it makes the site friendlier to share and easier to find.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card top-red">
+            <h3>Readable web addresses</h3>
+            <ul>
+              <li>Give each language its own clear address, so an English article reads in English and a French article reads in French.</li>
+              <li>Tell search engines which page is which language, so the right version shows up for the right person.</li>
+              <li>Automatically send old links to the new ones, so nothing breaks.</li>
+            </ul>
+          </div>
+          <div class="card top-gold">
+            <h3>Three languages that match</h3>
+            <ul>
+              <li>The same pages, links, and footer in Arabic, English, and French.</li>
+              <li>When a translation is still coming, say so clearly instead of quietly showing something different.</li>
+              <li>Tidy up the stretched Arabic text used for decoration, which also helps search and screen readers.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="before-after reveal">
+          <div class="ba-cell before"><div class="label">Today, an English link</div><p><code>/en/%D9%82%D8%B3%D9%85-%D8%A7%D9%84%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1/...</code></p></div>
+          <div class="ba-cell after"><div class="label">After</div><p><code>/en/news/president-attends-inauguration/</code></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 What to fix first -->
+    <section id="improvements" class="section alt">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">08 / What To Fix First</div>
+            <h2>Quick wins now, bigger improvements next.</h2>
+          </div>
+          <p class="lead">You do not have to do everything at once. Some fixes are fast and make an immediate difference. Others take a little longer but set the site up for the future.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card top-red">
+            <span class="tag red">Quick wins, in days to weeks</span>
+            <ol>
+              <li><strong>Make the empty pages work</strong> so Speeches, President Answers, and National Projects actually show their content. Most important of all.</li>
+              <li><strong>Stop loading content twice.</strong> This instantly makes pages faster and friendlier for screen readers.</li>
+              <li><strong>Fix the menu</strong> so it behaves like a real menu, and add a "skip to content" shortcut.</li>
+              <li><strong>Freshen up the dates,</strong> starting with the 2020 footer and the old reports.</li>
+              <li><strong>Improve the hard-to-read colors.</strong></li>
+              <li><strong>Add a search box</strong> and show off the RSS feeds you already have.</li>
+              <li><strong>Make the footer and links the same</strong> in all three languages.</li>
+              <li><strong>Publish a privacy statement and an accessibility statement.</strong></li>
+            </ol>
+          </div>
+          <div class="card top-gold">
+            <span class="tag gold">Bigger improvements, in weeks to months</span>
+            <ol>
+              <li><strong>Give every language readable web addresses,</strong> with old links redirected automatically.</li>
+              <li><strong>Reorganize the menus</strong> around what visitors actually need, the same way in every language.</li>
+              <li><strong>Rebuild pages so they load fully and quickly,</strong> even before the extra code runs.</li>
+              <li><strong>Roll out the new design kit</strong> across the whole site.</li>
+              <li><strong>Deepen the initiative and project pages</strong> with goals, numbers, and results.</li>
+              <li><strong>Bring the three languages to full parity,</strong> with a simple translation workflow.</li>
+              <li><strong>Add proper sitemaps</strong> so search engines find everything.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 New ideas -->
+    <section id="features" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">09 / New Ideas</div>
+            <h2>Thoughtful features people will actually use.</h2>
+          </div>
+          <p class="lead">Once the essentials are in place, these additions turn the site from a news feed into a modern, helpful national platform, all appropriate for an official government site.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card top-red"><h3>A modern news center</h3><p>One place for all news, easy to filter by topic, date, and language, with official photos and logos ready for journalists to use.</p></div>
+          <div class="card top-gold"><h3>A searchable speech library</h3><p>Every speech with its full text, official video, a downloadable copy, and a stable link, easy to search by year or topic.</p></div>
+          <div class="card top-red"><h3>A national projects hub</h3><p>The 21 topics filled in with real project pages, maps, budgets, timelines, and a simple dashboard showing progress.</p></div>
+          <div class="card top-gold"><h3>A clear way to reach the Presidency</h3><p>A simple, respectful contact experience, and a more welcoming home for "The President Answers."</p></div>
+          <div class="card top-red"><h3>Follow the updates</h3><p>Let people sign up by email, or get a notification, when there is new news, a new speech, or a live event.</p></div>
+          <div class="card top-gold"><h3>An accessibility helper</h3><p>A small toolbar to make text bigger, switch to high contrast, or read speeches in a calm, distraction-free view.</p></div>
+          <div class="card top-red"><h3>A rich media gallery</h3><p>Beautiful, well-organized photo and video collections of state events, palaces, and projects, with captions in all three languages.</p></div>
+          <div class="card top-gold"><h3>A dedicated live page</h3><p>For major events: a schedule, a countdown, live captions, and the recording afterward.</p></div>
+          <div class="card top-red"><h3>A transparency center</h3><p>One current home for achievement and development reports, published on a regular, predictable schedule.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 The plan -->
+    <section id="roadmap" class="section alt">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">10 / The Plan</div>
+            <h2>Three clear stages, real progress early.</h2>
+          </div>
+          <p class="lead">We suggest working in stages so you see visible wins within the first few weeks, while the bigger pieces come together behind the scenes.</p>
+        </div>
+
+        <div class="timeline reveal">
+          <div class="timeline-card">
+            <div><div class="phase">Stage 1</div><div class="time">Weeks 1 – 4</div></div>
+            <div><h3>Fix what is broken</h3><p>Make the empty pages work, stop loading content twice, fix the menu and add a "skip to content" shortcut, freshen up the dates, improve the hard-to-read colors, add search, tidy the footer, and publish a privacy and accessibility statement.</p><div class="out">The result: the site stops letting visitors down, and immediately feels more cared for.</div></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Stage 2</div><div class="time">Weeks 5 – 12</div></div>
+            <div><h3>A beautiful, solid foundation</h3><p>Give every language readable web addresses, add proper sitemaps, roll out the new light red, white, black, and gold design kit, and rebuild the busiest pages so they load fully and fast.</p><div class="out">The result: a clean, elegant, easy-to-find site in all three languages.</div></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Stage 3</div><div class="time">Months 4 – 9</div></div>
+            <div><h3>Bring the site to life</h3><p>Launch the new menu structure, the modern news center, the searchable speech library, and the filled-in projects hub. Then add follow-by-email, the media gallery, the transparency center, and the accessibility helper.</p><div class="out">The result: a modern, welcoming national platform people love to use.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 How we measure success -->
+    <section id="metrics" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">11 / How We Measure Success</div>
+            <h2>Simple, honest ways to know it worked.</h2>
+          </div>
+          <p class="lead">We keep the scorecard easy to understand. If these get better, the project is working.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card top-red">
+            <h3>Easy and welcoming</h3>
+            <ul>
+              <li>No more pages that open empty.</li>
+              <li>People can easily find the latest speech, browse older ones, find a project, and contact the Presidency in a quick test.</li>
+              <li>The site meets the recognized accessibility standard for public websites.</li>
+            </ul>
+          </div>
+          <div class="card top-gold">
+            <h3>Fast and light</h3>
+            <ul>
+              <li>Pages open quickly on a normal phone.</li>
+              <li>Article pages become much lighter once content is no longer loaded twice.</li>
+              <li>Nothing jumps around while a page loads.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:20px;">
+          <div class="card top-gold">
+            <h3>Easy to find</h3>
+            <ul>
+              <li>Every English and French page has a readable address in its own language.</li>
+              <li>More people find the English and French pages through search.</li>
+              <li>Search engines see clean, non-duplicated content.</li>
+            </ul>
+          </div>
+          <div class="card top-red">
+            <h3>Trusted and current</h3>
+            <ul>
+              <li>More people follow updates by RSS and email.</li>
+              <li>Visitors spend more time reading speeches and initiatives, and come back.</li>
+              <li>Every page has a clear "last updated" date, a privacy statement, and an accessibility statement.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell">
+        <div class="cta-panel reveal">
+          <div class="section-kicker">In Short</div>
+          <h2>A website as dignified as the office it represents.</h2>
+          <p>You already have the content and the security. With a cleaner, more elegant light design in red, white, black, and gold, a few important fixes, and a handful of thoughtful features, the Presidency website can become something Egypt is proud to share, clear, beautiful, and welcoming to everyone. We would be honored to help you get there.</p>
+          <div class="decision-row" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <a class="button primary" href="mailto:ayousef@nixailabs.com?subject=Presidency%20of%20the%20Arab%20Republic%20of%20Egypt%20proposal%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20prepared%20for%20Presidency%20of%20the%20Arab%20Republic%20of%20Egypt.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept proposal</a>
+            <a class="button secondary" href="mailto:ayousef@nixailabs.com?subject=Presidency%20of%20the%20Arab%20Republic%20of%20Egypt%20proposal%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20prepared%20for%20Presidency%20of%20the%20Arab%20Republic%20of%20Egypt.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject proposal</a>
+            <a class="button secondary" href="#top">Back to Top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>Prepared for the <span class="g">Presidency of the Arab Republic of Egypt</span></span>
+      <span>Website Review · Redesign · Recommendations</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!window.gsap) {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
+        animateCounts();
+        return;
+      }
+
+      gsap.registerPlugin(window.ScrollTrigger);
+      gsap.to('.hero-content', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' });
+      gsap.to('.hero-visual', { opacity: 1, y: 0, duration: 0.9, delay: 0.16, ease: 'power3.out' });
+
+      gsap.utils.toArray('.reveal').forEach(function (el) {
+        if (el.classList.contains('hero-content') || el.classList.contains('hero-visual')) return;
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+      });
+
+      if (!reduceMotion) {
+        gsap.to('#sealCard', { y: -12, duration: 4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+        gsap.to('.hero-seal-bg', { rotation: 360, transformOrigin: '50% 50%', duration: 120, repeat: -1, ease: 'none' });
+        gsap.to('.hero-visual', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+      }
+
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+      navLinks.forEach(function (link) {
+        var id = link.getAttribute('href');
+        var target = document.querySelector(id);
+        if (!target) return;
+        ScrollTrigger.create({ trigger: target, start: 'top center', end: 'bottom center', onToggle: function (self) { if (self.isActive) setActive(link); } });
+      });
+      function setActive(link) { navLinks.forEach(function (l) { l.classList.remove('active'); }); link.classList.add('active'); }
+
+      animateCounts();
+      function animateCounts() {
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+          var end = parseFloat(el.getAttribute('data-count'));
+          if (window.gsap && window.ScrollTrigger && !reduceMotion) {
+            var obj = { v: 0 };
+            gsap.to(obj, { v: end, duration: 1.5, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 92%' }, onUpdate: function () { el.textContent = Math.round(obj.v); } });
+          } else { el.textContent = end; }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

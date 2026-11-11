@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Grand Fest, Aesthetic Carnival | Redesign, Custom CMS, SEO and AIEO Proposal</title>
+  <meta name="description" content="A premium website redesign, custom CMS, SEO, and AIEO proposal for The Grand Fest, Aesthetic Carnival — a flagship aesthetic and dermatology congress on the Red Sea, Egypt." />
+  <meta property="og:title" content="The Grand Fest, Aesthetic Carnival | Redesign, CMS, SEO & AIEO Proposal" />
+  <meta property="og:description" content="A custom CMS, modern Next.js front end, and a cinematic GSAP + WebGL motion layer to turn The Grand Fest into the most credible, bookable, and cited aesthetic congress in the region." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #04070f;
+      --bg-soft: #07111c;
+      --panel: rgba(10, 22, 36, 0.78);
+      --panel-strong: rgba(12, 27, 44, 0.94);
+      --line: rgba(94, 234, 212, 0.16);
+      --line-strong: rgba(45, 212, 191, 0.34);
+      --text: #eaf6f4;
+      --muted: #9db9bb;
+      --faint: #6e8a8d;
+      --teal: #2dd4bf;
+      --aqua: #5eead4;
+      --deep: #0e7490;
+      --gold: #f5c451;
+      --coral: #fb7c6d;
+      --rose: #f472b6;
+      --white: #ffffff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+      --radius: 28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 16% 10%, rgba(45, 212, 191, 0.16), transparent 30%),
+        radial-gradient(circle at 84% 2%, rgba(14, 116, 144, 0.26), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(245, 196, 81, 0.07), transparent 36%),
+        radial-gradient(circle at 90% 88%, rgba(251, 124, 109, 0.08), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(94, 234, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(94, 234, 212, 0.05) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 80%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 8%, transparent, rgba(4, 7, 15, 0.72) 74%);
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { color: var(--muted); margin: 0 0 18px; }
+    strong { color: var(--white); font-weight: 700; }
+    code {
+      font-family: "JetBrains Mono", monospace;
+      color: #c8fff4;
+      background: rgba(45, 212, 191, 0.08);
+      border: 1px solid rgba(45, 212, 191, 0.18);
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 0.92em;
+    }
+
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* Hero ---------------------------------------------------------------- */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.9;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 94vh;
+      display: grid;
+      align-items: center;
+      padding: 96px 0 70px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(45, 212, 191, 0.26);
+      background: rgba(45, 212, 191, 0.08);
+      color: #c8fff4;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 0 0 rgba(245, 196, 81, 0.8);
+      animation: pulse 1.8s infinite;
+    }
+
+    h1 {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      max-width: 900px;
+      font-size: clamp(42px, 7vw, 92px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      color: var(--white);
+      margin-bottom: 26px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #ffffff, #5eead4 38%, #f5c451 78%, #fb7c6d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy { max-width: 720px; font-size: clamp(18px, 2vw, 23px); color: #bcd6d4; margin-bottom: 34px; }
+
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 10px 22px; margin-bottom: 30px;
+      font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--aqua);
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-meta span::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--gold); }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 13px 20px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-weight: 800; font-size: 14px;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .button.primary {
+      color: #04140f;
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      box-shadow: 0 18px 48px rgba(45, 212, 191, 0.24);
+    }
+    .button.secondary { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+    .button:hover { transform: translateY(-2px); border-color: rgba(45, 212, 191, 0.45); }
+
+    /* Hero visual card ---------------------------------------------------- */
+    .ticket-card {
+      position: relative;
+      border: 1px solid var(--line-strong);
+      background:
+        linear-gradient(180deg, rgba(15, 40, 56, 0.92), rgba(6, 14, 24, 0.92)),
+        rgba(255, 255, 255, 0.04);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow), 0 0 80px rgba(45, 212, 191, 0.12);
+      overflow: hidden;
+      transform: perspective(900px) rotateX(5deg) rotateY(-7deg);
+      will-change: transform;
+    }
+    .ticket-card::before {
+      content: "";
+      position: absolute; inset: -1px;
+      background: linear-gradient(130deg, rgba(45, 212, 191, 0.30), transparent 38%, rgba(245, 196, 81, 0.20));
+      opacity: 0.8; pointer-events: none;
+    }
+    .ticket-top {
+      position: relative; display: flex; justify-content: space-between; gap: 14px;
+      padding: 18px; border-bottom: 1px dashed var(--line);
+      color: var(--muted); font-size: 12px; font-family: "JetBrains Mono", monospace;
+    }
+    .ticket-body { position: relative; padding: 22px; }
+    .ticket-headline { font-family: "Space Grotesk", sans-serif; color: var(--white); font-size: 21px; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .ticket-sub { color: var(--aqua); font-family: "JetBrains Mono", monospace; font-size: 12px; margin-bottom: 18px; }
+    .ticket-rows { display: grid; gap: 10px; margin-bottom: 16px; }
+    .ticket-row {
+      display: flex; justify-content: space-between; align-items: center;
+      border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .ticket-row small { color: var(--faint); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .ticket-row b { color: var(--white); font-family: "JetBrains Mono", monospace; font-size: 15px; }
+    .ticket-cme {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .ticket-cme .cell {
+      border: 1px solid var(--line); background: rgba(4, 7, 15, 0.42);
+      border-radius: 14px; padding: 14px;
+    }
+    .ticket-cme small { display: block; color: var(--faint); font-size: 11px; margin-bottom: 4px; }
+    .ticket-cme strong { font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--gold); }
+
+    /* Stats --------------------------------------------------------------- */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      margin-top: -28px; position: relative; z-index: 5;
+    }
+    .stat-card, .card, .section-card, .timeline-card {
+      border: 1px solid var(--line); background: var(--panel);
+      border-radius: 22px; box-shadow: 0 16px 52px rgba(0, 0, 0, 0.24); backdrop-filter: blur(16px);
+    }
+    .stat-card { padding: 22px; }
+    .stat-card b {
+      font-family: "Space Grotesk", sans-serif;
+      display: block; color: var(--white); font-size: 30px; line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em;
+    }
+    .stat-card span { color: var(--muted); font-size: 13px; }
+
+    /* Sections ------------------------------------------------------------ */
+    .section { padding: 92px 0; border-top: 1px solid rgba(94, 234, 212, 0.08); }
+    .section-head {
+      display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.55fr);
+      gap: 38px; align-items: end; margin-bottom: 34px;
+    }
+    .section-kicker {
+      font-family: "JetBrains Mono", monospace; color: var(--teal);
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--white); font-size: clamp(32px, 4.8vw, 56px);
+      line-height: 1.02; letter-spacing: -0.04em;
+    }
+    h3 { font-family: "Space Grotesk", sans-serif; color: var(--white); font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 14px; }
+    h4 { color: #e0fbf6; font-size: 16px; margin: 0 0 10px; }
+    .lead { font-size: 18px; color: #bcd6d4; margin-bottom: 0; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+
+    .card, .section-card { padding: 26px; }
+    .card.accent { border-color: rgba(45, 212, 191, 0.32); background: linear-gradient(180deg, rgba(45, 212, 191, 0.08), rgba(10, 22, 36, 0.78)); }
+    .card.gold { border-color: rgba(245, 196, 81, 0.34); background: linear-gradient(180deg, rgba(245, 196, 81, 0.09), rgba(10, 22, 36, 0.78)); }
+    .card.coral { border-color: rgba(251, 124, 109, 0.34); background: linear-gradient(180deg, rgba(251, 124, 109, 0.09), rgba(10, 22, 36, 0.78)); }
+    .card.danger { border-color: rgba(251, 124, 109, 0.4); background: linear-gradient(180deg, rgba(251, 124, 109, 0.11), rgba(10, 22, 36, 0.78)); }
+
+    .tag {
+      display: inline-flex; align-items: center;
+      border: 1px solid rgba(45, 212, 191, 0.24); color: #c8fff4;
+      background: rgba(45, 212, 191, 0.07); border-radius: 999px;
+      padding: 6px 10px; font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .tag.gold { border-color: rgba(245, 196, 81, 0.3); color: #ffe6a6; background: rgba(245, 196, 81, 0.08); }
+    .tag.coral { border-color: rgba(251, 124, 109, 0.3); color: #ffd2c9; background: rgba(251, 124, 109, 0.08); }
+
+    ul, ol { padding-left: 20px; color: var(--muted); }
+    li { margin-bottom: 10px; }
+    li::marker { color: var(--teal); }
+
+    .audit-list { display: grid; gap: 18px; }
+    .audit-item {
+      display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 18px;
+      padding: 22px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255, 255, 255, 0.035);
+    }
+    .audit-item strong { display: block; color: var(--teal); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .audit-item .sev { display: block; color: var(--coral); font-size: 12px; font-family: "JetBrains Mono", monospace; }
+
+    .quote {
+      border-left: 3px solid var(--teal); padding: 18px 20px; border-radius: 0 18px 18px 0;
+      background: rgba(45, 212, 191, 0.07); color: #e0fbf6; margin: 0;
+    }
+    .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .ba-cell { border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: rgba(255,255,255,0.035); }
+    .ba-cell .label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .ba-cell.before .label { color: var(--coral); }
+    .ba-cell.after .label { color: var(--teal); }
+    .ba-cell p { margin: 0; color: #cfe6e3; font-size: 14px; }
+
+    .positioning {
+      border-radius: 30px; padding: 34px; border: 1px solid rgba(245, 196, 81, 0.28);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(245, 196, 81, 0.13), transparent 32%),
+        linear-gradient(135deg, rgba(45, 212, 191, 0.09), rgba(10, 22, 36, 0.86));
+      margin-bottom: 24px;
+    }
+    .positioning p {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(19px, 2.4vw, 28px); line-height: 1.4; letter-spacing: -0.02em; color: var(--white); margin: 0;
+    }
+
+    .sitemap {
+      columns: 2; column-gap: 34px; border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 28px; background: rgba(255, 255, 255, 0.035);
+    }
+    .sitemap ul { break-inside: avoid; margin-bottom: 16px; }
+    .sitemap > ul { padding-left: 18px; }
+    .sitemap li { color: #cfe6e3; }
+    .sitemap li ul { margin-top: 8px; }
+    .sitemap li ul li { color: var(--muted); }
+
+    .timeline { position: relative; display: grid; gap: 16px; }
+    .timeline-card { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 20px; padding: 24px; }
+    .timeline-card .phase { color: var(--teal); font-family: "JetBrains Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; }
+    .timeline-card .time { color: var(--gold); font-size: 13px; font-weight: 800; margin-top: 8px; }
+
+    .nav { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 8px; }
+    .nav a { width: 10px; height: 10px; border-radius: 999px; background: rgba(157, 185, 187, 0.35); border: 1px solid transparent; transition: all 0.2s ease; }
+    .nav a:hover, .nav a.active { background: var(--teal); transform: scale(1.35); box-shadow: 0 0 16px rgba(45, 212, 191, 0.65); }
+
+    /* Investment ---------------------------------------------------------- */
+    .investment-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 86% 8%, rgba(245, 196, 81, 0.13), transparent 30%),
+        radial-gradient(circle at 8% 100%, rgba(45, 212, 191, 0.16), transparent 34%),
+        var(--panel-strong);
+      box-shadow: var(--shadow), 0 0 90px rgba(45, 212, 191, 0.10);
+      padding: clamp(28px, 5vw, 46px);
+      margin-bottom: 18px;
+    }
+    .investment-top {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px;
+      align-items: end; padding-bottom: 28px; border-bottom: 1px solid var(--line);
+    }
+    .investment-label {
+      font-family: "JetBrains Mono", monospace; color: var(--teal);
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .investment-total { text-align: right; }
+    .investment-total span {
+      display: block; color: var(--muted); font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.10em; margin-bottom: 2px;
+    }
+    .investment-total strong {
+      display: block; font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(48px, 7vw, 82px); line-height: 0.95; letter-spacing: -0.06em; color: var(--white);
+    }
+    .quote-table {
+      display: grid; gap: 1px; margin-top: 26px; border: 1px solid var(--line);
+      border-radius: 22px; overflow: hidden; background: var(--line);
+    }
+    .quote-row {
+      display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 20px;
+      align-items: center; padding: 18px 20px; background: rgba(6, 14, 24, 0.66);
+    }
+    .quote-row.total { background: rgba(45, 212, 191, 0.10); }
+    .quote-row h4 { margin: 0 0 3px; color: var(--white); font-size: 15px; }
+    .quote-row p { margin: 0; font-size: 13px; color: var(--faint); }
+    .quote-price {
+      text-align: right; font-family: "JetBrains Mono", monospace;
+      color: #c8fff4; font-size: 17px; font-weight: 800;
+    }
+    .payment-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    .payment-card { border: 1px solid var(--line); border-radius: 20px; background: rgba(255, 255, 255, 0.035); padding: 20px; }
+    .payment-card span {
+      display: block; color: var(--teal); font-family: "JetBrains Mono", monospace;
+      font-size: 12px; margin-bottom: 8px;
+    }
+    .payment-card strong {
+      display: block; font-family: "Space Grotesk", sans-serif; color: var(--white);
+      font-size: 24px; letter-spacing: -0.04em; margin-bottom: 6px;
+    }
+    .card.warning { border-color: rgba(245, 196, 81, 0.4); background: linear-gradient(180deg, rgba(245, 196, 81, 0.10), rgba(10, 22, 36, 0.78)); }
+
+    .cta { padding: 70px 0 96px; }
+    .cta-panel {
+      position: relative; overflow: hidden; border-radius: 34px; border: 1px solid var(--line-strong);
+      background:
+        radial-gradient(circle at 80% 0%, rgba(45, 212, 191, 0.18), transparent 38%),
+        radial-gradient(circle at 20% 100%, rgba(245, 196, 81, 0.13), transparent 42%),
+        var(--panel-strong);
+      padding: clamp(32px, 6vw, 64px); box-shadow: var(--shadow); text-align: center;
+    }
+    .cta-panel h2 { max-width: 880px; margin: 0 auto 18px; }
+    .cta-panel p { max-width: 780px; margin: 0 auto 30px; font-size: 18px; }
+
+    footer { border-top: 1px solid var(--line); color: var(--faint); padding: 30px 0; font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    .reveal { opacity: 0; transform: translateY(22px); }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(245, 196, 81, 0.65); }
+      70% { box-shadow: 0 0 0 10px rgba(245, 196, 81, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 196, 81, 0); }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .section-head, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .ticket-card { transform: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
+      .nav { display: none; }
+      .sitemap { columns: 1; }
+      .audit-item, .timeline-card { grid-template-columns: 1fr; }
+      .before-after { grid-template-columns: 1fr; }
+      .investment-top, .payment-grid { grid-template-columns: 1fr; }
+      .investment-total, .quote-price { text-align: left; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      .hero { min-height: auto; padding: 70px 0 44px; }
+      .stats, .ticket-cme { grid-template-columns: 1fr; }
+      .quote-row { grid-template-columns: 1fr; }
+      .quote-price { text-align: left; }
+      .section { padding: 64px 0; }
+      .card, .section-card, .positioning, .sitemap, .timeline-card { padding: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .pulse { animation: none; }
+      #hero-canvas { display: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media print {
+      body { background: #ffffff; color: #102028; }
+      body::before, body::after, .nav, #hero-canvas, .button { display: none !important; }
+      .hero { min-height: auto; padding: 40px 0; }
+      .hero-grid, .section-head, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .card, .section-card, .stat-card, .timeline-card, .positioning, .sitemap, .cta-panel,
+      .investment-panel, .payment-card {
+        border: 1px solid #d4e2e0; background: #ffffff; box-shadow: none; break-inside: avoid;
+      }
+      .quote-table { border: 1px solid #d4e2e0; background: #ffffff; }
+      .quote-row, .quote-row.total { background: #ffffff; border-top: 1px solid #d4e2e0; }
+      .quote-price, .investment-total strong { color: #07131a; }
+      h1, h2, h3, h4, strong, .positioning p { color: #07131a; }
+      p, li { color: #34504c; }
+      .section { padding: 34px 0; border-top: 1px solid #d4e2e0; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Proposal sections">
+    <a href="#summary" aria-label="Executive summary"></a>
+    <a href="#audit" aria-label="Current state audit"></a>
+    <a href="#positioning" aria-label="Strategic opportunity"></a>
+    <a href="#design" aria-label="Redesign direction"></a>
+    <a href="#ia" aria-label="Information architecture"></a>
+    <a href="#conversion" aria-label="Conversion strategy"></a>
+    <a href="#seo" aria-label="SEO strategy"></a>
+    <a href="#aieo" aria-label="AIEO strategy"></a>
+    <a href="#trust" aria-label="Trust and credibility"></a>
+    <a href="#roadmap" aria-label="Roadmap"></a>
+    <a href="#stack" aria-label="Tech stack"></a>
+    <a href="#metrics" aria-label="Success metrics"></a>
+    <a href="#investment" aria-label="Investment"></a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="shell hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow"><span class="pulse"></span> Redesign · Custom CMS · SEO · AIEO</div>
+          <h1>The Grand Fest deserves a site as serious as its <span class="gradient-text">science, and as alive as its carnival.</span></h1>
+          <p class="hero-copy">A full rebuild on a custom CMS with a modern Next.js front end and a cinematic GSAP, WebGL and parallax motion layer — engineered to convert registrations, sell workshops, and make the congress the most cited aesthetic event in the region.</p>
+          <div class="hero-meta">
+            <span>Red Sea, Egypt</span>
+            <span>13–15 November 2025</span>
+            <span>40 CME Hours</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#summary">Read Proposal</a>
+            <a class="button secondary" href="https://grandfestegy.com" target="_blank" rel="noreferrer">View Current Site</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="ticket-card" id="ticketCard">
+            <div class="ticket-top">
+              <span>THE GRAND FEST / AESTHETIC CARNIVAL</span>
+              <span>RED SEA · 2025</span>
+            </div>
+            <div class="ticket-body">
+              <div class="ticket-headline">Aesthetic &amp; Dermatology Congress</div>
+              <div class="ticket-sub">Science meets the Red Sea</div>
+              <div class="ticket-rows">
+                <div class="ticket-row"><small>Faculty</small><b>45 international experts</b></div>
+                <div class="ticket-row"><small>Format</small><b>Sessions · Workshops · Cadaver lab</b></div>
+                <div class="ticket-row"><small>Audience</small><b>Dermatologists · Surgeons</b></div>
+              </div>
+              <div class="ticket-cme">
+                <div class="cell"><small>CME Hours</small><strong>40</strong></div>
+                <div class="cell"><small>Event Days</small><strong>3</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell stats reveal">
+      <div class="stat-card"><b data-count="45" data-suffix="">0</b><span>International speakers</span></div>
+      <div class="stat-card"><b data-count="40" data-suffix="">0</b><span>CME accreditation hours</span></div>
+      <div class="stat-card"><b data-count="3" data-suffix="">0</b><span>Days on the Red Sea</span></div>
+      <div class="stat-card"><b data-count="13" data-suffix="">0</b><span>Strategic proposal sections</span></div>
+    </div>
+
+    <!-- 01 Executive summary -->
+    <section id="summary" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">01 / Executive Summary</div>
+            <h2>A flagship event on a template-grade website.</h2>
+          </div>
+          <p class="lead">Around 45 international speakers, hands-on workshops, a pre-congress cadaver lab, 40 CME hours, and a Red Sea destination experience. The current site cannot carry that ambition — and AI assistants have almost nothing accurate to cite.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card accent">
+            <span class="tag">Problem 01</span>
+            <h3>Dated, untrustworthy experience</h3>
+            <p>A generic WordPress and five-builder theme with leftover demo content. A doctor cannot quickly understand the value, trust the brand, or register in a clean flow.</p>
+          </div>
+          <div class="card accent">
+            <span class="tag">Problem 02</span>
+            <h3>No real conversion path</h3>
+            <p>No persistent Register CTA, no native registration or ticketing, no workshop booking with capacity, and a single catch-all contact form standing in for revenue.</p>
+          </div>
+          <div class="card accent">
+            <span class="tag">Problem 03</span>
+            <h3>Weak to broken discovery</h3>
+            <p>No real SEO foundation and an AIEO setup that is actively broken — a default <code>llms.txt</code> pointing AI crawlers to a staging domain and a "Hello world!" post.</p>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:18px;">
+          <h3>The recommendation</h3>
+          <p>Rebuild on a <strong>custom content management system</strong> rather than another WordPress and page-builder stack. A custom CMS, paired with a modern Next.js front end and a cinematic motion layer (GSAP, WebGL and parallax), delivers three things the current stack cannot:</p>
+          <ol>
+            <li><strong>A premium, fast, branded experience</strong> that feels like a flagship medical and lifestyle event, not a template.</li>
+            <li><strong>Bespoke conversion flows</strong> built for this event: native registration and ticketing, workshop booking with live capacity limits, and a sponsor and exhibitor pipeline.</li>
+            <li><strong>Total control over machine-readable output</strong> — clean server-rendered HTML, programmatic schema (Event, Course, Person, Organization, FAQ), a real <code>llms.txt</code>, and per-entity metadata generated from the event data.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Current state audit -->
+    <section id="audit" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">02 / Current State Audit</div>
+            <h2>Specific findings from the live site.</h2>
+          </div>
+          <p class="lead">This is not a styling problem a new theme fixes. It is a structural, content-integrity, conversion and discoverability problem — which is the case for a custom build.</p>
+        </div>
+
+        <div class="audit-list reveal">
+          <div class="audit-item">
+            <div><strong>Design</strong><span class="sev">First impression</span></div>
+            <div>
+              <p>A long single scroll built on a stock festival theme (Festiva). Spacing, typography and rhythm read as a generic template, not a premium medical congress.</p>
+              <ul>
+                <li>The hero shows a slogan but does not answer the three five-second questions: what is this, who is it for, what do I do next.</li>
+                <li>The visual language does not signal the dual identity of serious scientific credibility plus carnival and concert energy.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>UX &amp; Structure</strong><span class="sev">No clear action</span></div>
+            <div>
+              <p>There is no persistent "Register" call to action in a fixed header; the main interaction is a generic form near the bottom of the page.</p>
+              <ul>
+                <li>Speakers, workshops, sessions, venue and sponsors live as scroll sections rather than linkable, shareable destinations.</li>
+                <li>Heading structure is broken: <strong>no H1</strong> and only four H2 elements.</li>
+                <li>Date inconsistency: the banner reads 13–14 November, the body copy reads 13–15 November.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>Content</strong><span class="sev">Critical · integrity</span></div>
+            <div>
+              <p>The most urgent issue. The live site still contains <strong>leftover template demo content</strong>, which is fatal for a premium brand.</p>
+              <ul>
+                <li>A section still references "world marketing summit 2024".</li>
+                <li>Slider and block titles render as placeholders: "number-one" through "number-five".</li>
+                <li>Generic marketing blocks remain: "Startup Community", "New Knowledge", "Idea Sharing", and copy about "latest marketing techniques" — none of which belongs on an aesthetic medicine congress.</li>
+              </ul>
+              <div class="before-after">
+                <div class="ba-cell before"><div class="label">Before · live hero</div><p>"The Grand Fest is not just a medical congress, it's a scientific-aesthetic destination."</p></div>
+                <div class="ba-cell after"><div class="label">After</div><p>"Three days on the Red Sea where aesthetic medicine meets real practice. 45 international experts, live hands-on workshops, a cadaver lab, and 40 CME hours. Built for dermatologists, aesthetic physicians, and cosmetic surgeons."</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>Trust Signals</strong><span class="sev">High risk</span></div>
+            <div>
+              <p>For a paid professional congress, the current signals read as informal and risky.</p>
+              <ul>
+                <li>The only contact email is a <strong>Gmail address</strong> (grandfestegy@gmail.com), not a branded domain email.</li>
+                <li>The phone number is a <strong>placeholder</strong>: "(+987) 654 321 228 11".</li>
+                <li>No pricing, ticket detail, refund or cancellation policy, clear organizer or accreditation identity, privacy policy or terms.</li>
+                <li>Speaker entries are names only — weak authority for visitors and search engines.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>SEO</strong><span class="sev">Missing foundation</span></div>
+            <div>
+              <p>The most visible SEO fields are wasted or missing.</p>
+              <ul>
+                <li><strong>Title:</strong> "Grand Fest Egy - The Grand Fest" — no descriptive keywords (no "aesthetic congress", "Egypt", "CME", "2025").</li>
+                <li><strong>Meta description:</strong> missing entirely.</li>
+                <li><strong>Headings:</strong> no H1, sparse H2 usage, no logical tree.</li>
+                <li><strong>Structured data:</strong> only generic Yoast WebPage and Website graph — no Event, Course, Person or Organization schema.</li>
+                <li><strong>Open Graph:</strong> auto-pulls placeholder fragments ("number-one"), so shared links look broken.</li>
+                <li><strong>Images:</strong> 95 images on the homepage, ~14 missing alt text. Locale declared en-US with no Arabic version or hreflang.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>AIEO</strong><span class="sev">Actively broken</span></div>
+            <div>
+              <p>An <code>llms.txt</code> exists but is the <strong>default file auto-generated by a Hostinger plugin</strong> — worse than having none.</p>
+              <ul>
+                <li>It points to a staging domain (<code>yellowgreen-echidna-741950.hostingersite.com</code>) and lists a "Hello world!" sample post, feeding AI crawlers wrong information.</li>
+                <li>No machine-readable entity definition ("The Grand Fest is X, organized by Y, held at Z, accredited by W").</li>
+                <li>No FAQ, comparison content, or schema-backed entities for speakers, sessions, or workshops.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>Technical &amp; Speed</strong><span class="sev">Performance debt</span></div>
+            <div>
+              <p>WordPress 6.8.5, Festiva theme, and a heavy plugin stack: <strong>Elementor, WPBakery, Visual Composer addons, Smart Slider 3, Crelly Slider, ElementsKit, and WooCommerce 10.7.0</strong> (installed but unused for registration).</p>
+              <ul>
+                <li>The homepage ships roughly <strong>773 KB of HTML</strong> alone, with <strong>73+ external JavaScript files</strong> and 95 images.</li>
+                <li>Five competing builders and sliders load on a single page — slow load, layout shift, poor mobile Core Web Vitals, and a large security and maintenance surface.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Strategic opportunity -->
+    <section id="positioning" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">03 / Strategic Opportunity</div>
+            <h2>Make the digital experience match the real-world caliber.</h2>
+          </div>
+          <p class="lead">The event is strong. The opportunity is to own the category in both search and AI answers, with a digital experience worthy of the faculty, accreditation, and destination.</p>
+        </div>
+
+        <div class="positioning reveal">
+          <p>The Grand Fest is a premier aesthetic and dermatology medical congress held on the Red Sea in Egypt, combining accredited scientific sessions and 40 CME hours with hands-on workshops, a pre-congress cadaver lab, and an international faculty of leading injectors and surgeons — set within a festival experience of concerts and networking, built for dermatologists, aesthetic physicians, plastic and cosmetic surgeons across the MENA region and beyond.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card accent"><h3>Scientific authority</h3><p>Make the faculty, accreditation, and clinical depth unmistakable and verifiable.</p></div>
+          <div class="card gold"><h3>Hands-on transformation</h3><p>Sell the outcome — the skills a doctor walks away with — not just attendance.</p></div>
+          <div class="card coral"><h3>The destination experience</h3><p>The Red Sea, the concerts, the networking are a genuine differentiator. Show them with cinematic quality.</p></div>
+        </div>
+
+        <div class="quote reveal" style="margin-top:18px;">
+          Competitive edge: most congress sites are static brochures with weak schema and no AI strategy. A custom CMS that emits clean, structured, multilingual content can make The Grand Fest the most cited and most bookable aesthetic congress in the region.
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Redesign direction -->
+    <section id="design" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">04 / Redesign Direction</div>
+            <h2>A dual identity: clinical precision, carnival energy.</h2>
+          </div>
+          <p class="lead">A refined, editorial, clinical base that opens up into richer, warmer carnival energy in the experience sections — resolving the science-versus-festival tension instead of hiding it.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card accent">
+            <span class="tag">Visual Language</span>
+            <ul>
+              <li>Deep Red Sea night base (navy to deep teal).</li>
+              <li>Warm gold and coral accents for energy.</li>
+              <li>Clean light surfaces for scientific content where readability matters.</li>
+              <li>Confident display headlines, a legible humanist sans for body and data.</li>
+              <li>Real faculty, workshop and venue photography — all stock template imagery retired.</li>
+            </ul>
+          </div>
+          <div class="card gold">
+            <span class="tag gold">Motion &amp; 3D Layer</span>
+            <ul>
+              <li><strong>GSAP + ScrollTrigger</strong> scroll storytelling; hero and key numbers (45 speakers, 40 CME, 3 days) count up on view.</li>
+              <li><strong>WebGL / Three.js hero</strong>: a subtle Red Sea light environment or particle depth field, lazy-loaded.</li>
+              <li><strong>Parallax depth</strong> across venue and experience sections.</li>
+              <li>Interactive agenda and speaker cards with smooth flip, filter and transition.</li>
+            </ul>
+          </div>
+          <div class="card coral">
+            <span class="tag coral">Performance Guardrails</span>
+            <ul>
+              <li>All heavy effects deferred and lazy-loaded.</li>
+              <li>Run off the main thread where possible.</li>
+              <li>Respect <code>prefers-reduced-motion</code>.</li>
+              <li>Motion never blocks the registration path.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:18px;">
+          <h3>Bilingual from day one — Arabic and English</h3>
+          <p>The audience is primarily Egypt and the wider Arabic-speaking MENA region, yet the current site is English-only and declared en-US. We build the front end and CMS bilingual from the start.</p>
+          <div class="grid-2" style="margin-top:6px;">
+            <ul>
+              <li>Full <strong>RTL layout</strong> support — correct mirroring of layout, navigation, icons and motion direction, not a mirror hack.</li>
+              <li>Proper Arabic typography and numerals where appropriate.</li>
+            </ul>
+            <ul>
+              <li>A language switch that persists and is reflected in the URL structure for SEO.</li>
+              <li><code>hreflang</code> tags and locale-specific metadata generated by the CMS.</li>
+              <li>Localized registration, workshops and trust pages.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Information architecture -->
+    <section id="ia" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">05 / Information Architecture</div>
+            <h2>From one long demo page to linkable destinations.</h2>
+          </div>
+          <p class="lead">Every primary entity becomes its own destination, which helps users, SEO, and AIEO at the same time. A persistent global header carries a fixed Register button and a secondary Book a Workshop action.</p>
+        </div>
+
+        <div class="sitemap reveal">
+          <ul>
+            <li>Home</li>
+            <li>About
+              <ul><li>About The Grand Fest (entity, organizer, accreditation)</li><li>Why Attend (by audience)</li></ul>
+            </li>
+            <li>Faculty / Speakers
+              <ul><li>Speaker detail pages (bio, credentials, sessions, verified links)</li></ul>
+            </li>
+            <li>Program
+              <ul><li>Agenda (filterable by day, track, room)</li><li>Scientific Sessions</li><li>Masterclasses &amp; CME (40 CME hours)</li></ul>
+            </li>
+            <li>Workshops (hands-on)
+              <ul><li>Workshop detail + booking (capacity, level, trainer, price)</li></ul>
+            </li>
+            <li>Register / Tickets <em>(primary conversion)</em>
+              <ul><li>Packages, pricing, group rates, checkout</li></ul>
+            </li>
+            <li>Sponsors &amp; Exhibitors
+              <ul><li>Why partner (audience reach, packages)</li><li>Become a sponsor (inquiry flow)</li></ul>
+            </li>
+            <li>Venue &amp; Travel (Red Sea, hotels, transfers, visa)</li>
+            <li>Experience (concerts, parties, networking, gallery)</li>
+            <li>FAQ (AIEO-optimized, structured answers)</li>
+            <li>News / Insights (authority and SEO content)</li>
+            <li>Contact (branded email, real phone, map, organizer)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Conversion strategy -->
+    <section id="conversion" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">06 / Conversion Strategy</div>
+            <h2>Maximize registrations, workshops, and sponsor leads.</h2>
+          </div>
+          <p class="lead">The current generic Contact Form 7 cannot do this. The custom CMS powers purpose-built flows around the real conversions: registration, then workshop booking, then sponsor and exhibitor inquiries.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card accent">
+            <h3>Native registration &amp; ticketing</h3>
+            <ul>
+              <li>Multi-step registration and checkout modeled in the CMS: attendee type, package, add-ons, details, payment.</li>
+              <li>Group and clinic registrations, early-bird windows, discount codes — managed from the custom admin.</li>
+              <li>Confirmation, QR ticket, calendar add, and email automation.</li>
+            </ul>
+          </div>
+          <div class="card gold">
+            <h3>Workshop booking with capacity</h3>
+            <ul>
+              <li>Each workshop is a CMS entity with seat capacity, level, trainer, schedule and price.</li>
+              <li>The flow shows live availability ("6 seats left"), prevents overbooking, and supports waitlists.</li>
+              <li>Scarcity is real, and it converts.</li>
+            </ul>
+          </div>
+          <div class="card coral">
+            <h3>Sponsor &amp; exhibitor pipeline</h3>
+            <ul>
+              <li>A dedicated partner journey with package tiers and an audience and reach summary.</li>
+              <li>Downloadable prospectus and a structured inquiry form routing leads into the admin (and optionally a CRM).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:18px;">
+          <h3>Funnel tightening</h3>
+          <div class="grid-2">
+            <ul>
+              <li>One primary action above the fold on every page (Register).</li>
+              <li>Remove dead ends — every speaker, session and workshop links to the relevant booking step.</li>
+              <li>Trust at the point of decision: pricing clarity, CME accreditation, refund policy, secure payment badges in checkout.</li>
+            </ul>
+            <ul>
+              <li>Reduce friction: short forms, autosave on multi-step, mobile-first checkout, clear progress.</li>
+              <li>Measurable micro-conversions: brochure download, newsletter opt-in, and "notify me" for pricing, all tracked.</li>
+            </ul>
+          </div>
+          <div class="before-after">
+            <div class="ba-cell before"><div class="label">Before · CTA</div><p>A generic "Fill the form" with "Will you attend the event? Yes / No".</p></div>
+            <div class="ba-cell after"><div class="label">After</div><p>"Register for The Grand Fest. Choose your pass, add hands-on workshops while seats last, and secure your CME hours." — with a clear price and a single primary button.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 SEO -->
+    <section id="seo" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">07 / SEO Strategy</div>
+            <h2>A clean, fast, semantic foundation by default.</h2>
+          </div>
+          <p class="lead">The custom build solves most technical SEO automatically: server-rendered semantic HTML, one correct H1 per page, fast Core Web Vitals, clean sitemaps, and hreflang for Arabic and English.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card">
+            <h3>Technical SEO</h3>
+            <ul>
+              <li>Server-rendered, clean, semantic HTML from Next.js with a logical heading tree.</li>
+              <li>Fast Core Web Vitals: optimized AVIF/WebP images, code splitting, edge caching.</li>
+              <li>Canonical tags, a clean CMS-generated XML sitemap (no author or tag noise), proper <code>robots.txt</code>.</li>
+              <li><code>hreflang</code> for Arabic and English; HTTPS and security headers.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>On-Page SEO</h3>
+            <ul>
+              <li>Per-entity SEO fields in the CMS: every speaker, session, workshop and page has editable title, meta description, OG image, and slug.</li>
+              <li>Descriptive alt text on all images.</li>
+              <li>Internal linking between speakers, sessions and workshops.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Content &amp; Authority</h3>
+            <ul>
+              <li>Target real intent: "aesthetic conference Egypt 2025", "dermatology CME Middle East", "hands-on filler and toxin workshops", and Arabic equivalents.</li>
+              <li>A News and Insights hub: speaker spotlights, session previews, technique articles, post-event recaps.</li>
+              <li>Earn citations from associations, partner clinics, sponsors, and regional medical media with consistent NAP.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:18px;">
+          <h3>Fix the foundation immediately</h3>
+          <div class="before-after">
+            <div class="ba-cell before"><div class="label">Before · title</div><p>"Grand Fest Egy - The Grand Fest"</p></div>
+            <div class="ba-cell after"><div class="label">After · title</div><p>"The Grand Fest 2025, Aesthetic &amp; Dermatology Congress, Red Sea Egypt | 40 CME"</p></div>
+          </div>
+          <div class="ba-cell after" style="margin-top:14px;"><div class="label">After · description</div><p>"Join 45 international experts on the Red Sea, 13 to 15 November 2025. Accredited scientific sessions, hands-on workshops, cadaver lab, and 40 CME hours for dermatologists and aesthetic physicians. Register now."</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 AIEO -->
+    <section id="aieo" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">08 / AIEO Strategy</div>
+            <h2>The competitive edge: be cited by the AI engines.</h2>
+          </div>
+          <p class="lead">AIEO means being discoverable and citable inside ChatGPT, Perplexity, Gemini, Claude, and Google AI Overviews. The custom CMS controls machine-readable output completely — most competing congresses do none of this.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card accent">
+            <h3>Programmatic structured data</h3>
+            <p>The CMS emits accurate JSON-LD automatically, kept in sync with content:</p>
+            <ul>
+              <li><strong>Event</strong> schema for the congress and each session (dates, Place, organizer, offers, eventStatus).</li>
+              <li><strong>Course</strong> schema for workshops and CME content.</li>
+              <li><strong>Person</strong> schema for every speaker (jobTitle, affiliation, sameAs verified profiles).</li>
+              <li><strong>Organization</strong> schema for The Grand Fest as the entity.</li>
+              <li><strong>FAQPage</strong> schema on the FAQ and key pages.</li>
+            </ul>
+          </div>
+          <div class="card gold">
+            <h3>A real <code>llms.txt</code></h3>
+            <p>Replace the broken default file with a CMS-generated <code>llms.txt</code> (and fuller <code>llms-full.txt</code>) summarizing the event, key dates, audience, faculty highlights, workshops, accreditation, and canonical links.</p>
+            <ul>
+              <li>It regenerates as content changes, so it never goes stale or points to a wrong domain again.</li>
+              <li>Backed by a single, consistent, machine-readable entity definition across Organization schema, the About page, and <code>llms.txt</code>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-3 reveal" style="margin-top:18px;">
+          <div class="card"><h3>FAQ &amp; comparison content</h3><p>Structured answers to real questions — "Is the CME recognized in my country?", "Who should attend?", "What is included in each pass?" — in English and Arabic, framed so AI engines can quote them directly.</p></div>
+          <div class="card"><h3>Machine-readable structure</h3><p>Semantic HTML, descriptive headings, tables for agenda and pricing, and clear quotable statements rather than slogans — exactly what answer engines extract.</p></div>
+          <div class="card"><h3>Earn trusted citations</h3><p>Consistent, correct listings on medical association pages, event aggregators, speaker and sponsor sites, and regional health media that AI tools weight heavily.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 Trust -->
+    <section id="trust" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">09 / Trust &amp; Credibility</div>
+            <h2>Strengthen credibility honestly.</h2>
+          </div>
+          <p class="lead">Based on what the audit found, without overstating anything. Integrity fixes come first — they must be gone before any launch.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card danger">
+            <h3>Immediate cleanup</h3>
+            <ul>
+              <li>Remove every piece of leftover demo content ("world marketing summit 2024", "number-one", "Startup Community", marketing template copy).</li>
+              <li>Replace placeholder contact details — a branded domain email (e.g. info@grandfestegy.com) and a real, verified phone number. The Gmail address and "(+987)" number must go.</li>
+              <li>Resolve inconsistencies — lock a single, correct set of dates and details across the whole site.</li>
+            </ul>
+          </div>
+          <div class="card gold">
+            <h3>The trust layer</h3>
+            <ul>
+              <li>Make accreditation verifiable — state who provides the 40 CME hours and under which body, with a reference.</li>
+              <li>Clear organizer identity — name the organizing company and registration details.</li>
+              <li>Faculty credibility — structured speaker pages with real credentials and verified links (which also power Person schema).</li>
+              <li>Policies in the open — pricing, refund, privacy, and terms, especially in checkout.</li>
+              <li>Reassurance at payment — secure checkout indicators, accepted methods, visible support contact.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Roadmap -->
+    <section id="roadmap" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">10 / Phased Roadmap</div>
+            <h2>A realistic path from discovery to launch.</h2>
+          </div>
+          <p class="lead">A custom CMS plus front end with a cinematic experience layer. Phases overlap where safe. Because the event date is fixed, we recommend locking content delivery early — the long pole is asset and copy readiness, not engineering.</p>
+        </div>
+
+        <div class="timeline reveal">
+          <div class="timeline-card">
+            <div><div class="phase">Phase 0</div><div class="time">1.5 – 2 weeks</div></div>
+            <div><h3>Discovery &amp; content</h3><p>Stakeholder workshops, brand and goals, audience definition. Gather verified assets: faculty bios, agenda, workshop details and capacities, pricing, accreditation, venue and travel, sponsor packages. Define the content model and entity definitions; decide bilingual scope.</p></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 1</div><div class="time">2 – 3 weeks</div></div>
+            <div><h3>Design</h3><p>Information architecture, wireframes, and conversion flows. High-fidelity UI for both LTR and RTL, the dual-identity visual system, and the motion and 3D direction (prototype the hero).</p></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 2</div><div class="time">3 – 4 weeks</div></div>
+            <div><h3>Custom CMS &amp; admin build</h3><p>Data models: Speakers, Sessions/Agenda, Workshops, Sponsors, Tickets/Registrations, Pages, FAQ, Media. Custom admin with roles, bilingual fields, per-entity SEO fields. APIs for the front end, plus programmatic schema and <code>llms.txt</code> generation.</p></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 3</div><div class="time">3 – 5 weeks · overlaps P2</div></div>
+            <div><h3>Front-end build with motion</h3><p>Next.js front end, all pages and entity templates, RTL and i18n. GSAP, ScrollTrigger, WebGL hero, parallax, interactive agenda and speaker components — with performance guardrails and reduced-motion fallbacks.</p></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 4</div><div class="time">2 – 3 weeks</div></div>
+            <div><h3>Conversion &amp; integrations</h3><p>Registration and ticketing, workshop booking with capacity and waitlists, sponsor inquiry pipeline. Payment gateway (regional and international cards), email automation, analytics and event tracking, optional CRM.</p></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 5</div><div class="time">1 – 2 weeks · overlaps build</div></div>
+            <div><h3>SEO &amp; AIEO</h3><p>Metadata, sitemaps, hreflang, full schema rollout, real <code>llms.txt</code>, FAQ and comparison content, and a redirect map from old URLs.</p></div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 6</div><div class="time">1.5 – 2 weeks</div></div>
+            <div><h3>QA, content load &amp; launch</h3><p>Cross-device and RTL QA, performance and Core Web Vitals tuning, accessibility, load-testing the registration flow, content population, soft launch, then go live with monitoring.</p></div>
+          </div>
+        </div>
+
+        <div class="quote reveal" style="margin-top:18px;">
+          Indicative total: roughly <strong>10 to 14 weeks</strong>, depending on content readiness and bilingual scope.
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 Tech stack -->
+    <section id="stack" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">11 / Recommended Tech Stack</div>
+            <h2>A custom CMS and modern front end — not WordPress and builders.</h2>
+          </div>
+          <p class="lead">A small, owned codebase that gives us total control over performance, conversion flows, and machine-readable output.</p>
+        </div>
+
+        <div class="grid-4 reveal">
+          <div class="card">
+            <h3>Front end</h3>
+            <ul>
+              <li>Next.js (App Router) + TypeScript</li>
+              <li>Server-rendered, statically optimized, edge-deployed</li>
+              <li>Tailwind CSS design system</li>
+              <li>GSAP + ScrollTrigger</li>
+              <li>Three.js / React Three Fiber hero</li>
+              <li>next-intl for Arabic &amp; English with full RTL</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Custom CMS</h3>
+            <ul>
+              <li><strong>Option A (recommended):</strong> Payload CMS (Node/TS) on PostgreSQL — code-defined schema, polished admin, self-hostable.</li>
+              <li><strong>Option B:</strong> custom NestJS API + Prisma + PostgreSQL with a Next.js admin.</li>
+              <li>Bilingual fields and per-entity SEO fields.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Conversion</h3>
+            <ul>
+              <li>Payments: Stripe and/or a local Egyptian gateway (e.g. Paymob).</li>
+              <li>Email automation (transactional + marketing).</li>
+              <li>Programmatic JSON-LD, sitemaps, and <code>llms.txt</code> from CMS data.</li>
+              <li>Optional CRM for sponsor and registration leads.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Why it wins</h3>
+            <ul>
+              <li>One optimized rendering path vs. five builders loading at once.</li>
+              <li>Small, owned codebase — far lower security and maintenance surface.</li>
+              <li>Full control over HTML, schema and <code>llms.txt</code>.</li>
+              <li>Bespoke flows; multilingual and RTL done right; reusable for 2026+.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 Success metrics -->
+    <section id="metrics" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">12 / Success Metrics</div>
+            <h2>Tie every metric to conversion, experience, and discovery.</h2>
+          </div>
+          <p class="lead">Measured against the two core problems — a dated, untrustworthy experience and weak discovery — and the business goals of registrations, workshops, and sponsors.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card accent">
+            <h3>Conversion &amp; revenue</h3>
+            <ul>
+              <li>Paid registrations and total registration revenue.</li>
+              <li>Workshop bookings and seat fill rate (and waitlist signups).</li>
+              <li>Sponsor and exhibitor inquiries and closed partnerships.</li>
+              <li>Registration funnel and checkout completion rate vs. an effectively-zero baseline.</li>
+            </ul>
+          </div>
+          <div class="card gold">
+            <h3>Experience &amp; quality</h3>
+            <ul>
+              <li>Core Web Vitals (LCP, CLS, INP) in the "good" range on mobile.</li>
+              <li>Page weight and load time vs. the current ~773 KB, 73-script homepage.</li>
+              <li>Bounce and scroll depth on key pages; mobile registration completion rate.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:18px;">
+          <div class="card">
+            <h3>SEO</h3>
+            <ul>
+              <li>Organic traffic growth and rankings for target terms in English and Arabic.</li>
+              <li>Indexed pages (no placeholder content), valid schema coverage, and search CTR.</li>
+              <li>Backlinks and referring domains from medical and event sources.</li>
+            </ul>
+          </div>
+          <div class="card coral">
+            <h3>AIEO</h3>
+            <ul>
+              <li>Presence and accuracy of brand mentions in ChatGPT, Perplexity, Gemini, and Google AI Overviews.</li>
+              <li>Valid, error-free structured data across Event, Course, Person, Organization, and FAQ.</li>
+              <li>A correct, live <code>llms.txt</code> replacing the broken default.</li>
+              <li>Referral traffic and assisted conversions attributed to AI assistants.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 Investment -->
+    <section id="investment" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">13 / Investment</div>
+            <h2>One fixed fee for the entire rebuild.</h2>
+          </div>
+          <p class="lead">A single, transparent project fee covering the custom CMS, the Next.js front end and cinematic motion layer, every conversion flow, bilingual RTL, and the full SEO and AIEO foundation — through to QA and launch. No recurring platform fees, no hidden costs.</p>
+        </div>
+
+        <div class="investment-panel reveal">
+          <div class="investment-top">
+            <div>
+              <div class="investment-label">Fixed Project Fee</div>
+              <h3>Custom CMS, Next.js Front End, SEO &amp; AIEO Build</h3>
+              <p>Complete rebuild of The Grand Fest platform: a custom content management system and admin, a modern Next.js front end with a GSAP, WebGL and parallax motion layer, native registration and ticketing, workshop booking with live capacity, the sponsor and exhibitor pipeline, bilingual Arabic and English with full RTL, and a clean SEO and AIEO foundation — delivered, QA'd, and launched.</p>
+            </div>
+            <div class="investment-total">
+              <span>Total Investment</span>
+              <strong>$12,000</strong>
+            </div>
+          </div>
+
+          <div class="quote-table" aria-label="Project value breakdown">
+            <div class="quote-row">
+              <div>
+                <h4>Discovery, Content Modeling &amp; UX</h4>
+                <p>Stakeholder workshops, entity and content modeling, information architecture, conversion-flow mapping, and bilingual scope definition.</p>
+              </div>
+              <div class="quote-price">$1,500</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>Dual-Identity Design — LTR &amp; RTL</h4>
+                <p>High-fidelity UI for the clinical-meets-carnival system, full Arabic and RTL layouts, and the motion and 3D direction prototyped on the hero.</p>
+              </div>
+              <div class="quote-price">$1,800</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>Custom CMS &amp; Admin Build</h4>
+                <p>Code-defined models for Speakers, Sessions, Workshops, Sponsors, Tickets, Pages and FAQ, with roles, bilingual fields, and per-entity SEO fields.</p>
+              </div>
+              <div class="quote-price">$3,000</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>Next.js Front End + GSAP / 3D / Parallax</h4>
+                <p>All pages and entity templates, RTL and i18n, GSAP and ScrollTrigger scroll storytelling, the WebGL hero, parallax depth, and interactive agenda and speaker components — with performance guardrails.</p>
+              </div>
+              <div class="quote-price">$3,200</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>Conversion Flows</h4>
+                <p>Native registration and ticketing, workshop booking with live capacity and waitlists, and the sponsor and exhibitor inquiry pipeline, wired to the admin.</p>
+              </div>
+              <div class="quote-price">$1,500</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>SEO &amp; AIEO Setup</h4>
+                <p>Metadata, sitemaps, hreflang, programmatic JSON-LD schema (Event, Course, Person, Organization, FAQ), and a real, regenerating <code>llms.txt</code>.</p>
+              </div>
+              <div class="quote-price">$700</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>QA, Arabic / RTL Polish &amp; Launch</h4>
+                <p>Cross-device and RTL QA, Core Web Vitals and accessibility tuning, registration load-testing, soft launch, and go-live monitoring.</p>
+              </div>
+              <div class="quote-price">$300</div>
+            </div>
+            <div class="quote-row total">
+              <div>
+                <h4>Total Fixed Project Fee</h4>
+                <p>Complete commercial quote for the full scope described in this proposal.</p>
+              </div>
+              <div class="quote-price">$12,000</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-grid reveal">
+          <div class="payment-card">
+            <span>Payment 01</span>
+            <strong>40%</strong>
+            <p>Due at kickoff to begin discovery, content modeling, and design production.</p>
+          </div>
+          <div class="payment-card">
+            <span>Payment 02</span>
+            <strong>40%</strong>
+            <p>Due after design approval, as the CMS and front-end build moves into production.</p>
+          </div>
+          <div class="payment-card">
+            <span>Payment 03</span>
+            <strong>20%</strong>
+            <p>Due before final handoff, launch, and go-live monitoring.</p>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:18px;">
+          <div class="card accent">
+            <span class="tag">What's Included</span>
+            <h3>Everything to ship the platform</h3>
+            <p>The $12,000 covers the entire scope above end to end: custom CMS and admin, the animated Next.js front end, all three conversion flows, bilingual Arabic and English with full RTL, the SEO and AIEO foundation, and QA through launch.</p>
+          </div>
+          <div class="card warning">
+            <span class="tag gold">Commercial Note</span>
+            <h3>No hidden or recurring fees</h3>
+            <p>This is a one-time fixed fee for the build. It excludes only third-party running costs you own directly — hosting, the payment gateway's transaction fees, and domain — plus any optional post-launch retainer, agreed separately if you want one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell">
+        <div class="cta-panel reveal">
+          <div class="section-kicker">Closing</div>
+          <h2>The website is the one piece holding The Grand Fest back.</h2>
+          <p>The event already has the faculty, the accreditation, and the destination to lead the region. A custom CMS, a modern Next.js front end, a cinematic motion layer, and a disciplined SEO and AIEO foundation will turn the site from a dated template into the most credible, most bookable, and most cited aesthetic congress platform in the market — this year, and for every edition after.</p>
+          <div class="decision-row" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <a class="button primary" href="mailto:ayousef@nixailabs.com?subject=The%20Grand%20Fest%20proposal%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20prepared%20for%20The%20Grand%20Fest.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept proposal</a>
+            <a class="button secondary" href="mailto:ayousef@nixailabs.com?subject=The%20Grand%20Fest%20proposal%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20prepared%20for%20The%20Grand%20Fest.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject proposal</a>
+            <a class="button secondary" href="#top">Back to Top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>Prepared for The Grand Fest, Aesthetic Carnival — GrandFest Egypt</span>
+      <span>Redesign · Custom CMS · SEO · AIEO proposal</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---- WebGL-style Red Sea particle depth field (lightweight canvas) ---- */
+      (function heroField() {
+        var canvas = document.getElementById('hero-canvas');
+        if (!canvas || reduceMotion) return;
+        var ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var w, h, particles = [];
+        var COUNT = 90;
+        var colors = ['rgba(94,234,212,', 'rgba(245,196,81,', 'rgba(251,124,109,'];
+
+        function resize() {
+          w = canvas.offsetWidth; h = canvas.offsetHeight;
+          canvas.width = w * dpr; canvas.height = h * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        function seed() {
+          particles = [];
+          for (var i = 0; i < COUNT; i++) {
+            particles.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              z: Math.random(),
+              vx: (Math.random() - 0.5) * 0.25,
+              vy: -0.15 - Math.random() * 0.4,
+              c: colors[(Math.random() * colors.length) | 0]
+            });
+          }
+        }
+        function frame() {
+          ctx.clearRect(0, 0, w, h);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+            if (p.x < -10) p.x = w + 10;
+            if (p.x > w + 10) p.x = -10;
+            var r = 0.6 + p.z * 2.6;
+            var a = 0.12 + p.z * 0.5;
+            ctx.beginPath();
+            ctx.fillStyle = p.c + a + ')';
+            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          rafId = requestAnimationFrame(frame);
+        }
+        var rafId;
+        resize(); seed(); frame();
+        window.addEventListener('resize', function () { resize(); seed(); });
+      })();
+
+      /* ---- Reveal + parallax + count-up via GSAP ---- */
+      if (!window.gsap) {
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          el.style.opacity = 1; el.style.transform = 'none';
+        });
+        animateCounts();
+        return;
+      }
+
+      gsap.registerPlugin(window.ScrollTrigger);
+
+      gsap.to('.hero-content', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' });
+      gsap.to('.hero-visual', { opacity: 1, y: 0, duration: 0.9, delay: 0.18, ease: 'power3.out' });
+
+      gsap.utils.toArray('.reveal').forEach(function (el) {
+        if (el.classList.contains('hero-content') || el.classList.contains('hero-visual')) return;
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 0.75, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 84%' }
+        });
+      });
+
+      if (!reduceMotion) {
+        gsap.to('#ticketCard', { y: -16, duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+        /* Parallax: hero visual drifts as you scroll */
+        gsap.to('.hero-visual', {
+          yPercent: 18, ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+        gsap.to('#hero-canvas', {
+          yPercent: 12, ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+      }
+
+      /* Scroll-spy for the dot nav */
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+      navLinks.forEach(function (link) {
+        var id = link.getAttribute('href');
+        var target = document.querySelector(id);
+        if (!target) return;
+        ScrollTrigger.create({
+          trigger: target, start: 'top center', end: 'bottom center',
+          onToggle: function (self) { if (self.isActive) setActive(link); }
+        });
+      });
+      function setActive(link) {
+        navLinks.forEach(function (l) { l.classList.remove('active'); });
+        link.classList.add('active');
+      }
+
+      /* Count-up stats */
+      animateCounts();
+      function animateCounts() {
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+          var end = parseFloat(el.getAttribute('data-count'));
+          var suffix = el.getAttribute('data-suffix') || '';
+          if (window.gsap && window.ScrollTrigger && !reduceMotion) {
+            var obj = { v: 0 };
+            gsap.to(obj, {
+              v: end, duration: 1.6, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 90%' },
+              onUpdate: function () { el.textContent = Math.round(obj.v) + suffix; }
+            });
+          } else {
+            el.textContent = end + suffix;
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

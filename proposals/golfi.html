@@ -645,6 +645,11 @@
       .nav, .nav-toggle, .bill-dock, .cursor, .cursor-dot { display: none !important; }
       .bill { position: static; }
     }
+
+    .btn-reject { background: transparent; color: var(--muted, #6b7280); border-color: rgba(120,120,120,0.45); }
+    .btn-reject:hover { background: transparent; color: #c0392b; border-color: #c0392b; }
+    .close .btn-reject { color: var(--ink); border-color: var(--line); }
+    .close .btn-reject:hover { color: #c0392b; border-color: #c0392b; background: transparent; }
   </style>
 </head>
 <body>
@@ -1215,8 +1220,9 @@
       <h2 style="max-width:900px">We can be in discovery the week the first transfer clears.</h2>
       <p class="lead">Reply with the depth you chose on each line — or just the total the picker settled on, and we will reconstruct it. We will send a one-page statement of work, a kickoff date, and the access list for accounts and fleet data.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:hello@nixailabs.com?subject=Golfi%20quotation%20NIX-GOLFI-001">Approve quotation</a>
-        <a class="btn btn-ghost" href="mailto:hello@nixailabs.com?subject=Golfi%20%E2%80%94%20a%20question">Ask a question</a>
+        <a class="btn btn-primary" href="mailto:ayousef@nixailabs.com?subject=Golfi%20%E2%80%94%20NIX-GOLFI-001%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20NIX-GOLFI-001%20prepared%20for%20Golfi.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept quotation</a>
+        <a class="btn btn-ghost btn-reject" href="mailto:ayousef@nixailabs.com?subject=Golfi%20%E2%80%94%20NIX-GOLFI-001%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20NIX-GOLFI-001%20prepared%20for%20Golfi.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject quotation</a>
+        <a class="btn btn-ghost" href="mailto:ayousef@nixailabs.com?subject=Golfi%20%E2%80%94%20NIX-GOLFI-001%20%E2%80%94%20a%20question">Ask a question</a>
       </div>
       <footer>
         <img class="nix" src="/assets/nixai-wordmark-light.png" alt="NixAI" />
@@ -1225,7 +1231,7 @@
           <small>Your North Coast summer</small>
         </div>
         <div style="font-size:12px;color:var(--faint);text-align:right">
-          hello@nixailabs.com<br />nixailabs.com
+          ayousef@nixailabs.com<br />nixailabs.com
         </div>
       </footer>
     </div>

@@ -1193,6 +1193,21 @@ body {
   .proposal-footer { padding: 36px 24px; }
   .footer-legal { text-align: left; }
 }
+
+  .decision { padding: 72px 56px;  border-bottom: none; }
+  .decision-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 44px 40px; text-align: center; }
+  .decision-kicker { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px;  }
+  .decision-card h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: var(--ink); line-height: 1.15; margin: 0 auto 14px; max-width: 720px; }
+  .decision-card p { color: var(--ink-3); font-size: 15px; max-width: 640px; margin: 0 auto 28px; }
+  .decision-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .decision-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 26px; border-radius: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; transition: all 0.2s ease; }
+  .decision-btn.accept { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .decision-btn.accept:hover { filter: brightness(1.1); transform: translateY(-2px); }
+  .decision-btn.reject { background: transparent; color: var(--ink-3); border-color: var(--border); }
+  .decision-btn.reject:hover { color: #c0392b; border-color: #c0392b; transform: translateY(-2px); }
+  .decision-note { margin-top: 18px; font-size: 12px; color: var(--ink-3); }
+  .decision-note a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 720px) { .decision { padding: 48px 20px; } .decision-card { padding: 32px 20px; } }
 </style>
 </head>
 <body>
@@ -1866,6 +1881,21 @@ body {
       <div class="addon-price">Included</div>
       <div class="addon-note">Via Expo EAS — non-native updates ship without App Store review</div>
     </div>
+  </div>
+</section>
+
+
+<!-- ═══ DECISION ═══ -->
+<section class="section decision">
+  <div class="decision-card">
+    <div class="decision-kicker">Your decision</div>
+    <h2>Ready to build the Exits mobile app?</h2>
+    <p>Accept and we will send the statement of work, the deposit invoice and a kickoff date. Decline and we will simply close the file — no follow-up.</p>
+    <div class="decision-row">
+      <a class="decision-btn accept" href="mailto:ayousef@nixailabs.com?subject=Exits%20proposal%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20prepared%20for%20Exits.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept proposal</a>
+      <a class="decision-btn reject" href="mailto:ayousef@nixailabs.com?subject=Exits%20proposal%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20prepared%20for%20Exits.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject proposal</a>
+    </div>
+    <div class="decision-note">Either button opens an email to <a href="mailto:ayousef@nixailabs.com">ayousef@nixailabs.com</a>. Questions are welcome at the same address.</div>
   </div>
 </section>
 

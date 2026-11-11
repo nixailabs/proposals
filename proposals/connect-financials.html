@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connect Financials | Website, SEO and AIEO Proposal</title>
+  <meta name="description" content="A premium website redesign, SEO, and AIEO proposal for Connect Financials." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #030712;
+      --bg-soft: #07111f;
+      --panel: rgba(9, 20, 37, 0.78);
+      --panel-strong: rgba(12, 27, 49, 0.94);
+      --line: rgba(125, 211, 252, 0.16);
+      --line-strong: rgba(34, 211, 238, 0.34);
+      --text: #e5f4ff;
+      --muted: #9db5c7;
+      --faint: #6f8799;
+      --cyan: #22d3ee;
+      --blue: #3b82f6;
+      --lime: #a3e635;
+      --amber: #f59e0b;
+      --danger: #fb7185;
+      --white: #ffffff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius: 28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(34, 211, 238, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.20), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(163, 230, 53, 0.08), transparent 34%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(125, 211, 252, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125, 211, 252, 0.055) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 78%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 10%, transparent, rgba(3, 7, 18, 0.7) 72%);
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { color: var(--muted); margin: 0 0 18px; }
+    strong { color: var(--white); font-weight: 700; }
+    code {
+      font-family: "JetBrains Mono", monospace;
+      color: #b6f7ff;
+      background: rgba(34, 211, 238, 0.08);
+      border: 1px solid rgba(34, 211, 238, 0.16);
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 0.92em;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      padding: 96px 0 70px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(34, 211, 238, 0.24);
+      background: rgba(34, 211, 238, 0.08);
+      color: #b6f7ff;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--lime);
+      box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.8);
+      animation: pulse 1.8s infinite;
+    }
+
+    h1 {
+      max-width: 880px;
+      font-size: clamp(44px, 7.4vw, 96px);
+      line-height: 0.95;
+      letter-spacing: -0.08em;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #b6f7ff 45%, #a3e635);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      font-size: clamp(18px, 2vw, 23px);
+      color: #b8cce0;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-weight: 800;
+      font-size: 14px;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .button.primary {
+      color: #03111f;
+      background: linear-gradient(135deg, var(--cyan), var(--lime));
+      box-shadow: 0 18px 48px rgba(34, 211, 238, 0.22);
+    }
+
+    .button.secondary { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+    .button:hover { transform: translateY(-2px); border-color: rgba(34, 211, 238, 0.45); }
+
+    .terminal-card {
+      position: relative;
+      border: 1px solid var(--line-strong);
+      background:
+        linear-gradient(180deg, rgba(15, 35, 62, 0.92), rgba(4, 12, 24, 0.9)),
+        rgba(255, 255, 255, 0.04);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow), 0 0 80px rgba(34, 211, 238, 0.12);
+      overflow: hidden;
+      transform: perspective(900px) rotateX(4deg) rotateY(-7deg);
+    }
+
+    .terminal-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(130deg, rgba(34, 211, 238, 0.28), transparent 38%, rgba(163, 230, 53, 0.16));
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .terminal-top {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .terminal-body { position: relative; padding: 22px; }
+
+    .chart {
+      height: 190px;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(34, 211, 238, 0.08), transparent),
+        repeating-linear-gradient(to right, rgba(125, 211, 252, 0.08) 0 1px, transparent 1px 46px),
+        repeating-linear-gradient(to bottom, rgba(125, 211, 252, 0.08) 0 1px, transparent 1px 38px);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .chart svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.45));
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .market {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .market b { display: block; color: var(--white); font-size: 13px; margin-bottom: 3px; }
+    .market span { font-family: "JetBrains Mono", monospace; color: var(--lime); font-size: 12px; }
+
+    .trade-ticket {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .ticket-cell {
+      border: 1px solid var(--line);
+      background: rgba(3, 7, 18, 0.42);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .ticket-cell small { display: block; color: var(--faint); font-size: 11px; margin-bottom: 4px; }
+    .ticket-cell strong { font-family: "JetBrains Mono", monospace; font-size: 18px; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: -28px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .stat-card, .card, .section-card, .timeline-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 22px;
+      box-shadow: 0 16px 52px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(16px);
+    }
+
+    .stat-card { padding: 22px; }
+    .stat-card b { display: block; color: var(--white); font-size: 24px; line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em; }
+    .stat-card span { color: var(--muted); font-size: 13px; }
+
+    .section {
+      padding: 92px 0;
+      border-top: 1px solid rgba(125, 211, 252, 0.08);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.55fr);
+      gap: 38px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--cyan);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      color: var(--white);
+      font-size: clamp(32px, 4.8vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+    }
+
+    h3 {
+      color: var(--white);
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin: 0 0 14px;
+    }
+
+    h4 {
+      color: #dffaff;
+      font-size: 16px;
+      margin: 0 0 10px;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: #b8cce0;
+      margin-bottom: 0;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+
+    .card, .section-card { padding: 26px; }
+    .card.accent { border-color: rgba(163, 230, 53, 0.3); background: linear-gradient(180deg, rgba(163, 230, 53, 0.08), rgba(9, 20, 37, 0.78)); }
+    .card.warning { border-color: rgba(245, 158, 11, 0.32); background: linear-gradient(180deg, rgba(245, 158, 11, 0.08), rgba(9, 20, 37, 0.78)); }
+    .card.danger { border-color: rgba(251, 113, 133, 0.32); background: linear-gradient(180deg, rgba(251, 113, 133, 0.08), rgba(9, 20, 37, 0.78)); }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      color: #b6f7ff;
+      background: rgba(34, 211, 238, 0.07);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .investment-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 86% 8%, rgba(163, 230, 53, 0.14), transparent 30%),
+        radial-gradient(circle at 8% 100%, rgba(34, 211, 238, 0.16), transparent 34%),
+        linear-gradient(135deg, rgba(12, 27, 49, 0.98), rgba(4, 12, 24, 0.94));
+      box-shadow: var(--shadow), 0 0 90px rgba(34, 211, 238, 0.10);
+      padding: clamp(28px, 5vw, 46px);
+      margin-bottom: 18px;
+    }
+
+    .investment-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .investment-label {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--cyan);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .investment-total {
+      text-align: right;
+    }
+
+    .investment-total span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      margin-bottom: 2px;
+    }
+
+    .investment-total strong {
+      display: block;
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: 0.95;
+      letter-spacing: -0.08em;
+      color: var(--white);
+    }
+
+    .quote-table {
+      display: grid;
+      gap: 1px;
+      margin-top: 26px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .quote-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 150px;
+      gap: 20px;
+      align-items: center;
+      padding: 18px 20px;
+      background: rgba(3, 7, 18, 0.52);
+    }
+
+    .quote-row.total {
+      background: rgba(34, 211, 238, 0.10);
+    }
+
+    .quote-row h4 {
+      margin: 0 0 3px;
+      color: var(--white);
+      font-size: 15px;
+    }
+
+    .quote-row p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .quote-price {
+      text-align: right;
+      font-family: "JetBrains Mono", monospace;
+      color: #dffaff;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .payment-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 20px;
+    }
+
+    .payment-card span {
+      display: block;
+      color: var(--cyan);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .payment-card strong {
+      display: block;
+      color: var(--white);
+      font-size: 24px;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    ul, ol { padding-left: 20px; color: var(--muted); }
+    li { margin-bottom: 10px; }
+    li::marker { color: var(--cyan); }
+
+    .audit-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .audit-item {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .audit-item strong {
+      display: block;
+      color: var(--cyan);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .quote {
+      border-left: 3px solid var(--cyan);
+      padding: 18px 20px;
+      border-radius: 0 18px 18px 0;
+      background: rgba(34, 211, 238, 0.07);
+      color: #dffaff;
+      margin: 22px 0;
+    }
+
+    .positioning {
+      border-radius: 30px;
+      padding: 34px;
+      border: 1px solid rgba(163, 230, 53, 0.28);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(163, 230, 53, 0.12), transparent 32%),
+        linear-gradient(135deg, rgba(34, 211, 238, 0.09), rgba(9, 20, 37, 0.86));
+      margin-bottom: 24px;
+    }
+
+    .positioning p {
+      font-size: clamp(20px, 2.6vw, 30px);
+      line-height: 1.35;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .sitemap {
+      columns: 2;
+      column-gap: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .sitemap ul { break-inside: avoid; margin-bottom: 16px; }
+    .sitemap > ul { padding-left: 18px; }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .timeline-card .phase {
+      color: var(--cyan);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .timeline-card .time {
+      color: var(--lime);
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .nav {
+      position: fixed;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav a {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(157, 181, 199, 0.35);
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: var(--cyan);
+      transform: scale(1.35);
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.65);
+    }
+
+    .cta {
+      padding: 70px 0 96px;
+    }
+
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--line-strong);
+      background:
+        radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.18), transparent 38%),
+        radial-gradient(circle at 20% 100%, rgba(163, 230, 53, 0.12), transparent 42%),
+        var(--panel-strong);
+      padding: clamp(32px, 6vw, 64px);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-panel h2 { max-width: 860px; margin: 0 auto 18px; }
+    .cta-panel p { max-width: 760px; margin: 0 auto 30px; font-size: 18px; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      padding: 30px 0;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .reveal { opacity: 0; transform: translateY(22px); }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.65); }
+      70% { box-shadow: 0 0 0 10px rgba(163, 230, 53, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0); }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .section-head, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .terminal-card { transform: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
+      .nav { display: none; }
+      .sitemap { columns: 1; }
+      .audit-item, .timeline-card { grid-template-columns: 1fr; }
+      .investment-top, .quote-row, .payment-grid { grid-template-columns: 1fr; }
+      .investment-total, .quote-price { text-align: left; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      .top-actions { display: none; }
+      .hero { min-height: auto; padding: 70px 0 44px; }
+      .market-grid, .trade-ticket, .stats { grid-template-columns: 1fr; }
+      .section { padding: 64px 0; }
+      .card, .section-card, .positioning, .sitemap, .timeline-card { padding: 22px; }
+      h1 { letter-spacing: -0.06em; }
+    }
+
+    @media print {
+      body { background: #ffffff; color: #102033; }
+      body::before, body::after, .nav, .hero-visual, .button { display: none !important; }
+      .hero { min-height: auto; padding: 40px 0; }
+      .hero-grid, .section-head, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .card, .section-card, .stat-card, .timeline-card, .positioning, .sitemap, .cta-panel {
+        border: 1px solid #d8e2ee;
+        background: #ffffff;
+        box-shadow: none;
+        break-inside: avoid;
+      }
+      h1, h2, h3, h4, strong, .positioning p { color: #07111f; }
+      p, li { color: #34475c; }
+      .section { padding: 34px 0; border-top: 1px solid #d8e2ee; }
+      code { color: #0f5f7a; background: #eef8fb; border-color: #c8edf7; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Proposal sections">
+    <a href="#summary" aria-label="Executive summary"></a>
+    <a href="#audit" aria-label="Current state audit"></a>
+    <a href="#positioning" aria-label="Positioning"></a>
+    <a href="#design" aria-label="Redesign direction"></a>
+    <a href="#ia" aria-label="Information architecture"></a>
+    <a href="#conversion" aria-label="Conversion strategy"></a>
+    <a href="#seo" aria-label="SEO strategy"></a>
+    <a href="#aieo" aria-label="AIEO strategy"></a>
+    <a href="#trust" aria-label="Trust and compliance"></a>
+    <a href="#roadmap" aria-label="Roadmap"></a>
+    <a href="#stack" aria-label="Tech stack"></a>
+    <a href="#metrics" aria-label="Success metrics"></a>
+    <a href="#investment" aria-label="Investment"></a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow"><span class="pulse"></span> Website Redesign, SEO and AIEO</div>
+          <h1>Connect Financials needs to feel like a <span class="gradient-text">premium trading system.</span></h1>
+          <p class="hero-copy">A complete proposal to rebuild the Connect Financials marketing site into a high-trust, MENA-ready forex and CFD experience powered by GSAP, selective Three.js, stronger SEO, and AI Engine Optimization.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#summary">Read Proposal</a>
+            <a class="button secondary" href="https://connectfinancials.com" target="_blank" rel="noreferrer">View Current Site</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="terminal-card">
+            <div class="terminal-top">
+              <span>CONNECT / MT5 EXPERIENCE</span>
+              <span>LIVE SYSTEM STORY</span>
+            </div>
+            <div class="terminal-body">
+              <div class="chart">
+                <svg viewBox="0 0 620 260" preserveAspectRatio="none">
+                  <path d="M0 185 C70 160 110 204 168 168 S270 76 340 108 S450 198 520 88 S588 92 620 62" fill="none" stroke="rgba(34,211,238,0.95)" stroke-width="5"/>
+                  <path d="M0 212 C70 190 110 224 168 196 S270 116 340 134 S450 214 520 130 S588 132 620 98" fill="none" stroke="rgba(163,230,53,0.75)" stroke-width="3"/>
+                </svg>
+              </div>
+              <div class="market-grid">
+                <div class="market"><b>XAU/USD</b><span>Spread 0.1</span></div>
+                <div class="market"><b>USOIL</b><span>Fast fill</span></div>
+                <div class="market"><b>EUR/USD</b><span>MT5 ready</span></div>
+              </div>
+              <div class="trade-ticket">
+                <div class="ticket-cell"><small>Execution Story</small><strong>12ms</strong></div>
+                <div class="ticket-cell"><small>Journey</small><strong>Demo to Live</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell stats reveal">
+      <div class="stat-card"><b>12</b><span>Strategic proposal sections</span></div>
+      <div class="stat-card"><b>6</b><span>Live pages audited</span></div>
+      <div class="stat-card"><b>SEO</b><span>Technical, content and authority</span></div>
+      <div class="stat-card"><b>AIEO</b><span>AI discoverability and citation layer</span></div>
+    </div>
+
+    <section id="summary" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">01 / Executive Summary</div>
+            <h2>The website has ingredients. It needs a system.</h2>
+          </div>
+          <p class="lead">Connect Financials has MT5 access, a $100 entry point, Islamic account support, Arabic and English channels, fast execution claims, and SFSA regulation. The current website does not yet package those assets into a premium financial experience.</p>
+        </div>
+        <div class="grid-3 reveal">
+          <div class="card accent">
+            <span class="tag">Problem 01</span>
+            <h3>Outdated perception</h3>
+            <p>The site needs to feel like a modern financial platform, not a broker template with feature blocks.</p>
+          </div>
+          <div class="card accent">
+            <span class="tag">Problem 02</span>
+            <h3>Weak system story</h3>
+            <p>The current site lists spreads, MT5, accounts, and assets. It does not show the trading journey or why a trader should choose Connect Financials.</p>
+          </div>
+          <div class="card accent">
+            <span class="tag">Problem 03</span>
+            <h3>Low SEO and AI visibility</h3>
+            <p>The site needs stronger search foundations and a clear AIEO layer so AI assistants can identify, understand, and cite the brand correctly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="audit" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">02 / Current State Audit</div>
+            <h2>Specific findings from the live site.</h2>
+          </div>
+          <p class="lead">The audit reviewed the homepage, About, Trading Accounts, Tradable Assets, Payment Methods, and Partners pages, plus rendered desktop and mobile behavior.</p>
+        </div>
+
+        <div class="audit-list reveal">
+          <div class="audit-item">
+            <div><strong>Visual Design</strong><span>Premium gap</span></div>
+            <div>
+              <p>The homepage uses a dark space-like hero and the line "ConnectTradeAchieve," which points in the right direction. The execution is still mixed with generic cards, repeated buttons, inconsistent spacing, and no meaningful product interface story.</p>
+              <ul>
+                <li>The hero says "Experience the future of forex trading with ultra-low spreads, lightning execution, and low commissions." This is clear, but generic.</li>
+                <li>The live market card shows "US30 0.00000" while XAU/USD and USOIL show live-looking prices, weakening the real-time data promise.</li>
+                <li>The large risk-warning overlay blocks the conversion area on desktop and dominates the mobile first impression.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>UX and Funnel</strong><span>Portal friction</span></div>
+            <div>
+              <p>The marketing site pushes users to `portal.connectfinancials.com`, but the conversion path is not clean enough.</p>
+              <ul>
+                <li>"Trade Now," "Try Free Demo," "Open Account," and "Sign Up" often point to the same sign-in route.</li>
+                <li>A new visitor clicking "Sign Up" is sent to `portal.connectfinancials.com/auth/jwt/sign-in`, which reads like a login screen rather than registration.</li>
+                <li>The homepage says "No minimum deposit" near the bottom, while account pages state a $100 minimum deposit.</li>
+                <li>The site does not clearly separate "Open Live Account," "Open Demo Account," and "Login."</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>Messaging</strong><span>Generic claims</span></div>
+            <div>
+              <p>The current copy says what Connect Financials offers, but not why the offer matters. It uses category-common language that competitors can also claim.</p>
+              <ul>
+                <li>The homepage states "TRUSTED BY 50,000+ TRADERS," the About page says "3,000+ Active Traders," and the Trading Accounts page says "100,000+ Satisfied clients worldwide."</li>
+                <li>The Trading Accounts page says "Compare our four distinct account types," then shows three accounts.</li>
+                <li>The Raw account is described as "Commission-based model" on one page, while other sections say "No commission fees."</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>Trust</strong><span>Compliance risk</span></div>
+            <div>
+              <p>Trust can be strengthened, but only through accurate, supportable statements. The site currently has conflicting regulatory references and some risky claims.</p>
+              <ul>
+                <li>The homepage includes "FSCS Protected." FSCS is a UK compensation scheme and should not appear unless clients are actually covered.</li>
+                <li>The About page references Seychelles and license SD244, while Trading Accounts references Comoros CFSA, license HY00523008, and a Comoros address.</li>
+                <li>Claims such as "world's most trusted forex broker" and "client funds protected" need substantiation or replacement.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>Mobile</strong><span>Critical issue</span></div>
+            <div>
+              <p>At a 390px mobile viewport, the homepage rendered as a narrow left column with a large blank area to the right. The risk warning covered the hero and primary CTA.</p>
+              <ul>
+                <li>The first visible experience is compliance friction, not product value.</li>
+                <li>The chat widget and risk banner compete for limited mobile space.</li>
+                <li>The live market card starts below the overlay and does not create a premium mobile impression.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>SEO and AIEO</strong><span>Missing foundation</span></div>
+            <div>
+              <p>The site has basic pages but weak search and AI extraction signals.</p>
+              <ul>
+                <li>Homepage title is simply "Connect Financials."</li>
+                <li>The meta description is "Your Gateway to Seamless Trading," which is too vague.</li>
+                <li>No canonical tag or JSON-LD schema was detected on the homepage.</li>
+                <li>`sitemap.xml` returns 404 and `llms.txt` returns 404.</li>
+                <li>The site lacks AI-friendly answers such as "Is Connect Financials regulated?" and "Does Connect Financials offer Islamic accounts?"</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="audit-item">
+            <div><strong>Technical</strong><span>Performance budget</span></div>
+            <div>
+              <p>The homepage loaded with 49 observed resources during browser inspection, including 23 scripts, 8 CSS/link resources, 4 video resources, and multiple fetch/XHR calls. The inspected load event completed in roughly 3.4 seconds.</p>
+              <ul>
+                <li>Live market data appears partly broken or inconsistent.</li>
+                <li>Visual effects should be performance-budgeted before adding GSAP and Three.js.</li>
+                <li>Mobile Core Web Vitals should be treated as a design requirement.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="positioning" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">03 / Strategic Opportunity</div>
+            <h2>Stand apart in MENA through clarity, locality and experience.</h2>
+          </div>
+          <p class="lead">Connect Financials should not try to out-Exness Exness or out-XM XM on scale. The stronger position is a premium, MENA-ready MT5 trading journey.</p>
+        </div>
+
+        <div class="positioning reveal">
+          <p>Connect Financials is the premium MT5 broker for Arabic-speaking and MENA traders who want a clear, fast, swap-free-friendly trading journey with human support, transparent trading conditions, and easy funding.</p>
+        </div>
+
+        <div class="grid-4 reveal">
+          <div class="card"><h3>Against Exness</h3><p>More personal, more MENA-local, less faceless, with Arabic-first education and support.</p></div>
+          <div class="card"><h3>Against XM</h3><p>More modern and platform-led, with a sharper trading interface story.</p></div>
+          <div class="card"><h3>Against FXTM</h3><p>Simpler account selection and a cleaner onboarding journey.</p></div>
+          <div class="card"><h3>Against HFM</h3><p>Stronger visual identity, clearer AIEO footprint, and better AI-era content visibility.</p></div>
+        </div>
+
+        <div class="quote reveal">
+          Core message: Trade global markets on MT5 with clear account options, fast execution, swap-free support, local MENA payment access, and transparent risk information.
+        </div>
+      </div>
+    </section>
+
+    <section id="design" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">04 / Redesign Direction</div>
+            <h2>Dark, electric, premium and product-led.</h2>
+          </div>
+          <p class="lead">The redesign should feel closer to a fintech trading terminal than a generic broker template. Motion should reveal the trading journey, not decorate the page.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card accent">
+            <span class="tag">Visual Language</span>
+            <ul>
+              <li>Deep navy and near-black foundation.</li>
+              <li>Electric blue, cyan, and controlled lime accents.</li>
+              <li>Glassmorphism for market cards, account selectors, and execution stats.</li>
+              <li>High-contrast typography with compact trading data.</li>
+            </ul>
+          </div>
+          <div class="card accent">
+            <span class="tag">GSAP Motion</span>
+            <ul>
+              <li>Hero sequence with market grid, data points, MT5 interface and CTA reveal.</li>
+              <li>Account selector animations for Standard, Raw, Demo and Islamic paths.</li>
+              <li>Execution story from spread to order to confirmation.</li>
+              <li>Trust layer proof cards with controlled reveals.</li>
+            </ul>
+          </div>
+          <div class="card accent">
+            <span class="tag">Three.js</span>
+            <ul>
+              <li>Lightweight 3D market globe or liquidity field in the hero.</li>
+              <li>Premium asset universe section for forex, gold, oil, indices and crypto.</li>
+              <li>Static or CSS fallback visuals on mobile.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:18px;">
+          <h3>How the new design sells the system</h3>
+          <ol>
+            <li>Understand the promise: trade global markets with MT5, fast execution, and MENA-ready support.</li>
+            <li>See the platform: real MT5 screens, mobile flow, live spreads, tools, and execution highlights.</li>
+            <li>Choose the account: simple account comparison with honest spread and commission rules.</li>
+            <li>Explore assets: forex, gold, oil, indices, and crypto with market conditions and example use cases.</li>
+            <li>Fund confidently: cards, bank transfer, USDT, and regional payment options explained clearly.</li>
+            <li>Verify trust: legal entity, SFSA license SD244, risk warning, restrictions, support, and policies.</li>
+            <li>Start safely: demo first, then live account when ready.</li>
+          </ol>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:18px;">
+          <div class="card">
+            <h3>Arabic and RTL</h3>
+            <ul>
+              <li>Full RTL layout support with mirrored navigation, cards, icons, and motion direction.</li>
+              <li>Arabic typography selected for financial readability.</li>
+              <li>Arabic FAQs and education content written natively for MENA traders.</li>
+              <li>Separate Arabic metadata, schema, and hreflang implementation.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Trading Terminology</h3>
+            <p>Avoid literal translation where regional traders expect terms such as MT5, spread, swap-free, leverage, margin and CFD. The Arabic experience should be localized, not simply translated.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ia" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">05 / Information Architecture</div>
+            <h2>A clearer sitemap built around trader intent.</h2>
+          </div>
+          <p class="lead">The current site is close to 10 pages, but the structure needs clearer commercial, trust, platform, and education paths.</p>
+        </div>
+
+        <div class="sitemap reveal">
+          <ul>
+            <li>Home</li>
+            <li>Why Connect Financials</li>
+            <li>Platforms
+              <ul><li>MetaTrader 5</li><li>Mobile Trading</li></ul>
+            </li>
+            <li>Trading Accounts
+              <ul><li>Standard Account</li><li>Raw Spread Account</li><li>Demo Account</li><li>Islamic Swap-Free Account</li></ul>
+            </li>
+            <li>Markets
+              <ul><li>Forex Trading</li><li>Gold Trading</li><li>Oil Trading</li><li>Indices Trading</li><li>Crypto CFD Trading</li></ul>
+            </li>
+            <li>Trading Conditions
+              <ul><li>Spreads and Commissions</li><li>Leverage and Margin</li><li>Execution and Slippage</li><li>Market Hours</li></ul>
+            </li>
+            <li>Funding
+              <ul><li>Payment Methods</li><li>Deposits and Withdrawals</li><li>USDT Funding</li></ul>
+            </li>
+            <li>Learn
+              <ul><li>Market Analysis</li><li>Trading Guides</li><li>MT5 Tutorials</li><li>Risk Management</li></ul>
+            </li>
+            <li>Partners
+              <ul><li>Introducing Broker Program</li><li>Affiliate Program</li><li>Partner FAQ</li></ul>
+            </li>
+            <li>Trust and Legal
+              <ul><li>Regulation and License</li><li>Risk Disclosure</li><li>Client Fund Handling</li><li>KYC and AML</li><li>Complaints</li><li>Restricted Jurisdictions</li></ul>
+            </li>
+            <li>About</li>
+            <li>Contact</li>
+            <li>Help Center</li>
+          </ul>
+        </div>
+
+        <div class="grid-3 reveal" style="margin-top:18px;">
+          <div class="card"><h3>Priority Launch Pages</h3><p>Home, Trading Accounts, Islamic Account, MT5 Platform, Forex Trading, Gold Trading, Payment Methods, Regulation and License, Partners, FAQ.</p></div>
+          <div class="card"><h3>Commercial Pages</h3><p>Built around account choice, trading conditions, assets, platform benefits, and funding steps.</p></div>
+          <div class="card"><h3>Trust Pages</h3><p>Dedicated pages for regulation, risk, client fund handling, restrictions, KYC, AML, complaints and policies.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="conversion" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">06 / Conversion Strategy</div>
+            <h2>Tighten the funnel from marketing site to portal.</h2>
+          </div>
+          <p class="lead">The site should move visitors into the right portal action with more confidence and less ambiguity.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card">
+            <h3>Funnel Fixes</h3>
+            <ul>
+              <li>Separate "Open Live Account," "Open Demo Account," and "Login" into distinct CTAs.</li>
+              <li>Send sign-up clicks to a registration route, not a sign-in route, if the portal supports it.</li>
+              <li>Add a pre-portal transition page or modal explaining what happens next.</li>
+              <li>Add persistent but non-intrusive CTAs on mobile.</li>
+              <li>Use a compact risk disclosure pattern with expandable full details.</li>
+              <li>Add account recommendation logic for new traders, low-spread traders, demo users, and swap-free users.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Homepage Conversion Blocks</h3>
+            <ul>
+              <li>Hero with premium market visual and two CTAs.</li>
+              <li>Live spread strip with timestamp and source.</li>
+              <li>MT5 experience with desktop and mobile screens.</li>
+              <li>Account chooser for Standard, Raw, Demo and Islamic.</li>
+              <li>MENA funding section for cards, bank transfer, USDT and Whish where applicable.</li>
+              <li>Trust section with SFSA SD244 and risk context.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="seo" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">07 / SEO Strategy</div>
+            <h2>Build search visibility around high-intent trader questions.</h2>
+          </div>
+          <p class="lead">SEO should capture MENA and Arabic-speaking trader intent across platform, account, asset, funding, Islamic account, and trust searches.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card">
+            <h3>Technical SEO</h3>
+            <ul>
+              <li>Generate and submit `sitemap.xml`.</li>
+              <li>Add canonical tags across all pages.</li>
+              <li>Implement hreflang for English and Arabic.</li>
+              <li>Add breadcrumbs and structured data.</li>
+              <li>Optimize Core Web Vitals, especially mobile LCP and CLS.</li>
+              <li>Lazy-load Three.js sections and videos.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>On-Page SEO</h3>
+            <ul>
+              <li>Improve titles and meta descriptions across all pages.</li>
+              <li>Add FAQs to each commercial page.</li>
+              <li>Create specific trading-condition pages.</li>
+              <li>Add glossary content for MENA traders.</li>
+              <li>Add localized Arabic content around Islamic accounts, gold trading, forex trading and USDT deposits.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Authority Building</h3>
+            <ul>
+              <li>Secure verified profiles on broker directories and financial directories.</li>
+              <li>Publish consistent entity data across social and app profiles.</li>
+              <li>Earn citations through Arabic finance publications, webinars, and partner education.</li>
+              <li>Encourage reviews only through compliant, authentic processes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-card reveal" style="margin-top:18px;">
+          <h3>Recommended title examples</h3>
+          <ul>
+            <li>Home: "Connect Financials | MT5 Forex and CFD Broker for MENA Traders"</li>
+            <li>Trading Accounts: "Trading Accounts | Standard, Raw Spread, Demo and Islamic Accounts"</li>
+            <li>MT5 Platform: "MetaTrader 5 Broker | Trade Forex, Gold, Oil, Indices and Crypto"</li>
+            <li>Islamic Account: "Islamic Forex Account | Swap-Free Trading with Connect Financials"</li>
+            <li>Regulation: "Connect Financials Regulation | SFSA License SD244 and Legal Information"</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="aieo" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">08 / AIEO Strategy</div>
+            <h2>Make Connect Financials discoverable and citable in AI answers.</h2>
+          </div>
+          <p class="lead">AIEO makes the brand easier for ChatGPT, Perplexity, Gemini, Claude, and Google AI Overviews to understand, compare, and cite.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card accent">
+            <h3>Clean Entity Definition</h3>
+            <ul>
+              <li>Brand: Connect Financials.</li>
+              <li>Legal entity: Connect Financials Ltd.</li>
+              <li>Website: `connectfinancials.com`.</li>
+              <li>Portal: `portal.connectfinancials.com`.</li>
+              <li>Regulator: Seychelles Financial Services Authority.</li>
+              <li>License: SD244.</li>
+              <li>Platform: MetaTrader 5.</li>
+              <li>Products: forex CFDs, commodities CFDs, indices CFDs, crypto CFDs.</li>
+              <li>Languages: English and Arabic.</li>
+            </ul>
+          </div>
+          <div class="card accent">
+            <h3>Structured Data</h3>
+            <ul>
+              <li>Organization schema.</li>
+              <li>FinancialService schema.</li>
+              <li>WebSite schema.</li>
+              <li>BreadcrumbList schema.</li>
+              <li>FAQPage schema.</li>
+              <li>Article schema for education content.</li>
+              <li>Service schema for account types where compliant.</li>
+              <li>SameAs links for verified social channels and profiles.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-3 reveal" style="margin-top:18px;">
+          <div class="card">
+            <h3>`llms.txt`</h3>
+            <p>Create `https://connectfinancials.com/llms.txt` with verified legal facts, product summary, platform summary, risk disclosure, canonical links, contact paths, and citation guidance for AI systems.</p>
+          </div>
+          <div class="card">
+            <h3>FAQ Answer Blocks</h3>
+            <p>Answer real questions such as "Is Connect Financials regulated?", "What platform does it use?", "Does it offer Islamic accounts?", "What is the minimum deposit?", and "How does it compare with Exness, XM, FXTM and HFM?"</p>
+          </div>
+          <div class="card">
+            <h3>Citable Sources</h3>
+            <p>Clean up public profiles, pursue citations in broker directories and Arabic finance media, publish named market commentary, and add a public regulation page AI tools can cite safely.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">09 / Trust and Compliance</div>
+            <h2>Handle the regulation question honestly.</h2>
+          </div>
+          <p class="lead">Connect Financials should not hide offshore regulation, and it should not overstate it. The better strategy is clarity, consistency, and responsible risk framing.</p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card danger">
+            <h3>Immediate Cleanup</h3>
+            <ul>
+              <li>Remove or verify "FSCS Protected" immediately.</li>
+              <li>Standardize regulatory references to SFSA license SD244 if that is the correct current status.</li>
+              <li>Remove conflicting Comoros license and address references unless a separate active entity must be disclosed.</li>
+              <li>Replace "Trusted & Regulated Worldwide" with precise wording such as "Licensed by the SFSA, License SD244."</li>
+            </ul>
+          </div>
+          <div class="card warning">
+            <h3>Trust Layer</h3>
+            <ul>
+              <li>Add a dedicated Regulation and Legal page.</li>
+              <li>Add a "How client funds are handled" page with precise statements.</li>
+              <li>Use a clear risk disclosure above or near CTAs without blocking the entire experience.</li>
+              <li>Add verified support hours, phone number formatting, office addresses, complaints, AML, KYC and refund policy links.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">10 / Phased Roadmap</div>
+            <h2>A realistic path from audit to launch and growth.</h2>
+          </div>
+          <p class="lead">The redesign should start with verified facts, then move into UX, visual design, development, SEO and AIEO launch, and ongoing growth optimization.</p>
+        </div>
+
+        <div class="timeline reveal">
+          <div class="timeline-card">
+            <div><div class="phase">Phase 1</div><div class="time">1 to 2 weeks</div></div>
+            <div>
+              <h3>Strategy, Audit and Compliance Cleanup</h3>
+              <p>Final sitemap, conversion map, messaging framework, compliance content inventory, SEO and AIEO specification, and verified claims document.</p>
+            </div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 2</div><div class="time">2 to 3 weeks</div></div>
+            <div>
+              <h3>UX, Copy and Visual Design</h3>
+              <p>Wireframes, core page copy, dark electric visual system, Arabic and RTL rules, motion storyboard, and a custom premium component direction for trading cards, account selectors, trust blocks, and conversion CTAs.</p>
+            </div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 3</div><div class="time">4 to 6 weeks</div></div>
+            <div>
+              <h3>Development</h3>
+              <p>Next.js marketing site, GSAP animation system, lightweight Three.js hero or asset universe, CMS-backed content, portal CTA integration, bilingual templates, schema, sitemap, metadata, hreflang and analytics.</p>
+            </div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 4</div><div class="time">2 to 4 weeks</div></div>
+            <div>
+              <h3>SEO and AIEO Launch</h3>
+              <p>Indexing checks, `llms.txt`, structured data validation, FAQ and comparison content launch, authority profile cleanup, Search Console, analytics, and AI visibility baseline testing.</p>
+            </div>
+          </div>
+          <div class="timeline-card">
+            <div><div class="phase">Phase 5</div><div class="time">Ongoing</div></div>
+            <div>
+              <h3>Growth Optimization</h3>
+              <p>Content production, landing page expansion, conversion testing, Arabic SEO growth, partner funnel optimization, AI citation monitoring, and UX improvements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">11 / Recommended Tech Stack</div>
+            <h2>Premium UI with a performance budget.</h2>
+          </div>
+          <p class="lead">The stack should support a polished visual experience, bilingual content, SEO, AIEO, and fast mobile performance.</p>
+        </div>
+
+        <div class="grid-4 reveal">
+          <div class="card">
+            <h3>Frontend</h3>
+            <ul>
+              <li>Next.js App Router</li>
+              <li>TypeScript</li>
+              <li>Tailwind CSS</li>
+              <li>Custom UI component system</li>
+              <li>Reusable trading cards and account selectors</li>
+              <li>Premium trust, FAQ, and conversion components</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Motion</h3>
+            <ul>
+              <li>GSAP for scroll storytelling</li>
+              <li>Three.js or React Three Fiber</li>
+              <li>Mobile static fallbacks</li>
+              <li>Lazy-loaded visual sections</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Content and SEO</h3>
+            <ul>
+              <li>Sanity, Storyblok or Payload</li>
+              <li>MDX for lean editorial workflow</li>
+              <li>Automated sitemap</li>
+              <li>JSON-LD utilities</li>
+              <li>Bilingual routing</li>
+              <li>`llms.txt` generation</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Analytics</h3>
+            <ul>
+              <li>GA4</li>
+              <li>Google Search Console</li>
+              <li>Microsoft Clarity or PostHog</li>
+              <li>Portal CTA event tracking</li>
+              <li>Looker Studio dashboard</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metrics" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">12 / Success Metrics</div>
+            <h2>Measure brand trust, conversion, search and AI visibility.</h2>
+          </div>
+          <p class="lead">The redesign should be judged by how clearly it improves the three core problems: premium perception, system-selling conversion, and SEO plus AIEO visibility.</p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card"><h3>Brand and UX</h3><ul><li>Improved perceived trust and premium quality.</li><li>Reduced mobile bounce rate.</li><li>Increased scroll depth.</li><li>More engagement with MT5, account chooser, and funding sections.</li></ul></div>
+          <div class="card"><h3>Conversion</h3><ul><li>Higher click-through to live registration.</li><li>Higher demo account creation.</li><li>Lower drop-off between marketing site and portal.</li><li>Increased partner applications.</li></ul></div>
+          <div class="card"><h3>SEO</h3><ul><li>Indexed sitemap and priority pages.</li><li>Growth in non-branded organic clicks.</li><li>Rankings for MENA, Arabic, MT5, Islamic account, gold trading, and comparison queries.</li><li>Improved mobile Core Web Vitals.</li></ul></div>
+          <div class="card"><h3>AIEO</h3><ul><li>Correct brand facts returned by AI assistants.</li><li>AI tools cite official pages for regulation, accounts, platform and funding.</li><li>Presence in AI-generated answers.</li><li>Fewer factual inconsistencies across AI responses.</li></ul></div>
+          <div class="card"><h3>Trust</h3><ul><li>All regulatory references consistent.</li><li>Unsupported claims removed or verified.</li><li>Trust and legal pages indexed.</li><li>Lower user uncertainty around regulation, funding, risk and account setup.</li></ul></div>
+          <div class="card accent"><h3>Recommended Next Step</h3><p>Complete a claims verification session for regulation, FSCS wording, account types, trader counts, partner counts, execution speed, spreads, commissions, addresses, and portal registration routes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="investment" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">13 / Investment</div>
+            <h2>Project quote and commercial terms.</h2>
+          </div>
+          <p class="lead">A fixed project fee for the redesign, development, SEO foundation, AIEO setup, motion layer, analytics, QA, and launch support.</p>
+        </div>
+
+        <div class="investment-panel reveal">
+          <div class="investment-top">
+            <div>
+              <div class="investment-label">Fixed Project Fee</div>
+              <h3>Website Redesign, SEO and AIEO Upgrade</h3>
+              <p>Complete premium redesign and rebuild of the Connect Financials marketing website, including a dark electric UI direction, GSAP motion system, selective Three.js experience layer, bilingual and RTL planning, SEO architecture, AIEO foundations, analytics setup, QA, and launch support.</p>
+            </div>
+            <div class="investment-total">
+              <span>Total Investment</span>
+              <strong>$17,500</strong>
+            </div>
+          </div>
+
+          <div class="quote-table" aria-label="Project quote breakdown">
+            <div class="quote-row">
+              <div>
+                <h4>Strategy, UX and Visual Design</h4>
+                <p>Audit synthesis, messaging direction, sitemap, wireframes, premium UI direction, Arabic and RTL considerations.</p>
+              </div>
+              <div class="quote-price">$4,500</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>Website Development</h4>
+                <p>Next.js marketing site build, responsive page templates, content structure, portal CTA paths, and reusable custom UI components.</p>
+              </div>
+              <div class="quote-price">$7,000</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>GSAP and Three.js Motion Layer</h4>
+                <p>Scroll storytelling, hero experience, market visuals, motion states, and mobile-safe fallbacks.</p>
+              </div>
+              <div class="quote-price">$2,500</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>SEO and AIEO Foundation</h4>
+                <p>Technical SEO, metadata, sitemap, schema plan, FAQ structure, entity definition, and `llms.txt` foundation.</p>
+              </div>
+              <div class="quote-price">$3,000</div>
+            </div>
+            <div class="quote-row">
+              <div>
+                <h4>Analytics, QA and Launch Support</h4>
+                <p>Tracking setup, responsive QA, launch checks, indexing checks, and post-launch handoff.</p>
+              </div>
+              <div class="quote-price">$500</div>
+            </div>
+            <div class="quote-row total">
+              <div>
+                <h4>Total Fixed Project Fee</h4>
+                <p>Commercial quote for the scope described in this proposal.</p>
+              </div>
+              <div class="quote-price">$17,500</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-grid reveal">
+          <div class="payment-card">
+            <span>Payment 01</span>
+            <strong>40%</strong>
+            <p>Due at project kickoff to begin strategy, UX, and design production.</p>
+          </div>
+          <div class="payment-card">
+            <span>Payment 02</span>
+            <strong>40%</strong>
+            <p>Due after visual design approval and before full development production.</p>
+          </div>
+          <div class="payment-card">
+            <span>Payment 03</span>
+            <strong>20%</strong>
+            <p>Due before final handoff and launch support.</p>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:18px;">
+          <div class="card">
+            <span class="tag">Optional Growth Retainer</span>
+            <h3>$3,000 to $6,000/month</h3>
+            <p>Ongoing SEO content, AIEO monitoring, conversion testing, Arabic search growth, landing page expansion, performance optimization, and monthly reporting after launch.</p>
+          </div>
+          <div class="card warning">
+            <span class="tag">Commercial Note</span>
+            <h3>Final scope confirmation</h3>
+            <p>The fixed project fee assumes the scope described in this proposal. Final scope should be confirmed after the claims verification session and portal route review.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell">
+        <div class="cta-panel reveal">
+          <div class="section-kicker">Final Recommendation</div>
+          <h2>Rebuild Connect Financials as a premium trading journey, not a brochure.</h2>
+          <p>Once the core claims are verified, the redesign can move quickly into a GSAP-powered dark electric experience that sells the trading system, strengthens conversion, and gives SEO and AIEO the clean factual foundation they need.</p>
+          <div class="decision-row" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <a class="button primary" href="mailto:ayousef@nixailabs.com?subject=Connect%20Financials%20proposal%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20prepared%20for%20Connect%20Financials.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept proposal</a>
+            <a class="button secondary" href="mailto:ayousef@nixailabs.com?subject=Connect%20Financials%20proposal%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20prepared%20for%20Connect%20Financials.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject proposal</a>
+            <a class="button secondary" href="#top">Back to Top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>Prepared for Connect Financials</span>
+      <span>Website redesign, SEO and AIEO proposal</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    (function () {
+      if (!window.gsap) {
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          el.style.opacity = 1;
+          el.style.transform = 'none';
+        });
+        return;
+      }
+
+      gsap.registerPlugin(window.ScrollTrigger);
+
+      gsap.to('.hero-content', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' });
+      gsap.to('.hero-visual', { opacity: 1, y: 0, duration: 0.9, delay: 0.18, ease: 'power3.out' });
+
+      gsap.utils.toArray('.reveal').forEach(function (el) {
+        if (el.classList.contains('hero-content') || el.classList.contains('hero-visual')) return;
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 84%' }
+        });
+      });
+
+      gsap.to('.terminal-card', {
+        y: -16,
+        duration: 3.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+    })();
+  </script>
+</body>
+</html>

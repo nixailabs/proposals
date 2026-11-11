@@ -454,6 +454,11 @@
       .nav, .nav-toggle, .cursor, .cursor-dot, .scroll-progress { display: none !important; }
       .cover, .close { min-height: auto; }
     }
+
+    .btn-reject { background: transparent; color: var(--muted, #6b7280); border-color: rgba(120,120,120,0.45); }
+    .btn-reject:hover { background: transparent; color: #c0392b; border-color: #c0392b; }
+    .close .btn-reject, .dark .btn-reject { color: rgba(255,255,255,0.78); border-color: rgba(255,255,255,0.35); }
+    .close .btn-reject:hover, .dark .btn-reject:hover { color: #ff8a7a; border-color: #ff8a7a; background: transparent; }
   </style>
 </head>
 <body>
@@ -1117,7 +1122,8 @@
       </div>
 
       <div class="invest-actions">
-        <a class="btn btn-dark" href="mailto:hello@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20approved">Approve quotation</a>
+        <a class="btn btn-dark" href="mailto:ayousef@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20NIX-AWS-WEB-001%20prepared%20for%20Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept quotation</a>
+        <a class="btn btn-reject" href="mailto:ayousef@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20NIX-AWS-WEB-001%20prepared%20for%20Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject quotation</a>
         <button class="btn btn-outline" type="button" data-pdf><span>Download the quotation (PDF)</span></button>
       </div>
     </div>
@@ -1189,9 +1195,10 @@
       <h2 style="max-width:900px">We can be in discovery in El Obour the week the first transfer clears.</h2>
       <p class="lead">Reply with approval of this quotation, or with the optional lines you want in the first release. We will send a one-page statement of work, a kickoff date, and the account list for Shopify, payments and domains.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:hello@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20approved">Approve quotation</a>
+        <a class="btn btn-primary" href="mailto:ayousef@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20NIX-AWS-WEB-001%20prepared%20for%20Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept quotation</a>
+        <a class="btn btn-reject" href="mailto:ayousef@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20NIX-AWS-WEB-001%20prepared%20for%20Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject quotation</a>
         <button class="btn btn-ghost" type="button" data-pdf><span>Download the quotation</span></button>
-        <a class="btn btn-ghost" href="mailto:hello@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20%E2%80%94%20a%20question">Ask a question</a>
+        <a class="btn btn-ghost" href="mailto:ayousef@nixailabs.com?subject=Al%20Wefak%20Al%20Saudi%20for%20Food%20Industries%20%E2%80%94%20NIX-AWS-WEB-001%20%E2%80%94%20a%20question">Ask a question</a>
       </div>
       <footer>
         <img class="nix" src="/assets/nixai-wordmark-light.png" alt="NixAI" />
@@ -1200,7 +1207,7 @@
           <small>Your life with Al Wefak flavor</small>
         </div>
         <div style="font-size:12px;color:rgba(255,255,255,0.6);text-align:right">
-          hello@nixailabs.com<br />nixailabs.com
+          ayousef@nixailabs.com<br />nixailabs.com
         </div>
       </footer>
     </div>
@@ -1397,7 +1404,7 @@
       font("helvetica", "normal", 9.5, MUTED);
       wrap("A corporate website for Al Wefak Al Saudi for Food Industries in English and Arabic, and a Shopify storefront selling Mero across Egypt — designed to the standard of the Heinz and Organimo references, in the company's own brand.", CW).forEach((l) => { doc.text(l, ML, y); y += 4.6; });
       y += 6;
-      [["Prepared for", DOC_CLIENT], ["Prepared by", "NixAI · hello@nixailabs.com"], ["Date", DOC_DATE], ["Validity", "30 days from issue"], ["Delivery", "12 to 14 weeks from kickoff"]].forEach((r) => {
+      [["Prepared for", DOC_CLIENT], ["Prepared by", "NixAI · ayousef@nixailabs.com"], ["Date", DOC_DATE], ["Validity", "30 days from issue"], ["Delivery", "12 to 14 weeks from kickoff"]].forEach((r) => {
         kick(r[0], ML, y, FAINT, 6.4); font("helvetica", "normal", 9, INK); doc.text(r[1], ML + 34, y); y += 5.6;
       });
       y += 4;
@@ -1477,7 +1484,7 @@
       kick("Acceptance", ML, y, HONEY, 7); y += 6;
       font("helvetica", "normal", 8.2, MUTED); doc.text("Signing below accepts this quotation at the total shown above.", ML, y); y += 7;
       const bw = (CW - 8) / 2;
-      [["For " + DOC_CLIENT, ""], ["For NixAI", "hello@nixailabs.com · nixailabs.com"]].forEach((b, i) => {
+      [["For " + DOC_CLIENT, ""], ["For NixAI", "ayousef@nixailabs.com · nixailabs.com"]].forEach((b, i) => {
         const x = ML + i * (bw + 8);
         doc.setDrawColor(LINE[0], LINE[1], LINE[2]); doc.setLineWidth(0.2); doc.rect(x, y, bw, 33);
         kick(b[0], x + 4, y + 6.5, FAINT, 6.2);

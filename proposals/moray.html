@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moray Medical App — Quotation | Prepared for Main Marks by NixAI</title>
+  <meta name="description" content="A dedicated medical platform for Moray: React Native iOS and Android, Node.js and MongoDB backend, and a Next.js admin — fully branded and owned by the Moray Project." />
+  <meta property="og:title" content="Moray Medical App — Quotation for Main Marks" />
+  <meta property="og:description" content="Doctors, clinics, schedules, and appointments in one branded platform for Moray residents. Prepared by NixAI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/main-marks/moray-hero-architecture.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #000000;
+      --longe: #191819;
+      --ink: #323031;
+      --grey: #565656;
+      --silver: #c0bdbd;
+      --white: #ffffff;
+      --copper: #f7951e;
+      --orange: #fa6126;
+      --cyan: #12a2c6;
+      --cyan-bright: #15bee8;
+      --cyan-deep: #095569;
+      --cyan-navy: #06333e;
+      --line: rgba(255,255,255,0.10);
+      --line-strong: rgba(247,149,30,0.38);
+      --muted: rgba(255,255,255,0.68);
+      --faint: rgba(255,255,255,0.42);
+      --serif: "Cormorant Garamond", "Times New Roman", serif;
+      --sans: Manrope, system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    strong { color: var(--white); font-weight: 700; }
+    p { color: var(--muted); margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 80;
+      background: var(--copper); transform: scaleX(0); transform-origin: 0 50%;
+      pointer-events: none;
+    }
+    .cursor, .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 90;
+      border-radius: 50%; mix-blend-mode: difference;
+    }
+    .cursor {
+      width: 36px; height: 36px; margin: -18px 0 0 -18px;
+      border: 1px solid var(--copper);
+    }
+    .cursor-dot {
+      width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px;
+      background: var(--cyan-bright);
+    }
+    .cursor.is-link { border-color: var(--white); }
+    @media (hover: none), (pointer: coarse) {
+      .cursor, .cursor-dot { display: none; }
+    }
+    @media (hover: hover) and (pointer: fine) {
+      body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
+    }
+
+    .shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .shell-wide { width: min(1280px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* Nav ---------------------------------------------------------------- */
+    .nav {
+      position: fixed; top: 16px; left: 16px; right: 16px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px 18px;
+      background: rgba(10,10,10,0.72);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
+    .nav-brand img.emblem { height: 36px; width: auto; }
+    .nav-brand .slash { color: var(--copper); font-family: var(--serif); font-size: 22px; line-height: 1; }
+    .nav-brand img.word { height: 14px; width: auto; opacity: 0.92; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--silver); cursor: pointer; transition: color 200ms ease;
+    }
+    .nav-links .menu-quote { display: none; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--copper); color: var(--black);
+      padding: 10px 16px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+      transition: background 200ms ease, color 200ms ease;
+    }
+    .nav-cta:hover { background: var(--white); }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--line);
+      color: var(--white); width: 42px; height: 42px; cursor: pointer;
+    }
+
+    /* Cover -------------------------------------------------------------- */
+    .cover {
+      position: relative; min-height: 100vh;
+      display: grid; align-items: end;
+      overflow: hidden;
+    }
+    .cover-media {
+      position: absolute; inset: -12% 0;
+      height: 124%;
+      background: #000 url("/assets/main-marks/moray-hero-architecture.png") center/cover no-repeat;
+      will-change: transform;
+    }
+    .cover-media::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.25) 38%, rgba(0,0,0,0.88) 100%),
+        linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 55%, rgba(0,0,0,0.55) 100%);
+    }
+    .cover-inner {
+      position: relative; z-index: 2;
+      padding: 140px 0 56px;
+    }
+    .cover-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 24px; margin-bottom: 72px;
+    }
+    .cover-kicker {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper);
+    }
+    .cover-meta { text-align: right; color: var(--silver); font-size: 12px; letter-spacing: 0.06em; }
+    .cover-meta span { display: block; color: var(--faint); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; }
+    h1 {
+      font-family: var(--serif); font-weight: 500; font-style: italic;
+      font-size: clamp(48px, 8vw, 104px); line-height: 0.92;
+      letter-spacing: -0.02em; color: var(--white); max-width: 920px;
+      margin: 10px 0 22px;
+    }
+    h1 .h1-line { display: block; overflow: hidden; }
+    h1 .h1-line span { display: block; }
+    .cover-sub {
+      font-size: clamp(16px, 2vw, 20px); font-weight: 400; color: var(--silver);
+      max-width: 640px; margin-bottom: 40px;
+    }
+    .cover-foot {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+      border-top: 1px solid var(--line); padding-top: 22px;
+    }
+    .cover-logos { display: flex; align-items: center; gap: 18px; overflow: visible; }
+    .cover-logos img { height: 34px; width: auto; object-fit: contain; object-position: center; }
+    .cover-logos img.mm-word { height: 36px; }
+    .cover-logos .slash { color: var(--copper); font-family: var(--serif); font-size: 28px; }
+    .cover-stats { display: flex; gap: 36px; }
+    .cover-stats div span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+    .cover-stats strong { font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--white); }
+
+    /* Sections ----------------------------------------------------------- */
+    .section { padding: 108px 0; position: relative; scroll-margin-top: 88px; }
+    #cover, #next { scroll-margin-top: 0; }
+    .section.alt { background: var(--longe); }
+    .section-kicker {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 14px;
+    }
+    h2 {
+      font-family: var(--serif); font-weight: 500; font-style: italic;
+      font-size: clamp(36px, 5vw, 64px); line-height: 1.02; color: var(--copper);
+      letter-spacing: -0.02em; margin-bottom: 18px;
+    }
+    h2.white { color: var(--white); }
+    .lead { font-size: 18px; color: var(--silver); max-width: 720px; }
+    .section-head {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 48px; align-items: end; margin-bottom: 56px;
+    }
+
+    /* Quote bar ---------------------------------------------------------- */
+    .quote-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .quote-cell { padding: 28px 24px; border-right: 1px solid var(--line); }
+    .quote-cell:last-child { border-right: 0; }
+    .quote-cell span { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .quote-cell b { font-weight: 600; font-size: 15px; color: var(--white); }
+
+    /* Contents ----------------------------------------------------------- */
+    .toc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); }
+    .toc a {
+      display: grid; grid-template-columns: 72px 1fr auto; gap: 16px; align-items: center;
+      padding: 18px 22px; border-bottom: 1px solid var(--line); color: var(--silver);
+      cursor: pointer; transition: background 200ms ease, color 200ms ease;
+    }
+    .toc a:nth-child(odd) { border-right: 1px solid var(--line); }
+    .toc a:hover { background: rgba(247,149,30,0.08); color: var(--white); }
+    .toc .n { font-family: var(--serif); font-style: italic; color: var(--copper); font-size: 22px; }
+    .toc .t { font-size: 14px; font-weight: 500; }
+    .toc .pg { font-size: 11px; letter-spacing: 0.12em; color: var(--faint); }
+
+    /* Split / editorial -------------------------------------------------- */
+    .split { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 48px; align-items: center; }
+    .split img { width: 100%; height: 100%; object-fit: cover; min-height: 520px; }
+    .portrait-frame { position: relative; }
+    .portrait-frame::after {
+      content: ""; position: absolute; inset: 18px; border: 1px solid rgba(247,149,30,0.45); pointer-events: none;
+    }
+    .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+    .pillar { border: 1px solid var(--line); padding: 18px 18px 16px; }
+    .pillar h3 { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--white); margin-bottom: 6px; }
+    .pillar p { font-size: 13px; color: var(--silver); }
+
+    /* Requirement map ---------------------------------------------------- */
+    .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .req {
+      display: grid; grid-template-columns: 44px 1fr; gap: 14px;
+      border: 1px solid var(--line); padding: 18px 18px 16px;
+      transition: border-color 200ms ease;
+    }
+    .req:hover { border-color: var(--line-strong); }
+    .req .idx {
+      font-family: var(--serif); font-style: italic; color: var(--copper); font-size: 22px; line-height: 1;
+    }
+    .req h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .req p { font-size: 13px; color: var(--silver); }
+
+    /* Platforms ---------------------------------------------------------- */
+    .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .platform {
+      background: var(--black); border: 1px solid var(--line); padding: 28px 24px 24px;
+      min-height: 320px; display: flex; flex-direction: column;
+    }
+    .platform .tag {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 18px; font-weight: 700;
+    }
+    .platform h3 {
+      font-family: var(--serif); font-style: italic; font-size: 32px; color: var(--white);
+      margin-bottom: 12px; line-height: 1.05;
+    }
+    .platform p { flex: 1; }
+    .stack { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+      border: 1px solid var(--line); color: var(--silver); padding: 6px 10px;
+    }
+
+    /* Features ----------------------------------------------------------- */
+    .feat-block { margin-bottom: 42px; }
+    .feat-label {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--copper);
+    }
+    .feat-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .feat { border: 1px solid var(--line); padding: 20px 18px 18px; min-height: 164px; }
+    .feat svg { width: 22px; height: 22px; stroke: var(--copper); fill: none; stroke-width: 1.6; margin-bottom: 14px; }
+    .feat h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .feat p { font-size: 13px; color: var(--silver); }
+
+    /* Product experience ------------------------------------------------- */
+    .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: end; perspective: 1200px; }
+    .phone { background: #050505; border: 1px solid var(--line); padding: 14px 14px 18px; will-change: transform; }
+    .phone img { width: 100%; height: auto; }
+    .phone figcaption {
+      margin-top: 14px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+    }
+    .dash-shot { margin-top: 22px; border: 1px solid var(--line); }
+    .dash-shot img { width: 100%; }
+
+    /* Architecture ------------------------------------------------------- */
+    .arch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .arch-card { border: 1px solid var(--line); padding: 24px; background: rgba(255,255,255,0.02); }
+    .arch-card h3 { font-family: var(--serif); font-style: italic; font-size: 26px; margin-bottom: 10px; }
+    .arch-card ul { list-style: none; color: var(--silver); font-size: 14px; }
+    .arch-card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .arch-card li:last-child { border-bottom: 0; }
+    .flow {
+      margin-top: 18px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+    }
+    .flow-step { border: 1px solid var(--line); padding: 16px 12px; text-align: center; }
+    .flow-step b { display: block; font-family: var(--serif); font-style: italic; color: var(--copper); font-size: 20px; margin-bottom: 6px; }
+    .flow-step span { font-size: 12px; color: var(--silver); }
+
+    /* Timeline ----------------------------------------------------------- */
+    .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .phase { border: 1px solid var(--line); padding: 22px 18px; min-height: 280px; }
+    .phase .wk {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .phase h3 { font-family: var(--serif); font-style: italic; font-size: 26px; margin-bottom: 10px; }
+    .phase ul { list-style: none; color: var(--silver); font-size: 13px; }
+    .phase li { padding: 6px 0 6px 14px; position: relative; }
+    .phase li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 1px; background: var(--copper); }
+
+    /* Investment --------------------------------------------------------- */
+    .invest {
+      border: 1px solid var(--line-strong); background: linear-gradient(180deg, rgba(247,149,30,0.08), rgba(0,0,0,0));
+      padding: 32px 32px 8px;
+    }
+    .invest-top { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; padding-bottom: 24px; }
+    .invest-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--copper); font-weight: 700; }
+    .invest-total { text-align: right; }
+    .invest-total span { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+    .invest-total strong {
+      font-family: var(--serif); font-style: italic; font-size: clamp(48px, 6vw, 72px);
+      font-weight: 500; color: var(--white); line-height: 1;
+    }
+    .quote-row {
+      display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+      padding: 20px 0; border-top: 1px solid var(--line);
+    }
+    .quote-row h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .quote-row p { font-size: 13px; }
+    .quote-price { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--white); white-space: nowrap; }
+    .quote-row.total { background: rgba(247,149,30,0.10); margin: 0 -32px; padding: 22px 32px; }
+    .pay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
+    .pay { border: 1px solid var(--line); padding: 20px; }
+    .pay span { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .pay b { font-size: 22px; }
+    .addons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .addon { border: 1px dashed var(--line); padding: 18px; display: flex; justify-content: space-between; gap: 16px; }
+    .addon h4 { font-size: 15px; margin-bottom: 4px; }
+    .addon p { font-size: 13px; }
+    .addon em { font-style: normal; color: var(--copper); font-weight: 700; white-space: nowrap; }
+
+    /* Why / terms -------------------------------------------------------- */
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .why article { border: 1px solid var(--line); padding: 22px; }
+    .why h3 { font-family: var(--serif); font-style: italic; font-size: 24px; margin-bottom: 8px; }
+    .terms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .term { border: 1px solid var(--line); padding: 20px; }
+    .term h3 { font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--copper); margin-bottom: 8px; }
+    .term p { font-size: 13px; }
+
+    /* Close -------------------------------------------------------------- */
+    .close {
+      position: relative; min-height: 88vh; display: grid; align-items: end;
+      overflow: hidden;
+    }
+    .close-media {
+      position: absolute; inset: -12% 0; height: 124%;
+      background: #000 url("/assets/main-marks/moray-clinic-interior.png") center/cover no-repeat;
+      will-change: transform;
+    }
+    .close-media::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.88) 70%);
+    }
+    .close-inner { position: relative; z-index: 2; padding: 80px 0 48px; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 14px 22px; font-size: 12px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; cursor: pointer; transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+    .btn-primary { background: var(--copper); color: var(--black); border: 1px solid var(--copper); }
+    .btn-primary:hover { background: var(--white); border-color: var(--white); }
+    .btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--line); }
+    .btn-ghost:hover { border-color: var(--copper); color: var(--copper); }
+
+    footer {
+      border-top: 1px solid var(--line); padding: 28px 0 40px;
+      display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap;
+    }
+    .footer-mark { text-align: center; flex: 1; }
+    .footer-mark img { height: 26px; width: auto; object-fit: contain; margin: 0 auto 8px; }
+    .footer-mark small {
+      display: block; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--faint);
+    }
+    .nix { height: 22px; opacity: 0.9; }
+
+    .reveal { opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor, .cursor-dot, .scroll-progress { display: none !important; }
+      h1 .h1-line span { transform: none !important; }
+    }
+
+    @media (max-width: 980px) {
+      .nav-cta { display: none; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0;
+        background: #111; border: 1px solid var(--line); padding: 16px;
+      }
+      .nav-links .menu-quote { display: inline-flex; margin-top: 8px; }
+      .nav-toggle { display: grid; place-items: center; }
+      .section-head, .split, .req-grid, .platforms, .feat-grid, .phones, .arch, .phases,
+      .invest-top, .pay-grid, .addons, .why, .terms, .quote-bar, .toc, .flow, .pillars {
+        grid-template-columns: 1fr;
+      }
+      .toc a:nth-child(odd) { border-right: 0; }
+      .cover-top, .cover-foot { flex-direction: column; align-items: flex-start; }
+      .cover-logos { width: 100%; }
+      .cover-logos img { height: 20px; }
+      .cover-logos img.mm-word { height: 22px; max-width: min(220px, 58vw); }
+      .cover-stats { width: 100%; }
+      .cover-meta, .invest-total { text-align: left; }
+      .split img { min-height: 360px; }
+      h1 { font-size: 52px; }
+      .section { padding: 72px 0; }
+    }
+
+    @media print {
+      .nav, .nav-toggle { display: none !important; }
+      body { background: #000; }
+      .cover, .close { min-height: auto; }
+    }
+
+    .btn-reject { background: transparent; color: var(--muted, #6b7280); border-color: rgba(120,120,120,0.45); }
+    .btn-reject:hover { background: transparent; color: #c0392b; border-color: #c0392b; }
+    .close .btn-reject, .dark .btn-reject { color: rgba(255,255,255,0.78); border-color: rgba(255,255,255,0.35); }
+    .close .btn-reject:hover, .dark .btn-reject:hover { color: #ff8a7a; border-color: #ff8a7a; background: transparent; }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Proposal">
+    <a class="nav-brand" href="#cover">
+      <img class="emblem" src="/assets/main-marks/mainmarks-emblem.png" alt="Main Marks emblem" />
+      <span class="slash" aria-hidden="true">/</span>
+      <img class="word" src="/assets/main-marks/moray-wordmark.png" alt="Moray" />
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#brief">Brief</a>
+      <a href="#solution">Solution</a>
+      <a href="#scope">Scope</a>
+      <a href="#experience">Product</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#investment">Investment</a>
+      <a class="nav-cta menu-quote" href="#investment">View quotation</a>
+    </div>
+    <a class="nav-cta" href="#investment">View quotation</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" id="nav-toggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+
+  <header class="cover" id="cover">
+    <div class="cover-media" role="img" aria-label="Moray mixed-use architecture at dusk, copper and cyan light"></div>
+    <div class="cover-inner shell">
+      <div class="cover-top">
+        <div>
+          <div class="cover-kicker">Quotation &nbsp;·&nbsp; NIX-MM-MORAY-001</div>
+        </div>
+        <div class="cover-meta">
+          <span>Prepared for</span>
+          Main Marks
+          <span style="margin-top:12px">Date</span>
+          31 August 2026
+        </div>
+      </div>
+      <h1>
+        <span class="h1-line"><span>Moray</span></span>
+        <span class="h1-line"><span>Medical App.</span></span>
+      </h1>
+      <p class="cover-sub">A dedicated medical platform for residents of Moray — doctors, clinics, schedules, and appointments in one branded application, owned entirely by the project.</p>
+      <div class="cover-foot">
+        <div class="cover-logos">
+          <img class="mm-word" src="/assets/main-marks/mainmarks-wordmark.png?v=2" alt="Main Marks" />
+          <span class="slash">/</span>
+          <img src="/assets/main-marks/moray-wordmark.png" alt="Moray" />
+        </div>
+        <div class="cover-stats">
+          <div><span>Investment</span><strong data-count="50000" data-prefix="$">$50,000</strong></div>
+          <div><span>Delivery</span><strong>6–8 weeks</strong></div>
+          <div><span>Platforms</span><strong data-count="3">3</strong></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="quote-bar shell">
+    <div class="quote-cell"><span>Client</span><b>Main Marks</b></div>
+    <div class="quote-cell"><span>Project</span><b>Moray Medical App</b></div>
+    <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
+    <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
+  </div>
+
+  <section class="section" id="contents">
+    <div class="shell">
+      <div class="section-kicker">00 &nbsp;/&nbsp; Contents</div>
+      <h2>The document.</h2>
+      <div class="toc" style="margin-top:36px">
+        <a href="#brief"><span class="n">01</span><span class="t">Understanding the brief</span><span class="pg">—</span></a>
+        <a href="#solution"><span class="n">02</span><span class="t">Proposed solution</span><span class="pg">—</span></a>
+        <a href="#scope"><span class="n">03</span><span class="t">Scope of work</span><span class="pg">—</span></a>
+        <a href="#experience"><span class="n">04</span><span class="t">Product experience</span><span class="pg">—</span></a>
+        <a href="#architecture"><span class="n">05</span><span class="t">Architecture &amp; stack</span><span class="pg">—</span></a>
+        <a href="#timeline"><span class="n">06</span><span class="t">Delivery timeline</span><span class="pg">—</span></a>
+        <a href="#investment"><span class="n">07</span><span class="t">Investment</span><span class="pg">—</span></a>
+        <a href="#why"><span class="n">08</span><span class="t">Why NixAI / Terms</span><span class="pg">—</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="brief">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 &nbsp;/&nbsp; Understanding</div>
+          <h2>A medical amenity, not a clinic website.</h2>
+        </div>
+        <p class="lead">Moray is a mixed-use commercial state — art, people, nature, architecture. The medical app is how that community reaches care without leaving the project. We read the brief as a resident amenity: simple, branded, and built to grow with every new doctor, specialty, and clinic you add.</p>
+      </div>
+      <div class="split">
+        <div class="portrait-frame">
+          <img src="/assets/main-marks/moray-doctor-portrait.png" alt="Editorial portrait of a physician on black, copper rim light" />
+        </div>
+        <div>
+          <p>Main Marks asked for a dedicated application where residents find doctors and specialties, open a full profile, see working hours, book a visit, cancel or reschedule, and receive confirmation and reminders — with clinics, departments, and services in the same place.</p>
+          <p>The platform must include iOS and Android, a web admin to run doctors, specialties, schedules, and appointments, and it must be fully branded and owned by the Moray Project. Scalability is not a later phase. It is a requirement from day one.</p>
+          <div class="pillars">
+            <div class="pillar">
+              <h3>Bold</h3>
+              <p>A product that looks like Moray — black, copper, cyan — not a generic healthcare template.</p>
+            </div>
+            <div class="pillar">
+              <h3>Transparent</h3>
+              <p>Availability is real. A slot that is booked is gone. Admin and resident always see the same truth.</p>
+            </div>
+            <div class="pillar">
+              <h3>To the point</h3>
+              <p>Find a doctor. Book a time. Get a reminder. No extra friction for a resident who simply needs care.</p>
+            </div>
+            <div class="pillar">
+              <h3>Owned</h3>
+              <p>Source code, stores, and data belong to Moray. NixAI builds and hands over — we do not lock you in.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mapped">
+    <div class="shell">
+      <div class="section-kicker">01.1 &nbsp;/&nbsp; Requirements mapped</div>
+      <h2 class="white">Every line of the RFQ, answered.</h2>
+      <p class="lead" style="margin: 12px 0 36px">Nothing in this quotation is decorative. Each item below is a delivered capability in the first release.</p>
+      <div class="req-grid">
+        <article class="req"><div class="idx">01</div><div><h3>Doctors directory</h3><p>A complete, searchable list of doctors and specialties, ready to grow without a rebuild.</p></div></article>
+        <article class="req"><div class="idx">02</div><div><h3>Doctor profile</h3><p>Name, specialty, location, working hours, and contact — presented in Moray’s visual language.</p></div></article>
+        <article class="req"><div class="idx">03</div><div><h3>Search &amp; filter</h3><p>Find by name or specialty in under two taps. Filters remain as the catalog expands.</p></div></article>
+        <article class="req"><div class="idx">04</div><div><h3>Appointments</h3><p>Live availability. The resident picks a time; the backend reserves it against the doctor’s schedule.</p></div></article>
+        <article class="req"><div class="idx">05</div><div><h3>Appointment management</h3><p>Cancel or reschedule from the app. Rules for notice windows are configurable in admin.</p></div></article>
+        <article class="req"><div class="idx">06</div><div><h3>Notifications</h3><p>Confirmation at booking. Reminders before the visit. Status changes when a slot moves.</p></div></article>
+        <article class="req"><div class="idx">07</div><div><h3>Admin panel</h3><p>Web dashboard to manage doctors, specialties, clinics, schedules, and the appointment book.</p></div></article>
+        <article class="req"><div class="idx">08</div><div><h3>Platforms</h3><p>React Native for iOS and Android. Next.js for the admin. One Node.js + MongoDB backend.</p></div></article>
+        <article class="req"><div class="idx">09</div><div><h3>Branding &amp; ownership</h3><p>Moray CI throughout. Main Marks respected. You own the product, the code, and the stores.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="solution">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">02 &nbsp;/&nbsp; Solution</div>
+          <h2>Three surfaces. One platform.</h2>
+        </div>
+        <p class="lead">Residents live in the mobile app. Operations live in the dashboard. Everything meets in a Node.js API on MongoDB — the same source of truth for doctors, clinics, and time.</p>
+      </div>
+      <div class="platforms">
+        <article class="platform">
+          <div class="tag">01 &nbsp;/&nbsp; Resident</div>
+          <h3>Mobile application</h3>
+          <p>iOS and Android from a single React Native codebase. Directory, profiles, search, booking, cancel, reschedule, and a personal appointment list — designed as a Moray amenity, not a hospital portal.</p>
+          <div class="stack"><span class="chip">React Native</span><span class="chip">iOS</span><span class="chip">Android</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">02 &nbsp;/&nbsp; Operations</div>
+          <h3>Web admin</h3>
+          <p>A Next.js dashboard for the medical team and project operators. Create doctors and specialties, set weekly hours, open or block slots, and watch the day’s book without touching the app stores.</p>
+          <div class="stack"><span class="chip">Next.js</span><span class="chip">Web</span><span class="chip">Roles</span></div>
+        </article>
+        <article class="platform">
+          <div class="tag">03 &nbsp;/&nbsp; Platform</div>
+          <h3>API &amp; data</h3>
+          <p>Node.js services and MongoDB collections for users, doctors, clinics, schedules, appointments, and notification logs. Built so adding a clinic or specialty is a record — not a project.</p>
+          <div class="stack"><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip">Push</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="scope">
+    <div class="shell">
+      <div class="section-kicker">03 &nbsp;/&nbsp; Scope of work</div>
+      <h2>What ships in the first release.</h2>
+      <p class="lead" style="margin-bottom:40px">A production platform your residents can use and your operators can run. The items below are included in the fixed fee.</p>
+
+      <div class="feat-block">
+        <div class="feat-label">Resident mobile app</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+            <h3>Directory &amp; search</h3>
+            <p>Browse all doctors. Search by name. Filter by specialty. Empty states that still feel like Moray when a specialty has no listing yet.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 19c1.2-3.2 3.6-5 7-5s5.8 1.8 7 5"/></svg>
+            <h3>Doctor profiles</h3>
+            <p>Portrait, name, specialty, clinic location, working hours, contact, and a direct path to book the next available visit.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+            <h3>Booking</h3>
+            <p>See open times against the doctor’s schedule. Confirm in one step. The slot is held server-side so two residents cannot take the same minute.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <h3>Cancel &amp; reschedule</h3>
+            <p>From My Appointments. Configurable cut-off in admin. The original slot returns to the pool the moment it is released.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+            <h3>Confirmations &amp; reminders</h3>
+            <p>Push notification on booking, on change, and ahead of the visit. In-app history so the resident can always see what was sent.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16v12H4z"/><path d="M8 7V5h8v2"/></svg>
+            <h3>Clinics &amp; services</h3>
+            <p>Find clinics, departments, and the services offered. Each clinic can host multiple doctors without duplicating profiles.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Admin dashboard</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <h3>Doctors &amp; specialties</h3>
+            <p>Create, edit, archive. Assign specialty, clinic, contact, hours, and portrait. Nothing requires an app update.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            <h3>Schedules</h3>
+            <p>Weekly templates, exceptions, and blocked days. Generate bookable slots automatically from working hours.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+            <h3>Appointment book</h3>
+            <p>Day and week views. Status filters. Operator cancel or move with the resident notified in the same action.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Platform, brand &amp; launch</div>
+        <div class="feat-grid">
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+            <h3>Moray CI in product</h3>
+            <p>Longe black, copper, cyan. Manrope for interface. Serif for display. Slash and emblem used as supporting marks, never distorted.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/></svg>
+            <h3>Accounts &amp; roles</h3>
+            <p>Resident accounts on mobile. Admin and operator roles on the dashboard. Credentials and sessions owned by Moray.</p>
+          </article>
+          <article class="feat">
+            <svg viewBox="0 0 24 24"><path d="M7 17l5 4 5-4M7 7l5-4 5 4M5 12h14"/></svg>
+            <h3>Stores &amp; handover</h3>
+            <p>App Store and Play Console listing, screenshots, and submission. Source repositories, environments, and runbooks transferred.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="experience">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">04 &nbsp;/&nbsp; Product experience</div>
+          <h2>How Moray should feel in the hand.</h2>
+        </div>
+        <p class="lead">Directional frames in the project’s own language: black ground, copper type, cyan as a quiet second accent. Final UI is designed in discovery against the CI — these frames show the altitude, not a locked pixel grid.</p>
+      </div>
+      <div class="phones">
+        <figure class="phone">
+          <img src="/assets/main-marks/moray-app-doctors.png" alt="iPhone mockup of the Moray doctors directory" />
+          <figcaption>01 &nbsp;/&nbsp; Doctors directory</figcaption>
+        </figure>
+        <figure class="phone">
+          <img src="/assets/main-marks/moray-app-profile.png" alt="iPhone mockup of a doctor profile" />
+          <figcaption>02 &nbsp;/&nbsp; Doctor profile</figcaption>
+        </figure>
+        <figure class="phone">
+          <img src="/assets/main-marks/moray-app-booking.png" alt="iPhone mockup of appointment booking" />
+          <figcaption>03 &nbsp;/&nbsp; Book a visit</figcaption>
+        </figure>
+      </div>
+      <figure class="dash-shot">
+        <img src="/assets/main-marks/moray-admin-dashboard.png" alt="Moray admin dashboard on a dark canvas with copper and cyan charts" />
+      </figure>
+      <p style="margin-top:14px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint)">04 &nbsp;/&nbsp; Next.js admin — doctors, today’s book, weekly load</p>
+    </div>
+  </section>
+
+  <section class="section" id="architecture">
+    <div class="shell">
+      <div class="section-kicker">05 &nbsp;/&nbsp; Architecture</div>
+      <h2 class="white">The stack you asked for. Engineered to last.</h2>
+      <p class="lead" style="margin: 12px 0 36px">React Native, Node.js, MongoDB, Next.js — specified because they let one team ship iOS, Android, and admin against a single API, then add clinics without rewriting the product.</p>
+      <div class="arch">
+        <article class="arch-card">
+          <h3>Mobile — React Native</h3>
+          <ul>
+            <li>One codebase for iOS and Android, native store binaries</li>
+            <li>Navigation: home, directory, profile, booking, my visits, account</li>
+            <li>Push via APNs and FCM, permissioned and quiet when declined</li>
+            <li>Offline-tolerant profile cache; booking always confirmed online</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>API — Node.js + MongoDB</h3>
+          <ul>
+            <li>REST (or REST + selected RPC) for app and admin</li>
+            <li>Collections: users, doctors, specialties, clinics, schedules, appointments, notifications</li>
+            <li>Slot reservation with conflict checks — no double booking</li>
+            <li>Indexes designed for name and specialty search as the catalog grows</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Admin — Next.js</h3>
+          <ul>
+            <li>Server-rendered dashboard, role-aware routes</li>
+            <li>CRUD for doctors, specialties, clinics, hours, and appointments</li>
+            <li>Operational views: today, this week, no-show and cancellation rates</li>
+            <li>Audit of who changed a schedule or moved a visit</li>
+          </ul>
+        </article>
+        <article class="arch-card">
+          <h3>Brand, hosting &amp; ownership</h3>
+          <ul>
+            <li>Moray CI tokens in both apps — no generic medical teal</li>
+            <li>Staging and production environments under your accounts</li>
+            <li>Repositories, keys, and store listings in Main Marks / Moray control</li>
+            <li>30 days of hypercare after store approval</li>
+          </ul>
+        </article>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><b>01</b><span>Resident opens app</span></div>
+        <div class="flow-step"><b>02</b><span>Search / profile</span></div>
+        <div class="flow-step"><b>03</b><span>Slot reserved in API</span></div>
+        <div class="flow-step"><b>04</b><span>Push confirmation</span></div>
+        <div class="flow-step"><b>05</b><span>Admin sees the book</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="timeline">
+    <div class="shell">
+      <div class="section-kicker">06 &nbsp;/&nbsp; Timeline</div>
+      <h2>Six to eight weeks. Four movements.</h2>
+      <p class="lead" style="margin-bottom:36px">Mobile, API, and admin run in parallel from week one. A working MVP is in your hands by week five. UAT in week seven. Stores by week eight — six weeks if reviews come back the same day.</p>
+      <div class="phases">
+        <article class="phase">
+          <div class="wk">Week 1</div>
+          <h3>Discover</h3>
+          <ul>
+            <li>Stakeholder workshop with Main Marks / Moray medical ops</li>
+            <li>Information architecture and user journeys</li>
+            <li>CI applied to screens and dashboard</li>
+            <li>API contracts and MongoDB schema</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 1 — 5</div>
+          <h3>Build MVP</h3>
+          <ul>
+            <li>Node.js API: auth, doctors, clinics, slots</li>
+            <li>React Native directory, profile, booking</li>
+            <li>Cancel and reschedule flows</li>
+            <li>Internal TestFlight / Play testing — first MVP</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 3 — 6</div>
+          <h3>Operate</h3>
+          <ul>
+            <li>Next.js admin: doctors, specialties, hours</li>
+            <li>Appointment book and operator actions</li>
+            <li>Notification service and templates</li>
+            <li>Store listings, screenshots, privacy copy</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="wk">Weeks 6 — 8</div>
+          <h3>Launch</h3>
+          <ul>
+            <li>End-to-end QA on iOS, Android, and admin</li>
+            <li>UAT with Moray operators</li>
+            <li>App Store and Play submission</li>
+            <li>Production cutover and 30-day hypercare</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="investment">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">07 &nbsp;/&nbsp; Investment</div>
+          <h2>One fixed fee. The whole platform.</h2>
+        </div>
+        <p class="lead">A single project price covering discovery, Moray-branded UI, React Native iOS and Android, the Node.js and MongoDB backend, the Next.js admin, notifications, QA, store submission, and handover. No platform licence. No surprise line items for the scope above.</p>
+      </div>
+      <div class="invest">
+        <div class="invest-top">
+          <div>
+            <div class="invest-label">Fixed project fee</div>
+            <h3 style="font-family:var(--serif);font-style:italic;font-size:32px;margin:8px 0 10px">Moray Medical App — end to end</h3>
+            <p>Resident mobile app, operator dashboard, and the API that keeps them honest. Fully branded. Fully owned by the Moray Project.</p>
+          </div>
+          <div class="invest-total">
+            <span>Total investment</span>
+            <strong data-count="50000" data-prefix="$">$50,000</strong>
+          </div>
+        </div>
+        <div class="quote-row">
+          <div>
+            <h4>Discovery, UX &amp; Moray brand application</h4>
+            <p>Workshops, journeys, information architecture, and high-fidelity UI for mobile and admin against the Moray and Main Marks CI.</p>
+          </div>
+          <div class="quote-price">$5,500</div>
+        </div>
+        <div class="quote-row">
+          <div>
+            <h4>React Native — iOS &amp; Android</h4>
+            <p>Directory, profiles, search and filter, booking, cancel and reschedule, my appointments, account, and store-ready binaries.</p>
+          </div>
+          <div class="quote-price">$16,000</div>
+        </div>
+        <div class="quote-row">
+          <div>
+            <h4>Node.js + MongoDB backend</h4>
+            <p>Auth, doctors, specialties, clinics, schedule engine, conflict-safe appointments, notification dispatch, and admin APIs.</p>
+          </div>
+          <div class="quote-price">$14,000</div>
+        </div>
+        <div class="quote-row">
+          <div>
+            <h4>Next.js web admin</h4>
+            <p>Operators manage doctors, specialties, clinics, working hours, and the live appointment book, with roles and an activity log.</p>
+          </div>
+          <div class="quote-price">$10,000</div>
+        </div>
+        <div class="quote-row">
+          <div>
+            <h4>Notifications, QA, stores &amp; handover</h4>
+            <p>Confirmations and reminders, device QA, App Store and Play submission, repositories, environments, and 30 days of hypercare.</p>
+          </div>
+          <div class="quote-price">$4,500</div>
+        </div>
+        <div class="quote-row total">
+          <div>
+            <h4>Total</h4>
+            <p>Valid 30 days from 31 August 2026. Amounts in USD.</p>
+          </div>
+          <div class="quote-price">$50,000</div>
+        </div>
+      </div>
+
+      <div class="pay-grid">
+        <div class="pay"><span>To commence — 40%</span><b>$20,000</b></div>
+        <div class="pay"><span>After 1st MVP — 30%</span><b>$15,000</b></div>
+        <div class="pay"><span>After UAT — 20%</span><b>$10,000</b></div>
+        <div class="pay"><span>At store launch — 10%</span><b>$5,000</b></div>
+      </div>
+
+      <p style="margin:28px 0 12px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--copper)">Optional additions — not in the base fee</p>
+      <div class="addons">
+        <div class="addon">
+          <div>
+            <h4>Arabic + English, full RTL</h4>
+            <p>Resident app and admin in both languages, with Moray’s Noto Kufi pairing respected.</p>
+          </div>
+          <em>$4,800</em>
+        </div>
+        <div class="addon">
+          <div>
+            <h4>Video consultation</h4>
+            <p>In-app visit for selected specialties. Scheduled like any other appointment.</p>
+          </div>
+          <em>$8,500</em>
+        </div>
+        <div class="addon">
+          <div>
+            <h4>Care &amp; evolution</h4>
+            <p>Hosting ops, store updates, monitoring, and a monthly improvement budget.</p>
+          </div>
+          <em>$1,800 / mo</em>
+        </div>
+        <div class="addon">
+          <div>
+            <h4>Health records lite</h4>
+            <p>Visit notes and attachments on the resident profile, visible to assigned clinicians.</p>
+          </div>
+          <em>$6,500</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="why">
+    <div class="shell">
+      <div class="section-kicker">08 &nbsp;/&nbsp; Partnership</div>
+      <h2>Why this should be NixAI.</h2>
+      <p class="lead" style="margin-bottom:36px">You are not buying screens. You are buying a platform that has to look like Moray on day one and still look like Moray when the tenth clinic opens.</p>
+      <div class="why">
+        <article>
+          <h3>Brand, not a kit</h3>
+          <p>We design from the CI you issued — Longe black, copper foil, cyan, Manrope, the slash, the emblem as seal. The product will not arrive in a generic health-app skin.</p>
+        </article>
+        <article>
+          <h3>One team, three surfaces</h3>
+          <p>Mobile, API, and admin are built together. That is how a booked slot in the phone is the same slot the operator sees, the same afternoon.</p>
+        </article>
+        <article>
+          <h3>You own it</h3>
+          <p>Code, stores, data, and credentials transfer to Moray. If you later expand specialties or add a second development, you are not starting from a rented system.</p>
+        </article>
+      </div>
+
+      <div class="section-kicker" style="margin-top:56px">08.1 &nbsp;/&nbsp; Terms</div>
+      <h2 class="white" style="font-size:42px">Clear conditions.</h2>
+      <div class="terms" style="margin-top:28px">
+        <article class="term">
+          <h3>Payment</h3>
+          <p>40% to commence, 30% after delivery of the first MVP, 20% after UAT sign-off, 10% at store launch.</p>
+        </article>
+        <article class="term">
+          <h3>Validity</h3>
+          <p>This quotation is valid for 30 days from 31 August 2026. After that date we reconfirm timeline and fee against current capacity.</p>
+        </article>
+        <article class="term">
+          <h3>Included</h3>
+          <p>The scope in sections 03–05, staging and production, store submission support, documentation, and 30 days of hypercare after approval.</p>
+        </article>
+        <article class="term">
+          <h3>Client provides</h3>
+          <p>Brand assets already shared, doctor and clinic data for launch, Apple and Google developer accounts (or we open them in your name), and timely UAT feedback.</p>
+        </article>
+        <article class="term">
+          <h3>Not included</h3>
+          <p>Apple / Google developer fees, SMS or WhatsApp gateway costs, medical device certification, and hardware. Optional lines in section 07 are quoted separately.</p>
+        </article>
+        <article class="term">
+          <h3>Revisions</h3>
+          <p>Each phase includes two structured review rounds. Further design or scope change is estimated before work continues.</p>
+        </article>
+        <article class="term">
+          <h3>Intellectual property</h3>
+          <p>Upon final payment, all custom code and design for Moray Medical App assign to the Moray Project / Main Marks. Third-party open-source remains under its own licences.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" id="next">
+    <div class="close-media" role="img" aria-label="Moray clinic interior, copper and cyan architectural light"></div>
+    <div class="close-inner shell">
+      <div class="section-kicker">Next</div>
+      <h2 style="max-width:900px">We can be in discovery the week the first transfer clears.</h2>
+      <p class="lead">Reply with approval of this quotation, or with the optional lines you want in the first release. We will send a one-page statement of work, kickoff date, and access list for accounts and data.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:ayousef@nixailabs.com?subject=Moray%20Medical%20%E2%80%94%20NIX-MM-MORAY-001%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20NIX-MM-MORAY-001%20prepared%20for%20Moray%20Medical.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept quotation</a>
+        <a class="btn btn-ghost btn-reject" href="mailto:ayousef@nixailabs.com?subject=Moray%20Medical%20%E2%80%94%20NIX-MM-MORAY-001%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20NIX-MM-MORAY-001%20prepared%20for%20Moray%20Medical.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject quotation</a>
+        <a class="btn btn-ghost" href="mailto:ayousef@nixailabs.com?subject=Moray%20Medical%20%E2%80%94%20NIX-MM-MORAY-001%20%E2%80%94%20a%20question">Ask a question</a>
+      </div>
+      <footer>
+        <img class="nix" src="/assets/nixai-logo-white.png" alt="NixAI" />
+        <div class="footer-mark">
+          <img src="/assets/main-marks/mainmarks-wordmark.png?v=2" alt="Main Marks" />
+          <small>Bespoke experiences</small>
+        </div>
+        <div style="font-size:12px;color:var(--faint);text-align:right">
+          ayousef@nixailabs.com<br />nixailabs.com
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <script src="/assets/gsap/gsap.min.js"></script>
+  <script src="/assets/gsap/ScrollTrigger.min.js"></script>
+  <script src="/assets/gsap/ScrollToPlugin.min.js"></script>
+  <script>
+    const toggle = document.getElementById("nav-toggle");
+    const links = document.getElementById("nav-links");
+    toggle?.addEventListener("click", () => links.classList.toggle("open"));
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      links?.classList.remove("open");
+      if (reduce || typeof gsap === "undefined") {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+      } else {
+        gsap.to(window, { duration: 1.15, scrollTo: { y: el, offsetY: 80 }, ease: "power3.inOut" });
+      }
+      history.replaceState(null, "", "#" + id);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href").slice(1);
+        if (!id) return;
+        e.preventDefault();
+        scrollToId(id);
+      });
+    });
+
+    if (reduce || typeof gsap === "undefined") {
+      /* static page */
+    } else {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      gsap.to("#scroll-progress", {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: { scrub: 0.25 }
+      });
+
+      gsap.set(".nav", { y: -24, opacity: 0 });
+      gsap.set(".cover-media", { scale: 1.18, transformOrigin: "50% 40%" });
+      gsap.set(".cover-kicker, .cover-meta, .cover-sub, .cover-foot", { opacity: 0, y: 22 });
+      gsap.set("h1 .h1-line span", { yPercent: 110 });
+
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      intro
+        .to(".cover-media", { scale: 1, duration: 2.4, ease: "power2.out" }, 0)
+        .to(".nav", { y: 0, opacity: 1, duration: 0.8 }, 0.15)
+        .to(".cover-kicker", { opacity: 1, y: 0, duration: 0.7 }, 0.35)
+        .to(".cover-meta", { opacity: 1, y: 0, duration: 0.7 }, 0.45)
+        .to("h1 .h1-line span", { yPercent: 0, duration: 1.05, stagger: 0.12 }, 0.4)
+        .to(".cover-sub", { opacity: 1, y: 0, duration: 0.8 }, 0.85)
+        .to(".cover-foot", { opacity: 1, y: 0, duration: 0.8 }, 1.0);
+
+      document.querySelectorAll("[data-count]").forEach((el) => {
+        const end = Number(el.dataset.count);
+        const prefix = el.dataset.prefix || "";
+        const obj = { v: 0 };
+        const run = () => gsap.to(obj, {
+          v: end,
+          duration: 1.6,
+          ease: "power2.out",
+          onUpdate: () => {
+            el.textContent = prefix + Math.round(obj.v).toLocaleString("en-US");
+          },
+          onComplete: () => {
+            el.textContent = prefix + end.toLocaleString("en-US");
+          }
+        });
+        if (el.closest(".cover")) intro.add(run, 1.15);
+        else {
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 85%",
+            once: true,
+            onEnter: run
+          });
+        }
+      });
+
+      gsap.to(".cover-media", {
+        yPercent: 18,
+        ease: "none",
+        scrollTrigger: { trigger: ".cover", start: "top top", end: "bottom top", scrub: true }
+      });
+      gsap.to(".close-media", {
+        yPercent: 14,
+        ease: "none",
+        scrollTrigger: { trigger: "#next", start: "top bottom", end: "bottom top", scrub: true }
+      });
+
+      gsap.utils.toArray(".section-head, .quote-bar, .toc, .split, .dash-shot, .invest, .cta-row, .close-inner").forEach((el) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 48,
+          duration: 0.95,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 82%", once: true }
+        });
+      });
+
+      gsap.utils.toArray(".req, .platform, .feat, .phone, .arch-card, .flow-step, .phase, .quote-row, .pay, .addon, .why article, .term, .pillar").forEach((el, i) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 28,
+          duration: 0.7,
+          delay: (i % 6) * 0.04,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 88%", once: true }
+        });
+      });
+
+      gsap.utils.toArray(".section-kicker, h2").forEach((el) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 16,
+          duration: 0.65,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 86%", once: true }
+        });
+      });
+
+      let last = 0;
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          const y = self.scroll();
+          if (y > 80) {
+            gsap.to(".nav", { y: y > last + 6 ? -88 : 0, duration: 0.35, overwrite: true });
+          } else {
+            gsap.to(".nav", { y: 0, duration: 0.35, overwrite: true });
+          }
+          last = y;
+        }
+      });
+
+      if (finePointer) {
+        document.body.classList.add("has-cursor");
+        const ring = document.getElementById("cursor");
+        const dot = document.getElementById("cursor-dot");
+        const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        const move = (e) => {
+          pos.x = e.clientX;
+          pos.y = e.clientY;
+          gsap.to(dot, { x: pos.x, y: pos.y, duration: 0.12, ease: "power3.out" });
+          gsap.to(ring, { x: pos.x, y: pos.y, duration: 0.45, ease: "power3.out" });
+        };
+        window.addEventListener("mousemove", move, { passive: true });
+        document.querySelectorAll("a, button").forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            ring.classList.add("is-link");
+            gsap.to(ring, { scale: 1.65, duration: 0.28, ease: "power3.out", overwrite: "auto" });
+          });
+          el.addEventListener("mouseleave", () => {
+            ring.classList.remove("is-link");
+            gsap.to(ring, { scale: 1, duration: 0.28, ease: "power3.out", overwrite: "auto" });
+          });
+        });
+        window.addEventListener("mousedown", () => gsap.to(ring, { scale: 0.75, duration: 0.15, overwrite: "auto" }));
+        window.addEventListener("mouseup", () => gsap.to(ring, { scale: ring.classList.contains("is-link") ? 1.65 : 1, duration: 0.2, overwrite: "auto" }));
+
+        document.querySelectorAll(".btn, .nav-cta").forEach((btn) => {
+          btn.addEventListener("mousemove", (e) => {
+            const r = btn.getBoundingClientRect();
+            gsap.to(btn, {
+              x: (e.clientX - r.left - r.width / 2) * 0.28,
+              y: (e.clientY - r.top - r.height / 2) * 0.28,
+              duration: 0.35,
+              ease: "power3.out"
+            });
+          });
+          btn.addEventListener("mouseleave", () => {
+            gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "power3.out" });
+          });
+        });
+
+        const phones = document.querySelector(".phones");
+        phones?.addEventListener("mousemove", (e) => {
+          const r = phones.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          phones.querySelectorAll(".phone").forEach((card, i) => {
+            const dir = i - 1;
+            gsap.to(card, {
+              rotateY: x * 8 + dir * 4,
+              rotateX: -y * 6,
+              y: y * -10,
+              duration: 0.5,
+              ease: "power2.out",
+              transformPerspective: 900
+            });
+          });
+        });
+        phones?.addEventListener("mouseleave", () => {
+          phones.querySelectorAll(".phone").forEach((card) => {
+            gsap.to(card, { rotateY: 0, rotateX: 0, y: 0, duration: 0.7, ease: "power3.out" });
+          });
+        });
+      }
+    }
+  </script>
+</body>
+</html>

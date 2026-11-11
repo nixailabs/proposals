@@ -546,6 +546,11 @@
       .nav, .nav-toggle, .bill-dock, .cursor, .cursor-dot { display: none !important; }
       .bill { position: static; }
     }
+
+    .btn-reject { background: transparent; color: var(--muted, #6b7280); border-color: rgba(120,120,120,0.45); }
+    .btn-reject:hover { background: transparent; color: #c0392b; border-color: #c0392b; }
+    .close .btn-reject, .dark .btn-reject { color: rgba(255,255,255,0.78); border-color: rgba(255,255,255,0.35); }
+    .close .btn-reject:hover, .dark .btn-reject:hover { color: #ff8a7a; border-color: #ff8a7a; background: transparent; }
   </style>
 </head>
 <body>
@@ -1255,9 +1260,10 @@
       <h2 style="max-width:900px">We can be in discovery in Baghdad the week the first transfer clears.</h2>
       <p class="lead">Reply with the depth you chose on each line — or just the total the configurator settled on and we will reconstruct it. We will send a statement of work, a kickoff date, and the access list for brand assets, unit data and accounts.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" id="cta-approve" href="mailto:hello@nixailabs.com?subject=Al%20Ghadeer%20proposal%20NIX-GHADEER-001">Approve the programme</a>
+        <a class="btn btn-primary" id="cta-approve" href="mailto:ayousef@nixailabs.com?subject=Al%20Ghadeer%20%E2%80%94%20NIX-GHADEER-001%20%E2%80%94%20Accepted&body=We%20accept%20the%20proposal%20NIX-GHADEER-001%20prepared%20for%20Al%20Ghadeer.%0A%0APlease%20send%20the%20statement%20of%20work%2C%20the%20invoice%20for%20the%20first%20payment%20and%20a%20kickoff%20date.%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Accept the programme</a>
+        <a class="btn btn-ghost btn-reject" href="mailto:ayousef@nixailabs.com?subject=Al%20Ghadeer%20%E2%80%94%20NIX-GHADEER-001%20%E2%80%94%20Declined&body=We%20have%20decided%20not%20to%20proceed%20with%20the%20proposal%20NIX-GHADEER-001%20prepared%20for%20Al%20Ghadeer.%0A%0AReason%20%28optional%29%3A%0A%0AName%3A%0ATitle%3A%0ACompany%3A%0A">Reject the programme</a>
         <button class="btn btn-ghost" type="button" data-pdf><span>Download the quotation</span></button>
-        <a class="btn btn-ghost" href="mailto:hello@nixailabs.com?subject=Al%20Ghadeer%20%E2%80%94%20a%20question">Ask a question</a>
+        <a class="btn btn-ghost" href="mailto:ayousef@nixailabs.com?subject=Al%20Ghadeer%20%E2%80%94%20NIX-GHADEER-001%20%E2%80%94%20a%20question">Ask a question</a>
       </div>
       <footer>
         <img class="nix" src="/assets/nixai-logo-white.webp" alt="NixAI" />
@@ -1266,7 +1272,7 @@
           <small>One digital estate</small>
         </div>
         <div style="font-size:12px;color:rgba(236,236,236,0.6);text-align:right">
-          hello@nixailabs.com<br />nixailabs.com
+          ayousef@nixailabs.com<br />nixailabs.com
         </div>
       </footer>
     </div>
@@ -2251,7 +2257,7 @@
       doc.text("Signing below accepts this quotation at the configuration and total shown above.", ML, y);
       y += 7;
       const bw = (CW - 8) / 2;
-      [["For " + DOC_CLIENT, ""], ["For NixAI", "hello@nixailabs.com · nixailabs.com"]].forEach((b, i) => {
+      [["For " + DOC_CLIENT, ""], ["For NixAI", "ayousef@nixailabs.com · nixailabs.com"]].forEach((b, i) => {
         const x = ML + i * (bw + 8);
         box(x, y, bw, 33, LINE, 0.15);
         kick(b[0], x + 4, y + 6.5, FAINT, 6.2);
@@ -2355,11 +2361,11 @@
     function updateDocLinks(t, band, weeks) {
       const a = document.getElementById("cta-approve");
       if (!a) return;
-      const body = "We approve the configured programme.\n\n" + band.name + "\nTotal: " + money(t) +
+      const body = "We accept the configured programme.\n\n" + band.name + "\nTotal: " + money(t) +
         "\nDelivery: " + weeks.label + "\n\nConfiguration: " + shareUrl() +
         "\n\nPlease send the statement of work and a kickoff date.";
-      a.href = "mailto:hello@nixailabs.com?subject=" +
-        encodeURIComponent("Al Ghadeer — " + DOC_REF + " — " + money(t) + " approved") +
+      a.href = "mailto:ayousef@nixailabs.com?subject=" +
+        encodeURIComponent("Al Ghadeer — " + DOC_REF + " — " + money(t) + " — Accepted") +
         "&body=" + encodeURIComponent(body);
     }
     document.addEventListener("click", (e) => {
