@@ -199,7 +199,8 @@
     .callout li b { color: var(--white); }
 
     /* Platforms ---------------------------------------------------------- */
-    .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .platforms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .platform.ns { border-color: var(--line-strong); background: linear-gradient(180deg, rgba(31,161,219,0.08), var(--white)); }
     .platform { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 28px 24px 24px; min-height: 340px; display: flex; flex-direction: column; }
     .platform .tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-deep); margin-bottom: 18px; font-weight: 700; }
     .platform h3 { font-size: 30px; font-weight: 800; color: var(--navy); margin-bottom: 12px; line-height: 1.05; letter-spacing: -0.02em; }
@@ -334,10 +335,31 @@
     .arch-card ul { list-style: none; color: var(--muted); font-size: 14px; }
     .arch-card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
     .arch-card li:last-child { border-bottom: 0; }
-    .flow { margin-top: 18px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .flow { margin-top: 18px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
     .flow-step { border: 1px solid var(--line); border-radius: 14px; padding: 16px 12px; text-align: center; background: var(--white); }
     .flow-step b { display: block; color: var(--blue); font-size: 20px; font-weight: 800; margin-bottom: 6px; }
     .flow-step span { font-size: 12px; color: var(--muted); }
+
+    /* NetSuite ----------------------------------------------------------- */
+    .ns-head { margin-top: 64px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 48px; align-items: end; margin-bottom: 28px; }
+    .ns-head h3 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.05; }
+    .ns-head h3 em { font-style: normal; color: var(--blue); }
+    .ns-grid { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 16px; }
+    .ns-card { border: 1px solid var(--line); border-radius: 16px; background: var(--white); overflow: hidden; }
+    .ns-card.bridge { border-color: var(--line-strong); background: linear-gradient(180deg, rgba(31,161,219,0.08), var(--white)); padding: 24px; }
+    .ns-card.bridge h4 { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px; letter-spacing: -0.02em; }
+    .ns-card.bridge ul { list-style: none; color: var(--muted); font-size: 13.5px; }
+    .ns-card.bridge li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .ns-card.bridge li:last-child { border-bottom: 0; }
+    .ns-card.bridge li b { color: var(--navy); }
+    .ns-row { display: grid; grid-template-columns: 1fr 120px 1fr; gap: 0; border-bottom: 1px solid var(--line); align-items: center; }
+    .ns-row:last-child { border-bottom: 0; }
+    .ns-row.head > div { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-deep); font-weight: 700; padding: 12px 18px; background: var(--tint); }
+    .ns-row > div { padding: 14px 18px; font-size: 13.5px; color: var(--muted); }
+    .ns-row b { display: block; color: var(--navy); font-weight: 700; margin-bottom: 2px; }
+    .ns-row .dir { text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: var(--blue); }
+    .ns-row .dir small { display: block; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); font-weight: 700; margin-top: 2px; }
+    .ns-row code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--blue-deep); background: var(--tint); padding: 1px 6px; border-radius: 5px; }
 
     /* Timeline ----------------------------------------------------------- */
     .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
@@ -430,7 +452,10 @@
       .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
       .nav-links .menu-quote { display: inline-flex; margin-top: 8px; }
       .nav-toggle { display: grid; place-items: center; }
-      .section-head, .split, .platforms, .feat-grid, .arch, .phases, .invest-top, .pay-grid, .addons, .why, .terms, .quote-bar, .toc, .pillars, .mock-row, .type-row, .verdict { grid-template-columns: 1fr; }
+      .section-head, .split, .platforms, .feat-grid, .arch, .phases, .invest-top, .pay-grid, .addons, .why, .terms, .quote-bar, .toc, .pillars, .mock-row, .type-row, .verdict, .ns-head, .ns-grid { grid-template-columns: 1fr; }
+      .ns-row { grid-template-columns: 1fr; }
+      .ns-row.head { display: none; }
+      .ns-row .dir { text-align: left; }
       .flow { grid-template-columns: 1fr 1fr; }
       .facts { grid-template-columns: 1fr 1fr; }
       .swatches { grid-template-columns: repeat(3, 1fr); }
@@ -495,20 +520,20 @@
     <div class="cover-inner shell">
       <div class="cover-top">
         <div>
-          <div class="cover-kicker">Proposal &nbsp;·&nbsp; NIX-RHI-APP-001</div>
+          <div class="cover-kicker">Proposal &nbsp;·&nbsp; NIX-RHI-APP-001 &nbsp;·&nbsp; Rev. 2</div>
         </div>
         <div class="cover-meta">
           <span>Prepared for</span>
           Rawafed Health International Co.
           <span style="margin-top:12px">Date</span>
-          11 November 2026
+          22 November 2026 &nbsp;·&nbsp; Rev. 2
         </div>
       </div>
       <h1>
         <span class="h1-line"><span>Your store,</span></span>
         <span class="h1-line"><span>in their <em>pocket.</em></span></span>
       </h1>
-      <p class="cover-sub">A React Native shopping app for iOS and Android, built on the WooCommerce store you already run at rawafedhealth.com — Arabic and English, tabby, tamara and mada, orders that track themselves. Plus a straight answer on what WooCommerce can and cannot give a mobile app, and how we close that gap.</p>
+      <p class="cover-sub">A React Native shopping app for iOS and Android, built on the WooCommerce store you already run at rawafedhealth.com — Arabic and English, tabby, tamara and mada, orders that track themselves, and every paid order posted into Oracle NetSuite. Plus a straight answer on what WooCommerce can and cannot give a mobile app, and how we close that gap.</p>
       <div class="cover-foot">
         <div class="cover-logos">
           <img src="/assets/rawafed/logo.png" alt="Rawafed Health International Co. — شركة روافد الصحة العالمية" />
@@ -516,7 +541,7 @@
           <img class="nix-dark" src="/assets/rawafed/nixai-wordmark-navy.png" alt="NixAI" />
         </div>
         <div class="cover-stats">
-          <div><span>Investment</span><strong data-count="26000" data-prefix="$">$26,000</strong></div>
+          <div><span>Investment</span><strong data-count="33000" data-prefix="$">$33,000</strong></div>
           <div><span>Delivery</span><strong>14–16 weeks</strong></div>
           <div><span>Platforms</span><strong>iOS + Android</strong></div>
         </div>
@@ -526,7 +551,7 @@
 
   <div class="quote-bar shell" style="margin-top:-1px">
     <div class="quote-cell"><span>Client</span><b>Rawafed Health International Co. (RHI)</b></div>
-    <div class="quote-cell"><span>Project</span><b>React Native mobile app on existing WooCommerce</b></div>
+    <div class="quote-cell"><span>Project</span><b>React Native app on existing WooCommerce + Oracle NetSuite finance integration</b></div>
     <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
     <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
   </div>
@@ -684,9 +709,9 @@
       <div class="section-head">
         <div>
           <div class="section-kicker">03 &nbsp;/&nbsp; Proposed solution</div>
-          <h2>One app. One bridge. <em>Zero duplication.</em></h2>
+          <h2>One app. One bridge. One ledger. <em>Zero duplication.</em></h2>
         </div>
-        <p class="lead">Three deliverables, designed together so the app behaves like a first-class channel of the store rather than an add-on: the React Native app itself, the companion plugin that gives it a safe, customer-scoped API, and a mobile design system drawn from your brand guidelines.</p>
+        <p class="lead">Four deliverables, designed together so the app behaves like a first-class channel of the store rather than an add-on: the React Native app itself, the companion plugin that gives it a safe, customer-scoped API, a mobile design system drawn from your brand guidelines, and — added in this revision at your request — a financial integration that posts every order, payment and refund from WooCommerce into Oracle NetSuite.</p>
       </div>
       <div class="platforms">
         <article class="platform">
@@ -706,6 +731,12 @@
           <h3>The <em>system</em></h3>
           <p>A mobile design system built from the RHI Brand Guidelines: navy #16386B type on white, primary blue #1FA1DB for emphasis and action, the 55 / 15 / 15 / 10 / 5 colour proportion, two-tone headlines, prices set as bold numerals with the currency beneath, Myriad-class Latin with Graphik-class Arabic. Delivered as Figma components and a tokenised React Native theme.</p>
           <div class="stack"><span class="chip">Figma</span><span class="chip">Design tokens</span><span class="chip">WCAG AA</span><span class="chip">EN / AR</span></div>
+        </article>
+        <article class="platform ns">
+          <div class="tag">Deliverable D · New in Rev. 2</div>
+          <h3>The <em>ledger</em></h3>
+          <p>A WooCommerce ↔ Oracle NetSuite sync over SuiteTalk REST: customers, paid orders as sales orders and invoices with 15% KSA VAT, MyFatoorah / tabby / tamara settlements as customer payments against the right clearing accounts, refunds as credit memos, fulfilment and tracking back to the order and the app, and item availability by location. Idempotent queue, retries, a reconciliation log your finance team can read.</p>
+          <div class="stack"><span class="chip">SuiteTalk REST</span><span class="chip">SuiteQL</span><span class="chip">OAuth 2.0</span><span class="chip">Action Scheduler</span><span class="chip">Sandbox first</span></div>
         </article>
       </div>
     </div>
@@ -754,6 +785,15 @@
           <div class="feat bridge"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><h3>Profile, security &amp; deletion <span class="pill">Bridge</span></h3><p>Addresses, phone, language, notification preferences, password reset by OTP, and in-app account deletion as Apple's App Store requires.</p></div>
           <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M8 14l3-3 2 2 4-4"/></svg><h3>Analytics</h3><p>Firebase Analytics and Crashlytics, Meta and TikTok app events for your paid campaigns, and a weekly dashboard of installs, sessions and conversion.</p></div>
           <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg><h3>Store listings &amp; release</h3><p>App Store and Google Play listings in Arabic and English, screenshots, privacy labels, review handling, and a release pipeline that lets us ship updates over the air.</p></div>
+        </div>
+      </div>
+
+      <div class="feat-block">
+        <div class="feat-label">Finance — Oracle NetSuite (new in Rev. 2)</div>
+        <div class="feat-grid">
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 10h16M8 14h4"/></svg><h3>Orders, invoices &amp; VAT <span class="pill">NetSuite</span></h3><p>Every paid WooCommerce order — from the app or the website — becomes a NetSuite customer, sales order and invoice with line items by SKU, 15% KSA VAT, shipping, coupons and the payment method, within minutes of payment confirmation.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 15h4M2 10h20"/></svg><h3>Payments, refunds &amp; settlement <span class="pill">NetSuite</span></h3><p>MyFatoorah, tabby and tamara receipts posted as customer payments against gateway clearing accounts so settlement reconciles; WooCommerce refunds and returns posted as credit memos and customer refunds.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5z"/><circle cx="7" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg><h3>Fulfilment &amp; stock, both ways <span class="pill">NetSuite</span></h3><p>Item fulfilments in NetSuite mark the WooCommerce order shipped with tracking and trigger the app's push; item availability by location (Riyadh, Al Khobar, Jeddah) flows back to WooCommerce stock on a schedule you control.</p></div>
         </div>
       </div>
     </div>
@@ -919,6 +959,36 @@
         <div class="flow-step"><b>4</b><span>Checkout POST creates the order</span></div>
         <div class="flow-step"><b>5</b><span>Gateway sheet; webhook confirms payment</span></div>
         <div class="flow-step"><b>6</b><span>Status hooks push updates to the phone</span></div>
+        <div class="flow-step"><b>7</b><span>Paid order posts to NetSuite; fulfilment flows back</span></div>
+      </div>
+
+      <div class="ns-head" id="netsuite">
+        <div>
+          <div class="section-kicker">06.1 &nbsp;/&nbsp; Finance integration — new in Rev. 2</div>
+          <h3>WooCommerce sells. <em>NetSuite keeps the books.</em></h3>
+        </div>
+        <p class="lead" style="font-size:16px">Your site has no NetSuite connector today. We build the sync into the Bridge, on your WordPress, using NetSuite's SuiteTalk REST web services and SuiteQL with an OAuth 2.0 machine-to-machine integration record — no shared passwords, no middleware subscription. Every message carries an idempotency key, failures queue and retry, and a reconciliation log in WordPress shows your finance team exactly what posted, when, and what did not.</p>
+      </div>
+      <div class="ns-grid">
+        <div class="ns-card">
+          <div class="ns-row head"><div>WooCommerce</div><div>Direction</div><div>Oracle NetSuite</div></div>
+          <div class="ns-row"><div><b>Customer</b>Name, phone, email, billing and shipping addresses, VAT number for institutional buyers.</div><div class="dir">→<small>on first paid order</small></div><div><b>Customer record</b>Matched by phone / email / VAT no. to avoid duplicates; updated on address change.</div></div>
+          <div class="ns-row"><div><b>Paid order</b>Lines by SKU, quantities, unit prices, coupons, shipping, 15% VAT, payment method, order notes.</div><div class="dir">→<small>minutes after payment</small></div><div><b>Sales order → Invoice</b>Items by SKU, KSA tax code, location, shipping item, discount line; memo carries the WooCommerce order number.</div></div>
+          <div class="ns-row"><div><b>Payment confirmation</b>MyFatoorah, tabby or tamara webhook, gateway reference, fees where exposed.</div><div class="dir">→<small>with the invoice</small></div><div><b>Customer payment</b>Applied to the invoice against the gateway's clearing / undeposited-funds account so settlement reconciles.</div></div>
+          <div class="ns-row"><div><b>Refund or return</b>Full or partial refund from WooCommerce, return reason.</div><div class="dir">→<small>on refund</small></div><div><b>Credit memo + Customer refund</b>Against the original invoice; restocks per your policy.</div></div>
+          <div class="ns-row"><div><b>Order shipped</b>Status "completed", tracking number, courier — then push to the app.</div><div class="dir">←<small>on fulfilment</small></div><div><b>Item fulfilment</b>Posted by your warehouse team in NetSuite with tracking.</div></div>
+          <div class="ns-row"><div><b>Stock &amp; prices</b>Quantity available per SKU; optionally list price.</div><div class="dir">←<small>scheduled / optional</small></div><div><b>Item master</b>Availability by location (Riyadh, Al Khobar, Jeddah); SKU is the shared key.</div></div>
+        </div>
+        <div class="ns-card bridge">
+          <h4>What we need agreed before week five</h4>
+          <ul>
+            <li><b>A NetSuite sandbox</b> and an integration record with a least-privilege role (customers, transactions, items, SuiteQL).</li>
+            <li><b>Finance mapping owner</b> — one person from RHI finance for a two-hour workshop: chart of accounts, KSA tax codes, payment methods and clearing accounts, locations, item mapping by SKU.</li>
+            <li><b>System of record</b> — we propose NetSuite for finance and inventory quantities, WooCommerce for catalogue content and prices; the stock-sync direction is a switch, not a rebuild.</li>
+            <li><b>Scope note</b> — ZATCA e-invoicing is handled by your NetSuite Saudi localisation, not by this sync; B2B credit-term orders and purchase orders are available as the optional institutional buyer mode.</li>
+            <li><b>Volume</b> — your current order volume fits NetSuite's standard REST concurrency; SuiteCloud Plus is not required.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -930,7 +1000,7 @@
           <div class="section-kicker">07 &nbsp;/&nbsp; Delivery timeline</div>
           <h2 id="timeline-title">Fourteen to sixteen weeks. <em>Four movements.</em></h2>
         </div>
-        <p class="lead">The Bridge is built early and in parallel with design, so the app is wired to real accounts and real orders from the first sprint — not mocked data that breaks at the end. Store review time is inside the plan.</p>
+        <p class="lead">The Bridge is built early and in parallel with design, so the app is wired to real accounts and real orders from the first sprint — not mocked data that breaks at the end. The NetSuite sync runs alongside the app sprints on your sandbox and goes live with the app. Store review time is inside the plan.</p>
       </div>
       <div class="phases">
         <article class="phase">
@@ -952,6 +1022,7 @@
             <li>Cache exclusions and object cache</li>
             <li>Gateway webhooks and payment verification</li>
             <li>Security review and rate limiting</li>
+            <li>NetSuite sandbox connected; finance mapping workshop</li>
             <li>Deployed to production behind a feature flag</li>
           </ul>
         </article>
@@ -962,6 +1033,7 @@
             <li>Sprint 1 — catalogue, search, product, cart</li>
             <li>Sprint 2 — login, checkout, payments, orders</li>
             <li>Sprint 3 — wishlist, quotes, push, profile, analytics</li>
+            <li>In parallel — NetSuite sync: customers, orders, payments, refunds, fulfilment, stock</li>
             <li>Weekly TestFlight and Play internal builds to your team</li>
             <li>Arabic native review of every screen</li>
           </ul>
@@ -971,6 +1043,7 @@
           <h3>Harden &amp; launch</h3>
           <ul>
             <li>Device matrix QA, payment end-to-end on live gateways</li>
+            <li>NetSuite reconciliation run with finance; cut-over to production account</li>
             <li>Store listings, privacy labels, review submissions</li>
             <li>Soft launch to staff and showroom customers</li>
             <li>Public release, training, documentation</li>
@@ -982,6 +1055,7 @@
         <div class="g-row"><span>Discover &amp; design</span><div class="g-track"><div class="g-bar" style="left:0%;width:18.75%"></div></div></div>
         <div class="g-row"><span>Bridge plugin</span><div class="g-track"><div class="g-bar blue" style="left:6.25%;width:31.25%"></div></div></div>
         <div class="g-row"><span>App build — 3 sprints</span><div class="g-track"><div class="g-bar" style="left:18.75%;width:56.25%"></div></div></div>
+        <div class="g-row"><span>NetSuite integration</span><div class="g-track"><div class="g-bar blue" style="left:25%;width:56.25%"></div></div></div>
         <div class="g-row"><span>QA, stores &amp; launch</span><div class="g-track"><div class="g-bar blue" style="left:68.75%;width:31.25%"></div></div></div>
         <div class="g-row"><span>Hypercare</span><div class="g-track"><div class="g-bar light" style="left:87.5%;width:12.5%"></div></div></div>
         <div class="g-weeks"><span>W1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span></div>
@@ -994,20 +1068,20 @@
       <div class="section-head">
         <div>
           <div class="section-kicker">08 &nbsp;/&nbsp; Investment</div>
-          <h2>One fixed fee. <em>Both platforms.</em></h2>
+          <h2>One fixed fee. <em>Both platforms, and the books.</em></h2>
         </div>
-        <p class="lead">A single project price covering design, the React Native app on iOS and Android, the companion WordPress plugin that makes a secure app possible, payment integration, QA, store submission, training and hypercare. No per-platform surcharge. No surprise line items for the scope above.</p>
+        <p class="lead">A single project price covering design, the React Native app on iOS and Android, the companion WordPress plugin that makes a secure app possible, payment integration, the Oracle NetSuite finance integration added in this revision, QA, store submission, training and hypercare. No per-platform surcharge. No surprise line items for the scope above.</p>
       </div>
       <div class="invest" id="quote">
         <div class="invest-top">
           <div>
             <div class="invest-label">Fixed project fee</div>
-            <h3 style="font-size:30px;font-weight:800;letter-spacing:-0.02em;margin:8px 0 10px;color:var(--navy)">Rawafed Health app — iOS and Android, on your WooCommerce</h3>
-            <p>One codebase, two stores, the backend you already own. Fully branded from your guidelines. Fully owned by Rawafed Health International.</p>
+            <h3 style="font-size:30px;font-weight:800;letter-spacing:-0.02em;margin:8px 0 10px;color:var(--navy)">Rawafed Health app — iOS and Android, on your WooCommerce, posting to NetSuite</h3>
+            <p>One codebase, two stores, the backend you already own, and a ledger that reconciles itself. Fully branded from your guidelines. Fully owned by Rawafed Health International. Rev. 2 adds line D at your request; all other lines are unchanged from Rev. 1.</p>
           </div>
           <div class="invest-total">
             <span>Total investment</span>
-            <strong data-count="26000" data-prefix="$">$26,000</strong>
+            <strong data-count="33000" data-prefix="$">$33,000</strong>
           </div>
         </div>
 
@@ -1046,8 +1120,17 @@
         </div>
         <div class="quote-row sub"><div><h4>Integration subtotal</h4></div><div class="quote-price">$8,000</div></div>
 
-        <div class="quote-group">D &nbsp;/&nbsp; Launch</div>
-        <div class="quote-row" data-item data-name="QA, store submission, training &amp; hypercare" data-price="2000" data-group="D / Launch" data-desc="Device-matrix QA on iOS and Android, Arabic native review, security review of the Bridge, App Store and Google Play listings in both languages, privacy labels and review handling, over-the-air release pipeline, recorded training for the e-commerce team, documentation, 30 days of hypercare.">
+        <div class="quote-group">D &nbsp;/&nbsp; Finance integration — Oracle NetSuite (new in Rev. 2)</div>
+        <div class="quote-row" data-item data-name="Oracle NetSuite financial integration" data-price="7000" data-group="D / Finance integration — Oracle NetSuite" data-desc="WooCommerce to NetSuite sync built into the Bridge over SuiteTalk REST and SuiteQL with an OAuth 2.0 integration record: customers, paid orders as sales orders and invoices with KSA VAT, gateway payments as customer payments against clearing accounts, refunds as credit memos and customer refunds, item fulfilment and tracking back to WooCommerce and the app, scheduled item availability by location, idempotent queue with retries, reconciliation log, finance mapping workshop, sandbox build, production cut-over and a reconciliation run with your finance team.">
+          <div>
+            <h4>Oracle NetSuite financial integration</h4>
+            <p>Built into the Bridge over SuiteTalk REST and SuiteQL with an OAuth 2.0 integration record: customers, paid orders as sales orders and invoices with KSA VAT, gateway payments against clearing accounts, refunds as credit memos, fulfilment and tracking back to WooCommerce and the app, scheduled item availability by location, idempotent queue with retries, reconciliation log, finance mapping workshop, sandbox build, production cut-over and a reconciliation run with your finance team.</p>
+          </div>
+          <div class="quote-price">$7,000</div>
+        </div>
+
+        <div class="quote-group">E &nbsp;/&nbsp; Launch</div>
+        <div class="quote-row" data-item data-name="QA, store submission, training &amp; hypercare" data-price="2000" data-group="E / Launch" data-desc="Device-matrix QA on iOS and Android, Arabic native review, security review of the Bridge, App Store and Google Play listings in both languages, privacy labels and review handling, over-the-air release pipeline, recorded training for the e-commerce team, documentation, 30 days of hypercare.">
           <div>
             <h4>QA, store submission, training &amp; hypercare</h4>
             <p>Device-matrix QA, Arabic native review, security review of the Bridge, App Store and Google Play listings in both languages, privacy labels and review handling, over-the-air release pipeline, recorded training, documentation, 30 days of hypercare.</p>
@@ -1058,17 +1141,17 @@
         <div class="quote-row total">
           <div>
             <h4>Total</h4>
-            <p>Valid 30 days from 11 November 2026. Amounts in USD.</p>
+            <p>Rev. 2 — valid 30 days from 22 November 2026. Amounts in USD.</p>
           </div>
-          <div class="quote-price">$26,000</div>
+          <div class="quote-price">$33,000</div>
         </div>
       </div>
 
       <div class="pay-grid">
-        <div class="pay"><span>To commence — 40%</span><b>$10,400</b></div>
-        <div class="pay"><span>Design sign-off + Bridge live on staging — 30%</span><b>$7,800</b></div>
-        <div class="pay"><span>App UAT sign-off — 20%</span><b>$5,200</b></div>
-        <div class="pay"><span>Public release — 10%</span><b>$2,600</b></div>
+        <div class="pay"><span>To commence — 40%</span><b>$13,200</b></div>
+        <div class="pay"><span>Design sign-off + Bridge live on staging — 30%</span><b>$9,900</b></div>
+        <div class="pay"><span>App UAT + NetSuite reconciliation sign-off — 20%</span><b>$6,600</b></div>
+        <div class="pay"><span>Public release — 10%</span><b>$3,300</b></div>
       </div>
 
       <p style="margin:28px 0 12px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-deep);font-weight:700">Optional additions — not in the base fee</p>
@@ -1150,23 +1233,23 @@
       <div class="terms" style="margin-top:28px">
         <article class="term">
           <h3>Payment</h3>
-          <p>40% to commence, 30% at design sign-off with the Bridge live on staging, 20% at app UAT sign-off, 10% at public release. Amounts in USD by bank transfer.</p>
+          <p>40% to commence, 30% at design sign-off with the Bridge live on staging, 20% at app UAT and NetSuite reconciliation sign-off, 10% at public release. Amounts in USD by bank transfer.</p>
         </article>
         <article class="term">
           <h3>Validity</h3>
-          <p>This quotation is valid for 30 days from 11 November 2026. After that date we reconfirm timeline and fee against current capacity.</p>
+          <p>This quotation (Rev. 2) is valid for 30 days from 22 November 2026 and supersedes Rev. 1 of 11 November 2026. After that date we reconfirm timeline and fee against current capacity.</p>
         </article>
         <article class="term">
           <h3>Included</h3>
-          <p>The scope in sections 03–06, the companion plugin and its deployment to staging and production, both store submissions, training, documentation and 30 days of hypercare after public release.</p>
+          <p>The scope in sections 03–06 including the NetSuite integration in 06.1, the companion plugin and its deployment to staging and production, both store submissions, training, documentation and 30 days of hypercare after public release.</p>
         </article>
         <article class="term">
           <h3>Client provides</h3>
-          <p>WordPress administrator access and a staging copy from your host, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple Developer and Google Play developer accounts in RHI's name, licensed brand font files, and a named decision-maker for timely UAT feedback.</p>
+          <p>WordPress administrator access and a staging copy from your host, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple Developer and Google Play developer accounts in RHI's name, licensed brand font files, a NetSuite sandbox with an integration record and least-privilege role, a finance owner for the mapping workshop and reconciliation sign-off, and a named decision-maker for timely UAT feedback.</p>
         </article>
         <article class="term">
           <h3>Not included</h3>
-          <p>Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades (e.g. Redis), changes to the website itself, new product photography, and paid media budgets.</p>
+          <p>Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades (e.g. Redis), NetSuite licences, sandbox or SuiteCloud Plus fees, NetSuite Saudi localisation / ZATCA e-invoicing configuration, changes to NetSuite's own chart of accounts or workflows, changes to the website itself, new product photography, and paid media budgets.</p>
         </article>
         <article class="term">
           <h3>Revisions</h3>
@@ -1178,7 +1261,7 @@
         </article>
         <article class="term">
           <h3>Dependencies</h3>
-          <p>Store review by Apple and Google typically takes two to seven days per submission and is inside the plan. Gateway capability changes, host limitations or delayed access to WordPress extend the schedule, not the fee.</p>
+          <p>Store review by Apple and Google typically takes two to seven days per submission and is inside the plan. Gateway capability changes, host limitations, delayed access to WordPress or to the NetSuite sandbox, or a late finance mapping decision extend the schedule, not the fee.</p>
         </article>
       </div>
     </div>
@@ -1215,7 +1298,8 @@
   <script src="/assets/vendor/jspdf.umd.min.js"></script>
   <script>
     const DOC_REF = "NIX-RHI-APP-001";
-    const DOC_DATE = "11 November 2026";
+    const DOC_DATE = "22 November 2026";
+    const DOC_REV = "Rev. 2";
     const DOC_CLIENT = "Rawafed Health International Co.";
 
     const toggle = document.getElementById("nav-toggle");
@@ -1285,7 +1369,7 @@
       gsap.to(".cover-media", { yPercent: 14, ease: "none", scrollTrigger: { trigger: ".cover", start: "top top", end: "bottom top", scrub: true } });
       gsap.to(".close-media", { yPercent: 14, ease: "none", scrollTrigger: { trigger: "#next", start: "top bottom", end: "bottom top", scrub: true } });
 
-      gsap.utils.toArray(".section-head, .quote-bar, .toc, .split, .matrix, .callout, .invest, .cta-row, .close-inner, .gantt, .type-row").forEach((el) => {
+      gsap.utils.toArray(".section-head, .quote-bar, .toc, .split, .matrix, .callout, .invest, .cta-row, .close-inner, .gantt, .type-row, .ns-head, .ns-card").forEach((el) => {
         gsap.from(el, { opacity: 0, y: 48, duration: 0.95, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 82%", once: true } });
       });
 
@@ -1393,12 +1477,12 @@
       if (logos.client) { const h = 12, w = h * (logos.client.w / logos.client.h); doc.addImage(logos.client.url, "PNG", ML, y - 3, w, h); }
       if (logos.nixai) { const h = 5.2, w = h * (logos.nixai.w / logos.nixai.h); doc.addImage(logos.nixai.url, "PNG", RIGHT - w, y + 1, w, h); }
       y += 16; rule(ML, y, RIGHT, BLUE, 0.4); y += 10;
-      kick("Quotation · " + DOC_REF, ML, y, BLUE, 7.5); y += 8;
+      kick("Quotation · " + DOC_REF + " · " + DOC_REV, ML, y, BLUE, 7.5); y += 8;
       font("helvetica", "bold", 24, NAVY); doc.text("Your store, in their pocket.", ML, y); y += 8;
       font("helvetica", "normal", 9.5, MUTED);
-      wrap("A React Native shopping app for iOS and Android built on the existing WooCommerce store at rawafedhealth.com, with a companion WordPress plugin that gives the app secure, customer-scoped access to accounts, orders, wishlist, quotes and push — closing the gaps found in our API audit.", CW).forEach((l) => { doc.text(l, ML, y); y += 4.6; });
+      wrap("A React Native shopping app for iOS and Android built on the existing WooCommerce store at rawafedhealth.com, with a companion WordPress plugin that gives the app secure, customer-scoped access to accounts, orders, wishlist, quotes and push — closing the gaps found in our API audit — and, new in Rev. 2, a financial integration that posts customers, orders, payments, refunds and fulfilment between WooCommerce and Oracle NetSuite.", CW).forEach((l) => { doc.text(l, ML, y); y += 4.6; });
       y += 6;
-      [["Prepared for", DOC_CLIENT], ["Prepared by", "NixAI · ayousef@nixailabs.com"], ["Date", DOC_DATE], ["Validity", "30 days from issue"], ["Delivery", "14 to 16 weeks from kickoff"]].forEach((r) => {
+      [["Prepared for", DOC_CLIENT], ["Prepared by", "NixAI · ayousef@nixailabs.com"], ["Date", DOC_DATE], ["Validity", "30 days from issue · supersedes Rev. 1 (11 Nov 2026)"], ["Delivery", "14 to 16 weeks from kickoff"]].forEach((r) => {
         kick(r[0], ML, y, FAINT, 6.4); font("helvetica", "normal", 9, INK); doc.text(r[1], ML + 34, y); y += 5.6;
       });
       y += 4;
@@ -1440,7 +1524,7 @@
       /* payment */
       ensure(40);
       kick("Payment schedule", ML, y, BLUE, 7); y += 6.5;
-      [["40% to commence", 0.4], ["30% at design sign-off with the Bridge live on staging", 0.3], ["20% at app UAT sign-off", 0.2], ["10% at public release", 0.1]].forEach((p) => {
+      [["40% to commence", 0.4], ["30% at design sign-off with the Bridge live on staging", 0.3], ["20% at app UAT and NetSuite reconciliation sign-off", 0.2], ["10% at public release", 0.1]].forEach((p) => {
         font("helvetica", "normal", 8.8, MUTED); doc.text(p[0], ML, y);
         font("helvetica", "bold", 11.5, INK); doc.text(cash(Math.round(q.total * p[1])), RIGHT, y, { align: "right" });
         y += 3; rule(ML, y, RIGHT, LINE, 0.15); y += 5;
@@ -1462,9 +1546,9 @@
       ensure(80);
       kick("Terms", ML, y, BLUE, 7); y += 6.5;
       [
-        ["Included", "Discovery and mobile design system, React Native app for iOS and Android, the RHI Mobile Bridge companion plugin deployed to staging and production, payment integration, QA, both store submissions, training, documentation, and 30 days of hypercare after public release."],
-        ["Not included", "Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades, changes to the website itself, new product photography, and paid media."],
-        ["Client provides", "WordPress administrator access and a staging copy, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple and Google developer accounts in RHI's name, licensed brand font files, and a named decision-maker for UAT."],
+        ["Included", "Discovery and mobile design system, React Native app for iOS and Android, the RHI Mobile Bridge companion plugin deployed to staging and production, payment integration, the Oracle NetSuite financial integration (sandbox build, production cut-over, reconciliation run), QA, both store submissions, training, documentation, and 30 days of hypercare after public release."],
+        ["Not included", "Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades, NetSuite licences, sandbox or SuiteCloud Plus fees, NetSuite Saudi localisation / ZATCA configuration, changes to the website itself, new product photography, and paid media."],
+        ["Client provides", "WordPress administrator access and a staging copy, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple and Google developer accounts in RHI's name, licensed brand font files, a NetSuite sandbox with an integration record and least-privilege role, a finance owner for mapping and reconciliation sign-off, and a named decision-maker for UAT."],
         ["Revisions", "Two structured review rounds per phase. Further design or scope change is estimated before work continues."],
         ["Ownership", "On final payment all custom app code, the Bridge plugin and design assets assign to Rawafed Health International Co. React Native, WordPress and open-source components remain under their own licences."],
         ["Validity", "Valid 30 days from " + DOC_DATE + ". After that date we reconfirm timeline and fee against current capacity."]
@@ -1498,10 +1582,10 @@
         doc.setPage(i);
         rule(ML, H - 16, RIGHT, LINE, 0.15);
         font("helvetica", "normal", 6.8, FAINT);
-        doc.text(DOC_CLIENT + " × NixAI · " + DOC_REF + " · " + cash(q.total) + " · Valid 30 days from " + DOC_DATE, ML, H - 11.5);
+        doc.text(DOC_CLIENT + " × NixAI · " + DOC_REF + " " + DOC_REV + " · " + cash(q.total) + " · Valid 30 days from " + DOC_DATE, ML, H - 11.5);
         doc.text("Page " + i + " of " + pages, RIGHT, H - 11.5, { align: "right" });
       }
-      doc.setProperties({ title: "Rawafed Health — Quotation " + DOC_REF, subject: "React Native mobile app on WooCommerce", author: "NixAI", creator: "NixAI" });
+      doc.setProperties({ title: "Rawafed Health — Quotation " + DOC_REF + " " + DOC_REV, subject: "React Native mobile app on WooCommerce + Oracle NetSuite integration", author: "NixAI", creator: "NixAI" });
       return doc;
     }
     let LOGO_CACHE = null;
@@ -1526,7 +1610,7 @@
       try {
         const q = collectQuote();
         const doc = buildQuotationPdf(lib, q, await getLogos());
-        doc.save("Rawafed-Health-Quotation-" + DOC_REF + ".pdf");
+        doc.save("Rawafed-Health-Quotation-" + DOC_REF + "-Rev2.pdf");
         flash(btn, "Downloaded");
       } catch (err) { console.error(err); flash(btn, "Export failed"); }
     }
