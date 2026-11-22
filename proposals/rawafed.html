@@ -533,7 +533,7 @@
         <span class="h1-line"><span>Your store,</span></span>
         <span class="h1-line"><span>in their <em>pocket.</em></span></span>
       </h1>
-      <p class="cover-sub">A React Native shopping app for iOS and Android, built on the WooCommerce store you already run at rawafedhealth.com — Arabic and English, tabby, tamara and mada, orders that track themselves, and every paid order posted into Oracle NetSuite. Plus a straight answer on what WooCommerce can and cannot give a mobile app, and how we close that gap.</p>
+      <p class="cover-sub">A React Native shopping app for iOS and Android, built on the WooCommerce store you already run at rawafedhealth.com — Arabic and English, tabby, tamara and mada, orders that track themselves, every paid order posted into Oracle NetSuite, and stock that is the same number in the warehouse, on the website and in the app. Plus a straight answer on what WooCommerce can and cannot give a mobile app, and how we close that gap.</p>
       <div class="cover-foot">
         <div class="cover-logos">
           <img src="/assets/rawafed/logo.png" alt="Rawafed Health International Co. — شركة روافد الصحة العالمية" />
@@ -541,7 +541,7 @@
           <img class="nix-dark" src="/assets/rawafed/nixai-wordmark-navy.png" alt="NixAI" />
         </div>
         <div class="cover-stats">
-          <div><span>Investment</span><strong data-count="33000" data-prefix="$">$33,000</strong></div>
+          <div><span>Investment</span><strong data-count="37500" data-prefix="$">$37,500</strong></div>
           <div><span>Delivery</span><strong>14–16 weeks</strong></div>
           <div><span>Platforms</span><strong>iOS + Android</strong></div>
         </div>
@@ -551,7 +551,7 @@
 
   <div class="quote-bar shell" style="margin-top:-1px">
     <div class="quote-cell"><span>Client</span><b>Rawafed Health International Co. (RHI)</b></div>
-    <div class="quote-cell"><span>Project</span><b>React Native app on existing WooCommerce + Oracle NetSuite finance integration</b></div>
+    <div class="quote-cell"><span>Project</span><b>React Native app on existing WooCommerce + Oracle NetSuite finance &amp; inventory integration</b></div>
     <div class="quote-cell"><span>Prepared by</span><b>NixAI</b></div>
     <div class="quote-cell"><span>Validity</span><b>30 days from issue</b></div>
   </div>
@@ -711,7 +711,7 @@
           <div class="section-kicker">03 &nbsp;/&nbsp; Proposed solution</div>
           <h2>One app. One bridge. One ledger. <em>Zero duplication.</em></h2>
         </div>
-        <p class="lead">Four deliverables, designed together so the app behaves like a first-class channel of the store rather than an add-on: the React Native app itself, the companion plugin that gives it a safe, customer-scoped API, a mobile design system drawn from your brand guidelines, and — added in this revision at your request — a financial integration that posts every order, payment and refund from WooCommerce into Oracle NetSuite.</p>
+        <p class="lead">Four deliverables, designed together so the app behaves like a first-class channel of the store rather than an add-on: the React Native app itself, the companion plugin that gives it a safe, customer-scoped API, a mobile design system drawn from your brand guidelines, and — added in this revision at your request — a finance and inventory integration that posts every order, payment and refund from WooCommerce into Oracle NetSuite and keeps NetSuite stock levels live on the website and in the app.</p>
       </div>
       <div class="platforms">
         <article class="platform">
@@ -734,9 +734,9 @@
         </article>
         <article class="platform ns">
           <div class="tag">Deliverable D · New in Rev. 2</div>
-          <h3>The <em>ledger</em></h3>
-          <p>A WooCommerce ↔ Oracle NetSuite sync over SuiteTalk REST: customers, paid orders as sales orders and invoices with 15% KSA VAT, MyFatoorah / tabby / tamara settlements as customer payments against the right clearing accounts, refunds as credit memos, fulfilment and tracking back to the order and the app, and item availability by location. Idempotent queue, retries, a reconciliation log your finance team can read.</p>
-          <div class="stack"><span class="chip">SuiteTalk REST</span><span class="chip">SuiteQL</span><span class="chip">OAuth 2.0</span><span class="chip">Action Scheduler</span><span class="chip">Sandbox first</span></div>
+          <h3>The <em>ledger and the stock</em></h3>
+          <p>A WooCommerce ↔ Oracle NetSuite sync over SuiteTalk REST: customers, paid orders as sales orders and invoices with 15% KSA VAT, MyFatoorah / tabby / tamara settlements as customer payments against the right clearing accounts, refunds as credit memos, fulfilment and tracking back to the order and the app. Plus inventory management: NetSuite as the stock master — item master and SKUs, quantity available per location pushed to WooCommerce as it changes, receipts and transfers reflected within minutes, branch availability and low-stock states in the app. Idempotent queue, retries, a reconciliation log your finance and warehouse teams can read.</p>
+          <div class="stack"><span class="chip">SuiteTalk REST</span><span class="chip">SuiteQL</span><span class="chip">OAuth 2.0</span><span class="chip">Action Scheduler</span><span class="chip">Multi-location</span><span class="chip">Sandbox first</span></div>
         </article>
       </div>
     </div>
@@ -789,11 +789,14 @@
       </div>
 
       <div class="feat-block">
-        <div class="feat-label">Finance — Oracle NetSuite (new in Rev. 2)</div>
+        <div class="feat-label">Finance &amp; inventory — Oracle NetSuite (new in Rev. 2)</div>
         <div class="feat-grid">
           <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 10h16M8 14h4"/></svg><h3>Orders, invoices &amp; VAT <span class="pill">NetSuite</span></h3><p>Every paid WooCommerce order — from the app or the website — becomes a NetSuite customer, sales order and invoice with line items by SKU, 15% KSA VAT, shipping, coupons and the payment method, within minutes of payment confirmation.</p></div>
           <div class="feat bridge"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 15h4M2 10h20"/></svg><h3>Payments, refunds &amp; settlement <span class="pill">NetSuite</span></h3><p>MyFatoorah, tabby and tamara receipts posted as customer payments against gateway clearing accounts so settlement reconciles; WooCommerce refunds and returns posted as credit memos and customer refunds.</p></div>
-          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5z"/><circle cx="7" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg><h3>Fulfilment &amp; stock, both ways <span class="pill">NetSuite</span></h3><p>Item fulfilments in NetSuite mark the WooCommerce order shipped with tracking and trigger the app's push; item availability by location (Riyadh, Al Khobar, Jeddah) flows back to WooCommerce stock on a schedule you control.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5z"/><circle cx="7" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg><h3>Fulfilment &amp; tracking <span class="pill">NetSuite</span></h3><p>Item fulfilments in NetSuite mark the WooCommerce order shipped with tracking and trigger the app's push; partial fulfilments and back-orders show per line in the app's order timeline.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg><h3>Stock levels, NetSuite as master <span class="pill">NetSuite</span></h3><p>Quantity available per SKU and per location (Riyadh, Al Khobar, Jeddah) pushed to WooCommerce as inventory changes in NetSuite — sales, receipts, adjustments, transfers — so the website and the app never sell what the warehouse does not have.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg><h3>Item master &amp; SKUs <span class="pill">NetSuite</span></h3><p>New items and variants created or retired in NetSuite appear as draft products in WooCommerce for the e-commerce team to publish; SKU is the shared key, with a mismatch report for anything that does not line up.</p></div>
+          <div class="feat bridge"><svg viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg><h3>Availability in the app <span class="pill">NetSuite</span></h3><p>"In stock in Riyadh", "Ships from Jeddah in 2–3 days", "Notify me" when out of stock — branch-level availability and low-stock states on product pages, with back-in-stock push driven by NetSuite receipts.</p></div>
         </div>
       </div>
     </div>
@@ -964,10 +967,10 @@
 
       <div class="ns-head" id="netsuite">
         <div>
-          <div class="section-kicker">06.1 &nbsp;/&nbsp; Finance integration — new in Rev. 2</div>
-          <h3>WooCommerce sells. <em>NetSuite keeps the books.</em></h3>
+          <div class="section-kicker">06.1 &nbsp;/&nbsp; Finance &amp; inventory integration — new in Rev. 2</div>
+          <h3>WooCommerce sells. <em>NetSuite keeps the books and the stock.</em></h3>
         </div>
-        <p class="lead" style="font-size:16px">Your site has no NetSuite connector today. We build the sync into the Bridge, on your WordPress, using NetSuite's SuiteTalk REST web services and SuiteQL with an OAuth 2.0 machine-to-machine integration record — no shared passwords, no middleware subscription. Every message carries an idempotency key, failures queue and retry, and a reconciliation log in WordPress shows your finance team exactly what posted, when, and what did not.</p>
+        <p class="lead" style="font-size:16px">Your site has no NetSuite connector today. We build the sync into the Bridge, on your WordPress, using NetSuite's SuiteTalk REST web services and SuiteQL with an OAuth 2.0 machine-to-machine integration record — no shared passwords, no middleware subscription. Every message carries an idempotency key, failures queue and retry, and a reconciliation log in WordPress shows your finance and warehouse teams exactly what posted, when, and what did not. NetSuite is the master for financial records and inventory quantities; WooCommerce stays the master for product content, imagery and pricing presentation.</p>
       </div>
       <div class="ns-grid">
         <div class="ns-card">
@@ -977,14 +980,18 @@
           <div class="ns-row"><div><b>Payment confirmation</b>MyFatoorah, tabby or tamara webhook, gateway reference, fees where exposed.</div><div class="dir">→<small>with the invoice</small></div><div><b>Customer payment</b>Applied to the invoice against the gateway's clearing / undeposited-funds account so settlement reconciles.</div></div>
           <div class="ns-row"><div><b>Refund or return</b>Full or partial refund from WooCommerce, return reason.</div><div class="dir">→<small>on refund</small></div><div><b>Credit memo + Customer refund</b>Against the original invoice; restocks per your policy.</div></div>
           <div class="ns-row"><div><b>Order shipped</b>Status "completed", tracking number, courier — then push to the app.</div><div class="dir">←<small>on fulfilment</small></div><div><b>Item fulfilment</b>Posted by your warehouse team in NetSuite with tracking.</div></div>
-          <div class="ns-row"><div><b>Stock &amp; prices</b>Quantity available per SKU; optionally list price.</div><div class="dir">←<small>scheduled / optional</small></div><div><b>Item master</b>Availability by location (Riyadh, Al Khobar, Jeddah); SKU is the shared key.</div></div>
+          <div class="ns-row"><div><b>Stock level</b>Stock quantity per product and variation; per-branch availability shown in the app.</div><div class="dir">←<small>on every inventory change</small></div><div><b>Quantity available by location</b>Sales, item receipts, adjustments and transfer orders in Riyadh, Al Khobar and Jeddah; a full nightly reconciliation catches anything missed.</div></div>
+          <div class="ns-row"><div><b>Product &amp; variation</b>Draft product created for new SKUs; retired SKUs hidden; mismatch report for the team.</div><div class="dir">←<small>on item create / change</small></div><div><b>Item master</b>Inventory items and matrix items with SKU, name, brand, unit, barcode; SKU is the shared key.</div></div>
+          <div class="ns-row"><div><b>Back-in-stock push &amp; "notify me"</b>Wishlist and notify-me subscribers alerted in the app.</div><div class="dir">←<small>on receipt</small></div><div><b>Item receipt</b>Purchase order received into a location lifts availability and fires the alert.</div></div>
+          <div class="ns-row"><div><b>Price</b>Optional: regular price updated from NetSuite price level.</div><div class="dir">←<small>optional switch</small></div><div><b>Price level</b>Base or e-commerce price level, if you choose NetSuite as the pricing master.</div></div>
         </div>
         <div class="ns-card bridge">
           <h4>What we need agreed before week five</h4>
           <ul>
             <li><b>A NetSuite sandbox</b> and an integration record with a least-privilege role (customers, transactions, items, SuiteQL).</li>
             <li><b>Finance mapping owner</b> — one person from RHI finance for a two-hour workshop: chart of accounts, KSA tax codes, payment methods and clearing accounts, locations, item mapping by SKU.</li>
-            <li><b>System of record</b> — we propose NetSuite for finance and inventory quantities, WooCommerce for catalogue content and prices; the stock-sync direction is a switch, not a rebuild.</li>
+            <li><b>System of record</b> — NetSuite for finance and inventory quantities, WooCommerce for catalogue content; pricing master is a switch you choose. Stock counts in WooCommerce become read-only once the sync is live, so nobody edits a number that NetSuite will overwrite.</li>
+            <li><b>Inventory setup</b> — multi-location inventory enabled in NetSuite with the three branches as locations, SKUs aligned to WooCommerce (we run the mismatch report in week five and help clean it), and a decision on whether showroom stock is sellable online.</li>
             <li><b>Scope note</b> — ZATCA e-invoicing is handled by your NetSuite Saudi localisation, not by this sync; B2B credit-term orders and purchase orders are available as the optional institutional buyer mode.</li>
             <li><b>Volume</b> — your current order volume fits NetSuite's standard REST concurrency; SuiteCloud Plus is not required.</li>
           </ul>
@@ -1033,7 +1040,7 @@
             <li>Sprint 1 — catalogue, search, product, cart</li>
             <li>Sprint 2 — login, checkout, payments, orders</li>
             <li>Sprint 3 — wishlist, quotes, push, profile, analytics</li>
-            <li>In parallel — NetSuite sync: customers, orders, payments, refunds, fulfilment, stock</li>
+            <li>In parallel — NetSuite sync: customers, orders, payments, refunds, fulfilment, item master, stock by location</li>
             <li>Weekly TestFlight and Play internal builds to your team</li>
             <li>Arabic native review of every screen</li>
           </ul>
@@ -1043,7 +1050,7 @@
           <h3>Harden &amp; launch</h3>
           <ul>
             <li>Device matrix QA, payment end-to-end on live gateways</li>
-            <li>NetSuite reconciliation run with finance; cut-over to production account</li>
+            <li>NetSuite reconciliation run with finance and a stock-count check with the warehouse; cut-over to production account</li>
             <li>Store listings, privacy labels, review submissions</li>
             <li>Soft launch to staff and showroom customers</li>
             <li>Public release, training, documentation</li>
@@ -1055,7 +1062,7 @@
         <div class="g-row"><span>Discover &amp; design</span><div class="g-track"><div class="g-bar" style="left:0%;width:18.75%"></div></div></div>
         <div class="g-row"><span>Bridge plugin</span><div class="g-track"><div class="g-bar blue" style="left:6.25%;width:31.25%"></div></div></div>
         <div class="g-row"><span>App build — 3 sprints</span><div class="g-track"><div class="g-bar" style="left:18.75%;width:56.25%"></div></div></div>
-        <div class="g-row"><span>NetSuite integration</span><div class="g-track"><div class="g-bar blue" style="left:25%;width:56.25%"></div></div></div>
+        <div class="g-row"><span>NetSuite finance &amp; inventory</span><div class="g-track"><div class="g-bar blue" style="left:25%;width:56.25%"></div></div></div>
         <div class="g-row"><span>QA, stores &amp; launch</span><div class="g-track"><div class="g-bar blue" style="left:68.75%;width:31.25%"></div></div></div>
         <div class="g-row"><span>Hypercare</span><div class="g-track"><div class="g-bar light" style="left:87.5%;width:12.5%"></div></div></div>
         <div class="g-weeks"><span>W1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span></div>
@@ -1068,20 +1075,20 @@
       <div class="section-head">
         <div>
           <div class="section-kicker">08 &nbsp;/&nbsp; Investment</div>
-          <h2>One fixed fee. <em>Both platforms, and the books.</em></h2>
+          <h2>One fixed fee. <em>Both platforms, the books and the stock.</em></h2>
         </div>
-        <p class="lead">A single project price covering design, the React Native app on iOS and Android, the companion WordPress plugin that makes a secure app possible, payment integration, the Oracle NetSuite finance integration added in this revision, QA, store submission, training and hypercare. No per-platform surcharge. No surprise line items for the scope above.</p>
+        <p class="lead">A single project price covering design, the React Native app on iOS and Android, the companion WordPress plugin that makes a secure app possible, payment integration, the Oracle NetSuite finance and inventory integration added in this revision, QA, store submission, training and hypercare. No per-platform surcharge. No surprise line items for the scope above.</p>
       </div>
       <div class="invest" id="quote">
         <div class="invest-top">
           <div>
             <div class="invest-label">Fixed project fee</div>
             <h3 style="font-size:30px;font-weight:800;letter-spacing:-0.02em;margin:8px 0 10px;color:var(--navy)">Rawafed Health app — iOS and Android, on your WooCommerce, posting to NetSuite</h3>
-            <p>One codebase, two stores, the backend you already own, and a ledger that reconciles itself. Fully branded from your guidelines. Fully owned by Rawafed Health International. Rev. 2 adds line D at your request; all other lines are unchanged from Rev. 1.</p>
+            <p>One codebase, two stores, the backend you already own, and a ledger that reconciles itself. Fully branded from your guidelines. Fully owned by Rawafed Health International. Rev. 2 adds group D — NetSuite finance and inventory — at your request; all other lines are unchanged from Rev. 1.</p>
           </div>
           <div class="invest-total">
             <span>Total investment</span>
-            <strong data-count="33000" data-prefix="$">$33,000</strong>
+            <strong data-count="37500" data-prefix="$">$37,500</strong>
           </div>
         </div>
 
@@ -1120,14 +1127,22 @@
         </div>
         <div class="quote-row sub"><div><h4>Integration subtotal</h4></div><div class="quote-price">$8,000</div></div>
 
-        <div class="quote-group">D &nbsp;/&nbsp; Finance integration — Oracle NetSuite (new in Rev. 2)</div>
-        <div class="quote-row" data-item data-name="Oracle NetSuite financial integration" data-price="7000" data-group="D / Finance integration — Oracle NetSuite" data-desc="WooCommerce to NetSuite sync built into the Bridge over SuiteTalk REST and SuiteQL with an OAuth 2.0 integration record: customers, paid orders as sales orders and invoices with KSA VAT, gateway payments as customer payments against clearing accounts, refunds as credit memos and customer refunds, item fulfilment and tracking back to WooCommerce and the app, scheduled item availability by location, idempotent queue with retries, reconciliation log, finance mapping workshop, sandbox build, production cut-over and a reconciliation run with your finance team.">
+        <div class="quote-group">D &nbsp;/&nbsp; Oracle NetSuite — finance &amp; inventory (new in Rev. 2)</div>
+        <div class="quote-row" data-item data-name="Oracle NetSuite financial integration" data-price="7000" data-group="D / Oracle NetSuite — finance &amp; inventory" data-desc="WooCommerce to NetSuite sync built into the Bridge over SuiteTalk REST and SuiteQL with an OAuth 2.0 integration record: customers, paid orders as sales orders and invoices with KSA VAT, gateway payments as customer payments against clearing accounts, refunds as credit memos and customer refunds, item fulfilment and tracking back to WooCommerce and the app, scheduled item availability by location, idempotent queue with retries, reconciliation log, finance mapping workshop, sandbox build, production cut-over and a reconciliation run with your finance team.">
           <div>
             <h4>Oracle NetSuite financial integration</h4>
             <p>Built into the Bridge over SuiteTalk REST and SuiteQL with an OAuth 2.0 integration record: customers, paid orders as sales orders and invoices with KSA VAT, gateway payments against clearing accounts, refunds as credit memos, fulfilment and tracking back to WooCommerce and the app, scheduled item availability by location, idempotent queue with retries, reconciliation log, finance mapping workshop, sandbox build, production cut-over and a reconciliation run with your finance team.</p>
           </div>
           <div class="quote-price">$7,000</div>
         </div>
+        <div class="quote-row" data-item data-name="Oracle NetSuite inventory management integration" data-price="4500" data-group="D / Oracle NetSuite — finance &amp; inventory" data-desc="NetSuite as the stock master: item master and matrix items to WooCommerce products and variations with SKU as the shared key and a mismatch report, quantity available per location (Riyadh, Al Khobar, Jeddah) pushed to WooCommerce on every inventory change with a nightly full reconciliation, item receipts and transfer orders reflected within minutes, back-in-stock and notify-me push in the app driven by receipts, branch-level availability and low-stock states on product pages, optional price-level sync, stock-count check with the warehouse before cut-over.">
+          <div>
+            <h4>Oracle NetSuite inventory management integration</h4>
+            <p>NetSuite as the stock master: item master and matrix items to WooCommerce products and variations with SKU as the shared key and a mismatch report; quantity available per location pushed to WooCommerce on every inventory change with a nightly full reconciliation; receipts and transfers reflected within minutes; back-in-stock and notify-me push driven by receipts; branch-level availability and low-stock states in the app; optional price-level sync; stock-count check with the warehouse before cut-over.</p>
+          </div>
+          <div class="quote-price">$4,500</div>
+        </div>
+        <div class="quote-row sub"><div><h4>NetSuite subtotal</h4></div><div class="quote-price">$11,500</div></div>
 
         <div class="quote-group">E &nbsp;/&nbsp; Launch</div>
         <div class="quote-row" data-item data-name="QA, store submission, training &amp; hypercare" data-price="2000" data-group="E / Launch" data-desc="Device-matrix QA on iOS and Android, Arabic native review, security review of the Bridge, App Store and Google Play listings in both languages, privacy labels and review handling, over-the-air release pipeline, recorded training for the e-commerce team, documentation, 30 days of hypercare.">
@@ -1143,15 +1158,15 @@
             <h4>Total</h4>
             <p>Rev. 2 — valid 30 days from 22 November 2026. Amounts in USD.</p>
           </div>
-          <div class="quote-price">$33,000</div>
+          <div class="quote-price">$37,500</div>
         </div>
       </div>
 
       <div class="pay-grid">
-        <div class="pay"><span>To commence — 40%</span><b>$13,200</b></div>
-        <div class="pay"><span>Design sign-off + Bridge live on staging — 30%</span><b>$9,900</b></div>
-        <div class="pay"><span>App UAT + NetSuite reconciliation sign-off — 20%</span><b>$6,600</b></div>
-        <div class="pay"><span>Public release — 10%</span><b>$3,300</b></div>
+        <div class="pay"><span>To commence — 40%</span><b>$15,000</b></div>
+        <div class="pay"><span>Design sign-off + Bridge live on staging — 30%</span><b>$11,250</b></div>
+        <div class="pay"><span>App UAT + NetSuite reconciliation sign-off — 20%</span><b>$7,500</b></div>
+        <div class="pay"><span>Public release — 10%</span><b>$3,750</b></div>
       </div>
 
       <p style="margin:28px 0 12px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-deep);font-weight:700">Optional additions — not in the base fee</p>
@@ -1245,11 +1260,11 @@
         </article>
         <article class="term">
           <h3>Client provides</h3>
-          <p>WordPress administrator access and a staging copy from your host, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple Developer and Google Play developer accounts in RHI's name, licensed brand font files, a NetSuite sandbox with an integration record and least-privilege role, a finance owner for the mapping workshop and reconciliation sign-off, and a named decision-maker for timely UAT feedback.</p>
+          <p>WordPress administrator access and a staging copy from your host, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple Developer and Google Play developer accounts in RHI's name, licensed brand font files, a NetSuite sandbox with an integration record and least-privilege role, multi-location inventory enabled with the three branches as locations, a finance owner and a warehouse owner for the mapping workshops and reconciliation sign-off, and a named decision-maker for timely UAT feedback.</p>
         </article>
         <article class="term">
           <h3>Not included</h3>
-          <p>Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades (e.g. Redis), NetSuite licences, sandbox or SuiteCloud Plus fees, NetSuite Saudi localisation / ZATCA e-invoicing configuration, changes to NetSuite's own chart of accounts or workflows, changes to the website itself, new product photography, and paid media budgets.</p>
+          <p>Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades (e.g. Redis), NetSuite licences, sandbox or SuiteCloud Plus fees, NetSuite Saudi localisation / ZATCA e-invoicing configuration, changes to NetSuite's own chart of accounts, item records or workflows, physical stock counts and SKU data clean-up beyond the mismatch report, barcode or WMS hardware, changes to the website itself, new product photography, and paid media budgets.</p>
         </article>
         <article class="term">
           <h3>Revisions</h3>
@@ -1480,7 +1495,7 @@
       kick("Quotation · " + DOC_REF + " · " + DOC_REV, ML, y, BLUE, 7.5); y += 8;
       font("helvetica", "bold", 24, NAVY); doc.text("Your store, in their pocket.", ML, y); y += 8;
       font("helvetica", "normal", 9.5, MUTED);
-      wrap("A React Native shopping app for iOS and Android built on the existing WooCommerce store at rawafedhealth.com, with a companion WordPress plugin that gives the app secure, customer-scoped access to accounts, orders, wishlist, quotes and push — closing the gaps found in our API audit — and, new in Rev. 2, a financial integration that posts customers, orders, payments, refunds and fulfilment between WooCommerce and Oracle NetSuite.", CW).forEach((l) => { doc.text(l, ML, y); y += 4.6; });
+      wrap("A React Native shopping app for iOS and Android built on the existing WooCommerce store at rawafedhealth.com, with a companion WordPress plugin that gives the app secure, customer-scoped access to accounts, orders, wishlist, quotes and push — closing the gaps found in our API audit — and, new in Rev. 2, a finance and inventory integration with Oracle NetSuite: customers, orders, payments, refunds and fulfilment posted to the ledger, and NetSuite stock by location kept live on the website and in the app.", CW).forEach((l) => { doc.text(l, ML, y); y += 4.6; });
       y += 6;
       [["Prepared for", DOC_CLIENT], ["Prepared by", "NixAI · ayousef@nixailabs.com"], ["Date", DOC_DATE], ["Validity", "30 days from issue · supersedes Rev. 1 (11 Nov 2026)"], ["Delivery", "14 to 16 weeks from kickoff"]].forEach((r) => {
         kick(r[0], ML, y, FAINT, 6.4); font("helvetica", "normal", 9, INK); doc.text(r[1], ML + 34, y); y += 5.6;
@@ -1546,9 +1561,9 @@
       ensure(80);
       kick("Terms", ML, y, BLUE, 7); y += 6.5;
       [
-        ["Included", "Discovery and mobile design system, React Native app for iOS and Android, the RHI Mobile Bridge companion plugin deployed to staging and production, payment integration, the Oracle NetSuite financial integration (sandbox build, production cut-over, reconciliation run), QA, both store submissions, training, documentation, and 30 days of hypercare after public release."],
-        ["Not included", "Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades, NetSuite licences, sandbox or SuiteCloud Plus fees, NetSuite Saudi localisation / ZATCA configuration, changes to the website itself, new product photography, and paid media."],
-        ["Client provides", "WordPress administrator access and a staging copy, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple and Google developer accounts in RHI's name, licensed brand font files, a NetSuite sandbox with an integration record and least-privilege role, a finance owner for mapping and reconciliation sign-off, and a named decision-maker for UAT."],
+        ["Included", "Discovery and mobile design system, React Native app for iOS and Android, the RHI Mobile Bridge companion plugin deployed to staging and production, payment integration, the Oracle NetSuite finance and inventory integration (sandbox build, production cut-over, reconciliation and stock-count check), QA, both store submissions, training, documentation, and 30 days of hypercare after public release."],
+        ["Not included", "Apple ($99/yr) and Google ($25) developer fees, SMS and push service costs, gateway transaction fees, hosting upgrades, NetSuite licences, sandbox or SuiteCloud Plus fees, NetSuite Saudi localisation / ZATCA configuration, physical stock counts and SKU clean-up beyond the mismatch report, changes to the website itself, new product photography, and paid media."],
+        ["Client provides", "WordPress administrator access and a staging copy, MyFatoorah merchant settings for Apple Pay and mada, an SMS sender account, Apple and Google developer accounts in RHI's name, licensed brand font files, a NetSuite sandbox with an integration record and least-privilege role, multi-location inventory enabled, a finance owner and a warehouse owner for mapping and reconciliation sign-off, and a named decision-maker for UAT."],
         ["Revisions", "Two structured review rounds per phase. Further design or scope change is estimated before work continues."],
         ["Ownership", "On final payment all custom app code, the Bridge plugin and design assets assign to Rawafed Health International Co. React Native, WordPress and open-source components remain under their own licences."],
         ["Validity", "Valid 30 days from " + DOC_DATE + ". After that date we reconfirm timeline and fee against current capacity."]
@@ -1585,7 +1600,7 @@
         doc.text(DOC_CLIENT + " × NixAI · " + DOC_REF + " " + DOC_REV + " · " + cash(q.total) + " · Valid 30 days from " + DOC_DATE, ML, H - 11.5);
         doc.text("Page " + i + " of " + pages, RIGHT, H - 11.5, { align: "right" });
       }
-      doc.setProperties({ title: "Rawafed Health — Quotation " + DOC_REF + " " + DOC_REV, subject: "React Native mobile app on WooCommerce + Oracle NetSuite integration", author: "NixAI", creator: "NixAI" });
+      doc.setProperties({ title: "Rawafed Health — Quotation " + DOC_REF + " " + DOC_REV, subject: "React Native mobile app on WooCommerce + Oracle NetSuite finance & inventory integration", author: "NixAI", creator: "NixAI" });
       return doc;
     }
     let LOGO_CACHE = null;
